@@ -1,0 +1,582 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBC020F95554004BD3A0 /* AppDelegate.m */; };
+		CEDDCBC420F95554004BD3A0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBC320F95554004BD3A0 /* ViewController.m */; };
+		CEDDCBC720F95554004BD3A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBC520F95554004BD3A0 /* Main.storyboard */; };
+		CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBC820F95555004BD3A0 /* Assets.xcassets */; };
+		CEDDCBCC20F95555004BD3A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */; };
+		CEDDCBCF20F95555004BD3A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBCE20F95555004BD3A0 /* main.m */; };
+		CEDDCBD920F95555004BD3A0 /* NoovesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBD820F95555004BD3A0 /* NoovesTests.m */; };
+		CEDDCBE420F95555004BD3A0 /* NoovesUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBE320F95555004BD3A0 /* NoovesUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CEDDCBD520F95555004BD3A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEDDCBB420F95554004BD3A0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEDDCBBB20F95554004BD3A0;
+			remoteInfo = Nooves;
+		};
+		CEDDCBE020F95555004BD3A0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEDDCBB420F95554004BD3A0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEDDCBBB20F95554004BD3A0;
+			remoteInfo = Nooves;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CEDDCBBC20F95554004BD3A0 /* Nooves.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nooves.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CEDDCBC020F95554004BD3A0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CEDDCBC220F95554004BD3A0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		CEDDCBC320F95554004BD3A0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		CEDDCBC620F95554004BD3A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CEDDCBC820F95555004BD3A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CEDDCBCB20F95555004BD3A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CEDDCBCD20F95555004BD3A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEDDCBCE20F95555004BD3A0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CEDDCBD420F95555004BD3A0 /* NoovesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoovesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEDDCBD820F95555004BD3A0 /* NoovesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoovesTests.m; sourceTree = "<group>"; };
+		CEDDCBDA20F95555004BD3A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEDDCBDF20F95555004BD3A0 /* NoovesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoovesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEDDCBE320F95555004BD3A0 /* NoovesUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NoovesUITests.m; sourceTree = "<group>"; };
+		CEDDCBE520F95555004BD3A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CEDDCBB920F95554004BD3A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEDDCBD120F95555004BD3A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEDDCBDC20F95555004BD3A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CEDDCBB320F95554004BD3A0 = {
+			isa = PBXGroup;
+			children = (
+				CEDDCBBE20F95554004BD3A0 /* Nooves */,
+				CEDDCBD720F95555004BD3A0 /* NoovesTests */,
+				CEDDCBE220F95555004BD3A0 /* NoovesUITests */,
+				CEDDCBBD20F95554004BD3A0 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CEDDCBBD20F95554004BD3A0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CEDDCBBC20F95554004BD3A0 /* Nooves.app */,
+				CEDDCBD420F95555004BD3A0 /* NoovesTests.xctest */,
+				CEDDCBDF20F95555004BD3A0 /* NoovesUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CEDDCBBE20F95554004BD3A0 /* Nooves */ = {
+			isa = PBXGroup;
+			children = (
+				CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */,
+				CEDDCBC020F95554004BD3A0 /* AppDelegate.m */,
+				CEDDCBC220F95554004BD3A0 /* ViewController.h */,
+				CEDDCBC320F95554004BD3A0 /* ViewController.m */,
+				CEDDCBC520F95554004BD3A0 /* Main.storyboard */,
+				CEDDCBC820F95555004BD3A0 /* Assets.xcassets */,
+				CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */,
+				CEDDCBCD20F95555004BD3A0 /* Info.plist */,
+				CEDDCBCE20F95555004BD3A0 /* main.m */,
+			);
+			path = Nooves;
+			sourceTree = "<group>";
+		};
+		CEDDCBD720F95555004BD3A0 /* NoovesTests */ = {
+			isa = PBXGroup;
+			children = (
+				CEDDCBD820F95555004BD3A0 /* NoovesTests.m */,
+				CEDDCBDA20F95555004BD3A0 /* Info.plist */,
+			);
+			path = NoovesTests;
+			sourceTree = "<group>";
+		};
+		CEDDCBE220F95555004BD3A0 /* NoovesUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CEDDCBE320F95555004BD3A0 /* NoovesUITests.m */,
+				CEDDCBE520F95555004BD3A0 /* Info.plist */,
+			);
+			path = NoovesUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CEDDCBBB20F95554004BD3A0 /* Nooves */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEDDCBE820F95555004BD3A0 /* Build configuration list for PBXNativeTarget "Nooves" */;
+			buildPhases = (
+				CEDDCBB820F95554004BD3A0 /* Sources */,
+				CEDDCBB920F95554004BD3A0 /* Frameworks */,
+				CEDDCBBA20F95554004BD3A0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Nooves;
+			productName = Nooves;
+			productReference = CEDDCBBC20F95554004BD3A0 /* Nooves.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CEDDCBD320F95555004BD3A0 /* NoovesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEDDCBEB20F95555004BD3A0 /* Build configuration list for PBXNativeTarget "NoovesTests" */;
+			buildPhases = (
+				CEDDCBD020F95555004BD3A0 /* Sources */,
+				CEDDCBD120F95555004BD3A0 /* Frameworks */,
+				CEDDCBD220F95555004BD3A0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CEDDCBD620F95555004BD3A0 /* PBXTargetDependency */,
+			);
+			name = NoovesTests;
+			productName = NoovesTests;
+			productReference = CEDDCBD420F95555004BD3A0 /* NoovesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CEDDCBDE20F95555004BD3A0 /* NoovesUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEDDCBEE20F95555004BD3A0 /* Build configuration list for PBXNativeTarget "NoovesUITests" */;
+			buildPhases = (
+				CEDDCBDB20F95555004BD3A0 /* Sources */,
+				CEDDCBDC20F95555004BD3A0 /* Frameworks */,
+				CEDDCBDD20F95555004BD3A0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CEDDCBE120F95555004BD3A0 /* PBXTargetDependency */,
+			);
+			name = NoovesUITests;
+			productName = NoovesUITests;
+			productReference = CEDDCBDF20F95555004BD3A0 /* NoovesUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CEDDCBB420F95554004BD3A0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "Nikki Tran";
+				TargetAttributes = {
+					CEDDCBBB20F95554004BD3A0 = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+					CEDDCBD320F95555004BD3A0 = {
+						CreatedOnToolsVersion = 9.4.1;
+						TestTargetID = CEDDCBBB20F95554004BD3A0;
+					};
+					CEDDCBDE20F95555004BD3A0 = {
+						CreatedOnToolsVersion = 9.4.1;
+						TestTargetID = CEDDCBBB20F95554004BD3A0;
+					};
+				};
+			};
+			buildConfigurationList = CEDDCBB720F95554004BD3A0 /* Build configuration list for PBXProject "Nooves" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CEDDCBB320F95554004BD3A0;
+			productRefGroup = CEDDCBBD20F95554004BD3A0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CEDDCBBB20F95554004BD3A0 /* Nooves */,
+				CEDDCBD320F95555004BD3A0 /* NoovesTests */,
+				CEDDCBDE20F95555004BD3A0 /* NoovesUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CEDDCBBA20F95554004BD3A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEDDCBCC20F95555004BD3A0 /* LaunchScreen.storyboard in Resources */,
+				CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */,
+				CEDDCBC720F95554004BD3A0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEDDCBD220F95555004BD3A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEDDCBDD20F95555004BD3A0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CEDDCBB820F95554004BD3A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEDDCBC420F95554004BD3A0 /* ViewController.m in Sources */,
+				CEDDCBCF20F95555004BD3A0 /* main.m in Sources */,
+				CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEDDCBD020F95555004BD3A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEDDCBD920F95555004BD3A0 /* NoovesTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEDDCBDB20F95555004BD3A0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEDDCBE420F95555004BD3A0 /* NoovesUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CEDDCBD620F95555004BD3A0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEDDCBBB20F95554004BD3A0 /* Nooves */;
+			targetProxy = CEDDCBD520F95555004BD3A0 /* PBXContainerItemProxy */;
+		};
+		CEDDCBE120F95555004BD3A0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEDDCBBB20F95554004BD3A0 /* Nooves */;
+			targetProxy = CEDDCBE020F95555004BD3A0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CEDDCBC520F95554004BD3A0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEDDCBC620F95554004BD3A0 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEDDCBCB20F95555004BD3A0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CEDDCBE620F95555004BD3A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CEDDCBE720F95555004BD3A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CEDDCBE920F95555004BD3A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VX452D4486;
+				INFOPLIST_FILE = Nooves/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nikkitran.Nooves;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CEDDCBEA20F95555004BD3A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VX452D4486;
+				INFOPLIST_FILE = Nooves/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nikkitran.Nooves;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CEDDCBEC20F95555004BD3A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VX452D4486;
+				INFOPLIST_FILE = NoovesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nikkitran.NoovesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nooves.app/Nooves";
+			};
+			name = Debug;
+		};
+		CEDDCBED20F95555004BD3A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VX452D4486;
+				INFOPLIST_FILE = NoovesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nikkitran.NoovesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nooves.app/Nooves";
+			};
+			name = Release;
+		};
+		CEDDCBEF20F95555004BD3A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VX452D4486;
+				INFOPLIST_FILE = NoovesUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nikkitran.NoovesUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Nooves;
+			};
+			name = Debug;
+		};
+		CEDDCBF020F95555004BD3A0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VX452D4486;
+				INFOPLIST_FILE = NoovesUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nikkitran.NoovesUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Nooves;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CEDDCBB720F95554004BD3A0 /* Build configuration list for PBXProject "Nooves" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEDDCBE620F95555004BD3A0 /* Debug */,
+				CEDDCBE720F95555004BD3A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEDDCBE820F95555004BD3A0 /* Build configuration list for PBXNativeTarget "Nooves" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEDDCBE920F95555004BD3A0 /* Debug */,
+				CEDDCBEA20F95555004BD3A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEDDCBEB20F95555004BD3A0 /* Build configuration list for PBXNativeTarget "NoovesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEDDCBEC20F95555004BD3A0 /* Debug */,
+				CEDDCBED20F95555004BD3A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEDDCBEE20F95555004BD3A0 /* Build configuration list for PBXNativeTarget "NoovesUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEDDCBEF20F95555004BD3A0 /* Debug */,
+				CEDDCBF020F95555004BD3A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CEDDCBB420F95554004BD3A0 /* Project object */;
+}
