@@ -40,6 +40,7 @@
                                     <navigationItem title="Title" id="RGa-js-dus">
                                         <barButtonItem key="rightBarButtonItem" title="Compose" id="GW0-aY-u0Q">
                                             <connections>
+                                                <action selector="didTapCompose:" destination="BYZ-38-t0r" id="YpY-YS-4gw"/>
                                                 <segue destination="E67-PG-wnK" kind="presentation" identifier="composeSegue" id="RLU-Bp-d4x"/>
                                             </connections>
                                         </barButtonItem>
@@ -52,6 +53,9 @@
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="dOG-WQ-r8Z" id="LRZ-gd-cIH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

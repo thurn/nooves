@@ -7,8 +7,15 @@
 //
 
 #import "TimelineViewController.h"
+#import "postCell.h"
+#import "Post.h"
 
-@interface TimelineViewController ()
+@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray *postsArray;
+
+- (IBAction)didTapCompose:(id)sender;
 
 @end
 
@@ -17,6 +24,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,5 +43,24 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)didTapCompose:(id)sender {
+    [self performSegueWithIdentifier:@"composeSegue" sender:nil];
+}
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    
+    postCell *cell = [tableView dequeueReusableCellWithIdentifier:@"postCell" forIndexPath:indexPath];
+    
+    Post *post = self.postsArray[indexPath.row];
+    [cell setPost:post];
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return self.postsArray.count;
+}
 
 @end
