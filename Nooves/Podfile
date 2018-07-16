@@ -6,6 +6,7 @@ target 'Nooves' do
   # use_frameworks!
 
   # Pods for Nooves
+  pod 'Firebase/Core'
 
   target 'NoovesTests' do
     inherit! :search_paths
