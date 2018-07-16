@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		0912E12A9BE72B7CBF8E847C /* libPods-NoovesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAC0FF4AA347803CC4295B8 /* libPods-NoovesTests.a */; };
 		267B7E70BA2D0E758F0BFE59 /* libPods-NoovesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F11FDD6185EBC6FB54794B48 /* libPods-NoovesUITests.a */; };
+		327FA7BF20FD1FEF009C55BA /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7BE20FD1FEF009C55BA /* TimelineViewController.m */; };
+		327FA7C220FD2014009C55BA /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7C120FD2014009C55BA /* ComposeViewController.m */; };
 		843CEC35ED5431BAB141B183 /* libPods-Nooves.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 490196513151D701FAFA5567 /* libPods-Nooves.a */; };
 		CE458B1D20FD1B2600FA58C4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE458B1C20FD1B2600FA58C4 /* GoogleService-Info.plist */; };
 		CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBC020F95554004BD3A0 /* AppDelegate.m */; };
-		CEDDCBC420F95554004BD3A0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBC320F95554004BD3A0 /* ViewController.m */; };
 		CEDDCBC720F95554004BD3A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBC520F95554004BD3A0 /* Main.storyboard */; };
 		CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBC820F95555004BD3A0 /* Assets.xcassets */; };
 		CEDDCBCC20F95555004BD3A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */; };
@@ -40,6 +41,10 @@
 
 /* Begin PBXFileReference section */
 		0D8B5D3B0AE946E5196167DD /* Pods-NoovesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesTests/Pods-NoovesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		327FA7BD20FD1FEF009C55BA /* TimelineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimelineViewController.h; sourceTree = "<group>"; };
+		327FA7BE20FD1FEF009C55BA /* TimelineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
+		327FA7C020FD2014009C55BA /* ComposeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ComposeViewController.h; path = Assets.xcassets/ComposeViewController.h; sourceTree = "<group>"; };
+		327FA7C120FD2014009C55BA /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ComposeViewController.m; path = Assets.xcassets/ComposeViewController.m; sourceTree = "<group>"; };
 		43EE3158BF0D1AF142B14EA7 /* Pods-NoovesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesUITests/Pods-NoovesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		490196513151D701FAFA5567 /* libPods-Nooves.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Nooves.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		67042FC44E40E61D1421B224 /* Pods-Nooves.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nooves.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nooves/Pods-Nooves.release.xcconfig"; sourceTree = "<group>"; };
@@ -50,8 +55,6 @@
 		CEDDCBBC20F95554004BD3A0 /* Nooves.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nooves.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CEDDCBC020F95554004BD3A0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CEDDCBC220F95554004BD3A0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CEDDCBC320F95554004BD3A0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		CEDDCBC620F95554004BD3A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CEDDCBC820F95555004BD3A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEDDCBCB20F95555004BD3A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -145,14 +148,16 @@
 			children = (
 				CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */,
 				CEDDCBC020F95554004BD3A0 /* AppDelegate.m */,
-				CEDDCBC220F95554004BD3A0 /* ViewController.h */,
-				CEDDCBC320F95554004BD3A0 /* ViewController.m */,
 				CEDDCBC520F95554004BD3A0 /* Main.storyboard */,
 				CEDDCBC820F95555004BD3A0 /* Assets.xcassets */,
 				CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */,
 				CEDDCBCD20F95555004BD3A0 /* Info.plist */,
 				CE458B1C20FD1B2600FA58C4 /* GoogleService-Info.plist */,
 				CEDDCBCE20F95555004BD3A0 /* main.m */,
+				327FA7BD20FD1FEF009C55BA /* TimelineViewController.h */,
+				327FA7BE20FD1FEF009C55BA /* TimelineViewController.m */,
+				327FA7C020FD2014009C55BA /* ComposeViewController.h */,
+				327FA7C120FD2014009C55BA /* ComposeViewController.m */,
 			);
 			path = Nooves;
 			sourceTree = "<group>";
@@ -366,9 +371,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEDDCBC420F95554004BD3A0 /* ViewController.m in Sources */,
 				CEDDCBCF20F95555004BD3A0 /* main.m in Sources */,
 				CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */,
+				327FA7BF20FD1FEF009C55BA /* TimelineViewController.m in Sources */,
+				327FA7C220FD2014009C55BA /* ComposeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
