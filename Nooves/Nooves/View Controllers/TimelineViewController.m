@@ -16,6 +16,8 @@
 @property (strong, nonatomic) NSArray *postsArray;
 
 - (IBAction)didTapCompose:(id)sender;
+- (IBAction)didTapLogout:(id)sender;
+
 
 @end
 
@@ -46,6 +48,11 @@
 
 - (IBAction)didTapCompose:(id)sender {
     [self performSegueWithIdentifier:@"composeSegue" sender:nil];
+}
+
+- (IBAction)didTapLogout:(id)sender {
+    // log the user out and redirect them to the home page
+    
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
