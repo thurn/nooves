@@ -26,6 +26,8 @@
     [FIRApp configure];
 
     ComposeViewController *composeViewController = [[ComposeViewController alloc] init];
+    UINavigationController *composeNavController = [[UINavigationController alloc] initWithRootViewController:composeViewController];
+    // self.window.rootViewController = composeNavController;
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
