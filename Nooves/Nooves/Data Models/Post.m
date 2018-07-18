@@ -9,6 +9,37 @@
 #import "Post.h"
 
 @implementation Post
+
++(NSString *)activityTypeToString:(ActivityType) activityType{
+    switch (activityType) {
+        case Outdoors:
+            return @"Outdoors";
+        case Shopping:
+            return @"Shopping";
+        case Partying:
+            return @"Partying";
+        case Eating:
+            return @"Eating";
+        case Arts:
+            return @"Arts";
+        case Sports:
+            return @"Sports";
+        case Networking:
+            return @"Networking";
+        case Fitness:
+            return @"Fitness";
+        case Games:
+            return @"Games";
+        case Concert:
+            return @"Concert";
+        case Cinema:
+            return @"Cinema";
+        case Festival:
+            return @"Festival";
+        default:
+            return @"Other";
+    }
+};
 -(NSNumber *)ActivityTypeToNumber{
     NSNumber *activity = @(self.activityType);
     return activity;
