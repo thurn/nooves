@@ -38,7 +38,7 @@
     
     
     
-    [self.view addSubview: postButton];
+   // [self.view addSubview: postButton];
 }
 
 - (void) didTapPost {

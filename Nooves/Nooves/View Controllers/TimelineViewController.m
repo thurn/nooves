@@ -7,6 +7,9 @@
 //
 
 #import "TimelineViewController.h"
+#import "ComposeViewController.h"
+#import "AppDelegate.h"
+
 
 @interface TimelineViewController ()
 
@@ -31,14 +34,13 @@
     
     self.navigationItem.title = @"Home";
     
-    UIBarButtonItem *C
-    //[self configureComposeButton];
+    [self writeNewPost];
 
 }
 
 - (UITableView *) configureTableView {
     CGFloat x = 0;
-    CGFloat y = 50;
+    CGFloat y = 0;
     CGFloat width = self.view.frame.size.width;
     CGFloat height = self.view.frame.size.height;
     CGRect tableViewFrame = CGRectMake( x, y, width, height);
@@ -57,32 +59,17 @@
     
 }
 
-/*- (UIButton *) configureComposeButton {
+- (UIBarButtonItem *) writeNewPost {
     
-    CGRect buttonFrame = CGRectMake(15, 5, 25, 25);
-   UIButton *composeButton = [[UIButton alloc] initWithFrame:buttonFrame];
-    //UIButton *composeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    //composeButton.backgroundColor = [UIColor blueColor];
-     [composeButton setTitle:@"Compose" forState:UIControlStateNormal];
+    UIBarButtonItem *composeButton = [[UIBarButtonItem alloc] init];
+    composeButton.title = @"New Post";
+    self.navigationItem.rightBarButtonItem = composeButton;
     
-   composeButton.frame = CGRectMake(50.0f, 200.0f, 100.0f, 30.0f);
-    //composeButton.center = CGPointMake(320/2, 60);
-    [composeButton sizeToFit];
-    
-    [composeButton addTarget:self action:@selector(didTapCompose) forControlEvents:UIControlEventTouchUpInside];
-    
-    [composeButton setShowsTouchWhenHighlighted:YES];
-    
-    UIBarButtonItem *writePost = [[UIBarButtonItem alloc] initWithCustomView:composeButton];
-   self.navigationItem.rightBarButtonItem = writePost;
-   //[composeButton release];
-    [writePost release];
-    
-    // add the button to the subview
-    //[self.view addSubview:writePost];
-    
+    composeButton.target = self;
+    composeButton.action = @selector(didTapCompose);
+
     return composeButton;
-}*/
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -102,6 +89,8 @@
 
 - (void) didTapCompose {
     NSLog(@"pressed the compose button");
+    ComposeViewController *test = [[ComposeViewController alloc] init];
+    [self.navigationController pushViewController:test animated:YES];
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
