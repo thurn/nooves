@@ -13,10 +13,8 @@
 		327FA7C220FD2014009C55BA /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7C120FD2014009C55BA /* ComposeViewController.m */; };
 		327FA7C520FD273E009C55BA /* postCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7C420FD273E009C55BA /* postCell.m */; };
 		327FA7CE20FD2858009C55BA /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7CD20FD2858009C55BA /* Post.m */; };
-		327FA7D020FD425C009C55BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 327FA7CF20FD425C009C55BA /* GoogleService-Info.plist */; };
 		843CEC35ED5431BAB141B183 /* libPods-Nooves.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 490196513151D701FAFA5567 /* libPods-Nooves.a */; };
 		CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBC020F95554004BD3A0 /* AppDelegate.m */; };
-		CEDDCBC720F95554004BD3A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBC520F95554004BD3A0 /* Main.storyboard */; };
 		CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBC820F95555004BD3A0 /* Assets.xcassets */; };
 		CEDDCBCC20F95555004BD3A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */; };
 		CEDDCBCF20F95555004BD3A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBCE20F95555004BD3A0 /* main.m */; };
@@ -52,7 +50,6 @@
 		327FA7C420FD273E009C55BA /* postCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = postCell.m; sourceTree = "<group>"; };
 		327FA7CC20FD2858009C55BA /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		327FA7CD20FD2858009C55BA /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
-		327FA7CF20FD425C009C55BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		43EE3158BF0D1AF142B14EA7 /* Pods-NoovesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesUITests/Pods-NoovesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		490196513151D701FAFA5567 /* libPods-Nooves.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Nooves.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		67042FC44E40E61D1421B224 /* Pods-Nooves.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nooves.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nooves/Pods-Nooves.release.xcconfig"; sourceTree = "<group>"; };
@@ -62,7 +59,6 @@
 		CEDDCBBC20F95554004BD3A0 /* Nooves.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nooves.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CEDDCBC020F95554004BD3A0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CEDDCBC620F95554004BD3A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CEDDCBC820F95555004BD3A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEDDCBCB20F95555004BD3A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEDDCBCD20F95555004BD3A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -188,11 +184,9 @@
 				327FA7D120FE56F7009C55BA /* View Controllers */,
 				CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */,
 				CEDDCBC020F95554004BD3A0 /* AppDelegate.m */,
-				CEDDCBC520F95554004BD3A0 /* Main.storyboard */,
 				CEDDCBC820F95555004BD3A0 /* Assets.xcassets */,
 				CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */,
 				CEDDCBCD20F95555004BD3A0 /* Info.plist */,
-				327FA7CF20FD425C009C55BA /* GoogleService-Info.plist */,
 				CEDDCBCE20F95555004BD3A0 /* main.m */,
 			);
 			path = Nooves;
@@ -323,9 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEDDCBCC20F95555004BD3A0 /* LaunchScreen.storyboard in Resources */,
-				327FA7D020FD425C009C55BA /* GoogleService-Info.plist in Resources */,
 				CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */,
-				CEDDCBC720F95554004BD3A0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,14 +440,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		CEDDCBC520F95554004BD3A0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEDDCBC620F95554004BD3A0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
