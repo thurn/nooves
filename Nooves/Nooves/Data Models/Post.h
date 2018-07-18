@@ -7,7 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <FirebaseDatabase/FirebaseDatabase.h>
+#import "ActivityType.h"
 @interface Post : NSObject
+@property (nonatomic) ActivityType activityType;
+@property (strong, nonatomic) NSString *activityTitle;
+@property (strong, nonatomic) NSString *activityDescription;
+@property (strong, nonatomic) NSDate *activityDateAndTime;
 
+
+-(NSNumber *)ActivityTypeToNumber;
+-(instancetype)MakePost:(NSDate *)eventDate withTitle:(NSString *) postTitle withDescription:(NSString *) postDescription withType:(ActivityType ) activityType;
+-(int)getDateTimeStamp;
 @end

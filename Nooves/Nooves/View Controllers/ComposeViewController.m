@@ -26,7 +26,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"New Event";
-    
+
     //UIView *buttonView = [[UIView alloc] init];
     //[self.view addSubview: buttonView];
     [self post];
@@ -53,7 +53,11 @@
                                                                   target:self
                                                                   action:@selector(didTapBack)];
     self.navigationItem.leftBarButtonItem = backButton;
-    return backButton;
+
+    UIView *view = [[UIView alloc] init];
+
+   // [self.view addSubview: postButton];
+  return backButton;
 }
 
 - (void) didTapPost {

@@ -10,14 +10,20 @@
 #define ActivityType_h
 typedef NS_ENUM(NSInteger, ActivityType){
     Outdoors,
+    Arts,
+    Sports,
     Shopping,
     Partying,
+    Networking,
+    Fitness,
+    Games,
     Eating,
     Cinema,
     Festival,
+    Concert,
     Other
 };
-(NSString*)ConvertActivityToString(ActivityType activityType){
+NSString * ActivityTypeToString(ActivityType activityType){
     switch (activityType) {
         case Outdoors:
             return @"Outdoors";
@@ -27,6 +33,18 @@ typedef NS_ENUM(NSInteger, ActivityType){
             return @"Partying";
         case Eating:
             return @"Eating";
+        case Arts:
+            return @"Arts";
+        case Sports:
+            return @"Sports";
+        case Networking:
+            return @"Networking";
+        case Fitness:
+            return @"Fitness";
+        case Games:
+            return @"Games";
+        case Concert:
+            return @"Concert";
         case Cinema:
             return @"Cinema";
         case Festival:
