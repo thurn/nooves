@@ -8,7 +8,6 @@
 
 #import "ComposeViewController.h"
 #import "AppDelegate.h"
-#import "ActivityType.h"
 
 @interface ComposeViewController ()
 
