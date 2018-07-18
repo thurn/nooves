@@ -13,7 +13,6 @@
 		327FA7C520FD273E009C55BA /* postCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7C420FD273E009C55BA /* postCell.m */; };
 		327FA7CE20FD2858009C55BA /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7CD20FD2858009C55BA /* Post.m */; };
 		327FA7D720FEAA63009C55BA /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7D620FEAA63009C55BA /* TimelineViewController.m */; };
-		327FA7D920FEAA7D009C55BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 327FA7D820FEAA7D009C55BA /* Main.storyboard */; };
 		843CEC35ED5431BAB141B183 /* libPods-Nooves.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 490196513151D701FAFA5567 /* libPods-Nooves.a */; };
 		CE3B74B620FFD2A50063861D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE3B74B520FFD2A50063861D /* GoogleService-Info.plist */; };
 		CE3B74B920FFDFB30063861D /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3B74B820FFDFB30063861D /* ProfileViewController.m */; };
@@ -53,7 +52,6 @@
 		327FA7CD20FD2858009C55BA /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		327FA7D520FEAA63009C55BA /* TimelineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimelineViewController.h; sourceTree = "<group>"; };
 		327FA7D620FEAA63009C55BA /* TimelineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
-		327FA7D820FEAA7D009C55BA /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		43EE3158BF0D1AF142B14EA7 /* Pods-NoovesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesUITests/Pods-NoovesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		490196513151D701FAFA5567 /* libPods-Nooves.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Nooves.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		67042FC44E40E61D1421B224 /* Pods-Nooves.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nooves.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nooves/Pods-Nooves.release.xcconfig"; sourceTree = "<group>"; };
@@ -125,7 +123,6 @@
 				327FA7C120FD2014009C55BA /* ComposeViewController.m */,
 				327FA7D520FEAA63009C55BA /* TimelineViewController.h */,
 				327FA7D620FEAA63009C55BA /* TimelineViewController.m */,
-				327FA7D820FEAA7D009C55BA /* Main.storyboard */,
 				CE3B74B720FFDFB30063861D /* ProfileViewController.h */,
 				CE3B74B820FFDFB30063861D /* ProfileViewController.m */,
 			);
@@ -329,7 +326,6 @@
 			files = (
 				CEDDCBCC20F95555004BD3A0 /* LaunchScreen.storyboard in Resources */,
 				CE3B74B620FFD2A50063861D /* GoogleService-Info.plist in Resources */,
-				327FA7D920FEAA7D009C55BA /* Main.storyboard in Resources */,
 				CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -581,7 +577,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N54432JF7W;
+				DEVELOPMENT_TEAM = VX452D4486;
 				INFOPLIST_FILE = Nooves/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -599,7 +595,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N54432JF7W;
+				DEVELOPMENT_TEAM = VX452D4486;
 				INFOPLIST_FILE = Nooves/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
