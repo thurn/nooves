@@ -14,13 +14,24 @@
 		327FA7C220FD2014009C55BA /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7C120FD2014009C55BA /* ComposeViewController.m */; };
 		327FA7C520FD273E009C55BA /* postCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7C420FD273E009C55BA /* postCell.m */; };
 		327FA7CE20FD2858009C55BA /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7CD20FD2858009C55BA /* Post.m */; };
+		327FA7D420FE9BAC009C55BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 327FA7D320FE9BA6009C55BA /* GoogleService-Info.plist */; };
 		327FA7D720FEAA63009C55BA /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7D620FEAA63009C55BA /* TimelineViewController.m */; };
 		843CEC35ED5431BAB141B183 /* libPods-Nooves.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 490196513151D701FAFA5567 /* libPods-Nooves.a */; };
+<<<<<<< HEAD
+=======
 		CE3B74BE20FFF8660063861D /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3B74BD20FFF8660063861D /* LaunchViewController.m */; };
 		CE3B74C120FFF8870063861D /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3B74C020FFF8870063861D /* DetailsViewController.m */; };
 		CE3B74C420FFF8AC0063861D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3B74C320FFF8AC0063861D /* LoginViewController.m */; };
 		CE3B74C720FFF9010063861D /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3B74C620FFF9010063861D /* ProfileViewController.m */; };
 		CE3B74CA20FFF92E0063861D /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3B74C920FFF92E0063861D /* SignUpViewController.m */; };
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> fbe48b2fbb1f9a969be78f1c96c195e5667e7159
+=======
+		CE3B74CC20FFFB640063861D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE3B74CB20FFFB640063861D /* GoogleService-Info.plist */; };
+>>>>>>> 932793ed1ff3fdccdb80cccd685c4d87908f4356
+>>>>>>> c1b279cd4930fd7ecf90043fecf2dc1c744a6b61
 		CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBC020F95554004BD3A0 /* AppDelegate.m */; };
 		CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBC820F95555004BD3A0 /* Assets.xcassets */; };
 		CEDDCBCC20F95555004BD3A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */; };
@@ -57,6 +68,7 @@
 		327FA7C420FD273E009C55BA /* postCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = postCell.m; sourceTree = "<group>"; };
 		327FA7CC20FD2858009C55BA /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		327FA7CD20FD2858009C55BA /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		327FA7D320FE9BA6009C55BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		327FA7D520FEAA63009C55BA /* TimelineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimelineViewController.h; sourceTree = "<group>"; };
 		327FA7D620FEAA63009C55BA /* TimelineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
 		43EE3158BF0D1AF142B14EA7 /* Pods-NoovesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesUITests/Pods-NoovesUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -65,6 +77,8 @@
 		7EAC0FF4AA347803CC4295B8 /* libPods-NoovesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NoovesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC12C5A6DFAD290C2F56A434 /* Pods-Nooves.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nooves.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nooves/Pods-Nooves.debug.xcconfig"; sourceTree = "<group>"; };
 		AC46F66A7E379DBE1F02E0AC /* Pods-NoovesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesTests/Pods-NoovesTests.release.xcconfig"; sourceTree = "<group>"; };
+<<<<<<< HEAD
+=======
 		CE3B74BC20FFF8660063861D /* LaunchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LaunchViewController.h; sourceTree = "<group>"; };
 		CE3B74BD20FFF8660063861D /* LaunchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaunchViewController.m; sourceTree = "<group>"; };
 		CE3B74BF20FFF8870063861D /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
@@ -75,6 +89,14 @@
 		CE3B74C620FFF9010063861D /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		CE3B74C820FFF92E0063861D /* SignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		CE3B74C920FFF92E0063861D /* SignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> fbe48b2fbb1f9a969be78f1c96c195e5667e7159
+=======
+		CE3B74CB20FFFB640063861D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+>>>>>>> 932793ed1ff3fdccdb80cccd685c4d87908f4356
+>>>>>>> c1b279cd4930fd7ecf90043fecf2dc1c744a6b61
 		CEDDCBBC20F95554004BD3A0 /* Nooves.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nooves.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CEDDCBC020F95554004BD3A0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -138,16 +160,6 @@
 				327FA7C120FD2014009C55BA /* ComposeViewController.m */,
 				327FA7D520FEAA63009C55BA /* TimelineViewController.h */,
 				327FA7D620FEAA63009C55BA /* TimelineViewController.m */,
-				CE3B74BC20FFF8660063861D /* LaunchViewController.h */,
-				CE3B74BD20FFF8660063861D /* LaunchViewController.m */,
-				CE3B74BF20FFF8870063861D /* DetailsViewController.h */,
-				CE3B74C020FFF8870063861D /* DetailsViewController.m */,
-				CE3B74C520FFF9010063861D /* ProfileViewController.h */,
-				CE3B74C620FFF9010063861D /* ProfileViewController.m */,
-				CE3B74C220FFF8AC0063861D /* LoginViewController.h */,
-				CE3B74C320FFF8AC0063861D /* LoginViewController.m */,
-				CE3B74C820FFF92E0063861D /* SignUpViewController.h */,
-				CE3B74C920FFF92E0063861D /* SignUpViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -217,7 +229,19 @@
 				CEDDCBC820F95555004BD3A0 /* Assets.xcassets */,
 				CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */,
 				CEDDCBCD20F95555004BD3A0 /* Info.plist */,
+<<<<<<< HEAD
 				0A12D47520FFFC32003FC73C /* GoogleService-Info.plist */,
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+				327FA7D320FE9BA6009C55BA /* GoogleService-Info.plist */,
+=======
+				0A12D47320FFFAF2003FC73C /* GoogleService-Info.plist */,
+>>>>>>> fbe48b2fbb1f9a969be78f1c96c195e5667e7159
+=======
+				CE3B74CB20FFFB640063861D /* GoogleService-Info.plist */,
+>>>>>>> 932793ed1ff3fdccdb80cccd685c4d87908f4356
+>>>>>>> c1b279cd4930fd7ecf90043fecf2dc1c744a6b61
 				CEDDCBCE20F95555004BD3A0 /* main.m */,
 			);
 			path = Nooves;
@@ -348,8 +372,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEDDCBCC20F95555004BD3A0 /* LaunchScreen.storyboard in Resources */,
+<<<<<<< HEAD
 				0A12D47620FFFC32003FC73C /* GoogleService-Info.plist in Resources */,
 				CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */,
+=======
+				327FA7D420FE9BAC009C55BA /* GoogleService-Info.plist in Resources */,
+				CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */,
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+				0A12D47420FFFAF3003FC73C /* GoogleService-Info.plist in Resources */,
+>>>>>>> fbe48b2fbb1f9a969be78f1c96c195e5667e7159
+=======
+				CE3B74CC20FFFB640063861D /* GoogleService-Info.plist in Resources */,
+>>>>>>> 932793ed1ff3fdccdb80cccd685c4d87908f4356
+>>>>>>> c1b279cd4930fd7ecf90043fecf2dc1c744a6b61
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,14 +470,9 @@
 			files = (
 				CEDDCBCF20F95555004BD3A0 /* main.m in Sources */,
 				0A12D47220FFE9C5003FC73C /* FirebasePost.m in Sources */,
-				CE3B74CA20FFF92E0063861D /* SignUpViewController.m in Sources */,
 				327FA7CE20FD2858009C55BA /* Post.m in Sources */,
-				CE3B74BE20FFF8660063861D /* LaunchViewController.m in Sources */,
-				CE3B74C420FFF8AC0063861D /* LoginViewController.m in Sources */,
 				327FA7C520FD273E009C55BA /* postCell.m in Sources */,
 				CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */,
-				CE3B74C120FFF8870063861D /* DetailsViewController.m in Sources */,
-				CE3B74C720FFF9010063861D /* ProfileViewController.m in Sources */,
 				327FA7C220FD2014009C55BA /* ComposeViewController.m in Sources */,
 				327FA7D720FEAA63009C55BA /* TimelineViewController.m in Sources */,
 			);
@@ -605,7 +637,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VX452D4486;
+				DEVELOPMENT_TEAM = N54432JF7W;
 				INFOPLIST_FILE = Nooves/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -623,7 +655,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VX452D4486;
+				DEVELOPMENT_TEAM = N54432JF7W;
 				INFOPLIST_FILE = Nooves/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
