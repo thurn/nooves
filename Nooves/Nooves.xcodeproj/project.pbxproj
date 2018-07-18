@@ -12,10 +12,9 @@
 		327FA7C220FD2014009C55BA /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7C120FD2014009C55BA /* ComposeViewController.m */; };
 		327FA7C520FD273E009C55BA /* postCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7C420FD273E009C55BA /* postCell.m */; };
 		327FA7CE20FD2858009C55BA /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7CD20FD2858009C55BA /* Post.m */; };
+		327FA7D420FE9BAC009C55BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 327FA7D320FE9BA6009C55BA /* GoogleService-Info.plist */; };
 		327FA7D720FEAA63009C55BA /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7D620FEAA63009C55BA /* TimelineViewController.m */; };
-		327FA7D920FEAA7D009C55BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 327FA7D820FEAA7D009C55BA /* Main.storyboard */; };
 		843CEC35ED5431BAB141B183 /* libPods-Nooves.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 490196513151D701FAFA5567 /* libPods-Nooves.a */; };
-		CE3B74B620FFD2A50063861D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE3B74B520FFD2A50063861D /* GoogleService-Info.plist */; };
 		CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBC020F95554004BD3A0 /* AppDelegate.m */; };
 		CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBC820F95555004BD3A0 /* Assets.xcassets */; };
 		CEDDCBCC20F95555004BD3A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */; };
@@ -50,16 +49,15 @@
 		327FA7C420FD273E009C55BA /* postCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = postCell.m; sourceTree = "<group>"; };
 		327FA7CC20FD2858009C55BA /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		327FA7CD20FD2858009C55BA /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
+		327FA7D320FE9BA6009C55BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		327FA7D520FEAA63009C55BA /* TimelineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimelineViewController.h; sourceTree = "<group>"; };
 		327FA7D620FEAA63009C55BA /* TimelineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
-		327FA7D820FEAA7D009C55BA /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		43EE3158BF0D1AF142B14EA7 /* Pods-NoovesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesUITests/Pods-NoovesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		490196513151D701FAFA5567 /* libPods-Nooves.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Nooves.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		67042FC44E40E61D1421B224 /* Pods-Nooves.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nooves.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nooves/Pods-Nooves.release.xcconfig"; sourceTree = "<group>"; };
 		7EAC0FF4AA347803CC4295B8 /* libPods-NoovesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NoovesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC12C5A6DFAD290C2F56A434 /* Pods-Nooves.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nooves.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nooves/Pods-Nooves.debug.xcconfig"; sourceTree = "<group>"; };
 		AC46F66A7E379DBE1F02E0AC /* Pods-NoovesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesTests/Pods-NoovesTests.release.xcconfig"; sourceTree = "<group>"; };
-		CE3B74B520FFD2A50063861D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CEDDCBBC20F95554004BD3A0 /* Nooves.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nooves.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CEDDCBC020F95554004BD3A0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -122,7 +120,6 @@
 				327FA7C120FD2014009C55BA /* ComposeViewController.m */,
 				327FA7D520FEAA63009C55BA /* TimelineViewController.h */,
 				327FA7D620FEAA63009C55BA /* TimelineViewController.m */,
-				327FA7D820FEAA7D009C55BA /* Main.storyboard */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -191,8 +188,8 @@
 				CEDDCBC020F95554004BD3A0 /* AppDelegate.m */,
 				CEDDCBC820F95555004BD3A0 /* Assets.xcassets */,
 				CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */,
-				CE3B74B520FFD2A50063861D /* GoogleService-Info.plist */,
 				CEDDCBCD20F95555004BD3A0 /* Info.plist */,
+				327FA7D320FE9BA6009C55BA /* GoogleService-Info.plist */,
 				CEDDCBCE20F95555004BD3A0 /* main.m */,
 			);
 			path = Nooves;
@@ -323,8 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEDDCBCC20F95555004BD3A0 /* LaunchScreen.storyboard in Resources */,
-				CE3B74B620FFD2A50063861D /* GoogleService-Info.plist in Resources */,
-				327FA7D920FEAA7D009C55BA /* Main.storyboard in Resources */,
+				327FA7D420FE9BAC009C55BA /* GoogleService-Info.plist in Resources */,
 				CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
