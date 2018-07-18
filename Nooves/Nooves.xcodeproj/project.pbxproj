@@ -42,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A12D46F20FEAFFC003FC73C /* ActivityType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivityType.h; sourceTree = "<group>"; };
 		0D8B5D3B0AE946E5196167DD /* Pods-NoovesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesTests/Pods-NoovesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		327FA7BD20FD1FEF009C55BA /* TimelineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimelineViewController.h; sourceTree = "<group>"; };
 		327FA7BE20FD1FEF009C55BA /* TimelineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
@@ -104,6 +105,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A9C2ADB20FEA9D60044A972 /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				327FA7CC20FD2858009C55BA /* Post.h */,
+				327FA7CD20FD2858009C55BA /* Post.m */,
+				0A12D46F20FEAFFC003FC73C /* ActivityType.h */,
+			);
+			path = "Data Models";
+			sourceTree = "<group>";
+		};
 		327FA7D120FE56F7009C55BA /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -118,8 +129,6 @@
 		327FA7D220FE5736009C55BA /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				327FA7CC20FD2858009C55BA /* Post.h */,
-				327FA7CD20FD2858009C55BA /* Post.m */,
 				327FA7C320FD273E009C55BA /* postCell.h */,
 				327FA7C420FD273E009C55BA /* postCell.m */,
 			);
@@ -174,6 +183,7 @@
 		CEDDCBBE20F95554004BD3A0 /* Nooves */ = {
 			isa = PBXGroup;
 			children = (
+				0A9C2ADB20FEA9D60044A972 /* Data Models */,
 				327FA7D220FE5736009C55BA /* Views */,
 				327FA7D120FE56F7009C55BA /* View Controllers */,
 				CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */,
