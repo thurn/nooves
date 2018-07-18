@@ -2,22 +2,17 @@
 //  TimelineViewController.m
 //  Nooves
 //
-//  Created by Norette Ingabire on 7/16/18.
+//  Created by Norette Ingabire on 7/17/18.
 //  Copyright © 2018 Nikki Tran. All rights reserved.
 //
 
 #import "TimelineViewController.h"
-#import "postCell.h"
-#import "Post.h"
 
-@interface TimelineViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface TimelineViewController ()
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) UILabel *label;
+@property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *postsArray;
-
-- (IBAction)didTapCompose:(id)sender;
-- (IBAction)didTapLogout:(id)sender;
-
 
 @end
 
@@ -27,14 +22,61 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.tableView = [self configureTableView];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    [self.view addSubview:self.tableView];
+    [self.tableView reloadData];
+    
+    self.navigationItem.title = @"Home";
+    
+    [self composeButton];
+    
+}
+
+- (UITableView *) configureTableView {
+    CGFloat x = 0;
+    CGFloat y = 50;
+    CGFloat width = self.view.frame.size.width;
+    CGFloat height = self.view.frame.size.height;
+    CGRect tableViewFrame = CGRectMake( x, y, width, height);
+    
+    self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
+    
+    self.tableView.rowHeight = 45;
+    self.tableView.sectionFooterHeight = 22;
+    self.tableView.sectionHeaderHeight = 22;
+    self.tableView.scrollEnabled = YES;
+    self.tableView.showsVerticalScrollIndicator = YES;
+    self.tableView.userInteractionEnabled = YES;
+    self.tableView.bounces = YES;
+    
+    return self.tableView;
+    
+}
+
+- (UIButton *) composeButton {
+    
+    UIButton *composeButon = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    composeButon.backgroundColor = [UIColor blueColor];
+    
+    composeButon.frame = CGRectMake(50.0f, 200.0f, 100.0f, 30.0f);
+    
+    [composeButon addTarget:self action:@selector(didTapCompose) forControlEvents:UIControlEventTouchUpInside];
+    [composeButon setTitle:@"Compose" forState:UIControlStateNormal];
+    
+    // add the button to the subview
+    [self.view addSubview:composeButon];
+    
+    return composeButon;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 /*
 #pragma mark - Navigation
@@ -46,22 +88,18 @@
 }
 */
 
-- (IBAction)didTapCompose:(id)sender {
-    [self performSegueWithIdentifier:@"composeSegue" sender:nil];
-}
-
-- (IBAction)didTapLogout:(id)sender {
-    // log the user out and redirect them to the home page
-    
+- (void) didTapCompose {
+    NSLog(@"pressed the compose button");
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
-    postCell *cell = [tableView dequeueReusableCellWithIdentifier:@"postCell" forIndexPath:indexPath];
+    static NSString *cellIdentifier = @"cell";
+    UITableViewCell *cell = (UITableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     
-    Post *post = self.postsArray[indexPath.row];
-    [cell setPost:post];
-    
+    cell.textLabel.text = @"post";
     return cell;
 }
 
@@ -69,5 +107,7 @@
     
     return self.postsArray.count;
 }
+
+
 
 @end

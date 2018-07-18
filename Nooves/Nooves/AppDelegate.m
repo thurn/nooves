@@ -7,7 +7,14 @@
 //
 
 #import "AppDelegate.h"
+<<<<<<< HEAD
 #import "ComposeViewController.h"
+=======
+#import "TimelineViewController.h"
+
+@import Firebase;
+
+>>>>>>> 298f696a0d1ca9a18ede176ec8ecca3a024e1eff
 
 @interface AppDelegate ()
 
@@ -15,15 +22,25 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     [FIRApp configure];
     
+<<<<<<< HEAD
     ComposeViewController *composeViewController = [[ComposeViewController alloc] init];
     
+=======
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+
+    TimelineViewController *feedController = [[TimelineViewController alloc]init];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:feedController];
+    
+    self.window.rootViewController = navigationController;
+>>>>>>> 298f696a0d1ca9a18ede176ec8ecca3a024e1eff
     [self.window makeKeyAndVisible];
     
     return YES;
