@@ -8,8 +8,14 @@
 
 #import "ComposeViewController.h"
 #import "AppDelegate.h"
+#import "ActivityType.h"
 
 @interface ComposeViewController ()
+
+@property (strong, nonatomic) UITextField *eventTitle;
+@property (strong, nonatomic) UITextView *eventDescription;
+// date
+// category
 
 @end
 
@@ -19,34 +25,49 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
-    self.navigationItem.title = @"Compose";
-    
-    // right navigation bar button
-    UIBarButtonItem *postButton = [[UIBarButtonItem alloc] initWithTitle:@"Post"
-        style:UIBarButtonItemStylePlain
-        target:self
-        action:@selector(didTapPost:)];
+    self.navigationItem.title = @"New Event";
+
+    //UIView *buttonView = [[UIView alloc] init];
+    //[self.view addSubview: buttonView];
+    [self post];
+    [self goBack];
+}
+
+- (UITextView *) event {
+    UITextView *eventTitle = [[UITextView alloc] init];
+    eventTitle.text = @"Add title here";
+}
+
+- (UIBarButtonItem *) post {
+    UIBarButtonItem *postButton = [[UIBarButtonItem alloc] init];
+    postButton.title = @"Share";
+    postButton.target = self;
+    postButton.action = @selector(didTapPost);
     self.navigationItem.rightBarButtonItem = postButton;
-    // [postButton release];
-    
-    // left navigation bar button
+    return postButton;
+}
+
+- (UIBarButtonItem *) goBack {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon.png"]
-        style:UIBarButtonItemStylePlain
-        target:self
-        action:@selector(didTapBack:)];
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(didTapBack)];
     self.navigationItem.leftBarButtonItem = backButton;
-    
+
     UIView *view = [[UIView alloc] init];
-    
+
    // [self.view addSubview: postButton];
+  return backButton;
 }
 
 - (void) didTapPost {
     // API call
+    NSLog(@"User posted successfully");
 }
 
 - (void) didTapBack {
     [self.navigationController popToRootViewControllerAnimated:YES];
+    NSLog(@"User pressed to go back");
 }
 
 - (void)didReceiveMemoryWarning {
