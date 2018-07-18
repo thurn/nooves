@@ -15,6 +15,7 @@
 		327FA7CE20FD2858009C55BA /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7CD20FD2858009C55BA /* Post.m */; };
 		843CEC35ED5431BAB141B183 /* libPods-Nooves.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 490196513151D701FAFA5567 /* libPods-Nooves.a */; };
 		CE458B2120FE988900FA58C4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE458B2020FE988900FA58C4 /* GoogleService-Info.plist */; };
+		CE458B2320FEAA8D00FA58C4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE458B2220FEAA8D00FA58C4 /* Main.storyboard */; };
 		CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBC020F95554004BD3A0 /* AppDelegate.m */; };
 		CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBC820F95555004BD3A0 /* Assets.xcassets */; };
 		CEDDCBCC20F95555004BD3A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */; };
@@ -57,6 +58,7 @@
 		AC12C5A6DFAD290C2F56A434 /* Pods-Nooves.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nooves.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nooves/Pods-Nooves.debug.xcconfig"; sourceTree = "<group>"; };
 		AC46F66A7E379DBE1F02E0AC /* Pods-NoovesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesTests/Pods-NoovesTests.release.xcconfig"; sourceTree = "<group>"; };
 		CE458B2020FE988900FA58C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CE458B2220FEAA8D00FA58C4 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CEDDCBBC20F95554004BD3A0 /* Nooves.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nooves.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CEDDCBC020F95554004BD3A0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */,
 				CEDDCBC020F95554004BD3A0 /* AppDelegate.m */,
 				CEDDCBC820F95555004BD3A0 /* Assets.xcassets */,
+				CE458B2220FEAA8D00FA58C4 /* Main.storyboard */,
 				CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */,
 				CEDDCBCD20F95555004BD3A0 /* Info.plist */,
 				CE458B2020FE988900FA58C4 /* GoogleService-Info.plist */,
@@ -312,6 +315,7 @@
 				CEDDCBCC20F95555004BD3A0 /* LaunchScreen.storyboard in Resources */,
 				CE458B2120FE988900FA58C4 /* GoogleService-Info.plist in Resources */,
 				CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */,
+				CE458B2320FEAA8D00FA58C4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
