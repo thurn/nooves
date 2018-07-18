@@ -7,6 +7,7 @@
 //
 
 #import "ComposeViewController.h"
+#import "AppDelegate.h"
 
 @interface ComposeViewController ()
 
@@ -16,7 +17,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationItem.title = @"Compose";
+    
+    // right navigation bar button
+    UIBarButtonItem *postButton = [[UIBarButtonItem alloc] initWithTitle:@"Post"
+        style:UIBarButtonItemStylePlain
+        target:self
+        action:@selector(didTapPost:)];
+    self.navigationItem.rightBarButtonItem = postButton;
+    // [postButton release];
+    
+    // left navigation bar button
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon.png"]
+        style:UIBarButtonItemStylePlain
+        target:self
+        action:@selector(didTapBack:)];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
+    UIView *view = [[UIView alloc] init];
+    
+   // [self.view addSubview: postButton];
+}
+
+- (void) didTapPost {
+    // API call
+}
+
+- (void) didTapBack {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
