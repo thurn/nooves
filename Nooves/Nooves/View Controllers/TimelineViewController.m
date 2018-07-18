@@ -31,7 +31,7 @@
     
     self.navigationItem.title = @"Home";
     
-    UIBarButtonItem *C
+    // UIBarButtonItem *C
     //[self configureComposeButton];
 
 }

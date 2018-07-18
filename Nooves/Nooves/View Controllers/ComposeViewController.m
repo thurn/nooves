@@ -36,7 +36,7 @@
         action:@selector(didTapBack:)];
     self.navigationItem.leftBarButtonItem = backButton;
     
-    
+    UIView *view = [[UIView alloc] init];
     
     [self.view addSubview: postButton];
 }
