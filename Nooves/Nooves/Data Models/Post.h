@@ -8,8 +8,24 @@
 
 #import <Foundation/Foundation.h>
 #import <FirebaseDatabase/FirebaseDatabase.h>
-#import "ActivityType.h"
+
 @interface Post : NSObject
+typedef NS_ENUM(NSInteger, ActivityType){
+    Outdoors,
+    Arts,
+    Sports,
+    Shopping,
+    Partying,
+    Networking,
+    Fitness,
+    Games,
+    Eating,
+    Cinema,
+    Festival,
+    Concert,
+    Other
+};
+
 @property (nonatomic) ActivityType activityType;
 @property (strong, nonatomic) NSString *activityTitle;
 @property (strong, nonatomic) NSString *activityDescription;
