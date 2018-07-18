@@ -18,6 +18,7 @@
 		CE3B74BB20FFF4DD0063861D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE3B74BA20FFF4DD0063861D /* GoogleService-Info.plist */; };
 		CE3B74BE20FFF8660063861D /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3B74BD20FFF8660063861D /* LaunchViewController.m */; };
 		CE3B74C120FFF8870063861D /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3B74C020FFF8870063861D /* DetailsViewController.m */; };
+		CE3B74C420FFF8AC0063861D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3B74C320FFF8AC0063861D /* LoginViewController.m */; };
 		CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBC020F95554004BD3A0 /* AppDelegate.m */; };
 		CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBC820F95555004BD3A0 /* Assets.xcassets */; };
 		CEDDCBCC20F95555004BD3A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */; };
@@ -66,6 +67,8 @@
 		CE3B74BD20FFF8660063861D /* LaunchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LaunchViewController.m; sourceTree = "<group>"; };
 		CE3B74BF20FFF8870063861D /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		CE3B74C020FFF8870063861D /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
+		CE3B74C220FFF8AC0063861D /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		CE3B74C320FFF8AC0063861D /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		CEDDCBBC20F95554004BD3A0 /* Nooves.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nooves.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CEDDCBC020F95554004BD3A0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -133,6 +136,8 @@
 				CE3B74BD20FFF8660063861D /* LaunchViewController.m */,
 				CE3B74BF20FFF8870063861D /* DetailsViewController.h */,
 				CE3B74C020FFF8870063861D /* DetailsViewController.m */,
+				CE3B74C220FFF8AC0063861D /* LoginViewController.h */,
+				CE3B74C320FFF8AC0063861D /* LoginViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -420,6 +425,7 @@
 				0A12D47220FFE9C5003FC73C /* FirebasePost.m in Sources */,
 				327FA7CE20FD2858009C55BA /* Post.m in Sources */,
 				CE3B74BE20FFF8660063861D /* LaunchViewController.m in Sources */,
+				CE3B74C420FFF8AC0063861D /* LoginViewController.m in Sources */,
 				327FA7C520FD273E009C55BA /* postCell.m in Sources */,
 				CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */,
 				CE3B74C120FFF8870063861D /* DetailsViewController.m in Sources */,
