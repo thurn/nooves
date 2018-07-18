@@ -19,6 +19,7 @@
 		CE3B74BE20FFF8660063861D /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3B74BD20FFF8660063861D /* LaunchViewController.m */; };
 		CE3B74C120FFF8870063861D /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3B74C020FFF8870063861D /* DetailsViewController.m */; };
 		CE3B74C420FFF8AC0063861D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3B74C320FFF8AC0063861D /* LoginViewController.m */; };
+		CE3B74C720FFF9010063861D /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3B74C620FFF9010063861D /* ProfileViewController.m */; };
 		CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBC020F95554004BD3A0 /* AppDelegate.m */; };
 		CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBC820F95555004BD3A0 /* Assets.xcassets */; };
 		CEDDCBCC20F95555004BD3A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */; };
@@ -69,6 +70,8 @@
 		CE3B74C020FFF8870063861D /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		CE3B74C220FFF8AC0063861D /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		CE3B74C320FFF8AC0063861D /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		CE3B74C520FFF9010063861D /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		CE3B74C620FFF9010063861D /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		CEDDCBBC20F95554004BD3A0 /* Nooves.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nooves.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CEDDCBC020F95554004BD3A0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -136,6 +139,8 @@
 				CE3B74BD20FFF8660063861D /* LaunchViewController.m */,
 				CE3B74BF20FFF8870063861D /* DetailsViewController.h */,
 				CE3B74C020FFF8870063861D /* DetailsViewController.m */,
+				CE3B74C520FFF9010063861D /* ProfileViewController.h */,
+				CE3B74C620FFF9010063861D /* ProfileViewController.m */,
 				CE3B74C220FFF8AC0063861D /* LoginViewController.h */,
 				CE3B74C320FFF8AC0063861D /* LoginViewController.m */,
 			);
@@ -429,6 +434,7 @@
 				327FA7C520FD273E009C55BA /* postCell.m in Sources */,
 				CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */,
 				CE3B74C120FFF8870063861D /* DetailsViewController.m in Sources */,
+				CE3B74C720FFF9010063861D /* ProfileViewController.m in Sources */,
 				327FA7C220FD2014009C55BA /* ComposeViewController.m in Sources */,
 				327FA7D720FEAA63009C55BA /* TimelineViewController.m in Sources */,
 			);
