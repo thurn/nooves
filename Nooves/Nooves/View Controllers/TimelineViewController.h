@@ -10,6 +10,5 @@
 
 @interface TimelineViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (strong, nonatomic) UITableView *tableView;
 
 @end

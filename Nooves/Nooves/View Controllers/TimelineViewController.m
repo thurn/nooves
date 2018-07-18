@@ -10,8 +10,9 @@
 
 @interface TimelineViewController ()
 
-@property (strong, nonatomic) UITextField *textField;
 @property (strong, nonatomic) UILabel *label;
+@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) NSArray *postsArray;
 
 @end
 
@@ -21,13 +22,42 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.tableView = [self configureTableView];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    [self.view addSubview:self.tableView];
     [self.tableView reloadData];
     
     self.navigationItem.title = @"Home";
     
-    // Initialize a button
+    [self composeButton];
+    
+}
+
+- (UITableView *) configureTableView {
+    CGFloat x = 0;
+    CGFloat y = 50;
+    CGFloat width = self.view.frame.size.width;
+    CGFloat height = self.view.frame.size.height;
+    CGRect tableViewFrame = CGRectMake( x, y, width, height);
+    
+    self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
+    
+    self.tableView.rowHeight = 45;
+    self.tableView.sectionFooterHeight = 22;
+    self.tableView.sectionHeaderHeight = 22;
+    self.tableView.scrollEnabled = YES;
+    self.tableView.showsVerticalScrollIndicator = YES;
+    self.tableView.userInteractionEnabled = YES;
+    self.tableView.bounces = YES;
+    
+    return self.tableView;
+    
+}
+
+- (UIButton *) composeButton {
+    
     UIButton *composeButon = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     composeButon.backgroundColor = [UIColor blueColor];
     
@@ -35,8 +65,11 @@
     
     [composeButon addTarget:self action:@selector(didTapCompose) forControlEvents:UIControlEventTouchUpInside];
     [composeButon setTitle:@"Compose" forState:UIControlStateNormal];
+    
+    // add the button to the subview
     [self.view addSubview:composeButon];
     
+    return composeButon;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,9 +104,8 @@
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  
-    // REPLACE PLACEHOLDER
-    return 1;
+    
+    return self.postsArray.count;
 }
 
 
