@@ -31,8 +31,9 @@
     
     self.navigationItem.title = @"Home";
     
-    [self composeButton];
-    
+    UIBarButtonItem *C
+    //[self configureComposeButton];
+
 }
 
 - (UITableView *) configureTableView {
@@ -56,21 +57,32 @@
     
 }
 
-- (UIButton *) composeButton {
+/*- (UIButton *) configureComposeButton {
     
-    UIButton *composeButon = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    composeButon.backgroundColor = [UIColor blueColor];
+    CGRect buttonFrame = CGRectMake(15, 5, 25, 25);
+   UIButton *composeButton = [[UIButton alloc] initWithFrame:buttonFrame];
+    //UIButton *composeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    //composeButton.backgroundColor = [UIColor blueColor];
+     [composeButton setTitle:@"Compose" forState:UIControlStateNormal];
     
-    composeButon.frame = CGRectMake(50.0f, 200.0f, 100.0f, 30.0f);
+   composeButton.frame = CGRectMake(50.0f, 200.0f, 100.0f, 30.0f);
+    //composeButton.center = CGPointMake(320/2, 60);
+    [composeButton sizeToFit];
     
-    [composeButon addTarget:self action:@selector(didTapCompose) forControlEvents:UIControlEventTouchUpInside];
-    [composeButon setTitle:@"Compose" forState:UIControlStateNormal];
+    [composeButton addTarget:self action:@selector(didTapCompose) forControlEvents:UIControlEventTouchUpInside];
+    
+    [composeButton setShowsTouchWhenHighlighted:YES];
+    
+    UIBarButtonItem *writePost = [[UIBarButtonItem alloc] initWithCustomView:composeButton];
+   self.navigationItem.rightBarButtonItem = writePost;
+   //[composeButton release];
+    [writePost release];
     
     // add the button to the subview
-    [self.view addSubview:composeButon];
+    //[self.view addSubview:writePost];
     
-    return composeButon;
-}
+    return composeButton;
+}*/
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -99,7 +111,7 @@
 
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     
-    cell.textLabel.text = @"post";
+   // cell.textLabel.text = @"post";
     return cell;
 }
 
