@@ -33,11 +33,6 @@
     [self goBack];
 }
 
-- (UITextView *) event {
-    UITextView *eventTitle = [[UITextView alloc] init];
-    eventTitle.text = @"Add title here";
-}
-
 - (UIBarButtonItem *) post {
     UIBarButtonItem *postButton = [[UIBarButtonItem alloc] init];
     postButton.title = @"Share";
