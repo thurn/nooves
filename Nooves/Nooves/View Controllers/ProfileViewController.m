@@ -2,7 +2,7 @@
 //  ProfileViewController.m
 //  Nooves
 //
-//  Created by Nikki Tran on 7/18/18.
+//  Created by Nikki Tran on 7/19/18.
 //  Copyright © 2018 Nikki Tran. All rights reserved.
 //
 
@@ -16,7 +16,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 - (void)didReceiveMemoryWarning {

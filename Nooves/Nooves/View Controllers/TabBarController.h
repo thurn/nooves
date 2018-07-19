@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TimelineViewController.h"
+#import "ProfileViewController.h"
 
 @interface TabBarController : UITabBarController
 
