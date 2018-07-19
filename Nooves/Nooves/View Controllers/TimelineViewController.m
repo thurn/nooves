@@ -22,6 +22,11 @@
 
 @implementation TimelineViewController
 
+UIButton *interestedButton;
+UIButton *goingButton;
+bool going = NO;
+bool interested = NO;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -29,6 +34,7 @@
     self.tableView = [self configureTableView];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 
     [self.view addSubview:self.tableView];
     [self.tableView reloadData];
@@ -37,13 +43,15 @@
 
     [self writeNewPost];
     [self itemsMenu];
+    [self goingToEvent];
+    [self interestedInEvent];
     
     // set up the search bar
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
     [[self tableView] setTableHeaderView:searchBar];
     
     // set up the post field
-    UILabel *postField = [[UILabel alloc] initWithFrame:CGRectMake(100,150,300, 30)];
+    UILabel *postField = [[UILabel alloc] initWithFrame:CGRectMake(100,110,300, 30)];
     UIColor *postColor = [UIColor blueColor];
     [postField setBackgroundColor: postColor];
     [postField setText:@"Insert Post here"];
@@ -51,10 +59,10 @@
     
     
     //set up the date field
-    UILabel *dateField = [[UILabel alloc] initWithFrame:CGRectMake(30, 100, 50 , 30)];
+    UILabel *dateField = [[UILabel alloc] initWithFrame:CGRectMake(10, 110, 50 , 50)];
     UIColor *dateColor = [UIColor yellowColor];
     [dateField setBackgroundColor:dateColor];
-    [dateField setText:@"Insert Date here"];
+    [dateField setText:@"Date"];
     [self.view addSubview:dateField];
 }
 
@@ -93,14 +101,40 @@
 
 - (UIBarButtonItem *) itemsMenu {
     
-    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] init];
-    menuButton.title = @"Menu";
-    self.navigationItem.leftBarButtonItem = menuButton;
+    UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] init];
+    filterButton.title = @"Filter";
+    self.navigationItem.leftBarButtonItem = filterButton;
     
-    menuButton.target = self;
-    menuButton.action = @selector(didTapMenu);
+    filterButton.target = self;
+    filterButton.action = @selector(didTapFilter);
     
-    return menuButton;
+    return filterButton;
+}
+
+- (UIButton *) goingToEvent {
+    
+    goingButton = [[UIButton alloc] initWithFrame:CGRectMake(100, 150, 100, 30)];
+    UIColor *goingButtonColor = [UIColor purpleColor];
+    [goingButton setBackgroundColor:goingButtonColor];
+    [goingButton setTitle:@"Going" forState:UIControlStateNormal];
+    [self.view addSubview:goingButton];
+    
+    [goingButton addTarget:self action:@selector(didTapGoing) forControlEvents:UIControlEventTouchUpInside];
+    
+    return goingButton;
+}
+
+- (UIButton *) interestedInEvent {
+    
+   interestedButton = [[UIButton alloc] initWithFrame:CGRectMake(250, 150, 100, 30)];
+    UIColor *interestedButtonColor = [UIColor greenColor];
+    [interestedButton setBackgroundColor:interestedButtonColor];
+    [interestedButton setTitle:@"Interested" forState:UIControlStateNormal];
+    [self.view addSubview:interestedButton];
+    
+    [interestedButton addTarget:self action:@selector(didTapInterested) forControlEvents:UIControlEventTouchUpInside];
+    
+    return interestedButton;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -140,10 +174,80 @@
     [self.navigationController pushViewController:test animated:YES];
 }
 
-- (void) didTapMenu {
+- (void) didTapFilter {
     NSLog(@"clicked on the menu button");
     
     // implement a slide out menu bar
 }
 
+- (void) didTapGoing {
+     //  change button color and number/list of people going and check for unselected button
+    if (!interested) {
+        if (going) {
+            NSLog(@"not going anymore");
+            [goingButton setBackgroundColor:[UIColor purpleColor]];
+            going = NO;
+        }
+        
+        else {
+            NSLog(@"TAPPED GOING BUTTON");
+            UIColor *selectedGoing = [UIColor blackColor];
+            [goingButton setBackgroundColor:selectedGoing];
+            going = YES;
+        }
+    }
+    
+    else {
+        interested = NO;
+        [interestedButton setBackgroundColor:[UIColor greenColor]];
+        if (going) {
+            NSLog(@"not going anymore");
+            [goingButton setBackgroundColor:[UIColor purpleColor]];
+            going = NO;
+        }
+        
+        else {
+            NSLog(@"TAPPED GOING BUTTON");
+            UIColor *selectedGoing = [UIColor blackColor];
+            [goingButton setBackgroundColor:selectedGoing];
+            going = YES;
+        }
+    }
+}
+
+- (void) didTapInterested {
+    if (!going) {
+        if (interested) {
+            // DECREMENT THE NUMBER OF THOSE INTERESTED - REMOVE USER FROM THE LIST
+            NSLog(@"Changed to not interested");
+            [interestedButton setBackgroundColor:[UIColor greenColor]];
+            interested = NO;
+        }
+        else {
+            // ADD THE USER TO THE LIST OF THOSE INTERESTED
+            NSLog(@"tapped interested button");
+            UIColor *selectedInterested = [UIColor blackColor];
+            [interestedButton setBackgroundColor:selectedInterested];
+            interested = YES;
+        }
+    }
+    
+    else {
+        going = NO;
+        [goingButton setBackgroundColor:[UIColor purpleColor]];
+        if (interested) {
+            // DECREMENT THE NUMBER OF THOSE INTERESTED - REMOVE USER FROM THE LIST
+            NSLog(@"Changed to not interested");
+            [interestedButton setBackgroundColor:[UIColor greenColor]];
+            interested = NO;
+        }
+        else {
+            // ADD THE USER TO THE LIST OF THOSE INTERESTED
+            NSLog(@"tapped interested button");
+            UIColor *selectedInterested = [UIColor blackColor];
+            [interestedButton setBackgroundColor:selectedInterested];
+            interested = YES;
+        }
+    }
+}
 @end
