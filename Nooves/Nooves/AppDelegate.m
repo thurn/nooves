@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "ComposeViewController.h"
 #import "TimelineViewController.h"
+#import "TabBarController.h"
+#import "ProfileViewController.h"
 
 @import Firebase;
 
@@ -25,18 +27,28 @@
     // Override point for customization after application launch.
     [FIRApp configure];
     
-    ComposeViewController *composeViewController = [[ComposeViewController alloc] init];
-    UINavigationController *composeNavController = [[UINavigationController alloc] initWithRootViewController:composeViewController];
-    // self.window.rootViewController = composeNavController;
+    // This is the top level tab that will contain the navs
     
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
-
-    TimelineViewController *feedController = [[TimelineViewController alloc]init];
+    // the leaf controllers
+    ProfileViewController* profileViewController = [[ProfileViewController alloc] init];
+    TimelineViewController *timelineController = [[TimelineViewController alloc] init];
     
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:feedController];
+    // 2 navs
+    UINavigationController* timelineNavCont = [[UINavigationController alloc] initWithRootViewController:timelineController];
+    UINavigationController* profileNavCont = [[UINavigationController alloc] initWithRootViewController:profileViewController];
     
-    self.window.rootViewController = navigationController;
+    //    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    //    self.window.backgroundColor = [UIColor whiteColor];
+    TabBarController *baseController = [[TabBarController alloc] init];
+    baseController.viewControllers = @[timelineNavCont, profileNavCont];
+    
+    UIImage *feedImage = [UIImage imageNamed:@"feed_tab"];
+    UIImage *profileImage = [UIImage imageNamed:@"profile_tab"];
+    
+    timelineController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Home" image:feedImage tag:0];
+    profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Profile" image:profileImage tag:1];
+    
+    self.window.rootViewController = baseController;
     
     [self.window makeKeyAndVisible];
     
