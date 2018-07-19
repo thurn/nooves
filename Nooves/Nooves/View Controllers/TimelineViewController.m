@@ -9,14 +9,13 @@
 #import "TimelineViewController.h"
 #import "ComposeViewController.h"
 #import "AppDelegate.h"
-//#import "postCell.h"
+#import "postCell.h"
+#import "ProfileViewController.h"
 
 
 @interface TimelineViewController ()
 
-@property (strong, nonatomic) UILabel *label;
-@property (strong, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) NSArray *postsArray;
+
 
 @end
 
@@ -24,27 +23,34 @@
 
 UIButton *interestedButton;
 UIButton *goingButton;
+UIButton *profileButton;
+
 bool going = NO;
 bool interested = NO;
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    if(!self.tempPostsArray){
+        self.tempPostsArray = [[NSMutableArray alloc]init];
+    }
     self.tableView = [self configureTableView];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    NSLog(@"row height: %f", self.tableView.rowHeight);
 
     [self.view addSubview:self.tableView];
     [self.tableView reloadData];
 
     self.navigationItem.title = @"Home";
-
     [self writeNewPost];
     [self itemsMenu];
     [self goingToEvent];
     [self interestedInEvent];
+    [self userProfile];
     
     // set up the search bar
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
@@ -55,6 +61,7 @@ bool interested = NO;
     UIColor *postColor = [UIColor blueColor];
     [postField setBackgroundColor: postColor];
     [postField setText:@"Insert Post here"];
+    [postField sizeToFit];
     [self.view addSubview:postField];
     
     
@@ -63,6 +70,7 @@ bool interested = NO;
     UIColor *dateColor = [UIColor yellowColor];
     [dateField setBackgroundColor:dateColor];
     [dateField setText:@"Date"];
+    [dateField sizeToFit];
     [self.view addSubview:dateField];
 }
 
@@ -113,10 +121,11 @@ bool interested = NO;
 
 - (UIButton *) goingToEvent {
     
-    goingButton = [[UIButton alloc] initWithFrame:CGRectMake(100, 150, 100, 30)];
+    goingButton = [[UIButton alloc] initWithFrame:CGRectMake(100, 140, 100, 10)];
     UIColor *goingButtonColor = [UIColor purpleColor];
     [goingButton setBackgroundColor:goingButtonColor];
     [goingButton setTitle:@"Going" forState:UIControlStateNormal];
+    [goingButton sizeToFit];
     [self.view addSubview:goingButton];
     
     [goingButton addTarget:self action:@selector(didTapGoing) forControlEvents:UIControlEventTouchUpInside];
@@ -126,10 +135,11 @@ bool interested = NO;
 
 - (UIButton *) interestedInEvent {
     
-   interestedButton = [[UIButton alloc] initWithFrame:CGRectMake(250, 150, 100, 30)];
+   interestedButton = [[UIButton alloc] initWithFrame:CGRectMake(200, 140, 100, 10)];
     UIColor *interestedButtonColor = [UIColor greenColor];
     [interestedButton setBackgroundColor:interestedButtonColor];
     [interestedButton setTitle:@"Interested" forState:UIControlStateNormal];
+   [interestedButton sizeToFit];
     [self.view addSubview:interestedButton];
     
     [interestedButton addTarget:self action:@selector(didTapInterested) forControlEvents:UIControlEventTouchUpInside];
@@ -142,6 +152,15 @@ bool interested = NO;
     // Dispose of any resources that can be recreated.
 }
 
+- (UIButton *) userProfile {
+    profileButton = [[UIButton alloc] initWithFrame:CGRectMake(300, 140, 100, 10)];
+    [profileButton setImage:[UIImage imageNamed:@"profile_tab.png"] forState:UIControlStateNormal];
+    [profileButton sizeToFit];
+    [self.view addSubview:profileButton];
+    
+    [profileButton addTarget:self action:@selector(didTapProfile) forControlEvents:UIControlEventTouchUpInside];
+    return profileButton;
+}
 
 /*
 #pragma mark - Navigation
@@ -168,9 +187,20 @@ bool interested = NO;
     return self.postsArray.count;
 }
 
+/*- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    postCell *postObj = (postCell *) [self tableView:self.tableView cellForRowAtIndexPath:indexPath];
+    [postObj setBackgroundColor:[UIColor redColor]];
+    postObj.postField.text = @"Posting here";
+    [postObj.postField sizeToFit];
+    [self.view addSubview:postObj];
+    
+    return  (postObj.postField.frame.origin.y + postObj.postField.frame.size.height);
+}*/
+
 - (void) didTapCompose {
     NSLog(@"pressed the compose button");
     ComposeViewController *test = [[ComposeViewController alloc] init];
+    test.tempPostsArray = self.tempPostsArray;
     [self.navigationController pushViewController:test animated:YES];
 }
 
@@ -184,12 +214,14 @@ bool interested = NO;
      //  change button color and number/list of people going and check for unselected button
     if (!interested) {
         if (going) {
+            // remove the user from the list of those going
             NSLog(@"not going anymore");
             [goingButton setBackgroundColor:[UIColor purpleColor]];
             going = NO;
         }
         
         else {
+            // add the user to the list of those going
             NSLog(@"TAPPED GOING BUTTON");
             UIColor *selectedGoing = [UIColor blackColor];
             [goingButton setBackgroundColor:selectedGoing];
@@ -201,12 +233,14 @@ bool interested = NO;
         interested = NO;
         [interestedButton setBackgroundColor:[UIColor greenColor]];
         if (going) {
+            // remove the user from the list of those going
             NSLog(@"not going anymore");
             [goingButton setBackgroundColor:[UIColor purpleColor]];
             going = NO;
         }
         
         else {
+            // add the user to the list of those going
             NSLog(@"TAPPED GOING BUTTON");
             UIColor *selectedGoing = [UIColor blackColor];
             [goingButton setBackgroundColor:selectedGoing];
@@ -249,5 +283,11 @@ bool interested = NO;
             interested = YES;
         }
     }
+}
+
+-(void) didTapProfile {
+    NSLog(@"did tap on profile");
+    ProfileViewController *profile = [[ProfileViewController alloc] init];
+    [self.navigationController pushViewController:profile animated:YES];
 }
 @end
