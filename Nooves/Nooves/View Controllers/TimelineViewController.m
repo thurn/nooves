@@ -17,6 +17,9 @@
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *postsArray;
 
+@property (nonatomic) CALayer *shadowLayer;
+@property (strong, nonatomic) UITapGestureRecognizer *tapGesture;
+
 @end
 
 @implementation TimelineViewController
