@@ -24,7 +24,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     [FIRApp configure];
-
+    
     ComposeViewController *composeViewController = [[ComposeViewController alloc] init];
     UINavigationController *composeNavController = [[UINavigationController alloc] initWithRootViewController:composeViewController];
     // self.window.rootViewController = composeNavController;
