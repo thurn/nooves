@@ -13,6 +13,7 @@
 
 @interface ComposeViewController () <UIScrollViewDelegate, UITextViewDelegate>
 
+@property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UITextField *eventTitle;
 @property (strong, nonatomic) UITextView *eventDescription;
 // date
@@ -40,16 +41,21 @@
     // instantiate and set properties for event description text view
     self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 200, 100, 150)];
     self.eventDescription.delegate = self;
-    self.eventDescription.text = @"Add description";
+    self.eventDescription.text = @"Add a description";
     self.eventDescription.textColor = UIColor.grayColor;
     
     [self.view addSubview:self.eventTitle];
     [self.view addSubview:self.eventDescription];
     
-    //     UIScrollView *scrollView = [[UIScrollView alloc] init];
-    //
-    //     self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-    //     self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.width, 40);
+    UIScrollView *scrollView = [[UIScrollView alloc] init];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    // self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds, self.scrollView.bounds);
+    CGRect contentRect = CGRectZero;
+    
+    for (UIView *view in self.scrollView.subviews) {
+        contentRect = CGRectUnion(contentRect, view.frame);
+    }
+    self.scrollView.contentSize = contentRect.size;
 
     [self post];
     [self goBack];
