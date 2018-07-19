@@ -18,7 +18,6 @@
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *postsArray;
 
-
 @end
 
 @implementation TimelineViewController
