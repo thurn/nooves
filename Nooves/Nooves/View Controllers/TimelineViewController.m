@@ -30,7 +30,9 @@ bool interested = NO;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    if(!self.tempPostsArray){
+        self.tempPostsArray = [[NSMutableArray alloc]init];
+    }
     self.tableView = [self configureTableView];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -170,6 +172,7 @@ bool interested = NO;
 - (void) didTapCompose {
     NSLog(@"pressed the compose button");
     ComposeViewController *test = [[ComposeViewController alloc] init];
+    test.tempPostsArray = self.tempPostsArray;
     [self.navigationController pushViewController:test animated:YES];
 }
 

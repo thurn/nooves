@@ -8,20 +8,12 @@
 
 #import "ComposeViewController.h"
 #import "AppDelegate.h"
-#import "Post.h"
 #import "FirebasePost.h"
 #import "TimelineViewController.h"
 
 @interface ComposeViewController () <UIScrollViewDelegate, UITextViewDelegate, UIPickerViewDelegate>
 
-@property (strong, nonatomic) UIScrollView *scrollView;
-@property (strong, nonatomic) UITextField *eventTitle;
-@property (strong, nonatomic) UITextView *eventDescription;
-@property (strong, nonatomic) NSArray *category;
-@property (strong, nonatomic) UITextField *eventLocation;
-// @property (strong, nonatomic) UIPickerView *pickerView;
-@property (strong, nonatomic) NSMutableArray *tempPostsArray;
-@property (strong, nonatomic) Post *post;
+
 // date
 // location
 // category
