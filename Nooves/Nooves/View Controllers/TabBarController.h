@@ -1,5 +1,5 @@
 //
-//  LaunchViewController.h
+//  TabBarController.h
 //  Nooves
 //
 //  Created by Nikki Tran on 7/19/18.
@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TimelineViewController.h"
+#import "ProfileViewController.h"
 
-@interface LaunchViewController : UIViewController
+@interface TabBarController : UITabBarController
 
 @end

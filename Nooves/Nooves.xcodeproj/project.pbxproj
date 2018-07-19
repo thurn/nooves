@@ -15,7 +15,6 @@
 		327FA7CE20FD2858009C55BA /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7CD20FD2858009C55BA /* Post.m */; };
 		327FA7D420FE9BAC009C55BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 327FA7D320FE9BA6009C55BA /* GoogleService-Info.plist */; };
 		327FA7D720FEAA63009C55BA /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7D620FEAA63009C55BA /* TimelineViewController.m */; };
-		327FA7DC21010541009C55BA /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7DB21010541009C55BA /* SideMenuViewController.m */; };
 		843CEC35ED5431BAB141B183 /* libPods-Nooves.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 490196513151D701FAFA5567 /* libPods-Nooves.a */; };
 		CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBC020F95554004BD3A0 /* AppDelegate.m */; };
 		CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBC820F95555004BD3A0 /* Assets.xcassets */; };
@@ -55,8 +54,6 @@
 		327FA7D320FE9BA6009C55BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		327FA7D520FEAA63009C55BA /* TimelineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimelineViewController.h; sourceTree = "<group>"; };
 		327FA7D620FEAA63009C55BA /* TimelineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
-		327FA7DA21010541009C55BA /* SideMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
-		327FA7DB21010541009C55BA /* SideMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
 		43EE3158BF0D1AF142B14EA7 /* Pods-NoovesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesUITests/Pods-NoovesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		490196513151D701FAFA5567 /* libPods-Nooves.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Nooves.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		67042FC44E40E61D1421B224 /* Pods-Nooves.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nooves.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nooves/Pods-Nooves.release.xcconfig"; sourceTree = "<group>"; };
@@ -126,8 +123,6 @@
 				327FA7C120FD2014009C55BA /* ComposeViewController.m */,
 				327FA7D520FEAA63009C55BA /* TimelineViewController.h */,
 				327FA7D620FEAA63009C55BA /* TimelineViewController.m */,
-				327FA7DA21010541009C55BA /* SideMenuViewController.h */,
-				327FA7DB21010541009C55BA /* SideMenuViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -415,7 +410,6 @@
 				0A12D47220FFE9C5003FC73C /* FirebasePost.m in Sources */,
 				327FA7CE20FD2858009C55BA /* Post.m in Sources */,
 				327FA7C520FD273E009C55BA /* postCell.m in Sources */,
-				327FA7DC21010541009C55BA /* SideMenuViewController.m in Sources */,
 				CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */,
 				327FA7C220FD2014009C55BA /* ComposeViewController.m in Sources */,
 				327FA7D720FEAA63009C55BA /* TimelineViewController.m in Sources */,

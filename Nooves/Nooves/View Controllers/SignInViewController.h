@@ -1,5 +1,5 @@
 //
-//  LaunchViewController.h
+//  SignInViewController.h
 //  Nooves
 //
 //  Created by Nikki Tran on 7/19/18.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LaunchViewController : UIViewController
+@interface SignInViewController : UIViewController
 
 @end
