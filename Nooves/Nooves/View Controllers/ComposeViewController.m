@@ -11,11 +11,10 @@
 #import "FirebasePost.h"
 #import "TimelineViewController.h"
 
-@interface ComposeViewController () <UIScrollViewDelegate, UITextViewDelegate, UIPickerViewDelegate>
+@interface ComposeViewController () <UIScrollViewDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
 
 // date
-// location
 // category
 
 @end
@@ -48,7 +47,7 @@
     
     // instantiate and set properties for event location text field
     // need to connect actual locations from api
-    self.eventLocation = [[UITextField alloc] initWithFrame:CGRectMake(0, 200, 1000, 150)];
+    self.eventLocation = [[UITextField alloc] initWithFrame:CGRectMake(0, 150, 1000, 150)];
     self.eventLocation.text = nil;
     self.eventLocation.placeholder = @"Add location";
     self.eventLocation.borderStyle = UITextBorderStyleRoundedRect;
@@ -56,7 +55,7 @@
     
     
     // instantiate and set properties for event description text view
-    self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 400, 100, 150)];
+    self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 300, 100, 150)];
     self.eventDescription.delegate = self;
     self.eventDescription.text = @"Add a description";
     self.eventDescription.textColor = UIColor.grayColor;
@@ -78,9 +77,10 @@
     for (UIView *view in self.scrollView.subviews) {
         contentRect = CGRectUnion(contentRect, view.frame);
     }
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, 4000.0);
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:self.eventTitle];
+    [self.scrollView addSubview:self.eventLocation];
     [self.scrollView addSubview:self.eventDescription];
     [self postButton];
     [self goBack];
@@ -101,11 +101,11 @@
     
 }
 
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)thePickerView {
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
 
-- (NSInteger)pickerView:(UIPickerView *)thePickerView
+- (NSInteger)pickerView:(UIPickerView *)pickerView
 numberOfRowsInComponent:(NSInteger)component {
     return 13;
 }
