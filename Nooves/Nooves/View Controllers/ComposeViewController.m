@@ -8,12 +8,15 @@
 
 #import "ComposeViewController.h"
 #import "AppDelegate.h"
+#import "Post.h"
+#import "FirebasePost.h"
 
-@interface ComposeViewController () <UIScrollViewDelegate>
+@interface ComposeViewController () <UIScrollViewDelegate, UITextViewDelegate>
 
 @property (strong, nonatomic) UITextField *eventTitle;
 @property (strong, nonatomic) UITextView *eventDescription;
 // date
+// location
 // category
 
 @end
@@ -26,13 +29,19 @@
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"New Event";
     
-    self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(10.0f, 30.0f,
-                                                                    300.0f, 30.0f)];
-    self.eventDescription = [[UITextView alloc] init];
-    self.eventTitle.text = @"Title";
-    // self.eventTitle.delegate = self;
-    self.eventDescription.text = @"Description";
+    // instantiate and set properties for event title text field
+    self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(0, 0,
+                                                                    1000, 150)];
+    self.eventTitle.text = nil;
+    self.eventTitle.placeholder = @"Event name";
     self.eventTitle.borderStyle = UITextBorderStyleRoundedRect;
+    self.eventTitle.textColor = UIColor.grayColor;
+    
+    // instantiate and set properties for event description text view
+    self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 200, 100, 150)];
+    self.eventDescription.delegate = self;
+    self.eventDescription.text = @"Add description";
+    self.eventDescription.textColor = UIColor.grayColor;
     
     [self.view addSubview:self.eventTitle];
     [self.view addSubview:self.eventDescription];
@@ -42,10 +51,22 @@
     //     self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     //     self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.width, 40);
 
-    // UIView *buttonView = [[UIView alloc] init];
-    // [self.view addSubview: buttonView];
     [self post];
     [self goBack];
+}
+
+- (void) textViewDidBeginEditing:(UITextView *)textView {
+    if (textView.textColor == UIColor.grayColor) {
+        textView.text = nil;
+        textView.textColor = UIColor.blackColor;
+    }
+}
+
+- (void) textViewDidEndEditing:(UITextView *)textView {
+    if (textView.text == nil) {
+        textView.text = @"Add description";
+        textView.textColor = UIColor.grayColor;
+    }
 }
 
 - (UIBarButtonItem *) post {
@@ -63,10 +84,7 @@
                                                                   target:self
                                                                   action:@selector(didTapBack)];
     self.navigationItem.leftBarButtonItem = backButton;
-
-    UIView *view = [[UIView alloc] init];
-
-   // [self.view addSubview: postButton];
+    
   return backButton;
 }
 
