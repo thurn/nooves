@@ -24,6 +24,11 @@
 
 - (void) setPost: (Post *) post {
     self.post = post;
+    self.postField = [[UILabel alloc] initWithFrame:CGRectMake(100, 100, 100, 30)];
+    [self.postField setText:@"Insert Post here"];
+    
 }
+
+
 
 @end

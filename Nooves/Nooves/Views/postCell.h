@@ -13,4 +13,6 @@
 
 - (void) setPost: (Post *) post;
 
+@property (strong, nonatomic) UILabel *postField;
+
 @end

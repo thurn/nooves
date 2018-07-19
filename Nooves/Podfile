@@ -10,7 +10,6 @@ target 'Nooves' do
   pod 'AFNetworking'
   pod 'Firebase/Core'
   pod 'Firebase/Database'
-  pod 'MFSideMenu'
 
   target 'NoovesTests' do
     inherit! :search_paths
