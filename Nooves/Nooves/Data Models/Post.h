@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <FirebaseDatabase/FirebaseDatabase.h>
-
+#import "FirebasePost.h"
+@class FirebasePost;
 @interface Post : NSObject
 typedef NS_ENUM(NSInteger, ActivityType){
     Outdoors,
@@ -35,4 +36,5 @@ typedef NS_ENUM(NSInteger, ActivityType){
 -(NSNumber *)ActivityTypeToNumber;
 -(instancetype)MakePost:(NSDate *)eventDate withTitle:(NSString *) postTitle withDescription:(NSString *) postDescription withType:(ActivityType ) activityType;
 -(int)getDateTimeStamp;
+-(instancetype)initFromFireBasePost:(FirebasePost *)firePost;
 @end

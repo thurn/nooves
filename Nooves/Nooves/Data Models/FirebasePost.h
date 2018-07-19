@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Post.h"
+@class Post;
 @interface FirebasePost : NSObject
 @property (strong, nonatomic) NSNumber *activityType;
 @property (strong, nonatomic) NSString *postTitle;
 @property (strong, nonatomic) NSString *postDescription;
 @property (strong, nonatomic) NSNumber *eventDateAndTime;
+-(instancetype)initWithPost:(Post *)post;
 @end

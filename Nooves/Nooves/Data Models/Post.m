@@ -56,5 +56,16 @@
     post.activityType = activityType;
     return post;
 }
+-(instancetype)initFromFireBasePost:(FirebasePost *)firePost{
+    Post *post = [[Post alloc]init];
+    int date = [firePost.eventDateAndTime intValue];
+    NSDate *eventDate = [NSDate dateWithTimeIntervalSince1970:date];
+    post.activityDateAndTime = eventDate;
+    post.activityTitle = firePost.postTitle;
+    post.activityDescription = firePost.postDescription;
+    NSInteger eventType = [firePost.activityType integerValue];
+    post.activityType = eventType;
+    return post;
+}
 @end
 
