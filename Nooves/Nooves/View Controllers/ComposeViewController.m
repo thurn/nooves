@@ -37,10 +37,10 @@
     [self.view addSubview:self.eventTitle];
     [self.view addSubview:self.eventDescription];
     
-//     UIScrollView *scrollView = [[UIScrollView alloc] init];
-//
-//        self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-//        self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.width, 40);
+    //     UIScrollView *scrollView = [[UIScrollView alloc] init];
+    //
+    //     self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    //     self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds.width, 40);
 
     // UIView *buttonView = [[UIView alloc] init];
     // [self.view addSubview: buttonView];
