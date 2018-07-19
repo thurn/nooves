@@ -7,8 +7,17 @@
 //
 
 #import "FirebasePost.h"
-#import "Post.h"
-@implementation FirebasePost
 
+@implementation FirebasePost
+-(instancetype)initWithPost:(Post *)post{
+    FirebasePost *firePost = [[FirebasePost alloc]init];
+    int timestamp = [post getDateTimeStamp];
+    firePost.eventDateAndTime = @(timestamp);
+    firePost.postTitle = post.activityTitle;
+    firePost.postDescription = post.activityDescription;
+    NSNumber *eventType = [post ActivityTypeToNumber];
+    firePost.activityType = eventType;
+    return firePost;
+}
 
 @end
