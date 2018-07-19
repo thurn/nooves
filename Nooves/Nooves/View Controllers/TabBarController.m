@@ -16,7 +16,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    TimelineViewController *fvc = [[TimelineViewController alloc] init];
+    ProfileViewController *svc = [[ProfileViewController alloc] init];
+    
+    NSArray* tabViewControllers = @[fvc, svc];
+    
+    [self setViewControllers:tabViewControllers];
+    
+    UIImage *firstImage = [UIImage imageNamed:@"feed_tab.png"];
+    UIImage *secondImage = [UIImage imageNamed:@"profile_tab.png"];
+    
+    fvc.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Home" image:firstImage tag:0];
+    
+    svc.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Profile" image:secondImage tag:1];
+    
 }
 
 - (void)didReceiveMemoryWarning {
