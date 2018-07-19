@@ -16,6 +16,7 @@
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UITextField *eventTitle;
 @property (strong, nonatomic) UITextView *eventDescription;
+@property (strong, nonatomic) NSMutableArray *tempPostsArray;
 // date
 // location
 // category
@@ -44,19 +45,24 @@
     self.eventDescription.text = @"Add a description";
     self.eventDescription.textColor = UIColor.grayColor;
     
-    [self.view addSubview:self.eventTitle];
-    [self.view addSubview:self.eventDescription];
+
+    self.scrollView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.scrollView.backgroundColor = [UIColor brownColor];
     
-    UIScrollView *scrollView = [[UIScrollView alloc] init];
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    CGFloat descHeight = self.eventDescription.frame.origin.y + self.eventDescription.frame.size.height+1000.0;
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, descHeight);
+    
     // self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds, self.scrollView.bounds);
     CGRect contentRect = CGRectZero;
     
     for (UIView *view in self.scrollView.subviews) {
         contentRect = CGRectUnion(contentRect, view.frame);
     }
-    self.scrollView.contentSize = contentRect.size;
-
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, 4000.0);
+    [self.view addSubview:self.scrollView];
+    [self.scrollView addSubview:self.eventTitle];
+    [self.scrollView addSubview:self.eventDescription];
     [self post];
     [self goBack];
 }
