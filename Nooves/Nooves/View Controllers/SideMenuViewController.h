@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SideMenuViewController : UITableViewController
-
+@interface SideMenuViewController : UIViewController
+{
+    NSArray *menuItems;
+}
 @end

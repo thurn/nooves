@@ -9,6 +9,7 @@
 #import "TimelineViewController.h"
 #import "ComposeViewController.h"
 #import "AppDelegate.h"
+//#import "postCell.h"
 
 
 @interface TimelineViewController ()
@@ -17,8 +18,6 @@
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *postsArray;
 
-@property (nonatomic) CALayer *shadowLayer;
-@property (strong, nonatomic) UITapGestureRecognizer *tapGesture;
 
 @end
 
@@ -43,7 +42,21 @@
     // set up the search bar
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
     [[self tableView] setTableHeaderView:searchBar];
-
+    
+    // set up the post field
+    UILabel *postField = [[UILabel alloc] initWithFrame:CGRectMake(100,150,300, 30)];
+    UIColor *postColor = [UIColor blueColor];
+    [postField setBackgroundColor: postColor];
+    [postField setText:@"Insert Post here"];
+    [self.view addSubview:postField];
+    
+    
+    //set up the date field
+    UILabel *dateField = [[UILabel alloc] initWithFrame:CGRectMake(30, 100, 50 , 30)];
+    UIColor *dateColor = [UIColor yellowColor];
+    [dateField setBackgroundColor:dateColor];
+    [dateField setText:@"Insert Date here"];
+    [self.view addSubview:dateField];
 }
 
 - (UITableView *) configureTableView {
