@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "Post.h"
 #import "FirebasePost.h"
+#import "TimelineViewController.h"
 
 @interface ComposeViewController () <UIScrollViewDelegate, UITextViewDelegate>
 
@@ -17,6 +18,7 @@
 @property (strong, nonatomic) UITextField *eventTitle;
 @property (strong, nonatomic) UITextView *eventDescription;
 @property (strong, nonatomic) NSMutableArray *tempPostsArray;
+@property (strong, nonatomic) Post *post;
 // date
 // location
 // category
@@ -27,6 +29,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if(!self.tempPostsArray){
+        self.tempPostsArray = [[NSMutableArray alloc] init];
+    }
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"New Event";
@@ -63,7 +68,7 @@
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:self.eventTitle];
     [self.scrollView addSubview:self.eventDescription];
-    [self post];
+    [self postButton];
     [self goBack];
 }
 
@@ -81,7 +86,7 @@
     }
 }
 
-- (UIBarButtonItem *) post {
+- (UIBarButtonItem *) postButton {
     UIBarButtonItem *postButton = [[UIBarButtonItem alloc] init];
     postButton.title = @"Share";
     postButton.target = self;
@@ -102,6 +107,11 @@
 
 - (void) didTapPost {
     // API call
+    self.post = [[Post alloc] MakePost:[NSDate date] withTitle:self.eventTitle.text withDescription:self.eventDescription.text withType:Other];
+    [self.tempPostsArray addObject:self.post];
+    TimelineViewController *timeline = [[TimelineViewController alloc]init];
+    timeline.tempPostsArray = self.tempPostsArray;
+    [self.navigationController pushViewController:timeline animated:YES];
     NSLog(@"User posted successfully");
 }
 
