@@ -15,9 +15,7 @@
 
 @interface TimelineViewController ()
 
-@property (strong, nonatomic) UILabel *label;
-@property (strong, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) NSArray *postsArray;
+
 
 @end
 
@@ -29,7 +27,9 @@ UIButton *profileButton;
 
 bool going = NO;
 bool interested = NO;
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -44,7 +44,6 @@ bool interested = NO;
     [self.tableView reloadData];
 
     self.navigationItem.title = @"Home";
-
     [self writeNewPost];
     [self itemsMenu];
     [self goingToEvent];

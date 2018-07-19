@@ -10,12 +10,18 @@
 #import "AppDelegate.h"
 #import "Post.h"
 #import "FirebasePost.h"
+#import "TimelineViewController.h"
 
-@interface ComposeViewController () <UIScrollViewDelegate, UITextViewDelegate>
+@interface ComposeViewController () <UIScrollViewDelegate, UITextViewDelegate, UIPickerViewDelegate>
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UITextField *eventTitle;
 @property (strong, nonatomic) UITextView *eventDescription;
+@property (strong, nonatomic) NSArray *category;
+@property (strong, nonatomic) UITextField *eventLocation;
+// @property (strong, nonatomic) UIPickerView *pickerView;
+@property (strong, nonatomic) NSMutableArray *tempPostsArray;
+@property (strong, nonatomic) Post *post;
 // date
 // location
 // category
@@ -26,40 +32,92 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if(!self.tempPostsArray){
+        self.tempPostsArray = [[NSMutableArray alloc] init];
+    }
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"New Event";
     
+    self.category = @[@"Outdoors", @"Shopping", @"Partying", @"Eating", @"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
+    
+    UIPickerView *pickerView = [[UIPickerView alloc] init];
+    pickerView.delegate = self;
+    pickerView.dataSource = self;
+    
     // instantiate and set properties for event title text field
     self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(0, 0,
                                                                     1000, 150)];
+    
     self.eventTitle.text = nil;
     self.eventTitle.placeholder = @"Event name";
     self.eventTitle.borderStyle = UITextBorderStyleRoundedRect;
     self.eventTitle.textColor = UIColor.grayColor;
     
+    // instantiate and set properties for event location text field
+    // need to connect actual locations from api
+    self.eventLocation = [[UITextField alloc] initWithFrame:CGRectMake(0, 200, 1000, 150)];
+    self.eventLocation.text = nil;
+    self.eventLocation.placeholder = @"Add location";
+    self.eventLocation.borderStyle = UITextBorderStyleRoundedRect;
+    self.eventLocation.textColor = UIColor.grayColor;
+    
+    
     // instantiate and set properties for event description text view
-    self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 200, 100, 150)];
+    self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 400, 100, 150)];
     self.eventDescription.delegate = self;
     self.eventDescription.text = @"Add a description";
     self.eventDescription.textColor = UIColor.grayColor;
     
     [self.view addSubview:self.eventTitle];
+    [self.view addSubview:self.eventLocation];
     [self.view addSubview:self.eventDescription];
+
+    self.scrollView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.scrollView.backgroundColor = [UIColor brownColor];
     
-    UIScrollView *scrollView = [[UIScrollView alloc] init];
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    CGFloat descHeight = self.eventDescription.frame.origin.y + self.eventDescription.frame.size.height+1000.0;
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, descHeight);
+    
     // self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds, self.scrollView.bounds);
     CGRect contentRect = CGRectZero;
     
     for (UIView *view in self.scrollView.subviews) {
         contentRect = CGRectUnion(contentRect, view.frame);
     }
-    self.scrollView.contentSize = contentRect.size;
-
-    [self post];
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, 4000.0);
+    [self.view addSubview:self.scrollView];
+    [self.scrollView addSubview:self.eventTitle];
+    [self.scrollView addSubview:self.eventDescription];
+    [self postButton];
     [self goBack];
 }
+
+- (void)pickerView:(UIPickerView *)thePickerView
+      didSelectRow:(NSInteger)row
+       inComponent:(NSInteger)component {
+    
+    //Here, like the table view you can get the each section of each row if you've multiple sections
+//    NSLog(@"Selected Color: %@. Index of selected color: %i",
+//          [arrayColors objectAtIndex:row], row);
+    
+    //Now, if you want to navigate then;
+    // Say, OtherViewController is the controller, where you want to navigate:
+    //OtherViewController *objOtherViewController = [OtherViewController new];
+    //[self.navigationController pushViewController:objOtherViewController animated:YES];
+    
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)thePickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)thePickerView
+numberOfRowsInComponent:(NSInteger)component {
+    return 13;
+}
+
 
 - (void) textViewDidBeginEditing:(UITextView *)textView {
     if (textView.textColor == UIColor.grayColor) {
@@ -75,7 +133,7 @@
     }
 }
 
-- (UIBarButtonItem *) post {
+- (UIBarButtonItem *) postButton {
     UIBarButtonItem *postButton = [[UIBarButtonItem alloc] init];
     postButton.title = @"Share";
     postButton.target = self;
@@ -85,7 +143,7 @@
 }
 
 - (UIBarButtonItem *) goBack {
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon.png"]
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon"]
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(didTapBack)];
@@ -96,6 +154,11 @@
 
 - (void) didTapPost {
     // API call
+    self.post = [[Post alloc] MakePost:[NSDate date] withTitle:self.eventTitle.text withDescription:self.eventDescription.text withType:Other];
+    [self.tempPostsArray addObject:self.post];
+    TimelineViewController *timeline = [[TimelineViewController alloc]init];
+    timeline.tempPostsArray = self.tempPostsArray;
+    [self.navigationController pushViewController:timeline animated:YES];
     NSLog(@"User posted successfully");
 }
 
