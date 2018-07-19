@@ -24,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    
     self.tableView = [self configureTableView];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -35,9 +35,11 @@
     self.navigationItem.title = @"Home";
 
     [self writeNewPost];
-
-    // UIBarButtonItem *C
-    //[self configureComposeButton];
+    [self itemsMenu];
+    
+    // set up the search bar
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
+    [[self tableView] setTableHeaderView:searchBar];
 
 }
 
@@ -74,6 +76,18 @@
     return composeButton;
 }
 
+- (UIBarButtonItem *) itemsMenu {
+    
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] init];
+    menuButton.title = @"Menu";
+    self.navigationItem.leftBarButtonItem = menuButton;
+    
+    menuButton.target = self;
+    menuButton.action = @selector(didTapMenu);
+    
+    return menuButton;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -90,12 +104,6 @@
 }
 */
 
-- (void) didTapCompose {
-    NSLog(@"pressed the compose button");
-    ComposeViewController *test = [[ComposeViewController alloc] init];
-    [self.navigationController pushViewController:test animated:YES];
-}
-
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
 
     static NSString *cellIdentifier = @"cell";
@@ -103,7 +111,6 @@
 
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
 
-   // cell.textLabel.text = @"post";
     return cell;
 }
 
@@ -112,6 +119,16 @@
     return self.postsArray.count;
 }
 
+- (void) didTapCompose {
+    NSLog(@"pressed the compose button");
+    ComposeViewController *test = [[ComposeViewController alloc] init];
+    [self.navigationController pushViewController:test animated:YES];
+}
 
+- (void) didTapMenu {
+    NSLog(@"clicked on the menu button");
+    
+    // implement a slide out menu bar
+}
 
 @end
