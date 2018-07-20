@@ -26,7 +26,9 @@
     NSLog(@"%ld", (long)post.activityType);
     // self.categoriesArray = [NSMutableArray arrayWithObject:[NSString post.ActivityType]];
     // self.categoriesArray = [NSMutableArray arrayWithObjects:[NSString stringWithFormat:NS_ENUM(<#...#>)], nil];
-    NSNumber *activities = @(post.activityType);
+    
+    // holds the array of activities as an NSNumber
+    NSNumber *activities = post.ActivityTypeToNumber;
     NSMutableArray *list = [[NSMutableArray alloc] initWithObjects:activities, nil];
     for(id element in list) {
         NSLog(@"%@", [element description]);
@@ -64,6 +66,7 @@
     ComposeViewController *composer = [[ComposeViewController alloc] init];
     composer.tempPostsArray = self.tempPostsArray;
     composer.date = self.date;
+    composer.categories = self.categories;
     
     [self.navigationController pushViewController:composer animated:YES];
 }

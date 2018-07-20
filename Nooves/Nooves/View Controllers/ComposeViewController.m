@@ -27,7 +27,7 @@
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"New Event";
 
-    self.categories = @[@"Outdoors", @"Shopping", @"Partying", @"Eating", @"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
+    // self.categories = @[@"Outdoors", @"Shopping", @"Partying", @"Eating", @"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
 
     self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 1000, 150)];
     self.eventTitle.text = nil;
@@ -123,6 +123,7 @@
 -(void)didSelectDate{
     DatePickerPopUpViewController *datePicker = [DatePickerPopUpViewController new];
     datePicker.tempPostsArray = self.tempPostsArray;
+    self.date = datePicker.date;
     datePicker.activityType = self.activityType;
     [self.navigationController pushViewController:datePicker animated:YES];
 }
@@ -140,6 +141,7 @@
     CategoryPickerPopUpViewController *categoryPicker = [CategoryPickerPopUpViewController new];
     categoryPicker.tempPostsArray = self.tempPostsArray;
     self.date = categoryPicker.date;
+    categoryPicker.categories = self.categories;
     [self.navigationController pushViewController:categoryPicker animated:YES];
 }
 

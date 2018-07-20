@@ -35,8 +35,12 @@
 }
 -(void)didSelectDate{
     ComposeViewController *composer = [ComposeViewController new];
+//    composer.tempPostsArray = self.tempPostsArray;
+//    composer.date = self.datepicker.date;
+    
     composer.tempPostsArray = self.tempPostsArray;
-    composer.date = self.datepicker.date;
+    self.date = composer.date;
+    composer.activityType = self.activityType;
     [self.navigationController pushViewController:composer animated:YES];
 }
 - (void)didReceiveMemoryWarning{
