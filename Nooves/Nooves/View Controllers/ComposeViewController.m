@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "FirebasePost.h"
 #import "TimelineViewController.h"
-
+#import "DatePickerPopUpViewController.h"
 @interface ComposeViewController () <UIScrollViewDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
 
@@ -31,7 +31,7 @@
     self.navigationItem.title = @"New Event";
     
     self.category = @[@"Outdoors", @"Shopping", @"Partying", @"Eating", @"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
-    
+
     UIPickerView *pickerView = [[UIPickerView alloc] init];
     pickerView.delegate = self;
     pickerView.dataSource = self;
@@ -79,9 +79,11 @@
     }
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
     [self.view addSubview:self.scrollView];
+    
     [self.scrollView addSubview:self.eventTitle];
     [self.scrollView addSubview:self.eventLocation];
     [self.scrollView addSubview:self.eventDescription];
+    [self.scrollView addSubview:[self selectDate]];
     [self postButton];
     [self goBack];
 }
@@ -133,7 +135,17 @@ numberOfRowsInComponent:(NSInteger)component {
     self.navigationItem.rightBarButtonItem = postButton;
     return postButton;
 }
-
+-(UIButton *)selectDate{
+    UIButton *selectDate = [UIButton buttonWithType:UIButtonTypeSystem];
+    [selectDate setTitle:@"Select Date" forState:UIControlStateNormal];
+    [selectDate addTarget:self action:@selector(didSelectDate) forControlEvents:UIControlEventTouchUpInside];
+    [selectDate sizeToFit];
+    return selectDate;
+}
+-(void)didSelectDate{
+    DatePickerPopUpViewController *datePicker = [DatePickerPopUpViewController new];
+    [self.navigationController pushViewController:datePicker animated:YES];
+}
 - (UIBarButtonItem *) goBack {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon"]
                                                                    style:UIBarButtonItemStylePlain

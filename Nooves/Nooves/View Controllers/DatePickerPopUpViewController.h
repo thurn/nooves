@@ -6,8 +6,8 @@
 //  Copyright © 2018 Nikki Tran. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface DatePickerPopUpViewController : NSObject
-
+@interface DatePickerPopUpViewController : UIViewController
+@property UIDatePicker *datepicker;
 @end
