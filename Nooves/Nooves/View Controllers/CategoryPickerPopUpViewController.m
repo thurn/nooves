@@ -38,9 +38,6 @@
     self.pickerView = [[UIPickerView alloc] init];
     self.pickerView.delegate = self;
     self.pickerView.dataSource = self;
-    
-    self.pickerView.delegate = self;
-    self.pickerView.dataSource = self;
     self.pickerView.showsSelectionIndicator = YES;
     
     self.categoryLabel = [[UILabel alloc] init];

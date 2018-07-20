@@ -41,6 +41,14 @@
     self.eventLocation.placeholder = @"Add location";
     self.eventLocation.borderStyle = UITextBorderStyleRoundedRect;
     self.eventLocation.textColor = UIColor.grayColor;
+    
+    UILabel *activityLabel = [[UILabel alloc] init];
+    NSString *activityColon = @"Category: ";
+    activityLabel.frame = CGRectMake(10, 420, 150, 150);
+    NSString *activity = [Post activityTypeToString:self.activityType];
+    activityLabel.text = [activityColon stringByAppendingString:activity];
+    [activityLabel sizeToFit];
+    
 
     UILabel *dateLabel = [[UILabel alloc] init];
     NSString *dateColon = @"Date: ";
@@ -82,6 +90,7 @@
     [self.scrollView addSubview:self.eventTitle];
     [self.scrollView addSubview:self.eventLocation];
     [self.scrollView addSubview:self.eventDescription];
+    [self.scrollView addSubview:activityLabel];
     [self.scrollView addSubview:[self selectDate]];
     [self.scrollView addSubview:dateLabel];
     [self.scrollView addSubview:[self selectCategory]];
@@ -123,7 +132,7 @@
 -(void)didSelectDate{
     DatePickerPopUpViewController *datePicker = [DatePickerPopUpViewController new];
     datePicker.tempPostsArray = self.tempPostsArray;
-    self.date = datePicker.date;
+    datePicker.date = self.date;
     datePicker.activityType = self.activityType;
     [self.navigationController pushViewController:datePicker animated:YES];
 }
@@ -140,7 +149,7 @@
 -(void)didSelectCategory{
     CategoryPickerPopUpViewController *categoryPicker = [CategoryPickerPopUpViewController new];
     categoryPicker.tempPostsArray = self.tempPostsArray;
-    self.date = categoryPicker.date;
+    categoryPicker.date = self.date;
     categoryPicker.activityType = self.activityType;
     [self.navigationController pushViewController:categoryPicker animated:YES];
 }
@@ -157,7 +166,7 @@
 
 - (void) didTapPost {
     // API call
-    self.post = [[Post alloc] MakePost:self.date withTitle:self.eventTitle.text withDescription:self.eventDescription.text withType:Other];
+    self.post = [[Post alloc] MakePost:self.date withTitle:self.eventTitle.text withDescription:self.eventDescription.text withType:self.activityType];
     [self.tempPostsArray addObject:self.post];
     TimelineViewController *timeline = [[TimelineViewController alloc]init];
     timeline.tempPostsArray = self.tempPostsArray;

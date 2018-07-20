@@ -64,7 +64,6 @@ bool interested = NO;
     [postField sizeToFit];
     [self.view addSubview:postField];
     
-    
     //set up the date field
     UILabel *dateField = [[UILabel alloc] initWithFrame:CGRectMake(10, 110, 50 , 50)];
     UIColor *dateColor = [UIColor yellowColor];
