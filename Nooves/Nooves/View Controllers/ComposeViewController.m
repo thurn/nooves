@@ -53,12 +53,26 @@
     self.eventLocation.borderStyle = UITextBorderStyleRoundedRect;
     self.eventLocation.textColor = UIColor.grayColor;
     
-    
+    UILabel *dateLabel = [[UILabel alloc] init];
+    NSString *dateColon = @"Date: ";
+    dateLabel.frame = CGRectMake(10, 500, 100, 100);
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    formatter.dateFormat = @"MM-dd HH:mm";
+    NSString *dateDetails = [formatter stringFromDate:self.date];
+    self.eventDescription.textColor = UIColor.grayColor;
+    if(self.date){
+        dateLabel.text = [dateColon stringByAppendingString:dateDetails];
+    }
+    else{
+        dateLabel.text = dateColon;
+    }
+    [dateLabel sizeToFit];
+    [self.scrollView addSubview:dateLabel];
     // instantiate and set properties for event description text view
     self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 300, 100, 150)];
     self.eventDescription.delegate = self;
     self.eventDescription.text = @"Add a description";
-    self.eventDescription.textColor = UIColor.grayColor;
+
     
     [self.view addSubview:self.eventTitle];
     [self.view addSubview:self.eventLocation];
@@ -84,6 +98,7 @@
     [self.scrollView addSubview:self.eventLocation];
     [self.scrollView addSubview:self.eventDescription];
     [self.scrollView addSubview:[self selectDate]];
+    [self.scrollView addSubview:dateLabel];
     [self postButton];
     [self goBack];
 }
