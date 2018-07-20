@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "Post.h"
+#import "FirebasePost.h"
 
 @interface CategoryPickerPopUpViewController : UIViewController
-@property (strong, nonatomic) NSMutableArray *categoryArray;
 @property (strong, nonatomic) NSArray *categories;
+@property (strong, nonatomic) NSMutableArray *categoriesArray;
 @property (strong, nonatomic) UIPickerView *pickerView;
 @end

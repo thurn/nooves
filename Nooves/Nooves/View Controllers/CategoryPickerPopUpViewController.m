@@ -19,7 +19,11 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    // need to remove and replace with enums for array
     self.categories = @[@"Outdoors", @"Shopping", @"Partying", @"Eating", @"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
+    Post *post = [[Post alloc] init];
+    // self.categoriesArray = [NSMutableArray arrayWithObject:[NSString post.ActivityType]];
+    // self.categoriesArray = [NSMutableArray arrayWithObjects:[NSString stringWithFormat:NS_ENUM(<#...#>)], nil];
     
     self.pickerView = [[UIPickerView alloc] init];
     self.pickerView.delegate = self;
@@ -39,13 +43,13 @@
 -(UIButton *)selectCategory{
     UIButton *selectCategory = [UIButton buttonWithType:UIButtonTypeSystem];
     [selectCategory setTitle:@"Select category" forState:UIControlStateNormal];
-    [selectCategory addTarget:self action:@selector(didSelectCategory) forControlEvents:UIControlEventTouchUpInside];
+    [selectCategory addTarget:self action:@selector(didTapSelectCategory) forControlEvents:UIControlEventTouchUpInside];
     [selectCategory sizeToFit];
     return selectCategory;
 }
 -(void)didTapSelectCategory{
-    ComposeViewController *composer = [ComposeViewController new];
-    composer.tempPostsArray = self.categoryArray;
+    ComposeViewController *composer = [[ComposeViewController alloc] init];
+    //composer.tempPostsArray = self.categoriesArray;
     //    composer.date = self.datepicker.date;
     [self.navigationController pushViewController:composer animated:YES];
 }
@@ -62,7 +66,6 @@ numberOfRowsInComponent:(NSInteger)component {
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     return self.categories[row];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

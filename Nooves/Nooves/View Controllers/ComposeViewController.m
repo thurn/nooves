@@ -13,7 +13,7 @@
 #import "DatePickerPopUpViewController.h"
 #import "CategoryPickerPopUpViewController.h"
 
-@interface ComposeViewController () <UIScrollViewDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
+@interface ComposeViewController () <UIScrollViewDelegate, UITextViewDelegate>
 @end
 
 @implementation ComposeViewController
@@ -29,13 +29,7 @@
 
     self.categories = @[@"Outdoors", @"Shopping", @"Partying", @"Eating", @"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
 
-    self.pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 1000, 500,500)];
-    self.pickerView.delegate = self;
-    self.pickerView.dataSource = self;
-
-    self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(0, 0,
-                                                                    1000, 150)];
-
+    self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 1000, 150)];
     self.eventTitle.text = nil;
     self.eventTitle.placeholder = @"Event name";
     self.eventTitle.borderStyle = UITextBorderStyleRoundedRect;
@@ -67,6 +61,7 @@
     self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 300, 100, 150)];
     self.eventDescription.delegate = self;
     self.eventDescription.text = @"Add a description";
+    self.eventDescription.textColor = UIColor.grayColor;
 
     self.scrollView.translatesAutoresizingMaskIntoConstraints = NO;
     self.scrollView.backgroundColor = [UIColor brownColor];
@@ -87,42 +82,12 @@
     [self.scrollView addSubview:self.eventTitle];
     [self.scrollView addSubview:self.eventLocation];
     [self.scrollView addSubview:self.eventDescription];
-    [self.scrollView addSubview:self.pickerView];
     [self.scrollView addSubview:[self selectDate]];
     [self.scrollView addSubview:dateLabel];
     [self.scrollView addSubview:[self selectCategory]];
     [self postButton];
     [self goBack];
 }
-
-- (void)pickerView:(UIPickerView *)thePickerView
-      didSelectRow:(NSInteger)row
-       inComponent:(NSInteger)component {
-
-    //Here, like the table view you can get the each section of each row if you've multiple sections
-//    NSLog(@"Selected Color: %@. Index of selected color: %i",
-//          [arrayColors objectAtIndex:row], row);
-
-    //Now, if you want to navigate then;
-    // Say, OtherViewController is the controller, where you want to navigate:
-    //OtherViewController *objOtherViewController = [OtherViewController new];
-    //[self.navigationController pushViewController:objOtherViewController animated:YES];
-
-}
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView
-numberOfRowsInComponent:(NSInteger)component {
-    return self.categories.count;
-}
-
--(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return self.categories[row];
-}
-
 
 - (void) textViewDidBeginEditing:(UITextView *)textView {
     if (textView.textColor == UIColor.grayColor) {
@@ -146,6 +111,7 @@ numberOfRowsInComponent:(NSInteger)component {
     self.navigationItem.rightBarButtonItem = postButton;
     return postButton;
 }
+
 -(UIButton *)selectDate{
     UIButton *selectDate = [UIButton buttonWithType:UIButtonTypeSystem];
     [selectDate setTitle:@"Select Date" forState:UIControlStateNormal];
@@ -153,6 +119,7 @@ numberOfRowsInComponent:(NSInteger)component {
     [selectDate sizeToFit];
     return selectDate;
 }
+
 -(void)didSelectDate{
     DatePickerPopUpViewController *datePicker = [DatePickerPopUpViewController new];
     datePicker.tempPostsArray = self.tempPostsArray;
@@ -167,14 +134,11 @@ numberOfRowsInComponent:(NSInteger)component {
     [selectCategory sizeToFit];
     return selectCategory;
 }
+
 -(void)didSelectCategory{
     CategoryPickerPopUpViewController *categoryPicker = [CategoryPickerPopUpViewController new];
-    categoryPicker.categoryArray = self.tempPostsArray;
+    categoryPicker.categoriesArray = self.tempPostsArray;
     [self.navigationController pushViewController:categoryPicker animated:YES];
-    
-//    DatePickerPopUpViewController *datePicker = [DatePickerPopUpViewController new];
-//    datePicker.tempPostsArray = self.tempPostsArray;
-//    [self.navigationController pushViewController:datePicker animated:YES];
 }
 
 - (UIBarButtonItem *) goBack {
