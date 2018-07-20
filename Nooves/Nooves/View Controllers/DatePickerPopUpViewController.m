@@ -7,7 +7,7 @@
 //
 
 #import "DatePickerPopUpViewController.h"
-
+#import "ComposeViewController.h"
 @interface DatePickerPopUpViewController()
 
 @end
@@ -18,11 +18,28 @@
     self.datepicker = [[UIDatePicker alloc]init];
     self.datepicker.frame = CGRectMake(10.0, 30.0, self.view.frame.size.width, 200);
     self.datepicker.timeZone = [NSTimeZone localTimeZone];
+    UIButton *selectedDate = [self selectDate];
+    selectedDate.frame = CGRectMake(10.0, 250.0, 20, 30);
+    [selectedDate sizeToFit];
+    [self.view addSubview:selectedDate];
     self.datepicker.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.datepicker];
+
+}
+-(UIButton *)selectDate{
+    UIButton *selectDate = [UIButton buttonWithType:UIButtonTypeSystem];
+    [selectDate setTitle:@"Select Date" forState:UIControlStateNormal];
+    [selectDate addTarget:self action:@selector(didSelectDate) forControlEvents:UIControlEventTouchUpInside];
+    [selectDate sizeToFit];
+    return selectDate;
+}
+-(void)didSelectDate{
+    ComposeViewController *composer = [ComposeViewController new];
+    composer.tempPostsArray = self.tempPostsArray;
+    composer.date = self.datepicker.date;
+    [self.navigationController pushViewController:composer animated:YES];
 }
 - (void)didReceiveMemoryWarning{
-    
 }
 /*
  #pragma mark - Navigation

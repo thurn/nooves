@@ -144,6 +144,7 @@ numberOfRowsInComponent:(NSInteger)component {
 }
 -(void)didSelectDate{
     DatePickerPopUpViewController *datePicker = [DatePickerPopUpViewController new];
+    datePicker.tempPostsArray = self.tempPostsArray;
     [self.navigationController pushViewController:datePicker animated:YES];
 }
 - (UIBarButtonItem *) goBack {
@@ -158,7 +159,7 @@ numberOfRowsInComponent:(NSInteger)component {
 
 - (void) didTapPost {
     // API call
-    self.post = [[Post alloc] MakePost:[NSDate date] withTitle:self.eventTitle.text withDescription:self.eventDescription.text withType:Other];
+    self.post = [[Post alloc] MakePost:self.date withTitle:self.eventTitle.text withDescription:self.eventDescription.text withType:Other];
     [self.tempPostsArray addObject:self.post];
     TimelineViewController *timeline = [[TimelineViewController alloc]init];
     timeline.tempPostsArray = self.tempPostsArray;

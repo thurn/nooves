@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Post.h"
 @interface DatePickerPopUpViewController : UIViewController
-@property UIDatePicker *datepicker;
+@property (strong, nonatomic) UIDatePicker *datepicker;
+@property (strong, nonatomic) NSMutableArray *tempPostsArray;
+@property (strong, nonatomic) NSDate *date;
 @end
