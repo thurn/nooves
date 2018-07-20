@@ -18,4 +18,5 @@
 @property (strong, nonatomic) NSMutableArray *tempPostsArray;
 @property (strong, nonatomic) Post *post;
 @property (strong, nonatomic) NSDate *date;
+@property (nonatomic) ActivityType *activityType;
 @end

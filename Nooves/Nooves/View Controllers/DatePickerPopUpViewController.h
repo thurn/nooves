@@ -12,4 +12,5 @@
 @property (strong, nonatomic) UIDatePicker *datepicker;
 @property (strong, nonatomic) NSMutableArray *tempPostsArray;
 @property (strong, nonatomic) NSDate *date;
+@property (nonatomic) ActivityType *activityType;
 @end

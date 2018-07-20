@@ -15,4 +15,6 @@
 @property (strong, nonatomic) NSMutableArray *categoriesArray;
 @property (strong, nonatomic) UIPickerView *pickerView;
 @property (strong, nonatomic) UILabel *categoryLabel;
+@property (strong, nonatomic) NSMutableArray *tempPostsArray;
+@property (strong, nonatomic) NSDate *date;
 @end

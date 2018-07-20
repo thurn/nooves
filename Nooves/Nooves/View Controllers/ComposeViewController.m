@@ -123,6 +123,7 @@
 -(void)didSelectDate{
     DatePickerPopUpViewController *datePicker = [DatePickerPopUpViewController new];
     datePicker.tempPostsArray = self.tempPostsArray;
+    datePicker.activityType = self.activityType;
     [self.navigationController pushViewController:datePicker animated:YES];
 }
 
@@ -137,7 +138,8 @@
 
 -(void)didSelectCategory{
     CategoryPickerPopUpViewController *categoryPicker = [CategoryPickerPopUpViewController new];
-    categoryPicker.categoriesArray = self.tempPostsArray;
+    categoryPicker.tempPostsArray = self.tempPostsArray;
+    self.date = categoryPicker.date;
     [self.navigationController pushViewController:categoryPicker animated:YES];
 }
 
