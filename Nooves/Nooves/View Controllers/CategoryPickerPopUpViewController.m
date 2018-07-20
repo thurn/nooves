@@ -66,8 +66,7 @@
     ComposeViewController *composer = [[ComposeViewController alloc] init];
     composer.tempPostsArray = self.tempPostsArray;
     composer.date = self.date;
-    composer.categories = self.categories;
-    
+    composer.activityType = self.activityType;
     [self.navigationController pushViewController:composer animated:YES];
 }
 
@@ -86,6 +85,8 @@ numberOfRowsInComponent:(NSInteger)component {
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     self.categoryLabel.text = self.categories[row];
+    ActivityType type = [Post stringToActivityType:self.categoryLabel.text];
+    self.activityType = type;
 }
 
 - (void)didReceiveMemoryWarning {

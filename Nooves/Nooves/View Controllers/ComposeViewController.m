@@ -141,7 +141,7 @@
     CategoryPickerPopUpViewController *categoryPicker = [CategoryPickerPopUpViewController new];
     categoryPicker.tempPostsArray = self.tempPostsArray;
     self.date = categoryPicker.date;
-    categoryPicker.categories = self.categories;
+    categoryPicker.activityType = self.activityType;
     [self.navigationController pushViewController:categoryPicker animated:YES];
 }
 

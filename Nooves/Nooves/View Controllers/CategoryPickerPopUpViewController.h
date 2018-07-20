@@ -17,4 +17,5 @@
 @property (strong, nonatomic) UILabel *categoryLabel;
 @property (strong, nonatomic) NSMutableArray *tempPostsArray;
 @property (strong, nonatomic) NSDate *date;
+@property (nonatomic) ActivityType activityType;
 @end
