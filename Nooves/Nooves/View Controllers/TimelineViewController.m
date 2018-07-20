@@ -66,13 +66,13 @@
 
     tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
 
-    tableView.rowHeight = 45;
+   /* tableView.rowHeight = 45;
     tableView.sectionFooterHeight = 22;
     tableView.sectionHeaderHeight = 22;
     tableView.scrollEnabled = YES;
     tableView.showsVerticalScrollIndicator = YES;
     tableView.userInteractionEnabled = YES;
-    tableView.bounces = YES;
+    tableView.bounces = YES;*/
 
     return tableView;
 

@@ -15,13 +15,14 @@ static NSString *const postcellIdentifier = @"cellwithPost";
 
 @property (strong, nonatomic) Post *post;
 
-@property (strong, nonatomic) UILabel *postField;
+@property (strong, nonatomic) UILabel *activityDescriptionField;
 @property (strong, nonatomic) UILabel *dateField;
 @property (strong, nonatomic) UIButton *goingButton;
 @property (strong, nonatomic) UIButton *interestedButton;
 @property (strong, nonatomic) UIButton *profileButton;
 @property (strong, nonatomic) UILabel *eventTitle;
 @property (strong, nonatomic) UILabel *activityTypeField;
+
 
 -(void) configurePost: (Post *) post;
 

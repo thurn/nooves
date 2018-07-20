@@ -62,12 +62,12 @@ bool interested = NO;
 
 - (void) configurePost: (Post *) post {
     // set up the post field
-    self.postField = [[UILabel alloc]initWithFrame:(CGRectMake(100, 40, 250, 30))];
-    [self.postField setBackgroundColor:[UIColor greenColor]];
-    self.postField.text = @"Insert Post here";
+    self.activityDescriptionField = [[UILabel alloc]initWithFrame:(CGRectMake(100, 40, 250, 30))];
+    [self.activityDescriptionField setBackgroundColor:[UIColor greenColor]];
+    self.activityDescriptionField.text = @"Insert Post here";
     
-    [self.postField sizeToFit];
-    [self.contentView addSubview:self.postField];
+    [self.activityDescriptionField sizeToFit];
+    [self.contentView addSubview:self.activityDescriptionField];
     
     
     //self up the event title
@@ -92,7 +92,7 @@ bool interested = NO;
     [self.contentView addSubview:self.dateField];
     
     self.post = post;
-    self.postField.text = post.activityDescription;
+    self.activityDescriptionField.text = post.activityDescription;
     self.activityTypeField.text = [Post activityTypeToString:post.activityType];
     self.eventTitle.text = post.activityTitle;
     
