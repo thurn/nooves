@@ -53,6 +53,25 @@
     // set up the search bar
     UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
    // [[self tableView] setTableHeaderView:searchBar];
+
+    //[[self tableView] setTableHeaderView:searchBar];
+    
+    // set up the post field
+    UILabel *postField = [[UILabel alloc] initWithFrame:CGRectMake(100,110,300, 30)];
+    UIColor *postColor = [UIColor blueColor];
+    [postField setBackgroundColor: postColor];
+    [postField setText:@"Insert Post here"];
+    [postField sizeToFit];
+    [self.view addSubview:postField];
+    
+    //set up the date field
+    UILabel *dateField = [[UILabel alloc] initWithFrame:CGRectMake(10, 110, 50 , 50)];
+    UIColor *dateColor = [UIColor yellowColor];
+    [dateField setBackgroundColor:dateColor];
+    [dateField setText:@"Date"];
+    [dateField sizeToFit];
+    [self.view addSubview:dateField];
+
 }
 
 - (UITableView *) configureTableView {

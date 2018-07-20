@@ -10,14 +10,10 @@
 #import "AppDelegate.h"
 #import "FirebasePost.h"
 #import "TimelineViewController.h"
+#import "DatePickerPopUpViewController.h"
+#import "CategoryPickerPopUpViewController.h"
 
-@interface ComposeViewController () <UIScrollViewDelegate, UITextViewDelegate, UIPickerViewDelegate>
-
-
-// date
-// location
-// category
-
+@interface ComposeViewController () <UIScrollViewDelegate, UITextViewDelegate>
 @end
 
 @implementation ComposeViewController
@@ -30,86 +26,77 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"New Event";
-    
-    self.category = @[@"Outdoors", @"Shopping", @"Partying", @"Eating", @"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
-    
-    UIPickerView *pickerView = [[UIPickerView alloc] init];
-    pickerView.delegate = self;
-    pickerView.dataSource = self;
-    
-    // instantiate and set properties for event title text field
-    self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(0, 0,
-                                                                    1000, 150)];
-    
+
+    // self.categories = @[@"Outdoors", @"Shopping", @"Partying", @"Eating", @"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
+
+    self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 1000, 150)];
     self.eventTitle.text = nil;
     self.eventTitle.placeholder = @"Event name";
     self.eventTitle.borderStyle = UITextBorderStyleRoundedRect;
     self.eventTitle.textColor = UIColor.grayColor;
-    
-    // instantiate and set properties for event location text field
+
     // need to connect actual locations from api
-    self.eventLocation = [[UITextField alloc] initWithFrame:CGRectMake(0, 200, 1000, 150)];
+    self.eventLocation = [[UITextField alloc] initWithFrame:CGRectMake(0, 150, 1000, 150)];
     self.eventLocation.text = nil;
     self.eventLocation.placeholder = @"Add location";
     self.eventLocation.borderStyle = UITextBorderStyleRoundedRect;
     self.eventLocation.textColor = UIColor.grayColor;
     
+    UILabel *activityLabel = [[UILabel alloc] init];
+    NSString *activityColon = @"Category: ";
+    activityLabel.frame = CGRectMake(10, 420, 150, 150);
+    NSString *activity = [Post activityTypeToString:self.activityType];
+    activityLabel.text = [activityColon stringByAppendingString:activity];
+    [activityLabel sizeToFit];
     
-    // instantiate and set properties for event description text view
-    self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 400, 100, 150)];
+
+    UILabel *dateLabel = [[UILabel alloc] init];
+    NSString *dateColon = @"Date: ";
+    dateLabel.frame = CGRectMake(10, 500, 100, 100);
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    formatter.dateFormat = @"MM-dd HH:mm";
+    NSString *dateDetails = [formatter stringFromDate:self.date];
+    self.eventDescription.textColor = UIColor.grayColor;
+    if(self.date){
+        dateLabel.text = [dateColon stringByAppendingString:dateDetails];
+    }
+    else{
+        dateLabel.text = dateColon;
+    }
+    [dateLabel sizeToFit];
+    [self.scrollView addSubview:dateLabel];
+    
+    self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 300, 100, 150)];
     self.eventDescription.delegate = self;
     self.eventDescription.text = @"Add a description";
     self.eventDescription.textColor = UIColor.grayColor;
-    
-    [self.view addSubview:self.eventTitle];
-    [self.view addSubview:self.eventLocation];
-    [self.view addSubview:self.eventDescription];
 
     self.scrollView.translatesAutoresizingMaskIntoConstraints = NO;
     self.scrollView.backgroundColor = [UIColor brownColor];
-    
+
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     CGFloat descHeight = self.eventDescription.frame.origin.y + self.eventDescription.frame.size.height+1000.0;
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, descHeight);
-    
+
     // self.scrollView.contentSize = CGSizeMake(self.scrollView.bounds, self.scrollView.bounds);
     CGRect contentRect = CGRectZero;
-    
+
     for (UIView *view in self.scrollView.subviews) {
         contentRect = CGRectUnion(contentRect, view.frame);
     }
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, 4000.0);
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
     [self.view addSubview:self.scrollView];
+    
     [self.scrollView addSubview:self.eventTitle];
+    [self.scrollView addSubview:self.eventLocation];
     [self.scrollView addSubview:self.eventDescription];
+    [self.scrollView addSubview:activityLabel];
+    [self.scrollView addSubview:[self selectDate]];
+    [self.scrollView addSubview:dateLabel];
+    [self.scrollView addSubview:[self selectCategory]];
     [self postButton];
     [self goBack];
 }
-
-- (void)pickerView:(UIPickerView *)thePickerView
-      didSelectRow:(NSInteger)row
-       inComponent:(NSInteger)component {
-    
-    //Here, like the table view you can get the each section of each row if you've multiple sections
-//    NSLog(@"Selected Color: %@. Index of selected color: %i",
-//          [arrayColors objectAtIndex:row], row);
-    
-    //Now, if you want to navigate then;
-    // Say, OtherViewController is the controller, where you want to navigate:
-    //OtherViewController *objOtherViewController = [OtherViewController new];
-    //[self.navigationController pushViewController:objOtherViewController animated:YES];
-    
-}
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)thePickerView {
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)thePickerView
-numberOfRowsInComponent:(NSInteger)component {
-    return 13;
-}
-
 
 - (void) textViewDidBeginEditing:(UITextView *)textView {
     if (textView.textColor == UIColor.grayColor) {
@@ -134,19 +121,52 @@ numberOfRowsInComponent:(NSInteger)component {
     return postButton;
 }
 
+-(UIButton *)selectDate{
+    UIButton *selectDate = [UIButton buttonWithType:UIButtonTypeSystem];
+    [selectDate setTitle:@"Select Date" forState:UIControlStateNormal];
+    [selectDate addTarget:self action:@selector(didSelectDate) forControlEvents:UIControlEventTouchUpInside];
+    [selectDate sizeToFit];
+    return selectDate;
+}
+
+-(void)didSelectDate{
+    DatePickerPopUpViewController *datePicker = [DatePickerPopUpViewController new];
+    datePicker.tempPostsArray = self.tempPostsArray;
+    datePicker.date = self.date;
+    datePicker.activityType = self.activityType;
+    [self.navigationController pushViewController:datePicker animated:YES];
+}
+
+-(UIButton *)selectCategory{
+    UIButton *selectCategory = [UIButton buttonWithType:UIButtonTypeSystem];
+    [selectCategory setTitle:@"Select Category" forState:UIControlStateNormal];
+    [selectCategory addTarget:self action:@selector(didSelectCategory) forControlEvents:UIControlEventTouchUpInside];
+    selectCategory.center = CGPointMake(0, 40);
+    [selectCategory sizeToFit];
+    return selectCategory;
+}
+
+-(void)didSelectCategory{
+    CategoryPickerPopUpViewController *categoryPicker = [CategoryPickerPopUpViewController new];
+    categoryPicker.tempPostsArray = self.tempPostsArray;
+    categoryPicker.date = self.date;
+    categoryPicker.activityType = self.activityType;
+    [self.navigationController pushViewController:categoryPicker animated:YES];
+}
+
 - (UIBarButtonItem *) goBack {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon"]
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(didTapBack)];
     self.navigationItem.leftBarButtonItem = backButton;
-    
+
   return backButton;
 }
 
 - (void) didTapPost {
     // API call
-    self.post = [[Post alloc] MakePost:[NSDate date] withTitle:self.eventTitle.text withDescription:self.eventDescription.text withType:Other];
+    self.post = [[Post alloc] MakePost:self.date withTitle:self.eventTitle.text withDescription:self.eventDescription.text withType:self.activityType];
     [self.tempPostsArray addObject:self.post];
     TimelineViewController *timeline = [[TimelineViewController alloc]init];
     timeline.tempPostsArray = self.tempPostsArray;
