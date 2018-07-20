@@ -49,7 +49,7 @@ bool interested = NO;
         self.goingButton.backgroundColor = [UIColor blackColor];
         [self.goingButton setTitle:@"Going" forState:UIControlStateNormal];
         //[self.goingButton sizeToFit];
-        [self.contentView addSubview:self.goingButton];
+       // [self.contentView addSubview:self.goingButton];
         [self.goingButton addTarget:self action:@selector(didTapGoing) forControlEvents:UIControlEventTouchUpInside];
         
         // set up the 'interested' button
@@ -57,7 +57,7 @@ bool interested = NO;
         [self.interestedButton setBackgroundColor:[UIColor blackColor]];
         [self.interestedButton setTitle:@"Interested" forState:UIControlStateNormal];
         [self.interestedButton sizeToFit];
-        [self.contentView addSubview:self.interestedButton];
+      //  [self.contentView addSubview:self.interestedButton];
         [self.interestedButton addTarget:self action:@selector(didTapInterested) forControlEvents:UIControlEventTouchUpInside];
         
 
