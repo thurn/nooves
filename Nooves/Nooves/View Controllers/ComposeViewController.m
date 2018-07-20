@@ -13,7 +13,6 @@
 
 @interface ComposeViewController () <UIScrollViewDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
-
 // date
 // category
 
@@ -82,6 +81,7 @@
     [self.scrollView addSubview:self.eventTitle];
     [self.scrollView addSubview:self.eventLocation];
     [self.scrollView addSubview:self.eventDescription];
+    [self.scrollView addSubview:self.pickerView];
     [self postButton];
     [self goBack];
 }
