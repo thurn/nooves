@@ -27,8 +27,6 @@
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"New Event";
 
-    // self.categories = @[@"Outdoors", @"Shopping", @"Partying", @"Eating", @"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
-
     self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 1000, 150)];
     self.eventTitle.text = nil;
     self.eventTitle.placeholder = @"Event name";
