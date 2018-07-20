@@ -40,6 +40,45 @@
             return @"Other";
     }
 };
++(ActivityType)stringToActivityType:(NSString *)activityString{
+    if([activityString isEqualToString:@"Outdoors"]){
+        return Outdoors;
+    }
+    else if([activityString isEqualToString:@"Shopping"]){
+        return Shopping;
+    }
+    else if([activityString isEqualToString:@"Partying"]){
+        return Partying;
+    }
+    else if([activityString isEqualToString:@"Eating"]){
+        return Eating;
+    }
+    else if([activityString isEqualToString:@"Arts"]){
+        return Arts;
+    }
+    else if([activityString isEqualToString:@"Sports"]){
+        return Sports;
+    }
+    else if([activityString isEqualToString:@"Networking"]){
+        return Networking;
+    }
+    else if([activityString isEqualToString:@"Fitness"]){
+        return Fitness;
+    }
+    else if([activityString isEqualToString:@"Games"]){
+        return Games;
+    }
+    else if([activityString isEqualToString:@"Concert"]){
+        return Concert;
+    }
+    else if([activityString isEqualToString:@"Cinema"]){
+        return Cinema;
+    }
+    else if([activityString isEqualToString:@"Festival"]){
+        return Festival;
+    }
+    return Other;
+}
 -(NSNumber *)ActivityTypeToNumber{
     NSNumber *activity = @(self.activityType);
     return activity;
