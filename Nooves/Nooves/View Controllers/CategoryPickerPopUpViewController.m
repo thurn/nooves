@@ -11,6 +11,7 @@
 
 @interface CategoryPickerPopUpViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
+
 @end
 
 @implementation CategoryPickerPopUpViewController
@@ -22,6 +23,7 @@
     // need to remove and replace with enums for array
     self.categories = @[@"Outdoors", @"Shopping", @"Partying", @"Eating", @"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
     Post *post = [[Post alloc] init];
+    NSLog(@"%ld", (long)post.activityType);
     // self.categoriesArray = [NSMutableArray arrayWithObject:[NSString post.ActivityType]];
     // self.categoriesArray = [NSMutableArray arrayWithObjects:[NSString stringWithFormat:NS_ENUM(<#...#>)], nil];
     
@@ -32,7 +34,11 @@
     self.pickerView.delegate = self;
     self.pickerView.dataSource = self;
     self.pickerView.showsSelectionIndicator = YES;
+    
+    self.categoryLabel = [[UILabel alloc] init];
+    self.categoryLabel.frame = CGRectMake(10, 500, 100, 100);
     [self.view addSubview:self.pickerView];
+    [self.view addSubview:self.categoryLabel];
     
     UIButton *selectedCategory = [self selectCategory];
     selectedCategory.frame = CGRectMake(10.0, 250.0, 20, 30);
@@ -65,6 +71,10 @@ numberOfRowsInComponent:(NSInteger)component {
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     return self.categories[row];
+}
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    self.categoryLabel.text = self.categories[row];
 }
 
 - (void)didReceiveMemoryWarning {

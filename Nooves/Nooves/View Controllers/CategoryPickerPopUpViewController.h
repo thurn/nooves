@@ -14,4 +14,5 @@
 @property (strong, nonatomic) NSArray *categories;
 @property (strong, nonatomic) NSMutableArray *categoriesArray;
 @property (strong, nonatomic) UIPickerView *pickerView;
+@property (strong, nonatomic) UILabel *categoryLabel;
 @end
