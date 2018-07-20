@@ -35,7 +35,6 @@
     pickerView.delegate = self;
     pickerView.dataSource = self;
 
-    // instantiate and set properties for event title text field
     self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(0, 0,
                                                                     1000, 150)];
 
@@ -44,7 +43,6 @@
     self.eventTitle.borderStyle = UITextBorderStyleRoundedRect;
     self.eventTitle.textColor = UIColor.grayColor;
 
-    // instantiate and set properties for event location text field
     // need to connect actual locations from api
     self.eventLocation = [[UITextField alloc] initWithFrame:CGRectMake(0, 150, 1000, 150)];
     self.eventLocation.text = nil;
@@ -67,15 +65,10 @@
     }
     [dateLabel sizeToFit];
     [self.scrollView addSubview:dateLabel];
-    // instantiate and set properties for event description text view
+    
     self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 300, 100, 150)];
     self.eventDescription.delegate = self;
     self.eventDescription.text = @"Add a description";
-
-
-    [self.view addSubview:self.eventTitle];
-    [self.view addSubview:self.eventLocation];
-    [self.view addSubview:self.eventDescription];
 
     self.scrollView.translatesAutoresizingMaskIntoConstraints = NO;
     self.scrollView.backgroundColor = [UIColor brownColor];

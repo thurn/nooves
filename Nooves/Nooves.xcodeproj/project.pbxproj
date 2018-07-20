@@ -19,6 +19,7 @@
 		CED91F6C2101305000E0E2F6 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F6A2101304F00E0E2F6 /* TabBarController.m */; };
 		CED91F6F2101306800E0E2F6 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F6D2101306800E0E2F6 /* ProfileViewController.m */; };
 		CED91F77210132DC00E0E2F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CED91F76210132DC00E0E2F6 /* GoogleService-Info.plist */; };
+		CED91F7A2101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F792101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.m */; };
 		CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBC020F95554004BD3A0 /* AppDelegate.m */; };
 		CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBC820F95555004BD3A0 /* Assets.xcassets */; };
 		CEDDCBCC20F95555004BD3A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */; };
@@ -69,6 +70,8 @@
 		CED91F6D2101306800E0E2F6 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		CED91F6E2101306800E0E2F6 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		CED91F76210132DC00E0E2F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CED91F782101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryPickerPopUpViewController.h; sourceTree = "<group>"; };
+		CED91F792101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryPickerPopUpViewController.m; sourceTree = "<group>"; };
 		CEDDCBBC20F95554004BD3A0 /* Nooves.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nooves.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CEDDCBC020F95554004BD3A0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -138,6 +141,8 @@
 				0AADDFE021015B3C00C173CB /* DatePickerPopUpViewController.m */,
 				327FA7D520FEAA63009C55BA /* TimelineViewController.h */,
 				327FA7D620FEAA63009C55BA /* TimelineViewController.m */,
+				CED91F782101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.h */,
+				CED91F792101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -426,6 +431,7 @@
 				CED91F6F2101306800E0E2F6 /* ProfileViewController.m in Sources */,
 				0A12D47220FFE9C5003FC73C /* FirebasePost.m in Sources */,
 				327FA7CE20FD2858009C55BA /* Post.m in Sources */,
+				CED91F7A2101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.m in Sources */,
 				327FA7C520FD273E009C55BA /* postCell.m in Sources */,
 				CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */,
 				CED91F6C2101305000E0E2F6 /* TabBarController.m in Sources */,
