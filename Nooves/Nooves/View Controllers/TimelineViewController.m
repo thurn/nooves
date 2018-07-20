@@ -138,9 +138,10 @@
 
 - (void) didTapCompose {
     NSLog(@"pressed the compose button");
-    ComposeViewController *test = [[ComposeViewController alloc] init];
-    test.tempPostsArray = self.tempPostsArray;
-    [self.navigationController pushViewController:test animated:YES];
+    ComposeViewController *composer = [[ComposeViewController alloc] init];
+    composer.hidesBottomBarWhenPushed = YES;
+    composer.tempPostsArray = self.tempPostsArray;
+    [self.navigationController pushViewController:composer animated:YES];
 }
 
 - (void) didTapFilter {

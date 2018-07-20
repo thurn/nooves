@@ -20,20 +20,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    // need to remove and replace with enums for array
     self.categories = @[@"Outdoors", @"Shopping", @"Partying", @"Eating", @"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
-    Post *post = [[Post alloc] init];
-    NSLog(@"%ld", (long)post.activityType);
-    // self.categoriesArray = [NSMutableArray arrayWithObject:[NSString post.ActivityType]];
-    // self.categoriesArray = [NSMutableArray arrayWithObjects:[NSString stringWithFormat:NS_ENUM(<#...#>)], nil];
-    
-    // holds the array of activities as an NSNumber
-    NSNumber *activities = post.ActivityTypeToNumber;
-    NSMutableArray *list = [[NSMutableArray alloc] initWithObjects:activities, nil];
-    for(id element in list) {
-        NSLog(@"%@", [element description]);
-    }
-
     
     self.pickerView = [[UIPickerView alloc] init];
     self.pickerView.delegate = self;
