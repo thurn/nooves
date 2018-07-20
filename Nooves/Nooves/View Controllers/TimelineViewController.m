@@ -41,7 +41,7 @@
     tableView.rowHeight = UITableViewAutomaticDimension;
     tableView.backgroundColor = [UIColor whiteColor];
     
-    [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"testIdentifier"];
+    [tableView registerClass:[postCell class] forCellReuseIdentifier:@"testIdentifier"];
   
     [self.view addSubview:tableView];
     [tableView reloadData];
@@ -51,7 +51,7 @@
     [self filterResults];
     
     // set up the search bar
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
+  //  UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
    // [[self tableView] setTableHeaderView:searchBar];
 
 
@@ -121,18 +121,18 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    postCell *cell = (postCell *)
-    [tableView dequeueReusableCellWithIdentifier:@"testIdentifier" forIndexPath:indexPath];
-    Post *newPost =self.postsArray[indexPath.row];
-    //[cell setPost:newPost];
-        cell = [[postCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:postcellIdentifier];
+    postCell *cell =[tableView dequeueReusableCellWithIdentifier:@"testIdentifier" forIndexPath:indexPath];
+    Post *newPost =self.tempPostsArray[indexPath.row];
+    [cell configurePost:newPost];
     
     return cell;
 }
 
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
+    if(self.tempPostsArray){
+        return self.tempPostsArray.count;
+    }
     return 30;
 }
 

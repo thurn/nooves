@@ -139,8 +139,8 @@
 				327FA7C120FD2014009C55BA /* ComposeViewController.m */,
 				0AADDFDF21015B3C00C173CB /* DatePickerPopUpViewController.h */,
 				0AADDFE021015B3C00C173CB /* DatePickerPopUpViewController.m */,
-				327FA7D520FEAA63009C55BA /* TimelineViewController.h */,
 				327FA7D620FEAA63009C55BA /* TimelineViewController.m */,
+				327FA7D520FEAA63009C55BA /* TimelineViewController.h */,
 				CED91F782101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.h */,
 				CED91F792101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.m */,
 			);

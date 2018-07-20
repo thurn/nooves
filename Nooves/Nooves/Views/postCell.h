@@ -20,9 +20,10 @@ static NSString *const postcellIdentifier = @"cellwithPost";
 @property (strong, nonatomic) UIButton *goingButton;
 @property (strong, nonatomic) UIButton *interestedButton;
 @property (strong, nonatomic) UIButton *profileButton;
-@property (strong, nonatomic) UILabel *testLabel;
+@property (strong, nonatomic) UILabel *eventTitle;
+@property (strong, nonatomic) UILabel *activityTypeField;
 
-- (void) setPost: (Post *) post;
+-(void) configurePost: (Post *) post;
 
 - (UIButton *) goToProfile;
 

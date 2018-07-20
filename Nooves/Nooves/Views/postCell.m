@@ -12,22 +12,12 @@
 
 @implementation postCell
 
-@synthesize testLabel = _testLabel;
-
 bool going = NO;
 bool interested = NO;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // set up the post field
-        self.postField = [[UILabel alloc]initWithFrame:(CGRectMake(100, 0, 250, 30))];
-        [self.postField setBackgroundColor:[UIColor greenColor]];
-        self.postField.text = @"Insert Post here";
-        [self.postField sizeToFit];
-        [self.contentView addSubview:_postField];
-        
-       CGSize constraint = CGSizeMake(self.postField.frame.size.width, CGFLOAT_MAX);
+//- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+
+      /* CGSize constraint = CGSizeMake(self.postField.frame.size.width, CGFLOAT_MAX);
         CGSize size;
         
         NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
@@ -35,18 +25,11 @@ bool interested = NO;
         
         size = CGSizeMake(ceil(boundingBox.width), ceil(boundingBox.height));
         CGFloat postFieldheight = size.height;
-        
-        
-        // set up the date field
-        self.dateField = [[UILabel alloc] initWithFrame:CGRectMake(30, 10, 50 , 50)];
-        [self.dateField setBackgroundColor:[UIColor yellowColor]];
-        [self.dateField setText:@"Date"];
-        [self.dateField sizeToFit];
-        [self.contentView addSubview:self.dateField];
+        */
         
         // set up the 'going' button
-        self.goingButton = [[UIButton alloc] initWithFrame:CGRectMake(100, size.height+ 50, 50, 20)];
-        self.goingButton.backgroundColor = [UIColor blackColor];
+//       self.goingButton = [[UIButton alloc] initWithFrame:CGRectMake(100, size.height+ 50, 5 20)];
+       /* self.goingButton.backgroundColor = [UIColor blackColor];
         [self.goingButton setTitle:@"Going" forState:UIControlStateNormal];
         //[self.goingButton sizeToFit];
        // [self.contentView addSubview:self.goingButton];
@@ -58,15 +41,14 @@ bool interested = NO;
         [self.interestedButton setTitle:@"Interested" forState:UIControlStateNormal];
         [self.interestedButton sizeToFit];
       //  [self.contentView addSubview:self.interestedButton];
-        [self.interestedButton addTarget:self action:@selector(didTapInterested) forControlEvents:UIControlEventTouchUpInside];
+        [self.interestedButton addTarget:self action:@selector(didTapInterested) forControlEvents:UIControlEventTouchUpInside];*/
         
 
-    }
-    
-    return self;
-}
+//    
+//    return self;
+//}
 
-- (void)awakeFromNib {
+- (void) awakeFromNib {
     [super awakeFromNib];
     // Initialization code
     
@@ -78,21 +60,46 @@ bool interested = NO;
     // Configure the view for the selected state
 }
 
-- (void) setPost: (Post *) post {
-   
+- (void) configurePost: (Post *) post {
+    // set up the post field
+    self.postField = [[UILabel alloc]initWithFrame:(CGRectMake(100, 40, 250, 30))];
+    [self.postField setBackgroundColor:[UIColor greenColor]];
+    self.postField.text = @"Insert Post here";
+    
+    [self.postField sizeToFit];
+    [self.contentView addSubview:self.postField];
+    
+    
+    //self up the event title
+    
+    self.eventTitle = [[UILabel alloc] initWithFrame:CGRectMake(100, 0, 50, 50)];
+    [self.eventTitle setBackgroundColor:[UIColor cyanColor]];
+    self.eventTitle.text = @"Event Title";
+    [self.eventTitle sizeToFit];
+    [self.contentView addSubview:self.eventTitle];
+    
+    // set up activityType
+    self.activityTypeField = [[UILabel alloc] initWithFrame:CGRectMake(270, 0, 30, 30)];
+    //[self.activityTypeField setBackgroundColor:[UIColor blueColor]];
+    self.activityTypeField.text = @"Activity type";
+    [self.activityTypeField sizeToFit];
+    [self.contentView addSubview:self.activityTypeField];
+    
+    self.dateField = [[UILabel alloc] initWithFrame:CGRectMake(30, 10, 100 , 50)];
+    [self.dateField setBackgroundColor:[UIColor yellowColor]];
+    [self.dateField setText:@"Date"];
+    [self.dateField sizeToFit];
+    [self.contentView addSubview:self.dateField];
+    
     self.post = post;
-    self.postField = [[UILabel alloc] initWithFrame:CGRectMake(100, 100, 100, 30)];
-    //[self.postField setText:@"Insert Post here"];
-    self.postField.text = self.post.activityDescription;
-     [self.contentView addSubview:_postField];
+    self.postField.text = post.activityDescription;
+    self.activityTypeField.text = [Post activityTypeToString:post.activityType];
+    self.eventTitle.text = post.activityTitle;
     
-   /* NSDate *time = self.post.activityDateAndTime;
-    NSDateFormatter *df = [[NSDateFormatter alloc]init];
-    [df setDateFormat:@"MM/DD/YYYY"];
-    NSString *dateString = [df stringFromDate:time];
-    self.dateField.text = dateString;*/
-    
-    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"MM-dd HH:mm"];
+    NSString *dateString = [formatter stringFromDate:post.activityDateAndTime];
+    self.dateField.text = dateString;
 }
 
 - (void) didTapGoing {
