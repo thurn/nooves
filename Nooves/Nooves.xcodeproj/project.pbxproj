@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0912E12A9BE72B7CBF8E847C /* libPods-NoovesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAC0FF4AA347803CC4295B8 /* libPods-NoovesTests.a */; };
 		0A12D47220FFE9C5003FC73C /* FirebasePost.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A12D47120FFE9C5003FC73C /* FirebasePost.m */; };
+		0AADDFE121015B3C00C173CB /* DatePickerPopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AADDFE021015B3C00C173CB /* DatePickerPopUpViewController.m */; };
 		267B7E70BA2D0E758F0BFE59 /* libPods-NoovesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F11FDD6185EBC6FB54794B48 /* libPods-NoovesUITests.a */; };
 		327FA7C220FD2014009C55BA /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7C120FD2014009C55BA /* ComposeViewController.m */; };
 		327FA7C520FD273E009C55BA /* postCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7C420FD273E009C55BA /* postCell.m */; };
@@ -46,6 +47,8 @@
 /* Begin PBXFileReference section */
 		0A12D47020FFE9C5003FC73C /* FirebasePost.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebasePost.h; sourceTree = "<group>"; };
 		0A12D47120FFE9C5003FC73C /* FirebasePost.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirebasePost.m; sourceTree = "<group>"; };
+		0AADDFDF21015B3C00C173CB /* DatePickerPopUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatePickerPopUpViewController.h; sourceTree = "<group>"; };
+		0AADDFE021015B3C00C173CB /* DatePickerPopUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatePickerPopUpViewController.m; sourceTree = "<group>"; };
 		0D8B5D3B0AE946E5196167DD /* Pods-NoovesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesTests/Pods-NoovesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		327FA7C020FD2014009C55BA /* ComposeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
 		327FA7C120FD2014009C55BA /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
@@ -131,6 +134,8 @@
 				CED91F6A2101304F00E0E2F6 /* TabBarController.m */,
 				327FA7C020FD2014009C55BA /* ComposeViewController.h */,
 				327FA7C120FD2014009C55BA /* ComposeViewController.m */,
+				0AADDFDF21015B3C00C173CB /* DatePickerPopUpViewController.h */,
+				0AADDFE021015B3C00C173CB /* DatePickerPopUpViewController.m */,
 				327FA7D520FEAA63009C55BA /* TimelineViewController.h */,
 				327FA7D620FEAA63009C55BA /* TimelineViewController.m */,
 			);
@@ -417,6 +422,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEDDCBCF20F95555004BD3A0 /* main.m in Sources */,
+				0AADDFE121015B3C00C173CB /* DatePickerPopUpViewController.m in Sources */,
 				CED91F6F2101306800E0E2F6 /* ProfileViewController.m in Sources */,
 				0A12D47220FFE9C5003FC73C /* FirebasePost.m in Sources */,
 				327FA7CE20FD2858009C55BA /* Post.m in Sources */,

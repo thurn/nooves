@@ -17,4 +17,5 @@
 @property (strong, nonatomic) UIPickerView *pickerView;
 @property (strong, nonatomic) NSMutableArray *tempPostsArray;
 @property (strong, nonatomic) Post *post;
+@property (strong, nonatomic) NSDate *date;
 @end
