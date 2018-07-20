@@ -37,4 +37,5 @@ typedef NS_ENUM(NSInteger, ActivityType){
 -(instancetype)MakePost:(NSDate *)eventDate withTitle:(NSString *) postTitle withDescription:(NSString *) postDescription withType:(ActivityType ) activityType;
 -(int)getDateTimeStamp;
 -(instancetype)initFromFireBasePost:(FirebasePost *)firePost;
++(ActivityType)stringToActivityType:(NSString *)activityString;
 @end
