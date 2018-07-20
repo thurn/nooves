@@ -11,11 +11,9 @@
 #import "FirebasePost.h"
 #import "TimelineViewController.h"
 #import "DatePickerPopUpViewController.h"
+#import "CategoryPickerPopUpViewController.h"
+
 @interface ComposeViewController () <UIScrollViewDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
-
-// date
-// category
-
 @end
 
 @implementation ComposeViewController
@@ -29,11 +27,11 @@
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"New Event";
 
-    self.category = @[@"Outdoors", @"Shopping", @"Partying", @"Eating", @"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
+    self.categories = @[@"Outdoors", @"Shopping", @"Partying", @"Eating", @"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
 
-    UIPickerView *pickerView = [[UIPickerView alloc] init];
-    pickerView.delegate = self;
-    pickerView.dataSource = self;
+    self.pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 1000, 500,500)];
+    self.pickerView.delegate = self;
+    self.pickerView.dataSource = self;
 
     self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(0, 0,
                                                                     1000, 150)];
@@ -85,13 +83,14 @@
     }
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
     [self.view addSubview:self.scrollView];
-
+    
     [self.scrollView addSubview:self.eventTitle];
     [self.scrollView addSubview:self.eventLocation];
     [self.scrollView addSubview:self.eventDescription];
     [self.scrollView addSubview:self.pickerView];
     [self.scrollView addSubview:[self selectDate]];
     [self.scrollView addSubview:dateLabel];
+    [self.scrollView addSubview:[self selectCategory]];
     [self postButton];
     [self goBack];
 }
@@ -117,7 +116,11 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView
 numberOfRowsInComponent:(NSInteger)component {
-    return 13;
+    return self.categories.count;
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return self.categories[row];
 }
 
 
@@ -155,6 +158,25 @@ numberOfRowsInComponent:(NSInteger)component {
     datePicker.tempPostsArray = self.tempPostsArray;
     [self.navigationController pushViewController:datePicker animated:YES];
 }
+
+-(UIButton *)selectCategory{
+    UIButton *selectCategory = [UIButton buttonWithType:UIButtonTypeSystem];
+    [selectCategory setTitle:@"Select Category" forState:UIControlStateNormal];
+    [selectCategory addTarget:self action:@selector(didSelectCategory) forControlEvents:UIControlEventTouchUpInside];
+    selectCategory.center = CGPointMake(0, 40);
+    [selectCategory sizeToFit];
+    return selectCategory;
+}
+-(void)didSelectCategory{
+    CategoryPickerPopUpViewController *categoryPicker = [CategoryPickerPopUpViewController new];
+    categoryPicker.categoryArray = self.tempPostsArray;
+    [self.navigationController pushViewController:categoryPicker animated:YES];
+    
+//    DatePickerPopUpViewController *datePicker = [DatePickerPopUpViewController new];
+//    datePicker.tempPostsArray = self.tempPostsArray;
+//    [self.navigationController pushViewController:datePicker animated:YES];
+}
+
 - (UIBarButtonItem *) goBack {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon"]
                                                                    style:UIBarButtonItemStylePlain
