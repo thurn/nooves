@@ -11,11 +11,10 @@
 #import "AppDelegate.h"
 #import "postCell.h"
 #import "ProfileViewController.h"
-//#import "Post.h"
+#import "PureLayout/PureLayout.h"
 
 
 @interface TimelineViewController ()
-
 
 @end
 
@@ -29,29 +28,30 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
     if(!self.tempPostsArray){
         self.tempPostsArray = [[NSMutableArray alloc]init];
     }
+    
     tableView = [self configureTableView];
     
-    tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.rowHeight = UITableViewAutomaticDimension;
     tableView.backgroundColor = [UIColor whiteColor];
-    
-    [tableView registerClass:[postCell class] forCellReuseIdentifier:@"testIdentifier"];
-  
     [self.view addSubview:tableView];
     [tableView reloadData];
 
+    
     self.navigationItem.title = @"Home";
     [self writeNewPost];
     [self filterResults];
     
+    [tableView registerClass:[postCell class] forCellReuseIdentifier:@"postCellIdentifier"];
+
     // set up the search bar
-  //  UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
+   //  UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
    // [[self tableView] setTableHeaderView:searchBar];
 
 
@@ -65,17 +65,11 @@
     CGRect tableViewFrame = CGRectMake( x, y, width, height);
 
     tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
-
-   /* tableView.rowHeight = 45;
-    tableView.sectionFooterHeight = 22;
-    tableView.sectionHeaderHeight = 22;
     tableView.scrollEnabled = YES;
     tableView.showsVerticalScrollIndicator = YES;
     tableView.userInteractionEnabled = YES;
-    tableView.bounces = YES;*/
 
     return tableView;
-
 }
 
 - (UIBarButtonItem *) writeNewPost {
@@ -107,21 +101,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    postCell *cell =[tableView dequeueReusableCellWithIdentifier:@"testIdentifier" forIndexPath:indexPath];
+    postCell *cell =[tableView dequeueReusableCellWithIdentifier:@"postCellIdentifier" forIndexPath:indexPath];
     Post *newPost =self.tempPostsArray[indexPath.row];
     [cell configurePost:newPost];
     
@@ -137,7 +118,6 @@
 }
 
 - (void) didTapCompose {
-    NSLog(@"pressed the compose button");
     ComposeViewController *composer = [[ComposeViewController alloc] init];
     composer.hidesBottomBarWhenPushed = YES;
     composer.tempPostsArray = self.tempPostsArray;
@@ -145,22 +125,24 @@
 }
 
 - (void) didTapFilter {
-    NSLog(@"clicked on the menu button");
-    
-    // implement a slide out menu bar
+    // implement a filtering option
 }
 
 -(void) didTapProfile {
-    NSLog(@"did tap on profile");
     ProfileViewController *profile = [[ProfileViewController alloc] init];
     [self.navigationController pushViewController:profile animated:YES];
 }
 
 
-/*-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
-*/
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 
 @end

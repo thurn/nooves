@@ -8,31 +8,21 @@
 
 #import "postCell.h"
 #import "Post.h"
-//#import "ProfileViewController.h"
+#import "PureLayout/PureLayout.h"
 
 @implementation postCell
 
 bool going = NO;
 bool interested = NO;
 
-//- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+/* - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
 
-      /* CGSize constraint = CGSizeMake(self.postField.frame.size.width, CGFLOAT_MAX);
-        CGSize size;
-        
-        NSStringDrawingContext *context = [[NSStringDrawingContext alloc] init];
-        CGSize boundingBox = [self.postField.text boundingRectWithSize:constraint options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.postField.font} context:context].size;
-        
-        size = CGSizeMake(ceil(boundingBox.width), ceil(boundingBox.height));
-        CGFloat postFieldheight = size.height;
-        */
-        
         // set up the 'going' button
-//       self.goingButton = [[UIButton alloc] initWithFrame:CGRectMake(100, size.height+ 50, 5 20)];
-       /* self.goingButton.backgroundColor = [UIColor blackColor];
+        self.goingButton = [[UIButton alloc] initWithFrame:CGRectMake(100, size.height+ 50, 5 20)];
+      self.goingButton.backgroundColor = [UIColor blackColor];
         [self.goingButton setTitle:@"Going" forState:UIControlStateNormal];
-        //[self.goingButton sizeToFit];
-       // [self.contentView addSubview:self.goingButton];
+        [self.goingButton sizeToFit];
+        [self.contentView addSubview:self.goingButton];
         [self.goingButton addTarget:self action:@selector(didTapGoing) forControlEvents:UIControlEventTouchUpInside];
         
         // set up the 'interested' button
@@ -40,13 +30,11 @@ bool interested = NO;
         [self.interestedButton setBackgroundColor:[UIColor blackColor]];
         [self.interestedButton setTitle:@"Interested" forState:UIControlStateNormal];
         [self.interestedButton sizeToFit];
-      //  [self.contentView addSubview:self.interestedButton];
-        [self.interestedButton addTarget:self action:@selector(didTapInterested) forControlEvents:UIControlEventTouchUpInside];*/
-        
+        [self.contentView addSubview:self.interestedButton];
+        [self.interestedButton addTarget:self action:@selector(didTapInterested) forControlEvents:UIControlEventTouchUpInside];
 
-//    
-//    return self;
-//}
+    return self;
+}*/
 
 - (void) awakeFromNib {
     [super awakeFromNib];
@@ -56,45 +44,52 @@ bool interested = NO;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
 - (void) configurePost: (Post *) post {
-    // set up the post field
-    self.activityDescriptionField = [[UILabel alloc]initWithFrame:(CGRectMake(100, 40, 250, 30))];
-    [self.activityDescriptionField setBackgroundColor:[UIColor greenColor]];
-    self.activityDescriptionField.text = @"Insert Post here";
     
-    [self.activityDescriptionField sizeToFit];
-    [self.contentView addSubview:self.activityDescriptionField];
-    
-    
-    //self up the event title
-    
-    self.eventTitle = [[UILabel alloc] initWithFrame:CGRectMake(100, 0, 50, 50)];
-    [self.eventTitle setBackgroundColor:[UIColor cyanColor]];
-    self.eventTitle.text = @"Event Title";
-    [self.eventTitle sizeToFit];
-    [self.contentView addSubview:self.eventTitle];
-    
-    // set up activityType
-    self.activityTypeField = [[UILabel alloc] initWithFrame:CGRectMake(270, 0, 30, 30)];
-    //[self.activityTypeField setBackgroundColor:[UIColor blueColor]];
-    self.activityTypeField.text = @"Activity type";
-    [self.activityTypeField sizeToFit];
-    [self.contentView addSubview:self.activityTypeField];
-    
-    self.dateField = [[UILabel alloc] initWithFrame:CGRectMake(30, 10, 100 , 50)];
-    [self.dateField setBackgroundColor:[UIColor yellowColor]];
+    // set up the date field
+    self.dateField = [[UILabel alloc]init];
+    self.dateField.hidden = NO;
     [self.dateField setText:@"Date"];
     [self.dateField sizeToFit];
     [self.contentView addSubview:self.dateField];
+    [self.dateField autoPinEdgeToSuperviewMargin:ALEdgeLeft];
+    [self.dateField autoPinEdgeToSuperviewMargin:ALEdgeTop];
     
+    //self up the event title field
+    self.eventTitleField = [[UILabel alloc]init];
+    self.eventTitleField.hidden = NO;
+    self.eventTitleField.text = @"Event Title";
+    [self.eventTitleField sizeToFit];
+    [self.contentView addSubview:self.eventTitleField];
+    [self.eventTitleField autoPinEdgeToSuperviewMargin:ALEdgeTop];
+    [self.eventTitleField autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.dateField withOffset:15.0f];
+    
+    // set up the activity description field
+    self.activityDescriptionField = [[UILabel alloc]init];
+    self.activityDescriptionField.hidden = NO;
+    self.activityDescriptionField.text = @"Activity description";
+    [self.activityDescriptionField sizeToFit];
+    [self.contentView addSubview:self.activityDescriptionField];
+    [self.activityDescriptionField autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.eventTitleField withOffset:10.0f];
+    [self.activityDescriptionField autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.dateField withOffset:5.0f];
+    [self.activityDescriptionField autoPinEdgeToSuperviewMargin:ALEdgeBottom];
+    
+    // set up activityType
+    self.activityTypeField = [[UILabel alloc]init];
+    self.activityTypeField.hidden = NO;
+    self.activityTypeField.text = @"Activity type";
+    [self.activityTypeField sizeToFit];
+    [self.contentView addSubview:self.activityTypeField];
+    [self.activityTypeField autoPinEdgeToSuperviewMargin:ALEdgeTop];
+    [self.activityTypeField autoPinEdgeToSuperviewMargin:ALEdgeRight];
+        
     self.post = post;
     self.activityDescriptionField.text = post.activityDescription;
     self.activityTypeField.text = [Post activityTypeToString:post.activityType];
-    self.eventTitle.text = post.activityTitle;
+    self.eventTitleField.text = post.activityTitle;
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"MM-dd HH:mm"];
@@ -103,18 +98,17 @@ bool interested = NO;
 }
 
 - (void) didTapGoing {
-    //  change button color and number/list of people going and check for unselected button
+    //  change button color and number/list of people going
+    
     if (!interested) {
         if (going) {
             // remove the user from the list of those going
-            NSLog(@"not going anymore");
             [self.goingButton setBackgroundColor:[UIColor blackColor]];
             going = NO;
         }
         
         else {
             // add the user to the list of those going
-            NSLog(@"TAPPED GOING BUTTON");
             UIColor *selectedGoing = [UIColor greenColor];
             [self.goingButton setBackgroundColor:selectedGoing];
             going = YES;
@@ -126,14 +120,12 @@ bool interested = NO;
         [self.interestedButton setBackgroundColor:[UIColor blackColor]];
         if (going) {
             // remove the user from the list of those going
-            NSLog(@"not going anymore");
             [self.goingButton setBackgroundColor:[UIColor blackColor]];
             going = NO;
         }
         
         else {
             // add the user to the list of those going
-            NSLog(@"TAPPED GOING BUTTON");
             UIColor *selectedGoing = [UIColor greenColor];
             [self.goingButton setBackgroundColor:selectedGoing];
             going = YES;
@@ -141,22 +133,15 @@ bool interested = NO;
     }
 }
 
-- (UIButton *) interestedInEvent {
-    
-    return self.interestedButton;
-}
-
 - (void) didTapInterested {
     if (!going) {
         if (interested) {
             // DECREMENT THE NUMBER OF THOSE INTERESTED - REMOVE USER FROM THE LIST
-            NSLog(@"Changed to not interested");
             [self.interestedButton setBackgroundColor:[UIColor blackColor]];
             interested = NO;
         }
         else {
             // ADD THE USER TO THE LIST OF THOSE INTERESTED
-            NSLog(@"tapped interested button");
             UIColor *selectedInterested = [UIColor greenColor];
             [self.interestedButton setBackgroundColor:selectedInterested];
             interested = YES;
@@ -168,13 +153,11 @@ bool interested = NO;
         [self.goingButton setBackgroundColor:[UIColor blackColor]];
         if (interested) {
             // DECREMENT THE NUMBER OF THOSE INTERESTED - REMOVE USER FROM THE LIST
-            NSLog(@"Changed to not interested");
             [self.interestedButton setBackgroundColor:[UIColor blackColor]];
             interested = NO;
         }
         else {
             // ADD THE USER TO THE LIST OF THOSE INTERESTED
-            NSLog(@"tapped interested button");
             UIColor *selectedInterested = [UIColor greenColor];
             [self.interestedButton setBackgroundColor:selectedInterested];
             interested = YES;
