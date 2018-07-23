@@ -35,14 +35,15 @@
     }
     
     tableView = [self configureTableView];
+    self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(10, 10, 100, 30)];
     
     tableView.delegate = self;
     tableView.dataSource = self;
+    self.searchBar.delegate = self;
     tableView.rowHeight = UITableViewAutomaticDimension;
     tableView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:tableView];
     [tableView reloadData];
-
     
     self.navigationItem.title = @"Home";
     [self writeNewPost];
@@ -51,10 +52,8 @@
     [tableView registerClass:[postCell class] forCellReuseIdentifier:@"postCellIdentifier"];
 
     // set up the search bar
-   //  UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
-   // [[self tableView] setTableHeaderView:searchBar];
-
-
+    // UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
+    //[tableView setTableHeaderView:searchBar];
 }
 
 - (UITableView *) configureTableView {
@@ -88,6 +87,7 @@
     
     UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] init];
     filterButton.title = @"Filter";
+    [filterButton setImage:[UIImage imageNamed:@"filter-icon.png"]];
     self.navigationItem.leftBarButtonItem = filterButton;
     
     filterButton.target = self;
@@ -125,7 +125,21 @@
 }
 
 - (void) didTapFilter {
-    // implement a filtering option
+    
+}
+
+- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    if (searchText.length != 0) {
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSString *evaluatedObject, NSDictionary *bindings) {
+            return  [evaluatedObject containsString:searchText];
+        }];
+        self.filtedData = [self.tempPostsArray filteredArrayUsingPredicate:predicate];
+    }
+    
+    else {
+        self.filtedData = self.tempPostsArray;
+    }
+    [tableView reloadData];
 }
 
 -(void) didTapProfile {

@@ -15,6 +15,7 @@
 		327FA7C520FD273E009C55BA /* postCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7C420FD273E009C55BA /* postCell.m */; };
 		327FA7CE20FD2858009C55BA /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7CD20FD2858009C55BA /* Post.m */; };
 		327FA7D720FEAA63009C55BA /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7D620FEAA63009C55BA /* TimelineViewController.m */; };
+		32C735D6210684F0002F8689 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C735D5210684F0002F8689 /* FilterViewController.m */; };
 		843CEC35ED5431BAB141B183 /* libPods-Nooves.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 490196513151D701FAFA5567 /* libPods-Nooves.a */; };
 		CE57768B21064FDA00C7637C /* LocationPickerPopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57768A21064FDA00C7637C /* LocationPickerPopUpViewController.m */; };
 		CED91F6C2101305000E0E2F6 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F6A2101304F00E0E2F6 /* TabBarController.m */; };
@@ -60,6 +61,8 @@
 		327FA7CD20FD2858009C55BA /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		327FA7D520FEAA63009C55BA /* TimelineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimelineViewController.h; sourceTree = "<group>"; };
 		327FA7D620FEAA63009C55BA /* TimelineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
+		32C735D4210684E7002F8689 /* FilterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
+		32C735D5210684F0002F8689 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		43EE3158BF0D1AF142B14EA7 /* Pods-NoovesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesUITests/Pods-NoovesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		490196513151D701FAFA5567 /* libPods-Nooves.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Nooves.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		67042FC44E40E61D1421B224 /* Pods-Nooves.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nooves.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nooves/Pods-Nooves.release.xcconfig"; sourceTree = "<group>"; };
@@ -148,6 +151,8 @@
 				CED91F792101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.m */,
 				CE57768921064FDA00C7637C /* LocationPickerPopUpViewController.h */,
 				CE57768A21064FDA00C7637C /* LocationPickerPopUpViewController.m */,
+				32C735D5210684F0002F8689 /* FilterViewController.m */,
+				32C735D4210684E7002F8689 /* FilterViewController.h */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -434,6 +439,7 @@
 				CEDDCBCF20F95555004BD3A0 /* main.m in Sources */,
 				0AADDFE121015B3C00C173CB /* DatePickerPopUpViewController.m in Sources */,
 				CED91F6F2101306800E0E2F6 /* ProfileViewController.m in Sources */,
+				32C735D6210684F0002F8689 /* FilterViewController.m in Sources */,
 				0A12D47220FFE9C5003FC73C /* FirebasePost.m in Sources */,
 				327FA7CE20FD2858009C55BA /* Post.m in Sources */,
 				CED91F7A2101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.m in Sources */,

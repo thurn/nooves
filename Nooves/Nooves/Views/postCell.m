@@ -85,7 +85,7 @@ bool interested = NO;
     [self.contentView addSubview:self.activityTypeField];
     [self.activityTypeField autoPinEdgeToSuperviewMargin:ALEdgeTop];
     [self.activityTypeField autoPinEdgeToSuperviewMargin:ALEdgeRight];
-        
+    
     self.post = post;
     self.activityDescriptionField.text = post.activityDescription;
     self.activityTypeField.text = [Post activityTypeToString:post.activityType];

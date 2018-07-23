@@ -12,6 +12,7 @@
 #import "TimelineViewController.h"
 #import "DatePickerPopUpViewController.h"
 #import "CategoryPickerPopUpViewController.h"
+#import "PureLayout/PureLayout.h"
 
 @interface ComposeViewController () <UIScrollViewDelegate, UITextViewDelegate>
 
@@ -29,13 +30,25 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"New Event";
-
+    
+    //set up event name label
+    self.eventNameLabel = [[UILabel alloc]init];
+    self.eventNameLabel.frame = CGRectMake(0, 0, 100, 100);
+    self.eventNameLabel.hidden = NO;
+    self.eventNameLabel.text = @"Event Name";
+    [self.eventNameLabel sizeToFit];
+    //[self.eventNameLabel autoPinEdgeToSuperviewMargin:ALEdgeLeft];
+    //[self.eventNameLabel autoPinEdgeToSuperviewMargin:ALEdgeTop];
+    
     // set up event title properties
     self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 1000, 150)];
     self.eventTitle.text = nil;
     self.eventTitle.placeholder = @"Event name";
     self.eventTitle.borderStyle = UITextBorderStyleRoundedRect;
     self.eventTitle.textColor = UIColor.grayColor;
+  //  [self.scrollView autoPinEdgeToSuperviewEdge:ALEdgeTop];
+   // [self.eventTitle autoPinEdgeToSuperviewEdge:ALEdgeTop];
+   // [self.eventTitle autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.eventNameLabel withOffset:10.0f];
     
     // set location display label properties
     UILabel *locationLabel = [[UILabel alloc] init];
@@ -94,6 +107,7 @@
     [self.view addSubview:self.scrollView];
     
     // add components to scroll view
+    [self.scrollView addSubview:self.eventNameLabel];
     [self.scrollView addSubview:self.eventTitle];
     [self.scrollView addSubview:self.eventDescription];
     [self.scrollView addSubview:activityLabel];
