@@ -16,6 +16,7 @@
 		327FA7CE20FD2858009C55BA /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7CD20FD2858009C55BA /* Post.m */; };
 		327FA7D720FEAA63009C55BA /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7D620FEAA63009C55BA /* TimelineViewController.m */; };
 		843CEC35ED5431BAB141B183 /* libPods-Nooves.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 490196513151D701FAFA5567 /* libPods-Nooves.a */; };
+		CE57768B21064FDA00C7637C /* LocationPickerPopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57768A21064FDA00C7637C /* LocationPickerPopUpViewController.m */; };
 		CED91F6C2101305000E0E2F6 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F6A2101304F00E0E2F6 /* TabBarController.m */; };
 		CED91F6F2101306800E0E2F6 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F6D2101306800E0E2F6 /* ProfileViewController.m */; };
 		CED91F77210132DC00E0E2F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CED91F76210132DC00E0E2F6 /* GoogleService-Info.plist */; };
@@ -65,6 +66,8 @@
 		7EAC0FF4AA347803CC4295B8 /* libPods-NoovesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NoovesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC12C5A6DFAD290C2F56A434 /* Pods-Nooves.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nooves.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nooves/Pods-Nooves.debug.xcconfig"; sourceTree = "<group>"; };
 		AC46F66A7E379DBE1F02E0AC /* Pods-NoovesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesTests/Pods-NoovesTests.release.xcconfig"; sourceTree = "<group>"; };
+		CE57768921064FDA00C7637C /* LocationPickerPopUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationPickerPopUpViewController.h; sourceTree = "<group>"; };
+		CE57768A21064FDA00C7637C /* LocationPickerPopUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationPickerPopUpViewController.m; sourceTree = "<group>"; };
 		CED91F6A2101304F00E0E2F6 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		CED91F6B2101305000E0E2F6 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		CED91F6D2101306800E0E2F6 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
@@ -143,6 +146,8 @@
 				327FA7D520FEAA63009C55BA /* TimelineViewController.h */,
 				CED91F782101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.h */,
 				CED91F792101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.m */,
+				CE57768921064FDA00C7637C /* LocationPickerPopUpViewController.h */,
+				CE57768A21064FDA00C7637C /* LocationPickerPopUpViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -434,6 +439,7 @@
 				CED91F7A2101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.m in Sources */,
 				327FA7C520FD273E009C55BA /* postCell.m in Sources */,
 				CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */,
+				CE57768B21064FDA00C7637C /* LocationPickerPopUpViewController.m in Sources */,
 				CED91F6C2101305000E0E2F6 /* TabBarController.m in Sources */,
 				327FA7C220FD2014009C55BA /* ComposeViewController.m in Sources */,
 				327FA7D720FEAA63009C55BA /* TimelineViewController.m in Sources */,
