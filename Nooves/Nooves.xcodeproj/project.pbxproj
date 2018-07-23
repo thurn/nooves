@@ -18,6 +18,8 @@
 		32C735D6210684F0002F8689 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C735D5210684F0002F8689 /* FilterViewController.m */; };
 		843CEC35ED5431BAB141B183 /* libPods-Nooves.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 490196513151D701FAFA5567 /* libPods-Nooves.a */; };
 		CE57768B21064FDA00C7637C /* LocationPickerPopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57768A21064FDA00C7637C /* LocationPickerPopUpViewController.m */; };
+		CE57768D210654D400C7637C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE57768C210654D400C7637C /* MapKit.framework */; };
+		CE57768F210654E400C7637C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE57768E210654E400C7637C /* CoreLocation.framework */; };
 		CED91F6C2101305000E0E2F6 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F6A2101304F00E0E2F6 /* TabBarController.m */; };
 		CED91F6F2101306800E0E2F6 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F6D2101306800E0E2F6 /* ProfileViewController.m */; };
 		CED91F77210132DC00E0E2F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CED91F76210132DC00E0E2F6 /* GoogleService-Info.plist */; };
@@ -71,6 +73,8 @@
 		AC46F66A7E379DBE1F02E0AC /* Pods-NoovesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesTests/Pods-NoovesTests.release.xcconfig"; sourceTree = "<group>"; };
 		CE57768921064FDA00C7637C /* LocationPickerPopUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationPickerPopUpViewController.h; sourceTree = "<group>"; };
 		CE57768A21064FDA00C7637C /* LocationPickerPopUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationPickerPopUpViewController.m; sourceTree = "<group>"; };
+		CE57768C210654D400C7637C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		CE57768E210654E400C7637C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CED91F6A2101304F00E0E2F6 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		CED91F6B2101305000E0E2F6 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		CED91F6D2101306800E0E2F6 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
@@ -100,6 +104,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE57768F210654E400C7637C /* CoreLocation.framework in Frameworks */,
+				CE57768D210654D400C7637C /* MapKit.framework in Frameworks */,
 				843CEC35ED5431BAB141B183 /* libPods-Nooves.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -169,6 +175,8 @@
 		C3E0F500FA123CF05118A408 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE57768E210654E400C7637C /* CoreLocation.framework */,
+				CE57768C210654D400C7637C /* MapKit.framework */,
 				490196513151D701FAFA5567 /* libPods-Nooves.a */,
 				7EAC0FF4AA347803CC4295B8 /* libPods-NoovesTests.a */,
 				F11FDD6185EBC6FB54794B48 /* libPods-NoovesUITests.a */,

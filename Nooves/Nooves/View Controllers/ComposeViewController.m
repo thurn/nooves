@@ -13,6 +13,7 @@
 #import "DatePickerPopUpViewController.h"
 #import "CategoryPickerPopUpViewController.h"
 #import "PureLayout/PureLayout.h"
+#import "LocationPickerPopUpViewController.h"
 
 @interface ComposeViewController () <UIScrollViewDelegate, UITextViewDelegate>
 
@@ -162,7 +163,7 @@
     UIButton *selectLocation = [UIButton buttonWithType:UIButtonTypeSystem];
     UIImage *locationIcon = [UIImage imageNamed:@"location-marker"];
     [selectLocation setImage:locationIcon forState:UIControlStateNormal];
-    //[selectLocation addTarget:self action:@selector(didSelectLocation) forControlEvents:UIControlEventTouchUpInside];
+    [selectLocation addTarget:self action:@selector(didSelectLocation) forControlEvents:UIControlEventTouchUpInside];
     selectLocation.center = CGPointMake(20, 0);
     [selectLocation sizeToFit];
     return selectLocation;
@@ -170,12 +171,11 @@
 
 // pass post data and jump to location picker view
 -(void)didSelectLocation{
-    // LocationPickerPopUpViewController *locationPicker = [LocationPickerPopUpViewController new];
-    //locationPicker.tempPostsArray = self.tempPostsArray;
-    //locationPicker.date = self.date;
-    //locationPicker.activityType = self.activityType;
-    //locationPicker.location = self.location;
-    //[self.navigationController pushViewController:locationPicker animated:YES];
+    LocationPickerPopUpViewController *locationPicker = [LocationPickerPopUpViewController new];
+    locationPicker.tempPostsArray = self.tempPostsArray;
+    locationPicker.date = self.date;
+    locationPicker.activityType = self.activityType;
+    [self.navigationController pushViewController:locationPicker animated:YES];
 }
 
 // set up selection category button properties
