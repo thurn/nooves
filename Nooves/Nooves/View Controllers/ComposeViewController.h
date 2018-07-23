@@ -10,6 +10,7 @@
 #import "Post.h"
 @interface ComposeViewController : UIViewController
 @property (strong, nonatomic) UIScrollView *scrollView;
+@property (strong, nonatomic) UILabel *eventNameLabel;
 @property (strong, nonatomic) UITextField *eventTitle;
 @property (strong, nonatomic) UITextView *eventDescription;
 @property (strong, nonatomic) UIPickerView *pickerView;
