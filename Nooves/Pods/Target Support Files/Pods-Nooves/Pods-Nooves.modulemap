@@ -1,0 +1,6 @@
+module Pods_Nooves {
+  umbrella header "Pods-Nooves-umbrella.h"
+
+  export *
+  module * { export * }
+}
