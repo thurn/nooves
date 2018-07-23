@@ -12,7 +12,6 @@
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UITextField *eventTitle;
 @property (strong, nonatomic) UITextView *eventDescription;
-@property (strong, nonatomic) UITextField *eventLocation;
 @property (strong, nonatomic) UIPickerView *pickerView;
 @property (strong, nonatomic) NSMutableArray *tempPostsArray;
 @property (strong, nonatomic) Post *post;
