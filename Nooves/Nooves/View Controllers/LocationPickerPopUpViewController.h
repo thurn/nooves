@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Mapkit/Mapkit.h>
+#import <CoreLocation/CoreLocation.h>
 #import "Post.h"
 
 @interface LocationPickerPopUpViewController : UIViewController
