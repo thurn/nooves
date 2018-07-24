@@ -1,11 +1,3 @@
-//
-//  LocationPickerPopUpViewController.m
-//  Nooves
-//
-//  Created by Nikki Tran on 7/23/18.
-//  Copyright © 2018 Nikki Tran. All rights reserved.
-//
-
 #import "ComposeViewController.h"
 #import "LocationCell.h"
 #import "LocationPickerPopUpViewController.h"
@@ -32,16 +24,12 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
-    [self.searchBar sizeToFit];
     self.navigationItem.titleView = self.searchBar;
     
     self.tableView = [[UITableView alloc] init];
     
-    UIButton *selectedLocation = [self selectLocation];
-    [selectedLocation sizeToFit];
-    
     [self.view addSubview:self.tableView];
-    [self.tableView addSubview:selectedLocation];
+    // [self.tableView addSubview:selectLocation];
     
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(-5.0, 0.0, 320.0, 44.0)];
     self.searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;

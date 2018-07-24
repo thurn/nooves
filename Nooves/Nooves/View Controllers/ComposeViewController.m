@@ -7,7 +7,13 @@
 #import "PureLayout/PureLayout.h"
 #import "TimelineViewController.h"
 
-@interface ComposeViewController () <UIScrollViewDelegate, UITextViewDelegate>
+@interface ComposeViewController () <UITextViewDelegate>
+
+// @property (nonatomic) UIScrollView *scrollView;
+@property (nonatomic) UILabel *eventNameLabel;
+@property (nonatomic) UITextField *eventTitle;
+@property (nonatomic) UITextView *eventDescription;
+@property (nonatomic) UIPickerView *pickerView;
 
 @end
 
@@ -67,7 +73,7 @@
         dateLabel.text = dateColon;
     }
     [dateLabel sizeToFit];
-    [self.scrollView addSubview:dateLabel];
+    [self.view addSubview:dateLabel];
     
     // set event description properties
     self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 150, 1000, 150)];
@@ -76,34 +82,34 @@
     self.eventDescription.textColor = UIColor.grayColor;
 
     // set scroll view properties
-    self.scrollView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.scrollView.backgroundColor = [UIColor brownColor];
-    self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    //self.view.translatesAutoresizingMaskIntoConstraints = NO;
+    //self.view.backgroundColor = [UIColor brownColor];
+    //self.view = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     
-    CGFloat descHeight = self.eventDescription.frame.origin.y + self.eventDescription.frame.size.height+1000.0;
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, descHeight);
+    // CGFloat descHeight = self.eventDescription.frame.origin.y + self.eventDescription.frame.size.height+1000.0;
+    // self.view.contentSize = CGSizeMake(self.view.frame.size.width, descHeight);
     
     CGRect contentRect = CGRectZero;
 
-    for (UIView *view in self.scrollView.subviews) {
+    for (UIView *view in self.view.subviews) {
         contentRect = CGRectUnion(contentRect, view.frame);
     }
     
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
+    //self.view.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
     
     // add scroll view to subview
-    [self.view addSubview:self.scrollView];
+    //[self.view addSubview:self.scrollView];
     
     // add components to scroll view
-    [self.scrollView addSubview:self.eventNameLabel];
-    [self.scrollView addSubview:self.eventTitle];
-    [self.scrollView addSubview:self.eventDescription];
-    [self.scrollView addSubview:activityLabel];
-    [self.scrollView addSubview:[self selectDate]];
-    [self.scrollView addSubview:dateLabel];
-    [self.scrollView addSubview:[self selectCategory]];
-    [self.scrollView addSubview:[self selectLocation]];
-    [self.scrollView addSubview:locationLabel];
+    [self.view addSubview:self.eventNameLabel];
+    [self.view addSubview:self.eventTitle];
+    [self.view addSubview:self.eventDescription];
+    [self.view addSubview:activityLabel];
+    [self.view addSubview:[self selectDate]];
+    [self.view addSubview:dateLabel];
+    [self.view addSubview:[self selectCategory]];
+    [self.view addSubview:[self selectLocation]];
+    [self.view addSubview:locationLabel];
     
     // add tab bar buttons to controller
     [self postButton];
@@ -132,6 +138,7 @@
     UIImage *calendarIcon = [UIImage imageNamed:@"calendar"];
     [selectDate setImage:calendarIcon forState:UIControlStateNormal];
     [selectDate addTarget:self action:@selector(didSelectDate) forControlEvents:UIControlEventTouchUpInside];
+    selectDate.center = CGPointMake(0, 300);
     [selectDate sizeToFit];
     return selectDate;
 }
@@ -151,7 +158,7 @@
     UIImage *locationIcon = [UIImage imageNamed:@"location-marker"];
     [selectLocation setImage:locationIcon forState:UIControlStateNormal];
     [selectLocation addTarget:self action:@selector(didSelectLocation) forControlEvents:UIControlEventTouchUpInside];
-    selectLocation.center = CGPointMake(20, 0);
+    selectLocation.center = CGPointMake(20, 300);
     [selectLocation sizeToFit];
     return selectLocation;
 }
@@ -171,7 +178,7 @@
     UIImage *tagIcon = [UIImage imageNamed:@"tags"];
     [selectCategory setImage:tagIcon forState:UIControlStateNormal];
     [selectCategory addTarget:self action:@selector(didSelectCategory) forControlEvents:UIControlEventTouchUpInside];
-    selectCategory.center = CGPointMake(50, 0);
+    selectCategory.center = CGPointMake(50, 300);
     [selectCategory sizeToFit];
     return selectCategory;
 }
