@@ -77,7 +77,6 @@
     UIBarButtonItem *composeButton = [[UIBarButtonItem alloc] init];
     composeButton.title = @"New Post";
     self.navigationItem.rightBarButtonItem = composeButton;
-
     composeButton.target = self;
     composeButton.action = @selector(didTapCompose);
 

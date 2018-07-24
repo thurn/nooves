@@ -80,27 +80,14 @@
     self.eventDescription.delegate = self;
     self.eventDescription.text = @"Add a description";
     self.eventDescription.textColor = UIColor.grayColor;
-
-    // set scroll view properties
-    //self.view.translatesAutoresizingMaskIntoConstraints = NO;
-    //self.view.backgroundColor = [UIColor brownColor];
-    //self.view = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-    
-    // CGFloat descHeight = self.eventDescription.frame.origin.y + self.eventDescription.frame.size.height+1000.0;
-    // self.view.contentSize = CGSizeMake(self.view.frame.size.width, descHeight);
     
     CGRect contentRect = CGRectZero;
 
     for (UIView *view in self.view.subviews) {
         contentRect = CGRectUnion(contentRect, view.frame);
     }
-    
-    //self.view.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
-    
-    // add scroll view to subview
-    //[self.view addSubview:self.scrollView];
-    
-    // add components to scroll view
+
+    // add components to view
     [self.view addSubview:self.eventNameLabel];
     [self.view addSubview:self.eventTitle];
     [self.view addSubview:self.eventDescription];
