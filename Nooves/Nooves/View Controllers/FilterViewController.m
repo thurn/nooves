@@ -95,7 +95,7 @@
     // TODO: go back to the feed controller with filtered data
     // associate each button tag with its label tag -- put the labels.text in an array
     // iterate through the array of posts
-    // for each post that contains one or more strings listed in the array of checked buttons
+    // for each post that concblkdjlfrbhrjcdnjulfcgcghiktuttdtains one or more strings listed in the array of checked buttons
     // add it to the array of new posts that will be displayed
     
     TimelineViewController *feed = [[TimelineViewController alloc]init];
