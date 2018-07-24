@@ -2,7 +2,7 @@
 //  SignUpViewController.h
 //  Nooves
 //
-//  Created by Nikki Tran on 7/19/18.
+//  Created by Nkenna Aniedobe on 7/24/18.
 //  Copyright © 2018 Nikki Tran. All rights reserved.
 //
 
