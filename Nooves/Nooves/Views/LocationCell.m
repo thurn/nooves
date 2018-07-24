@@ -37,16 +37,24 @@
 
 - (void)initialize {
     // initialize cell properties
-    self.categoryImageView = [[UIImageView alloc] initWithFrame:CGRectMake(100, 200, 100, 100)];
+    self.categoryImageView = [[UIImageView alloc] init];
     self.addressLabel = [[UILabel alloc] init];
     self.nameLabel = [[UILabel alloc] init];
     self.location = [[NSDictionary alloc] init];
     
-    self.categoryImageView.frame = CGRectMake(0, 0, 20, 20);
+    CGRect frame = [self.categoryImageView frame];
+    frame.size.width = 30;
+    [self.categoryImageView setFrame:frame];
     
-    self.addressLabel.frame = CGRectMake(0, 30, 10, 10);
+    self.categoryImageView.frame = CGRectMake(7, 7, 30, 30);
     
-    self.nameLabel.frame = CGRectMake(0, 50, 10, 10);
+    self.addressLabel.frame = CGRectMake(7, 40, 10, 10);
+    self.addressLabel.text = @"";
+    [self.addressLabel sizeToFit];
+    
+    self.nameLabel.frame = CGRectMake(10, 55, 10, 10);
+    self.nameLabel.text = @"";
+    [self.nameLabel sizeToFit];
     
     [self addSubview:self.categoryImageView];
     [self addSubview:self.addressLabel];
@@ -67,6 +75,11 @@
         NSURL *url = [NSURL URLWithString:urlString];
         [self.categoryImageView setImageWithURL:url];
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
 }
 
 @end
