@@ -12,6 +12,7 @@
 #import "postCell.h"
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
+#import "FilterViewController.h"
 
 
 @interface TimelineViewController ()
@@ -125,6 +126,9 @@
 }
 
 - (void) didTapFilter {
+    FilterViewController *filter = [[FilterViewController alloc]init];
+  //  filter.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:filter animated:YES];
     
 }
 
