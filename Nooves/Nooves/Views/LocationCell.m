@@ -1,26 +1,18 @@
-//
-//  LocationCell.m
-//  Nooves
-//
-//  Created by Nikki Tran on 7/23/18.
-//  Copyright © 2018 Nikki Tran. All rights reserved.
-//
-
-#import "LocationCell.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
+#import "LocationCell.h"
 
 @interface LocationCell ()
 
-@property (strong, nonatomic) UIImageView *categoryImageView;
-@property (strong, nonatomic) UILabel *addressLabel;
-@property (strong, nonatomic) UILabel *nameLabel;
-@property (strong, nonatomic) NSDictionary *location;
+@property (nonatomic) UILabel *addressLabel;
+@property (nonatomic) UILabel *nameLabel;
+@property (nonatomic) UIImageView *categoryImageView;
+@property (nonatomic) NSDictionary *location;
 
 @end
 
 @implementation LocationCell
 
--(id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
+- (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
     
     self = [super initWithStyle:nil reuseIdentifier:@"LocationCell"];
     if (self) {

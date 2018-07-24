@@ -1,15 +1,11 @@
-//
-//  CategoryPickerPopUpViewController.m
-//  Nooves
-//
-//  Created by Nikki Tran on 7/19/18.
-//  Copyright © 2018 Nikki Tran. All rights reserved.
-//
-
 #import "CategoryPickerPopUpViewController.h"
 #import "ComposeViewController.h"
 
 @interface CategoryPickerPopUpViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
+
+@property (nonatomic) NSArray *categories;
+@property (nonatomic) UIPickerView *pickerView;
+@property (nonatomic) UILabel *categoryLabel;
 
 @end
 
@@ -43,7 +39,7 @@
 }
 
 // opens category picker view
--(UIButton *)selectCategory{
+- (UIButton *)selectCategory{
     UIButton *selectCategory = [UIButton buttonWithType:UIButtonTypeSystem];
     [selectCategory setTitle:@"Select category" forState:UIControlStateNormal];
     [selectCategory addTarget:self action:@selector(didTapSelectCategory) forControlEvents:UIControlEventTouchUpInside];
@@ -52,7 +48,7 @@
 }
 
 // passes post data and jumps back to composer view controller
--(void)didTapSelectCategory{
+- (void)didTapSelectCategory{
     ComposeViewController *composer = [[ComposeViewController alloc] init];
     composer.tempPostsArray = self.tempPostsArray;
     composer.date = self.date;
@@ -72,12 +68,12 @@ numberOfRowsInComponent:(NSInteger)component {
 }
 
 // returns the array at each row
--(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     return self.categories[row];
 }
 
 // assigns the selected category from picker view to label and activity type
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     self.categoryLabel.text = self.categories[row];
     ActivityType type = [Post stringToActivityType:self.categoryLabel.text];
     self.activityType = type;
