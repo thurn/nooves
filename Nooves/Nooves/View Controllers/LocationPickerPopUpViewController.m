@@ -7,6 +7,7 @@
 //
 
 #import "LocationPickerPopUpViewController.h"
+#import "LocationCell.h"
 #import "ComposeViewController.h"
 
 static NSString * const clientID = @"4FYRZKNIIFJQG25SUYJ55KINHUMVGWMYWFGQUFO5H4AQPQN2";
@@ -16,9 +17,6 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UISearchBar *searchBar;
-@property (strong, nonatomic) UISearchController *searchController;
-@property (strong, nonatomic) NSArray *data;
-@property (strong, nonatomic) NSArray *filteredData;
 @property (strong, nonatomic) NSArray *results;
 
 @end
@@ -38,16 +36,7 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     
     self.tableView = [[UITableView alloc] init];
     
-    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
-    //[self.tableView setTableHeaderView:self.searchBar];
-    
-    self.data = @[@"New York, NY", @"Los Angeles, CA", @"Chicago, IL", @"Houston, TX",
-                  @"Philadelphia, PA", @"Phoenix, AZ", @"San Diego, CA", @"San Antonio, TX",
-                  @"Dallas, TX", @"Detroit, MI", @"San Jose, CA", @"Indianapolis, IN",
-                  @"Jacksonville, FL", @"San Francisco, CA", @"Columbus, OH", @"Austin, TX",
-                  @"Memphis, TN", @"Baltimore, MD", @"Charlotte, ND", @"Fort Worth, TX"];
-    
-    self.filteredData = self.data;
+    // self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
     
     UIButton *selectedLocation = [self selectLocation];
     [selectedLocation sizeToFit];
@@ -61,23 +50,6 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     searchBarView.autoresizingMask = 0;
     [searchBarView addSubview:self.searchBar];
     self.navigationItem.titleView = searchBarView;
-    
-    [self.tableView reloadData];
-}
-
-// filters results based on string comparison
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    if (searchText.length != 0) {
-        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSString *evaluatedObject, NSDictionary *bindings) {
-            return [evaluatedObject containsString:searchText];
-        }];
-        self.filteredData = [self.data filteredArrayUsingPredicate:predicate];
-        
-        NSLog(@"%@", self.filteredData);
-    }
-    else {
-        self.filteredData = self.data;
-    }
     
     [self.tableView reloadData];
 }
