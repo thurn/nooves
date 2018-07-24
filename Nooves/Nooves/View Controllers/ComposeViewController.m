@@ -193,7 +193,8 @@
 
 // jump back to root view controller
 - (void)didTapBack {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    TimelineViewController *timeline = [[TimelineViewController alloc]init];
+    [self.navigationController pushViewController:timeline animated:YES];
     NSLog(@"User pressed to go back");
 }
 

@@ -21,33 +21,22 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.searchBar.delegate = self;
-    self.navigationItem.titleView = self.searchBar;
-    
-    self.tableView = [[UITableView alloc] init];
-    
-    self.tableView = [self configureTableView];
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.backgroundColor = [UIColor whiteColor];
+    [self configureTableView];
     [self.view addSubview:self.tableView];
-    [self.tableView reloadData];
     // [self.tableView addSubview:self.selectLocation];
     
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(-5.0, 0.0, 320.0, 44.0)];
+    self.searchBar.delegate = self;
     self.searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     UIView *searchBarView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 310.0, 44.0)];
     searchBarView.autoresizingMask = 0;
     [searchBarView addSubview:self.searchBar];
     self.navigationItem.titleView = searchBarView;
     
-    [self.tableView registerClass:[LocationCell class] forCellReuseIdentifier:@"LocationCell"];
-    
     [self.tableView reloadData];
 }
 
-- (UITableView *) configureTableView {
+- (void) configureTableView {
     CGFloat x = 0;
     CGFloat y = 0;
     CGFloat width = self.view.frame.size.width;
@@ -55,11 +44,14 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     CGRect tableViewFrame = CGRectMake( x, y, width, height);
     
     self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
+    [self.tableView registerClass:[LocationCell class] forCellReuseIdentifier:@"LocationCell"];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.scrollEnabled = YES;
     self.tableView.showsVerticalScrollIndicator = YES;
     self.tableView.userInteractionEnabled = YES;
-    
-    return self.tableView;
 }
 
 // cancel button appears when user edits search
@@ -90,11 +82,6 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     composer.date = self.date;
     composer.activityType = self.activityType;
     [self.navigationController pushViewController:composer animated:YES];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 // returns number of results from search
