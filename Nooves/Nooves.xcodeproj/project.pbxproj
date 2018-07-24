@@ -59,6 +59,7 @@
 		0A6C937C2107A68800097F37 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		0A6C937E2107A6A000097F37 /* SignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		0A6C937F2107A6A000097F37 /* SignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
+		0A6C93812107CE8C00097F37 /* Nooves.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nooves.entitlements; sourceTree = "<group>"; };
 		0AADDFDF21015B3C00C173CB /* DatePickerPopUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatePickerPopUpViewController.h; sourceTree = "<group>"; };
 		0AADDFE021015B3C00C173CB /* DatePickerPopUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatePickerPopUpViewController.m; sourceTree = "<group>"; };
 		0D8B5D3B0AE946E5196167DD /* Pods-NoovesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesTests/Pods-NoovesTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -237,6 +238,7 @@
 		CEDDCBBE20F95554004BD3A0 /* Nooves */ = {
 			isa = PBXGroup;
 			children = (
+				0A6C93812107CE8C00097F37 /* Nooves.entitlements */,
 				0A9C2ADB20FEA9D60044A972 /* Data Models */,
 				327FA7D220FE5736009C55BA /* Views */,
 				327FA7D120FE56F7009C55BA /* View Controllers */,
@@ -280,6 +282,7 @@
 				CEDDCBB820F95554004BD3A0 /* Sources */,
 				CEDDCBB920F95554004BD3A0 /* Frameworks */,
 				CEDDCBBA20F95554004BD3A0 /* Resources */,
+				CABF17110C800B5E3339E031 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -339,6 +342,11 @@
 				TargetAttributes = {
 					CEDDCBBB20F95554004BD3A0 = {
 						CreatedOnToolsVersion = 9.4.1;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					CEDDCBD320F95555004BD3A0 = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -432,6 +440,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CABF17110C800B5E3339E031 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Nooves/Pods-Nooves-resources.sh",
+				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Nooves/Pods-Nooves-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D779DAE853C4C23B520E7EA5 /* [CP] Check Pods Manifest.lock */ = {
@@ -636,8 +662,9 @@
 			baseConfigurationReference = AC12C5A6DFAD290C2F56A434 /* Pods-Nooves.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Nooves/Nooves.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VX452D4486;
+				DEVELOPMENT_TEAM = N29GB8Y55L;
 				INFOPLIST_FILE = Nooves/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -654,8 +681,9 @@
 			baseConfigurationReference = 67042FC44E40E61D1421B224 /* Pods-Nooves.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Nooves/Nooves.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VX452D4486;
+				DEVELOPMENT_TEAM = N29GB8Y55L;
 				INFOPLIST_FILE = Nooves/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
