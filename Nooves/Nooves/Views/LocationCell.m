@@ -14,7 +14,7 @@
 
 - (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
     
-    self = [super initWithStyle:nil reuseIdentifier:@"LocationCell"];
+    // self = [super initWithStyle:nil reuseIdentifier:@"LocationCell"];
     if (self) {
         // configure control(s)
         self.categoryImageView = [[UIImageView alloc] init];
@@ -23,6 +23,8 @@
         self.location = [[NSDictionary alloc] init];
         
         [self addSubview:self.categoryImageView];
+        [self addSubview:self.addressLabel];
+        [self addSubview:self.nameLabel];
     }
     return self;
 }
