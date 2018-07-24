@@ -11,7 +11,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "TimelineViewController.h"
-@interface LoginViewController ()
+@interface LoginViewController ()<FBSDKLoginButtonDelegate>
 @property UITextField *phoneNumber;
 @property FIRUser *user;
 @end
@@ -29,6 +29,7 @@
     [self.view addSubview:loginButton];
     
 }
+
 - (void)loginButton:(FBSDKLoginButton *)loginButton
 didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
               error:(NSError *)error {
@@ -53,6 +54,11 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
     }
     
 }
+
+- (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {
+    [self.navigationController pushViewController:[LoginViewController new] animated:YES];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -69,13 +75,13 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
 //}
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

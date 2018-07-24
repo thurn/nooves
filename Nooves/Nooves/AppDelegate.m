@@ -13,6 +13,7 @@
 #import "ProfileViewController.h"
 #import "LoginViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FirebaseAuth.h>
 @import Firebase;
 
 
@@ -45,10 +46,11 @@
     
     // the leaf controllers
     ProfileViewController* profileViewController = [[ProfileViewController alloc] init];
-    LoginViewController *timelineController = [[LoginViewController alloc] init];
-    
+    LoginViewController *loginController = [[LoginViewController alloc] init];
+    TimelineViewController *timelineController = [[TimelineViewController alloc] init];
     // 2 navs
-    UINavigationController* timelineNavCont = [[UINavigationController alloc] initWithRootViewController:timelineController];
+    
+    UINavigationController* timelineNavCont = [[UINavigationController alloc] initWithRootViewController:loginController];
     UINavigationController* profileNavCont = [[UINavigationController alloc] initWithRootViewController:profileViewController];
     
     //    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -59,7 +61,7 @@
     UIImage *feedImage = [UIImage imageNamed:@"feed_tab"];
     UIImage *profileImage = [UIImage imageNamed:@"profile_tab"];
     
-    timelineController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Home" image:feedImage tag:0];
+    loginController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Home" image:feedImage tag:0];
     profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Profile" image:profileImage tag:1];
     
     self.window.rootViewController = baseController;
