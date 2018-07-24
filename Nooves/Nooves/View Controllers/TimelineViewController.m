@@ -110,7 +110,6 @@
     return cell;
 }
 
-
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(self.tempPostsArray){
         return self.tempPostsArray.count;
