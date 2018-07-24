@@ -10,11 +10,17 @@
 #import "FilterViewController.h"
 #import "PureLayout/PureLayout.h"
 #import "TimelineViewController.h"
+#import "Post.h"
+#import "postCell.h"
 
 @interface FilterViewController ()
+
 @property(strong, nonatomic) NSArray *labelsArray;
 @property(strong, nonatomic) NSMutableArray *buttonsArray;
-@property(strong, nonatomic) NSMutableArray *tempPosts;
+@property(strong, nonatomic) NSMutableArray *categoriesArray;
+@property(strong, nonatomic) NSMutableArray *data;
+@property(strong, nonatomic) NSMutableArray *filteredData;
+
 @end
 
 @implementation FilterViewController
@@ -30,39 +36,37 @@
     [self setupCategories];
 }
 
-- (void) setupCategories {
+- (void)setupCategories {
     // set up the date field
     
+    self.buttonsArray = [[NSMutableArray alloc]init];
+    self.categoriesArray = [[NSMutableArray alloc]init];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     self.labelsArray = @[@"Outdoors", @"Shopping", @"Partying", @"Eating",@"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival"];
     int y = 100;
-    int by = 100;
-    self.buttonsArray = [[NSMutableArray alloc]init];
+    int bty = 100;
     
     for (int i = 0; i < 12; i++) {
         tagLabel = [[UILabel alloc]initWithFrame:CGRectMake(30, y, 50, 20)];
+        tagLabel.tag = i+1;
+        [self.categoriesArray addObject:tagLabel];
         tagLabel.text = self.labelsArray[i];
         [tagLabel sizeToFit];
         [self.view addSubview:tagLabel];
         
-        checkboxButton = [[UIButton alloc]initWithFrame:CGRectMake(150, by, 15, 15)];
-        checkboxButton.tag = i;
+        checkboxButton = [[UIButton alloc]initWithFrame:CGRectMake(150, bty, 15, 15)];
+        checkboxButton.tag = i+1;
         [self.buttonsArray addObject:checkboxButton];
         [checkboxButton setImage:[UIImage imageNamed:@"unchecked-box"] forState:UIControlStateNormal];
         [self.view addSubview:checkboxButton];
 
         y += 30;
-        by += 30;
+        bty += 30;
         }
-    
-    /*for (int i = 0; i < 12; i++) {
-        if (checkboxButton.tag == i) {
-            [checkboxButton setImage:[UIImage imageNamed:@"checked-box"] forState:UIControlStateSelected];
-            [checkboxButton addTarget:self action:@selector(checkedBox) forControlEvents:UIControlEventTouchUpInside];
-        }
-    }*/
+    [checkboxButton setImage:[UIImage imageNamed:@"checked-box"] forState:UIControlStateSelected];
+    [checkboxButton addTarget:self action:@selector(checkedBox) forControlEvents:UIControlEventTouchUpInside];
    
-    
+    NSLog(@"Categories'labels array :%@", self.categoriesArray);
     NSLog(@"Buttons array: %@", self.buttonsArray);
     UIButton *confirmButton = [[UIButton alloc]init];
     [confirmButton setTitle:@"Confirm" forState:UIControlStateNormal];
@@ -74,30 +78,41 @@
 }
 
 
-- (void) checkedBox {
-    if(checkboxButton.isSelected) {
-        checkboxButton.selected = NO;
-    }
-    else {
-        checkboxButton.selected = YES;
+- (void)checkedBox {
+    for (int i = 1; i < 13; i++) {
+        if (checkboxButton.tag == i) {
+            if(checkboxButton.isSelected) {
+                checkboxButton.selected = NO;
+            }
+            else {
+                checkboxButton.selected = YES;
+            }
+        }
     }
 }
 
-- (void) didTapConfirm {
+- (void)didTapConfirm {
     // TODO: go back to the feed controller with filtered data
     // associate each button tag with its label tag -- put the labels.text in an array
     // iterate through the array of posts
-    // for each post that contains one or more strings listed in the array of checked buttons
+    // for each post that concblkdjlfrbhrjcdnjulfcgcghiktuttdtains one or more strings listed in the array of checked buttons
     // add it to the array of new posts that will be displayed
     
     TimelineViewController *feed = [[TimelineViewController alloc]init];
-    self.tempPosts = feed.tempPostsArray;
-    for (id post in _tempPosts) {
+    self.data = feed.tempPostsArray;
+    //self.filteredData = self.data;
+    
+  /*  for (id post in self.data) {
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSString *evaluatedObject, NSDictionary *bindings){
+            return[evaluatedObject containsString:for(int i =0; i <self._categoriesArray.length; i++) {
+                
+            }];
+        }];
         NSString *test = @"hello";
         if ([post containsString:test])  {
             NSLog(@"contains string");
         }
-    }
+    }*/
     [self.navigationController pushViewController:feed animated:YES];
 }
 
