@@ -1,19 +1,11 @@
-//
-//  ComposeViewController.m
-//  Nooves
-//
-//  Created by Norette Ingabire on 7/16/18.
-//  Copyright © 2018 Nikki Tran. All rights reserved.
-//
-
-#import "ComposeViewController.h"
 #import "AppDelegate.h"
-#import "FirebasePost.h"
-#import "TimelineViewController.h"
-#import "DatePickerPopUpViewController.h"
 #import "CategoryPickerPopUpViewController.h"
-#import "PureLayout/PureLayout.h"
+#import "ComposeViewController.h"
+#import "DatePickerPopUpViewController.h"
+#import "FirebasePost.h"
 #import "LocationPickerPopUpViewController.h"
+#import "PureLayout/PureLayout.h"
+#import "TimelineViewController.h"
 
 @interface ComposeViewController () <UIScrollViewDelegate, UITextViewDelegate>
 
@@ -24,7 +16,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    if(!self.tempPostsArray){
+    if(!self.tempPostsArray) {
         self.tempPostsArray = [[NSMutableArray alloc] init];
     }
     
@@ -38,8 +30,6 @@
     self.eventNameLabel.hidden = NO;
     self.eventNameLabel.text = @"Event Name";
     [self.eventNameLabel sizeToFit];
-    //[self.eventNameLabel autoPinEdgeToSuperviewMargin:ALEdgeLeft];
-    //[self.eventNameLabel autoPinEdgeToSuperviewMargin:ALEdgeTop];
     
     // set up event title properties
     self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 1000, 150)];
@@ -47,9 +37,6 @@
     self.eventTitle.placeholder = @"Event name";
     self.eventTitle.borderStyle = UITextBorderStyleRoundedRect;
     self.eventTitle.textColor = UIColor.grayColor;
-  //  [self.scrollView autoPinEdgeToSuperviewEdge:ALEdgeTop];
-   // [self.eventTitle autoPinEdgeToSuperviewEdge:ALEdgeTop];
-   // [self.eventTitle autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.eventNameLabel withOffset:10.0f];
     
     // set location display label properties
     UILabel *locationLabel = [[UILabel alloc] init];
@@ -74,10 +61,9 @@
     formatter.dateFormat = @"MM-dd HH:mm";
     NSString *dateDetails = [formatter stringFromDate:self.date];
     self.eventDescription.textColor = UIColor.grayColor;
-    if(self.date){
+    if(self.date) {
         dateLabel.text = [dateColon stringByAppendingString:dateDetails];
-    }
-    else{
+    } else {
         dateLabel.text = dateColon;
     }
     [dateLabel sizeToFit];
@@ -102,6 +88,7 @@
     for (UIView *view in self.scrollView.subviews) {
         contentRect = CGRectUnion(contentRect, view.frame);
     }
+    
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, self.scrollView.frame.size.height);
     
     // add scroll view to subview
@@ -124,7 +111,7 @@
 }
 
 // checks to see if user is editing event description and changes text color if true
-- (void) textViewDidBeginEditing:(UITextView *)textView {
+- (void)textViewDidBeginEditing:(UITextView *)textView {
     if (textView.textColor == UIColor.grayColor) {
         textView.text = nil;
         textView.textColor = UIColor.blackColor;
@@ -132,7 +119,7 @@
 }
 
 // if event description is nil continue setting text color to grey
-- (void) textViewDidEndEditing:(UITextView *)textView {
+- (void)textViewDidEndEditing:(UITextView *)textView {
     if (textView.text == nil) {
         textView.text = @"Add description";
         textView.textColor = UIColor.grayColor;
@@ -140,7 +127,7 @@
 }
 
 // set up select date button properties
--(UIButton *)selectDate{
+-(UIButton *)selectDate {
     UIButton *selectDate = [UIButton buttonWithType:UIButtonTypeSystem];
     UIImage *calendarIcon = [UIImage imageNamed:@"calendar"];
     [selectDate setImage:calendarIcon forState:UIControlStateNormal];
@@ -150,7 +137,7 @@
 }
 
 // pass post data and jump to date picker view
--(void)didSelectDate{
+-(void)didSelectDate {
     DatePickerPopUpViewController *datePicker = [DatePickerPopUpViewController new];
     datePicker.tempPostsArray = self.tempPostsArray;
     datePicker.date = self.date;
@@ -159,7 +146,7 @@
 }
 
 // set up select location properties
--(UIButton *)selectLocation{
+-(UIButton *)selectLocation {
     UIButton *selectLocation = [UIButton buttonWithType:UIButtonTypeSystem];
     UIImage *locationIcon = [UIImage imageNamed:@"location-marker"];
     [selectLocation setImage:locationIcon forState:UIControlStateNormal];
@@ -170,7 +157,7 @@
 }
 
 // pass post data and jump to location picker view
--(void)didSelectLocation{
+-(void)didSelectLocation {
     LocationPickerPopUpViewController *locationPicker = [LocationPickerPopUpViewController new];
     locationPicker.tempPostsArray = self.tempPostsArray;
     locationPicker.date = self.date;
@@ -179,7 +166,7 @@
 }
 
 // set up selection category button properties
--(UIButton *)selectCategory{
+-(UIButton *)selectCategory {
     UIButton *selectCategory = [UIButton buttonWithType:UIButtonTypeSystem];
     UIImage *tagIcon = [UIImage imageNamed:@"tags"];
     [selectCategory setImage:tagIcon forState:UIControlStateNormal];
@@ -191,7 +178,7 @@
 
 
 // pass post data and jump to category picker view
--(void)didSelectCategory{
+-(void)didSelectCategory {
     CategoryPickerPopUpViewController *categoryPicker = [CategoryPickerPopUpViewController new];
     categoryPicker.tempPostsArray = self.tempPostsArray;
     categoryPicker.date = self.date;
@@ -200,7 +187,7 @@
 }
 
 // set up back button properties
-- (UIBarButtonItem *) goBack {
+- (UIBarButtonItem *)goBack {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon"]
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
@@ -211,23 +198,23 @@
 }
 
 // jump back to root view controller
-- (void) didTapBack {
+- (void)didTapBack {
     [self.navigationController popToRootViewControllerAnimated:YES];
     NSLog(@"User pressed to go back");
 }
 
 // set up post button properties
-- (UIBarButtonItem *) postButton {
-    UIBarButtonItem *postButton = [[UIBarButtonItem alloc] init];
-    postButton.title = @"Share";
-    postButton.target = self;
-    postButton.action = @selector(didTapPost);
+- (UIBarButtonItem *)postButton {
+    UIBarButtonItem *postButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Share"]
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(didTapPost)];
     self.navigationItem.rightBarButtonItem = postButton;
     return postButton;
 }
 
 // passes post data and adds to post array and jump back to timeline view
-- (void) didTapPost {
+- (void)didTapPost {
     // API call
     self.post = [[Post alloc] MakePost:self.date withTitle:self.eventTitle.text withDescription:self.eventDescription.text withType:self.activityType];
     [self.tempPostsArray addObject:self.post];
@@ -239,34 +226,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    if(!self.isMoreDataLoading){
-//        // Calculate the position of one screen length before the bottom of the results
-//        int scrollViewContentHeight = self.tableView.contentSize.height;
-//        int scrollOffsetThreshold = scrollViewContentHeight - self.tableView.bounds.size.height;
-//
-//        // When the user has scrolled past the threshold, start requesting
-//        if(scrollView.contentOffset.y > scrollOffsetThreshold && self.tableView.isDragging) {
-//            self.isMoreDataLoading = true;
-//
-//            // ... Code to load more results ...
-//            [self fetchPosts];
-//            NSLog(@"More posts successfully fetched");
-//        }
-//    }
-//}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

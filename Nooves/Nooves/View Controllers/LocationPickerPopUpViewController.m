@@ -6,18 +6,19 @@
 //  Copyright © 2018 Nikki Tran. All rights reserved.
 //
 
-#import "LocationPickerPopUpViewController.h"
-#import "LocationCell.h"
 #import "ComposeViewController.h"
+#import "LocationCell.h"
+#import "LocationPickerPopUpViewController.h"
 
 static NSString * const clientID = @"4FYRZKNIIFJQG25SUYJ55KINHUMVGWMYWFGQUFO5H4AQPQN2";
 static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ40WABD5VUP";
 
 @interface LocationPickerPopUpViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
-@property (strong, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) UISearchBar *searchBar;
-@property (strong, nonatomic) NSArray *results;
+@property (nonatomic) UITableView *tableView;
+@property (nonatomic) UISearchBar *searchBar;
+@property (nonatomic) NSArray *results;
+@property (nonatomic) UIPickerView *pickerView;
 
 @end
 
@@ -35,8 +36,6 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     self.navigationItem.titleView = self.searchBar;
     
     self.tableView = [[UITableView alloc] init];
-    
-    // self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
     
     UIButton *selectedLocation = [self selectLocation];
     [selectedLocation sizeToFit];
@@ -67,7 +66,7 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
 }
 
 // opens category picker view
--(UIButton *)selectLocation{
+- (UIButton *)selectLocation{
     UIButton *selectLocation = [UIButton buttonWithType:UIButtonTypeSystem];
     [selectLocation setTitle:@"Select location" forState:UIControlStateNormal];
     [selectLocation addTarget:self action:@selector(didTapSelectLocation) forControlEvents:UIControlEventTouchUpInside];
@@ -76,7 +75,7 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
 }
 
 // passes post data and jumps back to composer view controller
--(void)didTapSelectLocation{
+- (void)didTapSelectLocation{
     ComposeViewController *composer = [[ComposeViewController alloc] init];
     composer.tempPostsArray = self.tempPostsArray;
     composer.date = self.date;

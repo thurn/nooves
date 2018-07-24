@@ -11,10 +11,7 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) UILabel *label;
-@property (strong, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) NSArray *postsArray;
+@property (nonatomic) UIWindow *window;
 
 @end
 
