@@ -85,7 +85,6 @@ numberOfRowsInComponent:(NSInteger)component {
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    
 }
 
 @end
