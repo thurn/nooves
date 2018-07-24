@@ -28,8 +28,12 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     
     self.tableView = [[UITableView alloc] init];
     
+    self.tableView = [self configureTableView];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.tableView];
-    // [self.tableView addSubview:selectLocation];
+    [self.tableView reloadData];
+    // [self.tableView addSubview:self.selectLocation];
     
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(-5.0, 0.0, 320.0, 44.0)];
     self.searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -38,7 +42,24 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     [searchBarView addSubview:self.searchBar];
     self.navigationItem.titleView = searchBarView;
     
+    [self.tableView registerClass:[LocationCell class] forCellReuseIdentifier:@"LocationCell"];
+    
     [self.tableView reloadData];
+}
+
+- (UITableView *) configureTableView {
+    CGFloat x = 0;
+    CGFloat y = 0;
+    CGFloat width = self.view.frame.size.width;
+    CGFloat height = self.view.frame.size.height;
+    CGRect tableViewFrame = CGRectMake( x, y, width, height);
+    
+    self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
+    self.tableView.scrollEnabled = YES;
+    self.tableView.showsVerticalScrollIndicator = YES;
+    self.tableView.userInteractionEnabled = YES;
+    
+    return self.tableView;
 }
 
 // cancel button appears when user edits search
@@ -83,7 +104,8 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
 
 // populates searched data
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LocationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell" forIndexPath:indexPath];
+    LocationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell"
+                                                         forIndexPath:indexPath];
     [cell updateWithLocation:self.results[indexPath.row]];
     return cell;
 }
@@ -95,7 +117,7 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     NSNumber *lng = [venue valueForKeyPath:@"location.lng"];
     NSLog(@"%@, %@", lat, lng);
     
-    [self.delegate locationsPickerPopUpViewController:self didPickLocationWithLatitude:lat longitude:lng];
+    [self.delegate locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)self didPickLocationWithLatitude:lat longitude:lng];
 }
 
 - (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -129,14 +151,8 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     [task resume];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)controller didPickLocationWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude {
+    
 }
-*/
 
 @end

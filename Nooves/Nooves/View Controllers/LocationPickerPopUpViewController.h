@@ -3,19 +3,19 @@
 #import "Post.h"
 #import <UIKit/UIKit.h>
 
-@class LocationsPickerPopUpViewController;
+@class LocationPickerPopUpViewController;
 
-@protocol LocationsPickerPopUpViewControllerDelegate
+@protocol LocationPickerPopUpViewControllerDelegate
 
-- (void)locationsPickerPopUpViewController:(LocationsPickerPopUpViewController *)controller
+- (void)locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)controller
                didPickLocationWithLatitude:(NSNumber *)latitude
                                  longitude:(NSNumber *)longitude;
 
 @end
 
-@interface LocationPickerPopUpViewController : UIViewController
+@interface LocationPickerPopUpViewController : UIViewController <LocationPickerPopUpViewControllerDelegate>
 
-@property (weak, nonatomic) id<LocationsPickerPopUpViewControllerDelegate> delegate;
+@property (weak, nonatomic) id<LocationPickerPopUpViewControllerDelegate> delegate;
 
 @property (nonatomic) NSMutableArray *tempPostsArray;
 @property (nonatomic) NSDate *date;
