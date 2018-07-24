@@ -1,5 +1,5 @@
 //
-//  SignUpViewController.h
+//  LoginViewController.h
 //  Nooves
 //
 //  Created by Nkenna Aniedobe on 7/24/18.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SignUpViewController : UIViewController
+@interface LoginViewController : UIViewController
 
 @end

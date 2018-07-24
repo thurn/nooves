@@ -1,18 +1,18 @@
 //
-//  SignUpViewController.m
+//  LoginViewController.m
 //  Nooves
 //
 //  Created by Nkenna Aniedobe on 7/24/18.
 //  Copyright © 2018 Nikki Tran. All rights reserved.
 //
 
-#import "SignUpViewController.h"
+#import "LoginViewController.h"
 
-@interface SignUpViewController ()
+@interface LoginViewController ()
 
 @end
 
-@implementation SignUpViewController
+@implementation LoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
