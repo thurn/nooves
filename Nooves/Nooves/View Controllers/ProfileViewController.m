@@ -1,3 +1,4 @@
+#import "EditProfileViewController.h"
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
 
@@ -57,7 +58,8 @@
 }
 
 - (void)didTapEditProfile {
-    
+    EditProfileViewController *newProfile = [[EditProfileViewController alloc]init];
+    [self.navigationController pushViewController:newProfile animated:YES];
 }
 
 
