@@ -32,6 +32,8 @@
     selectedCategory.frame = CGRectMake(10.0, 250.0, 20, 30);
     [selectedCategory sizeToFit];
     
+    self.tabBarController.tabBar.hidden = YES;
+    
     // add components to view
     [self.view addSubview:self.pickerView];
     [self.view addSubview:self.categoryLabel];

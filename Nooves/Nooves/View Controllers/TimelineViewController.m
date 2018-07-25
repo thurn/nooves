@@ -117,7 +117,6 @@
 
 - (void)didTapCompose {
     ComposeViewController *composer = [[ComposeViewController alloc] init];
-    composer.hidesBottomBarWhenPushed = YES;
     composer.tempPostsArray = self.tempPostsArray;
     [self.navigationController pushViewController:composer animated:YES];
 }

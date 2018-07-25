@@ -19,7 +19,8 @@
     [self.view addSubview:selectedDate];
     self.datepicker.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.datepicker];
-
+    
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 - (UIButton *)selectDate{

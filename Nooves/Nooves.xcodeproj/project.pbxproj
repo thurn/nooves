@@ -21,7 +21,6 @@
 		32C7361D210842E3002F8689 /* FilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C7361C210842E3002F8689 /* FilterCell.m */; };
 		843CEC35ED5431BAB141B183 /* libPods-Nooves.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 490196513151D701FAFA5567 /* libPods-Nooves.a */; };
 		CE57768B21064FDA00C7637C /* LocationPickerPopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57768A21064FDA00C7637C /* LocationPickerPopUpViewController.m */; };
-		CE57768D210654D400C7637C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE57768C210654D400C7637C /* MapKit.framework */; };
 		CE57768F210654E400C7637C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE57768E210654E400C7637C /* CoreLocation.framework */; };
 		CE57769221068ADB00C7637C /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57769121068ADB00C7637C /* LocationCell.m */; };
 		CED91F6C2101305000E0E2F6 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F6A2101304F00E0E2F6 /* TabBarController.m */; };
@@ -84,7 +83,6 @@
 		AC46F66A7E379DBE1F02E0AC /* Pods-NoovesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesTests/Pods-NoovesTests.release.xcconfig"; sourceTree = "<group>"; };
 		CE57768921064FDA00C7637C /* LocationPickerPopUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationPickerPopUpViewController.h; sourceTree = "<group>"; };
 		CE57768A21064FDA00C7637C /* LocationPickerPopUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationPickerPopUpViewController.m; sourceTree = "<group>"; };
-		CE57768C210654D400C7637C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CE57768E210654E400C7637C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CE57769021068ADB00C7637C /* LocationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationCell.h; sourceTree = "<group>"; };
 		CE57769121068ADB00C7637C /* LocationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationCell.m; sourceTree = "<group>"; };
@@ -118,7 +116,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE57768F210654E400C7637C /* CoreLocation.framework in Frameworks */,
-				CE57768D210654D400C7637C /* MapKit.framework in Frameworks */,
 				843CEC35ED5431BAB141B183 /* libPods-Nooves.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,14 +161,14 @@
 				327FA7C120FD2014009C55BA /* ComposeViewController.m */,
 				0AADDFDF21015B3C00C173CB /* DatePickerPopUpViewController.h */,
 				0AADDFE021015B3C00C173CB /* DatePickerPopUpViewController.m */,
-				327FA7D620FEAA63009C55BA /* TimelineViewController.m */,
 				327FA7D520FEAA63009C55BA /* TimelineViewController.h */,
+				327FA7D620FEAA63009C55BA /* TimelineViewController.m */,
 				CED91F782101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.h */,
 				CED91F792101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.m */,
 				CE57768921064FDA00C7637C /* LocationPickerPopUpViewController.h */,
 				CE57768A21064FDA00C7637C /* LocationPickerPopUpViewController.m */,
-				32C735D5210684F0002F8689 /* FilterViewController.m */,
 				32C735D4210684E7002F8689 /* FilterViewController.h */,
+				32C735D5210684F0002F8689 /* FilterViewController.m */,
 				0A6C937B2107A68800097F37 /* LoginViewController.h */,
 				0A6C937C2107A68800097F37 /* LoginViewController.m */,
 				0A6C937E2107A6A000097F37 /* SignUpViewController.h */,
@@ -197,7 +194,6 @@
 			isa = PBXGroup;
 			children = (
 				CE57768E210654E400C7637C /* CoreLocation.framework */,
-				CE57768C210654D400C7637C /* MapKit.framework */,
 				490196513151D701FAFA5567 /* libPods-Nooves.a */,
 				7EAC0FF4AA347803CC4295B8 /* libPods-NoovesTests.a */,
 				F11FDD6185EBC6FB54794B48 /* libPods-NoovesUITests.a */,

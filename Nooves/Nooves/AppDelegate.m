@@ -47,8 +47,6 @@
     // the leaf controllers
     ProfileViewController* profileViewController = [[ProfileViewController alloc] init];
     LoginViewController *loginController = [[LoginViewController alloc] init];
-    TimelineViewController *timelineController = [[TimelineViewController alloc] init];
-    // 2 navs
     
     UINavigationController* timelineNavCont = [[UINavigationController alloc] initWithRootViewController:loginController];
     UINavigationController* profileNavCont = [[UINavigationController alloc] initWithRootViewController:profileViewController];

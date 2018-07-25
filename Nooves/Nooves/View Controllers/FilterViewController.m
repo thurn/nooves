@@ -45,7 +45,13 @@
     
     [self.tableView registerClass:[FilterCell class] forCellReuseIdentifier:@"filterCellIdentifier"];
     
+    self.tabBarController.tabBar.hidden = YES;
+    
     [self.tableView reloadData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 - (UITableView *)configureTableView {

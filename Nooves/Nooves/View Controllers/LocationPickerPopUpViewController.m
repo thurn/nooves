@@ -23,7 +23,6 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     
     [self configureTableView];
     [self.view addSubview:self.tableView];
-    // [self.tableView addSubview:self.selectLocation];
     
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(-5.0, 0.0, 320.0, 44.0)];
     self.searchBar.delegate = self;
@@ -33,10 +32,12 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     [searchBarView addSubview:self.searchBar];
     self.navigationItem.titleView = searchBarView;
     
+    self.tabBarController.tabBar.hidden = YES;
+    
     [self.tableView reloadData];
 }
 
-- (void) configureTableView {
+- (void)configureTableView {
     CGFloat x = 0;
     CGFloat y = 0;
     CGFloat width = self.view.frame.size.width;
@@ -118,7 +119,6 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     return true;
 }
 
-
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self fetchLocationsWithQuery:searchBar.text nearCity:@"San Francisco"];
 }
@@ -144,7 +144,6 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
 }
 
 - (void)locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)controller didPickLocationWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude {
-    
 }
 
 @end
