@@ -79,14 +79,7 @@
     }
     return Other;
 }
-- (NSNumber *)ActivityTypeToNumber{
-    NSNumber *activity = @(self.activityType);
-    return activity;
-}
-- (int)getDateTimeStamp{
-    int timestamp = [self.activityDateAndTime timeIntervalSince1970];
-    return timestamp;
-}
+
 - (instancetype)MakePost:(NSDate *)eventDate withTitle:(NSString *) postTitle withDescription:(NSString *) postDescription withType:(ActivityType ) activityType{
     Post *post = [[Post alloc]init];
     post.activityDateAndTime = eventDate;
@@ -95,17 +88,7 @@
     post.activityType = activityType;
     return post;
 }
-- (instancetype)initFromFireBasePost:(FirebasePost *)firePost{
-    Post *post = [[Post alloc]init];
-    int date = [firePost.eventDateAndTime intValue];
-    NSDate *eventDate = [NSDate dateWithTimeIntervalSince1970:date];
-    post.activityDateAndTime = eventDate;
-    post.activityTitle = firePost.postTitle;
-    post.activityDescription = firePost.postDescription;
-    NSInteger eventType = [firePost.activityType integerValue];
-    post.activityType = eventType;
-    return post;
-}
+
 + (void)postToFireBase:(Post *)post{
     int timestamp = [post.activityDateAndTime timeIntervalSince1970];
     NSNumber *dateAndTimeStamp = @(timestamp);
