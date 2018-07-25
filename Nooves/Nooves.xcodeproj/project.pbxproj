@@ -12,6 +12,7 @@
 		0A6C93802107A6A000097F37 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C937F2107A6A000097F37 /* SignUpViewController.m */; };
 		0AADDFE121015B3C00C173CB /* DatePickerPopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AADDFE021015B3C00C173CB /* DatePickerPopUpViewController.m */; };
 		267B7E70BA2D0E758F0BFE59 /* libPods-NoovesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F11FDD6185EBC6FB54794B48 /* libPods-NoovesUITests.a */; };
+		327D408421093011002E8513 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327D408321093011002E8513 /* EditProfileViewController.m */; };
 		327FA7C220FD2014009C55BA /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7C120FD2014009C55BA /* ComposeViewController.m */; };
 		327FA7C520FD273E009C55BA /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7C420FD273E009C55BA /* PostCell.m */; };
 		327FA7CE20FD2858009C55BA /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7CD20FD2858009C55BA /* Post.m */; };
@@ -60,6 +61,8 @@
 		0AADDFDF21015B3C00C173CB /* DatePickerPopUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatePickerPopUpViewController.h; sourceTree = "<group>"; };
 		0AADDFE021015B3C00C173CB /* DatePickerPopUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatePickerPopUpViewController.m; sourceTree = "<group>"; };
 		0D8B5D3B0AE946E5196167DD /* Pods-NoovesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesTests/Pods-NoovesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		327D408221093011002E8513 /* EditProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
+		327D408321093011002E8513 /* EditProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
 		327FA7C020FD2014009C55BA /* ComposeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
 		327FA7C120FD2014009C55BA /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
 		327FA7C320FD273E009C55BA /* PostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
@@ -154,7 +157,6 @@
 				CED91F6A2101304F00E0E2F6 /* TabBarController.m */,
 				327FA7C020FD2014009C55BA /* ComposeViewController.h */,
 				327FA7C120FD2014009C55BA /* ComposeViewController.m */,
-				0AADDFDF21015B3C00C173CB /* DatePickerPopUpViewController.h */,
 				0AADDFE021015B3C00C173CB /* DatePickerPopUpViewController.m */,
 				327FA7D520FEAA63009C55BA /* TimelineViewController.h */,
 				327FA7D620FEAA63009C55BA /* TimelineViewController.m */,
@@ -168,6 +170,8 @@
 				0A6C937C2107A68800097F37 /* LoginViewController.m */,
 				0A6C937E2107A6A000097F37 /* SignUpViewController.h */,
 				0A6C937F2107A6A000097F37 /* SignUpViewController.m */,
+				327D408221093011002E8513 /* EditProfileViewController.h */,
+				327D408321093011002E8513 /* EditProfileViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -240,6 +244,7 @@
 				327FA7D120FE56F7009C55BA /* View Controllers */,
 				CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */,
 				CEDDCBC020F95554004BD3A0 /* AppDelegate.m */,
+				0AADDFDF21015B3C00C173CB /* DatePickerPopUpViewController.h */,
 				CEDDCBC820F95555004BD3A0 /* Assets.xcassets */,
 				CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */,
 				CED91F76210132DC00E0E2F6 /* GoogleService-Info.plist */,
@@ -488,6 +493,7 @@
 				32C735D6210684F0002F8689 /* FilterViewController.m in Sources */,
 				0A6C93802107A6A000097F37 /* SignUpViewController.m in Sources */,
 				327FA7CE20FD2858009C55BA /* Post.m in Sources */,
+				327D408421093011002E8513 /* EditProfileViewController.m in Sources */,
 				CED91F7A2101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.m in Sources */,
 				327FA7C520FD273E009C55BA /* PostCell.m in Sources */,
 				CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */,
