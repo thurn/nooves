@@ -5,11 +5,11 @@
 #import "FirebasePost.h"
 #import "LocationPickerPopUpViewController.h"
 #import "PureLayout/PureLayout.h"
+#import "TabBarController.h"
 #import "TimelineViewController.h"
 
 @interface ComposeViewController () <UITextViewDelegate>
 
-// @property (nonatomic) UIScrollView *scrollView;
 @property (nonatomic) UILabel *eventNameLabel;
 @property (nonatomic) UITextField *eventTitle;
 @property (nonatomic) UITextView *eventDescription;
@@ -98,9 +98,15 @@
     [self.view addSubview:[self selectLocation]];
     [self.view addSubview:locationLabel];
     
+    self.tabBarController.tabBar.hidden = YES;
+    
     // add tab bar buttons to controller
     [self postButton];
     [self goBack];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 // checks to see if user is editing event description and changes text color if true
@@ -120,7 +126,7 @@
 }
 
 // set up select date button properties
--(UIButton *)selectDate {
+- (UIButton *)selectDate {
     UIButton *selectDate = [UIButton buttonWithType:UIButtonTypeSystem];
     UIImage *calendarIcon = [UIImage imageNamed:@"calendar"];
     [selectDate setImage:calendarIcon forState:UIControlStateNormal];
@@ -131,16 +137,17 @@
 }
 
 // pass post data and jump to date picker view
--(void)didSelectDate {
+- (void)didSelectDate {
     DatePickerPopUpViewController *datePicker = [DatePickerPopUpViewController new];
     datePicker.tempPostsArray = self.tempPostsArray;
     datePicker.date = self.date;
     datePicker.activityType = self.activityType;
     [self.navigationController pushViewController:datePicker animated:YES];
+    datePicker.hidesBottomBarWhenPushed = YES;
 }
 
 // set up select location properties
--(UIButton *)selectLocation {
+- (UIButton *)selectLocation {
     UIButton *selectLocation = [UIButton buttonWithType:UIButtonTypeSystem];
     UIImage *locationIcon = [UIImage imageNamed:@"location-marker"];
     [selectLocation setImage:locationIcon forState:UIControlStateNormal];
@@ -151,16 +158,17 @@
 }
 
 // pass post data and jump to location picker view
--(void)didSelectLocation {
+- (void)didSelectLocation {
     LocationPickerPopUpViewController *locationPicker = [LocationPickerPopUpViewController new];
     locationPicker.tempPostsArray = self.tempPostsArray;
     locationPicker.date = self.date;
     locationPicker.activityType = self.activityType;
     [self.navigationController pushViewController:locationPicker animated:YES];
+    locationPicker.hidesBottomBarWhenPushed = YES;
 }
 
 // set up selection category button properties
--(UIButton *)selectCategory {
+- (UIButton *)selectCategory {
     UIButton *selectCategory = [UIButton buttonWithType:UIButtonTypeSystem];
     UIImage *tagIcon = [UIImage imageNamed:@"tags"];
     [selectCategory setImage:tagIcon forState:UIControlStateNormal];
@@ -172,12 +180,13 @@
 
 
 // pass post data and jump to category picker view
--(void)didSelectCategory {
+- (void)didSelectCategory {
     CategoryPickerPopUpViewController *categoryPicker = [CategoryPickerPopUpViewController new];
     categoryPicker.tempPostsArray = self.tempPostsArray;
     categoryPicker.date = self.date;
     categoryPicker.activityType = self.activityType;
     [self.navigationController pushViewController:categoryPicker animated:YES];
+    categoryPicker.hidesBottomBarWhenPushed = YES;
 }
 
 // set up back button properties
@@ -193,7 +202,8 @@
 
 // jump back to root view controller
 - (void)didTapBack {
-    TimelineViewController *timeline = [[TimelineViewController alloc]init];
+    TimelineViewController *timeline = [[TimelineViewController alloc] init];
+    // timeline.hidesBottomBarWhenPushed = NO;
     [self.navigationController pushViewController:timeline animated:YES];
     NSLog(@"User pressed to go back");
 }
@@ -210,7 +220,7 @@
 
 // passes post data and adds to post array and jump back to timeline view
 - (void)didTapPost {
-    // API call
+    // post to timeline
     self.post = [[Post alloc] MakePost:self.date withTitle:self.eventTitle.text withDescription:self.eventDescription.text withType:self.activityType];
     [self.tempPostsArray addObject:self.post];
     TimelineViewController *timeline = [[TimelineViewController alloc]init];
