@@ -146,8 +146,6 @@
 				327FA7CD20FD2858009C55BA /* Post.m */,
 				0A12D47020FFE9C5003FC73C /* FirebasePost.h */,
 				0A12D47120FFE9C5003FC73C /* FirebasePost.m */,
-				32C7361B210842E3002F8689 /* FilterCell.h */,
-				32C7361C210842E3002F8689 /* FilterCell.m */,
 			);
 			path = "Data Models";
 			sourceTree = "<group>";
@@ -182,6 +180,8 @@
 		327FA7D220FE5736009C55BA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				32C7361B210842E3002F8689 /* FilterCell.h */,
+				32C7361C210842E3002F8689 /* FilterCell.m */,
 				327FA7C320FD273E009C55BA /* PostCell.h */,
 				327FA7C420FD273E009C55BA /* PostCell.m */,
 				CE57769021068ADB00C7637C /* LocationCell.h */,
