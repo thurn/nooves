@@ -227,7 +227,7 @@
 // passes post data and adds to post array and jump back to timeline view
 - (void)didTapPost {
     // post to timeline
-    self.post = [[Post alloc] MakePost:self.date withTitle:self.eventTitle.text withDescription:self.eventDescription.text withType:self.activityType];
+    self.post = [[Post alloc] initPostWithDetails:self.date withTitle:self.eventTitle.text withDescription:self.eventDescription.text withType:self.activityType];
     [Post postToFireBase:self.post];
     [self.tempPostsArray addObject:self.post];
     TimelineViewController *timeline = [[TimelineViewController alloc]init];

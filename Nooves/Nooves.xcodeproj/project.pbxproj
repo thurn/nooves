@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0912E12A9BE72B7CBF8E847C /* libPods-NoovesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAC0FF4AA347803CC4295B8 /* libPods-NoovesTests.a */; };
-		0A12D47220FFE9C5003FC73C /* FirebasePost.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A12D47120FFE9C5003FC73C /* FirebasePost.m */; };
 		0A6C937D2107A68800097F37 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C937C2107A68800097F37 /* LoginViewController.m */; };
 		0A6C93802107A6A000097F37 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C937F2107A6A000097F37 /* SignUpViewController.m */; };
 		0AADDFE121015B3C00C173CB /* DatePickerPopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AADDFE021015B3C00C173CB /* DatePickerPopUpViewController.m */; };
@@ -53,8 +52,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0A12D47020FFE9C5003FC73C /* FirebasePost.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirebasePost.h; sourceTree = "<group>"; };
-		0A12D47120FFE9C5003FC73C /* FirebasePost.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirebasePost.m; sourceTree = "<group>"; };
 		0A6C937B2107A68800097F37 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		0A6C937C2107A68800097F37 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		0A6C937E2107A6A000097F37 /* SignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
@@ -144,8 +141,6 @@
 			children = (
 				327FA7CC20FD2858009C55BA /* Post.h */,
 				327FA7CD20FD2858009C55BA /* Post.m */,
-				0A12D47020FFE9C5003FC73C /* FirebasePost.h */,
-				0A12D47120FFE9C5003FC73C /* FirebasePost.m */,
 			);
 			path = "Data Models";
 			sourceTree = "<group>";
@@ -491,7 +486,6 @@
 				CE57769221068ADB00C7637C /* LocationCell.m in Sources */,
 				CED91F6F2101306800E0E2F6 /* ProfileViewController.m in Sources */,
 				32C735D6210684F0002F8689 /* FilterViewController.m in Sources */,
-				0A12D47220FFE9C5003FC73C /* FirebasePost.m in Sources */,
 				0A6C93802107A6A000097F37 /* SignUpViewController.m in Sources */,
 				327FA7CE20FD2858009C55BA /* Post.m in Sources */,
 				CED91F7A2101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.m in Sources */,
