@@ -19,6 +19,9 @@
 @implementation LoginViewController
 
 - (void)viewDidLoad {
+    if(FIRAuth.auth.currentUser){
+        [self.navigationController pushViewController:[TimelineViewController new] animated:YES];
+    }
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
