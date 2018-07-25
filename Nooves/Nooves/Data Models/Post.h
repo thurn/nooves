@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <FirebaseDatabase/FirebaseDatabase.h>
-#import "FirebasePost.h"
-@class FirebasePost;
 @interface Post : NSObject
 typedef NS_ENUM(NSInteger, ActivityType){
     Outdoors,
