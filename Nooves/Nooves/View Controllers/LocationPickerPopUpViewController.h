@@ -19,5 +19,7 @@
 @property (nonatomic) NSMutableArray *tempPostsArray;
 @property (nonatomic) NSDate *date;
 @property (nonatomic) ActivityType activityType;
+@property (nonatomic) NSNumber *lat;
+@property (nonatomic) NSNumber *lng;
 
 @end

@@ -142,6 +142,8 @@
     datePicker.tempPostsArray = self.tempPostsArray;
     datePicker.date = self.date;
     datePicker.activityType = self.activityType;
+    datePicker.lat = self.lat;
+    datePicker.lng = self.lng;
     [self.navigationController pushViewController:datePicker animated:YES];
     datePicker.hidesBottomBarWhenPushed = YES;
 }
@@ -163,6 +165,8 @@
     locationPicker.tempPostsArray = self.tempPostsArray;
     locationPicker.date = self.date;
     locationPicker.activityType = self.activityType;
+    locationPicker.lat = self.lat;
+    locationPicker.lng = self.lng;
     [self.navigationController pushViewController:locationPicker animated:YES];
     locationPicker.hidesBottomBarWhenPushed = YES;
 }
@@ -185,6 +189,8 @@
     categoryPicker.tempPostsArray = self.tempPostsArray;
     categoryPicker.date = self.date;
     categoryPicker.activityType = self.activityType;
+    categoryPicker.lat = self.lat;
+    categoryPicker.lng = self.lng;
     [self.navigationController pushViewController:categoryPicker animated:YES];
     categoryPicker.hidesBottomBarWhenPushed = YES;
 }
