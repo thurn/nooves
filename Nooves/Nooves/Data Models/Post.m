@@ -87,7 +87,7 @@
     int timestamp = [self.activityDateAndTime timeIntervalSince1970];
     return timestamp;
 }
--(instancetype)MakePost:(NSDate *)eventDate withTitle:(NSString *) postTitle withDescription:(NSString *) postDescription withType:(ActivityType ) activityType{
+-(instancetype)MakePost:(NSDate *)eventDate withTitle:(NSString *) postTitle withDescription:(NSString *) postDescription withType:(ActivityType ) activityType {
     Post *post = [[Post alloc]init];
     post.activityDateAndTime = eventDate;
     post.activityTitle = postTitle;

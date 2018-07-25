@@ -17,6 +17,7 @@
     firePost.postDescription = post.activityDescription;
     NSNumber *eventType = [post ActivityTypeToNumber];
     firePost.activityType = eventType;
+    firePost.location = post.activityLat;
     return firePost;
 }
 

@@ -32,6 +32,9 @@ typedef NS_ENUM(NSInteger, ActivityType){
 @property (strong, nonatomic) NSString *activityDescription;
 @property (strong, nonatomic) NSDate *activityDateAndTime;
 
+@property (nonatomic) NSString *activityLat;
+@property (nonatomic) NSString *activityLng;
+
 +(NSString *)activityTypeToString:(ActivityType) activityType;
 -(NSNumber *)ActivityTypeToNumber;
 -(instancetype)MakePost:(NSDate *)eventDate withTitle:(NSString *) postTitle withDescription:(NSString *) postDescription withType:(ActivityType ) activityType;
