@@ -18,8 +18,8 @@
 @property(strong, nonatomic) NSArray *labelsArray;
 @property(strong, nonatomic) NSMutableArray *buttonsArray;
 @property(strong, nonatomic) NSMutableArray *categoriesArray;
-@property(strong, nonatomic) NSMutableArray *data;
 @property(strong, nonatomic) NSMutableArray *filteredData;
+@property(strong, nonatomic) Post *post;
 
 @end
 
@@ -62,7 +62,8 @@
 
         y += 30;
         bty += 30;
-        }
+    }
+    
     [checkboxButton setImage:[UIImage imageNamed:@"checked-box"] forState:UIControlStateSelected];
     [checkboxButton addTarget:self action:@selector(checkedBox) forControlEvents:UIControlEventTouchUpInside];
    
@@ -86,6 +87,7 @@
             }
             else {
                 checkboxButton.selected = YES;
+                [self.categoriesArray addObject:self.labelsArray[i]];
             }
         }
     }
@@ -98,21 +100,16 @@
     // for each post that concblkdjlfrbhrjcdnjulfcgcghiktuttdtains one or more strings listed in the array of checked buttons
     // add it to the array of new posts that will be displayed
     
+        for (Post *post in self.tempPostsArray) {
+            for(NSString *type in self.categoriesArray){
+                ActivityType aType = [Post stringToActivityType:type];
+                if(post.activityType == aType){
+                    [self.filteredData addObject:post];
+                }
+            }
+    }
     TimelineViewController *feed = [[TimelineViewController alloc]init];
-    self.data = feed.tempPostsArray;
-    //self.filteredData = self.data;
-    
-  /*  for (id post in self.data) {
-        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSString *evaluatedObject, NSDictionary *bindings){
-            return[evaluatedObject containsString:for(int i =0; i <self._categoriesArray.length; i++) {
-                
-            }];
-        }];
-        NSString *test = @"hello";
-        if ([post containsString:test])  {
-            NSLog(@"contains string");
-        }
-    }*/
+    feed.tempPostsArray = self.filteredData;
     [self.navigationController pushViewController:feed animated:YES];
 }
 

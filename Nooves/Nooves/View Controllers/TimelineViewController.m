@@ -16,7 +16,6 @@
 
 
 @interface TimelineViewController ()
-
 @end
 
 @implementation TimelineViewController
@@ -125,9 +124,8 @@
 
 - (void) didTapFilter {
     FilterViewController *filter = [[FilterViewController alloc]init];
-  //  filter.hidesBottomBarWhenPushed = YES;
+    filter.tempPostsArray = self.tempPostsArray;
     [self.navigationController pushViewController:filter animated:YES];
-    
 }
 
 - (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
