@@ -2,7 +2,6 @@
 #import "CategoryPickerPopUpViewController.h"
 #import "ComposeViewController.h"
 #import "DatePickerPopUpViewController.h"
-#import "FirebasePost.h"
 #import "LocationPickerPopUpViewController.h"
 #import "PureLayout/PureLayout.h"
 #import "TabBarController.h"

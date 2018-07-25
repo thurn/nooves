@@ -8,6 +8,7 @@
 
 #import "Post.h"
 #import <FIRDatabase.h>
+#import <FIRAuth.h>
 @implementation Post
 
 + (NSString *)activityTypeToString:(ActivityType) activityType{
@@ -89,7 +90,9 @@
     post.activityType = activityType;
     return post;
 }
+- (void)initFromFirebase{
 
+}
 + (void)postToFireBase:(Post *)post{
     int timestamp = [post.activityDateAndTime timeIntervalSince1970];
     NSNumber *dateAndTimeStamp = @(timestamp);

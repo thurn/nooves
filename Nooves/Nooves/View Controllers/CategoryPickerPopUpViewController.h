@@ -1,6 +1,5 @@
 #import <UIKit/UIKit.h>
 #import "Post.h"
-#import "FirebasePost.h"
 
 @interface CategoryPickerPopUpViewController : UIViewController
 
