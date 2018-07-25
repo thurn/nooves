@@ -19,6 +19,9 @@
 @implementation LoginViewController
 
 - (void)viewDidLoad {
+    if(FIRAuth.auth.currentUser){
+        [self.navigationController pushViewController:[TimelineViewController new] animated:YES];
+    }
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
@@ -63,16 +66,6 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-//-(UIButton *)selectDate {
-//    UIButton *selectDate = [UIButton buttonWithType:UIButtonTypeSystem];
-//    UIImage *calendarIcon = [UIImage imageNamed:@"calendar"];
-//    [selectDate setImage:calendarIcon forState:UIControlStateNormal];
-//    [selectDate addTarget:self action:@selector(didSelectDate) forControlEvents:UIControlEventTouchUpInside];
-//    selectDate.center = CGPointMake(0, 300);
-//    [selectDate sizeToFit];
-//    return selectDate;
-//}
 
 /*
  #pragma mark - Navigation

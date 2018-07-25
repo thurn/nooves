@@ -14,5 +14,6 @@
 @property (strong, nonatomic) NSString *postTitle;
 @property (strong, nonatomic) NSString *postDescription;
 @property (strong, nonatomic) NSNumber *eventDateAndTime;
+@property (nonatomic) NSNumber *location;
 -(instancetype)initWithPost:(Post *)post;
 @end
