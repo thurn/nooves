@@ -33,7 +33,10 @@ typedef NS_ENUM(NSInteger, ActivityType){
 @property (strong, nonatomic) NSDate *activityDateAndTime;
 @property (strong, nonatomic) FIRDatabaseReference *ref;
 
-+ (NSString *)activityTypeToString:(ActivityType) activityType;
+@property (nonatomic) NSString *activityLat;
+@property (nonatomic) NSString *activityLng;
+
++(NSString *)activityTypeToString:(ActivityType) activityType;
 - (instancetype)MakePost:(NSDate *)eventDate withTitle:(NSString *) postTitle withDescription:(NSString *) postDescription withType:(ActivityType ) activityType;
 + (ActivityType)stringToActivityType:(NSString *)activityString;
 + (void)postToFireBase:(Post *)post;

@@ -21,8 +21,7 @@
 @property(strong, nonatomic) NSArray *categories;
 @property(strong, nonatomic) NSMutableArray *selectedCategories;
 @property(strong, nonatomic) NSMutableArray *filteredData;
-@property(strong, nonatomic) NSMutableArray *data;
-@property(strong, nonatomic) NSArray *results;
+@property(strong, nonatomic) NSMutableArray *tempPostsArrayCopy;
 
 @end
 
@@ -36,6 +35,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    self.tempPostsArrayCopy = [[NSMutableArray alloc]init];
+    for (Post *post in self.tempPostsArray) {
+        [self.tempPostsArrayCopy addObject:post];
+    }
+    
     [self configureTableView];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -61,8 +66,6 @@
     CGFloat height = self.view.frame.size.height;
     CGRect tableViewFrame = CGRectMake( x, y, width, height);
     
-    self.selectedCategories = [[NSMutableArray alloc]init];
-    self.filteredData = [[NSMutableArray alloc]init];
     self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
     self.tableView.scrollEnabled = YES;
     self.tableView.showsVerticalScrollIndicator = YES;
@@ -72,7 +75,7 @@
     return self.tableView;
 }
 
-- (UIBarButtonItem *) returnAllPosts {
+- (UIBarButtonItem *)returnAllPosts {
     allPosts = [[UIBarButtonItem alloc]init];
     allPosts.title = @"All Posts";
     self.navigationItem.rightBarButtonItem = allPosts;
@@ -95,12 +98,11 @@
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     FilterCell *cell =[tableView dequeueReusableCellWithIdentifier:@"filterCellIdentifier" forIndexPath:indexPath];
     cell.textLabel.text = self.categories[indexPath.row];
-    
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(self.categories){
+    if (self.categories){
         return self.categories.count;
     }
     return 30;
@@ -110,54 +112,46 @@
     UITableViewCell *customcell = [tableView cellForRowAtIndexPath:indexPath];
     if (customcell.accessoryType == UITableViewCellAccessoryNone) {
         customcell.accessoryType = UITableViewCellAccessoryCheckmark;
-    }
-    else {
+    } else {
         customcell.accessoryType=UITableViewCellAccessoryNone;
     }
 }
 
-- (void) configureButton {
+- (void)configureButton {
     self.confirmButton = [[UIButton alloc]initWithFrame:CGRectMake(200, 600, 30, 30)];
     [self.confirmButton setBackgroundColor:[UIColor blueColor]];
     [self.confirmButton setTitle:@"Confirm" forState:UIControlStateNormal];
     [self.confirmButton sizeToFit];
     [self.view addSubview:self.confirmButton];
-    
     [self.confirmButton addTarget:self action:@selector(didTapConfirm) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void) didTapConfirm {
+- (void)didTapConfirm {
+    self.selectedCategories = [[NSMutableArray alloc]init];
+    self.filteredData = [[NSMutableArray alloc]init];
     for (UITableViewCell *cell in self.tableView.visibleCells) {
         if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
             [self.selectedCategories addObject:cell.textLabel.text];
         }
     }
-    NSLog(@"selected choices: %@", self.selectedCategories);
-    
-    for(Post *post in self.tempPostsArray) {
-        for(NSString *activity in self.selectedCategories) {
+
+    for (Post *post in self.tempPostsArray) {
+        for (NSString *activity in self.selectedCategories) {
             ActivityType tagType = [Post stringToActivityType:activity];
-            if(post.activityType == tagType) {
+            if (post.activityType == tagType) {
                 [self.filteredData addObject:post];
-            }
-            
-            else {
-                NSLog(@"they are not equal");
             }
         }
     }
+    
     TimelineViewController *feed = [[TimelineViewController alloc]init];
-    self.data = [self.tempPostsArray mutableCopy];
-    self.results = [[NSArray alloc]initWithArray:self.data];
-    feed.tempPostsArray =self.filteredData;
+    feed.tempPostsArray = self.filteredData;
     [self.navigationController pushViewController:feed animated:YES];
-    NSLog(@"Filtered data:%@", self.filteredData);
-    NSLog(@"Data array:%@", self.results);
 }
 
-- (void) didTapAllPosts {
+- (void)didTapAllPosts {
     TimelineViewController *timeline = [[TimelineViewController alloc]init];
-    timeline.tempPostsArray = self.data;
+    timeline.tempPostsArray = self.tempPostsArrayCopy;
     [self.navigationController pushViewController:timeline animated:YES];
 }
 

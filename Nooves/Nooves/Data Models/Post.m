@@ -80,7 +80,8 @@
     return Other;
 }
 
-- (instancetype)MakePost:(NSDate *)eventDate withTitle:(NSString *) postTitle withDescription:(NSString *) postDescription withType:(ActivityType ) activityType{
+
+-(instancetype)MakePost:(NSDate *)eventDate withTitle:(NSString *) postTitle withDescription:(NSString *) postDescription withType:(ActivityType ) activityType{
     Post *post = [[Post alloc]init];
     post.activityDateAndTime = eventDate;
     post.activityTitle = postTitle;
@@ -98,4 +99,3 @@
     [ref setValue:@{@"Date": dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription}];
 }
 @end
-
