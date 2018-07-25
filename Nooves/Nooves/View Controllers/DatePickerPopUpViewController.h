@@ -1,0 +1,10 @@
+#import <UIKit/UIKit.h>
+#import "Post.h"
+@interface DatePickerPopUpViewController : UIViewController
+
+@property (nonatomic) UIDatePicker *datepicker;
+@property (nonatomic) NSMutableArray *tempPostsArray;
+@property (nonatomic) NSDate *date;
+@property (nonatomic) ActivityType activityType;
+
+@end
