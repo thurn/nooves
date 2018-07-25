@@ -110,13 +110,17 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     NSDictionary *venue = self.results[indexPath.row];
     self.lat = [venue valueForKeyPath:@"location.lat"];
     self.lng = [venue valueForKeyPath:@"location.lng"];
+    self.location = [venue valueForKeyPath:@"location.name"];
+    // NSLog(@"%", self.location);
     NSLog(@"%@, %@", self.lat, self.lng);
     
-    [self.delegate locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)self didPickLocationWithLatitude:self.lat longitude:self.lng];
+    // [self.delegate locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)self didPickLocationWithLatitude:self.lat longitude:self.lng];
+    [self.delegate locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)self didPickLocationWithLatitude:self.lat longitude:self.lng location:self.location];
     
     ComposeViewController *composer = [[ComposeViewController alloc] init];
     composer.lat = self.lat;
     composer.lng = self.lng;
+    composer.location = self.location;
     
     [self.navigationController pushViewController:composer animated:YES];
     
@@ -154,7 +158,7 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     [task resume];
 }
 
-- (void)locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)controller didPickLocationWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude {
+- (void)locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)controller didPickLocationWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude location:(NSString *)location {
 }
 
 @end

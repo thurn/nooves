@@ -40,62 +40,64 @@
             return @"Other";
     }
 };
-+ (ActivityType)stringToActivityType:(NSString *)activityString{
-    if([activityString isEqualToString:@"Outdoors"]){
++ (ActivityType)stringToActivityType:(NSString *)activityString {
+    if([activityString isEqualToString:@"Outdoors"]) {
         return Outdoors;
     }
-    else if([activityString isEqualToString:@"Shopping"]){
+    else if([activityString isEqualToString:@"Shopping"]) {
         return Shopping;
     }
     else if([activityString isEqualToString:@"Partying"]){
         return Partying;
     }
-    else if([activityString isEqualToString:@"Eating"]){
+    else if([activityString isEqualToString:@"Eating"]) {
         return Eating;
     }
-    else if([activityString isEqualToString:@"Arts"]){
+    else if([activityString isEqualToString:@"Arts"]) {
         return Arts;
     }
-    else if([activityString isEqualToString:@"Sports"]){
+    else if([activityString isEqualToString:@"Sports"]) {
         return Sports;
     }
-    else if([activityString isEqualToString:@"Networking"]){
+    else if([activityString isEqualToString:@"Networking"]) {
         return Networking;
     }
     else if([activityString isEqualToString:@"Fitness"]){
         return Fitness;
     }
-    else if([activityString isEqualToString:@"Games"]){
+    else if([activityString isEqualToString:@"Games"]) {
         return Games;
     }
-    else if([activityString isEqualToString:@"Concert"]){
+    else if([activityString isEqualToString:@"Concert"]) {
         return Concert;
     }
-    else if([activityString isEqualToString:@"Cinema"]){
+    else if([activityString isEqualToString:@"Cinema"]) {
         return Cinema;
     }
-    else if([activityString isEqualToString:@"Festival"]){
+    else if([activityString isEqualToString:@"Festival"]) {
         return Festival;
     }
     return Other;
 }
 
-
--(instancetype)initPostWithDetails:(NSDate *)eventDate withTitle:(NSString *) postTitle withDescription:(NSString *) postDescription withType:(ActivityType ) activityType{
+- (instancetype)initPostWithDetails:(NSDate *)eventDate withTitle:(NSString *) postTitle withDescription:(NSString *) postDescription withType:(ActivityType ) activityType withLat:(NSNumber *) lat withLng:(NSNumber *) lng {
     Post *post = [[Post alloc]init];
     post.activityDateAndTime = eventDate;
     post.activityTitle = postTitle;
     post.activityDescription = postDescription;
     post.activityType = activityType;
+    post.activityLat = lat;
+    post.activityLng = lng;
     return post;
 }
 
-+ (void)postToFireBase:(Post *)post{
++ (void)postToFireBase:(Post *)post {
     int timestamp = [post.activityDateAndTime timeIntervalSince1970];
     NSNumber *dateAndTimeStamp = @(timestamp);
     NSNumber *activityType = @(post.activityType);
     post.ref = [[FIRDatabase database] reference];
     FIRDatabaseReference *ref = [[post.ref child:@"Posts"] childByAutoId];
-    [ref setValue:@{@"Date": dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription}];
+    [ref setValue:@{@"Date":dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription, @"Latitute":post.activityLat, @"Longitute":post.activityLng}];
 }
+
 @end
