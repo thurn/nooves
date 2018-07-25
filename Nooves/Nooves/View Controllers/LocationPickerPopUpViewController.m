@@ -110,8 +110,8 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     NSDictionary *venue = self.results[indexPath.row];
     self.lat = [venue valueForKeyPath:@"location.lat"];
     self.lng = [venue valueForKeyPath:@"location.lng"];
-    self.location = [venue valueForKeyPath:@"location.name"];
-    // NSLog(@"%", self.location);
+    self.location = [venue valueForKeyPath:@"name"];
+    NSLog(@"%@", self.location);
     NSLog(@"%@, %@", self.lat, self.lng);
     
     // [self.delegate locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)self didPickLocationWithLatitude:self.lat longitude:self.lng];
