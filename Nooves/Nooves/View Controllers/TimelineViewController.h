@@ -15,5 +15,6 @@
 @property (strong, nonatomic) NSArray *postsArray;
 @property (strong, nonatomic) NSArray *filtedData;
 @property (strong, nonatomic) UISearchBar *searchBar;
+@property (strong, nonatomic) NSArray *filteredData;
 
 @end

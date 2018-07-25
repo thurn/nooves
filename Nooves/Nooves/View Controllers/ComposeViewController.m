@@ -200,7 +200,7 @@
 
 // set up post button properties
 - (UIBarButtonItem *)postButton {
-    UIBarButtonItem *postButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Share"]
+    UIBarButtonItem *postButton = [[UIBarButtonItem alloc] initWithTitle:@"Share"
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(didTapPost)];
