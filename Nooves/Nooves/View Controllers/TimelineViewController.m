@@ -13,7 +13,7 @@
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
 #import "TimelineViewController.h"
-
+#import <FIRDatabase.h>
 
 @interface TimelineViewController ()
 @end
@@ -28,18 +28,17 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    FIRDatabaseReference *ref = [[FIRDatabase database] reference];
     // Do any additional setup after loading the view.
     if(!self.tempPostsArray){
         self.tempPostsArray = [[NSMutableArray alloc]init];
     }
     
     tableView = [self configureTableView];
-    self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(10, 10, 100, 30)];
+
     
     tableView.delegate = self;
     tableView.dataSource = self;
-    self.searchBar.delegate = self;
     tableView.rowHeight = UITableViewAutomaticDimension;
     tableView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:tableView];
@@ -125,19 +124,6 @@
     FilterViewController *filter = [[FilterViewController alloc]init];
     filter.tempPostsArray = self.tempPostsArray;
     [self.navigationController pushViewController:filter animated:YES];
-}
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    if (searchText.length != 0) {
-        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSString *evaluatedObject, NSDictionary *bindings) {
-            return  [evaluatedObject containsString:searchText];
-        }];
-        self.filtedData = [self.tempPostsArray filteredArrayUsingPredicate:predicate];
-    }
-    else {
-        self.filtedData = self.tempPostsArray;
-    }
-    [tableView reloadData];
 }
 
 -(void)didTapProfile {

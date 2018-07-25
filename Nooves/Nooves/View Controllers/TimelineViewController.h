@@ -13,8 +13,5 @@
 @property (strong, nonatomic) NSMutableArray *tempPostsArray;
 @property (strong, nonatomic) UILabel *label;
 @property (strong, nonatomic) NSArray *postsArray;
-@property (strong, nonatomic) NSArray *filtedData;
-@property (strong, nonatomic) UISearchBar *searchBar;
-@property (strong, nonatomic) NSArray *filteredData;
-
+@property (strong, nonatomic) NSArray *firArray;
 @end

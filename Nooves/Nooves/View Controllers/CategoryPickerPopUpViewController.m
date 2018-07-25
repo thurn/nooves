@@ -55,6 +55,9 @@
     composer.tempPostsArray = self.tempPostsArray;
     composer.date = self.date;
     composer.activityType = self.activityType;
+    composer.lat = self.lat;
+    composer.lng = self.lng;
+    composer.location = self.location;
     [self.navigationController pushViewController:composer animated:YES];
 }
 

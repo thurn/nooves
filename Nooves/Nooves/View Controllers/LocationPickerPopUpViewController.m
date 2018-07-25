@@ -82,6 +82,8 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     composer.tempPostsArray = self.tempPostsArray;
     composer.date = self.date;
     composer.activityType = self.activityType;
+    composer.lat = self.lat;
+    composer.lng = self.lng;
     [self.navigationController pushViewController:composer animated:YES];
 }
 
@@ -106,11 +108,24 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // This is the selected venue
     NSDictionary *venue = self.results[indexPath.row];
-    NSNumber *lat = [venue valueForKeyPath:@"location.lat"];
-    NSNumber *lng = [venue valueForKeyPath:@"location.lng"];
-    NSLog(@"%@, %@", lat, lng);
+    self.lat = [venue valueForKeyPath:@"location.lat"];
+    self.lng = [venue valueForKeyPath:@"location.lng"];
+    self.location = [venue valueForKeyPath:@"location.name"];
+    // NSLog(@"%", self.location);
+    NSLog(@"%@, %@", self.lat, self.lng);
     
-    [self.delegate locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)self didPickLocationWithLatitude:lat longitude:lng];
+    // [self.delegate locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)self didPickLocationWithLatitude:self.lat longitude:self.lng];
+    [self.delegate locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)self didPickLocationWithLatitude:self.lat longitude:self.lng location:self.location];
+    
+    ComposeViewController *composer = [[ComposeViewController alloc] init];
+    composer.lat = self.lat;
+    composer.lng = self.lng;
+    composer.location = self.location;
+    
+    [self.navigationController pushViewController:composer animated:YES];
+    
+    //Change the selected background view of the cell.
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -143,7 +158,7 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     [task resume];
 }
 
-- (void)locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)controller didPickLocationWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude {
+- (void)locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)controller didPickLocationWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude location:(NSString *)location {
 }
 
 @end
