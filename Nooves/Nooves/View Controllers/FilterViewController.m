@@ -7,123 +7,152 @@
 //
 
 #import "ComposeViewController.h"
+#import "FilterCell.h"
 #import "FilterViewController.h"
 #import "PureLayout/PureLayout.h"
 #import "TimelineViewController.h"
 #import "Post.h"
-#import "postCell.h"
+#import "PostCell.h"
 
-@interface FilterViewController ()
+@interface FilterViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property(strong, nonatomic) NSArray *labelsArray;
-@property(strong, nonatomic) NSMutableArray *buttonsArray;
-@property(strong, nonatomic) NSMutableArray *categoriesArray;
+@property(strong, nonatomic) UITableView *tableView;
+@property(strong, nonatomic) UIButton *confirmButton;
+@property(strong, nonatomic) NSArray *categories;
+@property(strong, nonatomic) NSMutableArray *selectedCategories;
 @property(strong, nonatomic) NSMutableArray *filteredData;
-@property(strong, nonatomic) Post *post;
+@property(strong, nonatomic) NSMutableArray *data;
+@property(strong, nonatomic) NSArray *results;
 
 @end
 
 @implementation FilterViewController
 {
-    UIButton *checkboxButton;
-    UILabel *tagLabel;
+    CGFloat x;
+    CGFloat y;
+    UIBarButtonItem *allPosts;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // Do any additional setup after loading the view, typically from a nib.
+    [self configureTableView];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self configureArray];
+    [self configureButton];
+    [self returnAllPosts];
     
-    [self setupCategories];
+    [self.tableView registerClass:[FilterCell class] forCellReuseIdentifier:@"filterCellIdentifier"];
+    
+    [self.tableView reloadData];
 }
 
-- (void)setupCategories {
-    // set up the date field
+- (UITableView *)configureTableView {
+    x = 0;
+    y = 0;
+    CGFloat width = self.view.frame.size.width;
+    CGFloat height = self.view.frame.size.height;
+    CGRect tableViewFrame = CGRectMake( x, y, width, height);
     
-    self.buttonsArray = [[NSMutableArray alloc]init];
-    self.categoriesArray = [[NSMutableArray alloc]init];
-    [self.view setBackgroundColor:[UIColor whiteColor]];
-    self.labelsArray = @[@"Outdoors", @"Shopping", @"Partying", @"Eating",@"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival"];
-    int y = 100;
-    int bty = 100;
+    self.selectedCategories = [[NSMutableArray alloc]init];
+    self.filteredData = [[NSMutableArray alloc]init];
+    self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
+    self.tableView.scrollEnabled = YES;
+    self.tableView.showsVerticalScrollIndicator = YES;
+    self.tableView.userInteractionEnabled = YES;
+    [self.view addSubview:self.tableView];
     
-    for (int i = 0; i < 12; i++) {
-        tagLabel = [[UILabel alloc]initWithFrame:CGRectMake(30, y, 50, 20)];
-        tagLabel.tag = i+1;
-        [self.categoriesArray addObject:tagLabel];
-        tagLabel.text = self.labelsArray[i];
-        [tagLabel sizeToFit];
-        [self.view addSubview:tagLabel];
-        
-        checkboxButton = [[UIButton alloc]initWithFrame:CGRectMake(150, bty, 15, 15)];
-        checkboxButton.tag = i+1;
-        [self.buttonsArray addObject:checkboxButton];
-        [checkboxButton setImage:[UIImage imageNamed:@"unchecked-box"] forState:UIControlStateNormal];
-        [self.view addSubview:checkboxButton];
-
-        y += 30;
-        bty += 30;
-    }
-    [checkboxButton setImage:[UIImage imageNamed:@"checked-box"] forState:UIControlStateSelected];
-    [checkboxButton addTarget:self action:@selector(checkedBox) forControlEvents:UIControlEventTouchUpInside];
-   
-    NSLog(@"Buttons array: %@", self.buttonsArray);
-    UIButton *confirmButton = [[UIButton alloc]init];
-    [confirmButton setTitle:@"Confirm" forState:UIControlStateNormal];
-    [confirmButton sizeToFit];;
-    [confirmButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [self.view addSubview:confirmButton];
-    [confirmButton autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:tagLabel withOffset:30];
-    [confirmButton addTarget:self action:@selector(didTapConfirm) forControlEvents:UIControlEventTouchUpInside];
+    return self.tableView;
 }
 
-- (void)checkedBox {
-    for (int i = 1; i < 12; i++) {
-        if (checkboxButton.tag == i) {
-            if(checkboxButton.isSelected) {
-                checkboxButton.selected = NO;
-            }
-            else {
-                checkboxButton.selected = YES;
-                [self.categoriesArray addObject:self.labelsArray[i+1]];
-            }
-        }
-    }
-}
-
-- (void)didTapConfirm {
-    // TODO: go back to the feed controller with filtered data
-    // associate each button tag with its label tag -- put the labels.text in an array
-    // iterate through the array of posts
-    // for each post that contains one or more strings listed in the array of checked buttons
-    // add it to the array of new posts that will be displayed
+- (UIBarButtonItem *) returnAllPosts {
+    allPosts = [[UIBarButtonItem alloc]init];
+    allPosts.title = @"All Posts";
+    self.navigationItem.rightBarButtonItem = allPosts;
     
-        for (Post *post in self.tempPostsArray) {
-            for(NSString *type in self.categoriesArray){
-               ActivityType aType = [Post stringToActivityType:type];
-                NSLog(@"post activity type: %ld", post.activityType);
-                if(post.activityType == aType){
-                    [self.filteredData addObject:post];
-                }
-            }
-    }
-    TimelineViewController *feed = [[TimelineViewController alloc]init];
-    feed.tempPostsArray = self.filteredData;
-    [self.navigationController pushViewController:feed animated:YES];
+    allPosts.target = self;
+    allPosts.action = @selector(didTapAllPosts);
+    
+    return allPosts;
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSArray *)configureArray {
+    self.categories= @[@"Outdoors", @"Shopping", @"Partying", @"Eating",@"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
+    return self.categories;
 }
-*/
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    FilterCell *cell =[tableView dequeueReusableCellWithIdentifier:@"filterCellIdentifier" forIndexPath:indexPath];
+    cell.textLabel.text = self.categories[indexPath.row];
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if(self.categories){
+        return self.categories.count;
+    }
+    return 30;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *customcell = [tableView cellForRowAtIndexPath:indexPath];
+    if (customcell.accessoryType == UITableViewCellAccessoryNone) {
+        customcell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else {
+        customcell.accessoryType=UITableViewCellAccessoryNone;
+    }
+}
+
+- (void) configureButton {
+    self.confirmButton = [[UIButton alloc]initWithFrame:CGRectMake(200, 600, 30, 30)];
+    [self.confirmButton setBackgroundColor:[UIColor blueColor]];
+    [self.confirmButton setTitle:@"Confirm" forState:UIControlStateNormal];
+    [self.confirmButton sizeToFit];
+    [self.view addSubview:self.confirmButton];
+    
+    [self.confirmButton addTarget:self action:@selector(didTapConfirm) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void) didTapConfirm {
+    for (UITableViewCell *cell in self.tableView.visibleCells) {
+        if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
+            [self.selectedCategories addObject:cell.textLabel.text];
+        }
+    }
+    NSLog(@"selected choices: %@", self.selectedCategories);
+    
+    for(Post *post in self.tempPostsArray) {
+        for(NSString *activity in self.selectedCategories) {
+            ActivityType tagType = [Post stringToActivityType:activity];
+            if(post.activityType == tagType) {
+                [self.filteredData addObject:post];
+            }
+            
+            else {
+                NSLog(@"they are not equal");
+            }
+        }
+    }
+    TimelineViewController *feed = [[TimelineViewController alloc]init];
+    self.data = [self.tempPostsArray mutableCopy];
+    self.results = [[NSArray alloc]initWithArray:self.data];
+    feed.tempPostsArray =self.filteredData;
+    [self.navigationController pushViewController:feed animated:YES];
+    NSLog(@"Filtered data:%@", self.filteredData);
+    NSLog(@"Data array:%@", self.results);
+}
+
+- (void) didTapAllPosts {
+    TimelineViewController *timeline = [[TimelineViewController alloc]init];
+    timeline.tempPostsArray = self.data;
+    [self.navigationController pushViewController:timeline animated:YES];
+}
 
 @end
