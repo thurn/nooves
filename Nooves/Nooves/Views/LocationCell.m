@@ -45,15 +45,16 @@
     CGRect frame = [self.categoryImageView frame];
     frame.size.width = 30;
     [self.categoryImageView setFrame:frame];
-    
     self.categoryImageView.frame = CGRectMake(7, 7, 30, 30);
     
-    self.addressLabel.frame = CGRectMake(7, 40, 10, 10);
-    self.addressLabel.text = @"";
+    self.addressLabel.frame = CGRectMake(7, 30, 20, 20);
+    self.addressLabel.text = @"address";
+    [self.addressLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12]];
     [self.addressLabel sizeToFit];
     
-    self.nameLabel.frame = CGRectMake(10, 55, 10, 10);
-    self.nameLabel.text = @"";
+    self.nameLabel.frame = CGRectMake(20, 55, 20, 20);
+    self.nameLabel.text = @"name";
+    [self.nameLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:12]];
     [self.nameLabel sizeToFit];
     
     [self addSubview:self.categoryImageView];
@@ -75,11 +76,6 @@
         NSURL *url = [NSURL URLWithString:urlString];
         [self.categoryImageView setImageWithURL:url];
     }
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 50;
 }
 
 @end
