@@ -12,29 +12,53 @@
 
 @implementation LocationCell
 
-- (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
-    
-    // self = [super initWithStyle:nil reuseIdentifier:@"LocationCell"];
-    if (self) {
-        // configure control(s)
-        self.categoryImageView = [[UIImageView alloc] init];
-        self.addressLabel = [[UILabel alloc] init];
-        self.nameLabel = [[UILabel alloc] init];
-        self.location = [[NSDictionary alloc] init];
-        
-        [self addSubview:self.categoryImageView];
-        [self addSubview:self.addressLabel];
-        [self addSubview:self.nameLabel];
-    }
+-(instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    [self initialize];
     return self;
 }
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
+-(instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    
+    [self initialize];
+    return self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    
+    [self initialize];
+    return self;
+}
+
+- (void)initialize {
+    // initialize cell properties
+    self.categoryImageView = [[UIImageView alloc] init];
+    self.addressLabel = [[UILabel alloc] init];
+    self.nameLabel = [[UILabel alloc] init];
+    self.location = [[NSDictionary alloc] init];
+    
+    CGRect frame = [self.categoryImageView frame];
+    frame.size.width = 30;
+    [self.categoryImageView setFrame:frame];
+    
+    self.categoryImageView.frame = CGRectMake(7, 7, 30, 30);
+    
+    self.addressLabel.frame = CGRectMake(7, 40, 10, 10);
+    self.addressLabel.text = @"";
+    [self.addressLabel sizeToFit];
+    
+    self.nameLabel.frame = CGRectMake(10, 55, 10, 10);
+    self.nameLabel.text = @"";
+    [self.nameLabel sizeToFit];
+    
+    [self addSubview:self.categoryImageView];
+    [self addSubview:self.addressLabel];
+    [self addSubview:self.nameLabel];
 }
 
 - (void)updateWithLocation:(NSDictionary *)location {
@@ -51,6 +75,11 @@
         NSURL *url = [NSURL URLWithString:urlString];
         [self.categoryImageView setImageWithURL:url];
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
 }
 
 @end
