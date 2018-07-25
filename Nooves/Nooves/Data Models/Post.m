@@ -7,10 +7,10 @@
 //
 
 #import "Post.h"
-
+#import <FIRDatabase.h>
 @implementation Post
 
-+(NSString *)activityTypeToString:(ActivityType) activityType{
++ (NSString *)activityTypeToString:(ActivityType) activityType{
     switch (activityType) {
         case Outdoors:
             return @"Outdoors";
@@ -40,7 +40,7 @@
             return @"Other";
     }
 };
-+(ActivityType)stringToActivityType:(NSString *)activityString{
++ (ActivityType)stringToActivityType:(NSString *)activityString{
     if([activityString isEqualToString:@"Outdoors"]){
         return Outdoors;
     }
@@ -79,15 +79,15 @@
     }
     return Other;
 }
--(NSNumber *)ActivityTypeToNumber{
+- (NSNumber *)ActivityTypeToNumber{
     NSNumber *activity = @(self.activityType);
     return activity;
 }
--(int)getDateTimeStamp{
+- (int)getDateTimeStamp{
     int timestamp = [self.activityDateAndTime timeIntervalSince1970];
     return timestamp;
 }
--(instancetype)MakePost:(NSDate *)eventDate withTitle:(NSString *) postTitle withDescription:(NSString *) postDescription withType:(ActivityType ) activityType{
+- (instancetype)MakePost:(NSDate *)eventDate withTitle:(NSString *) postTitle withDescription:(NSString *) postDescription withType:(ActivityType ) activityType{
     Post *post = [[Post alloc]init];
     post.activityDateAndTime = eventDate;
     post.activityTitle = postTitle;
@@ -95,7 +95,7 @@
     post.activityType = activityType;
     return post;
 }
--(instancetype)initFromFireBasePost:(FirebasePost *)firePost{
+- (instancetype)initFromFireBasePost:(FirebasePost *)firePost{
     Post *post = [[Post alloc]init];
     int date = [firePost.eventDateAndTime intValue];
     NSDate *eventDate = [NSDate dateWithTimeIntervalSince1970:date];
@@ -105,6 +105,14 @@
     NSInteger eventType = [firePost.activityType integerValue];
     post.activityType = eventType;
     return post;
+}
++ (void)postToFireBase:(Post *)post{
+    int timestamp = [post.activityDateAndTime timeIntervalSince1970];
+    NSNumber *dateAndTimeStamp = @(timestamp);
+    NSNumber *activityType = @(post.activityType);
+    post.ref = [[FIRDatabase database] reference];
+    FIRDatabaseReference *ref = [[post.ref child:@"Posts"] childByAutoId];
+    [ref setValue:@{@"Date": dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription}];
 }
 @end
 

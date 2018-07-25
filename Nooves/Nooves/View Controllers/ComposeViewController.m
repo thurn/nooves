@@ -212,6 +212,7 @@
 - (void)didTapPost {
     // API call
     self.post = [[Post alloc] MakePost:self.date withTitle:self.eventTitle.text withDescription:self.eventDescription.text withType:self.activityType];
+    [Post postToFireBase:self.post];
     [self.tempPostsArray addObject:self.post];
     TimelineViewController *timeline = [[TimelineViewController alloc]init];
     timeline.tempPostsArray = self.tempPostsArray;
