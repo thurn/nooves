@@ -6,13 +6,13 @@
 //  Copyright © 2018 Nikki Tran. All rights reserved.
 //
 
-#import "TimelineViewController.h"
-#import "ComposeViewController.h"
 #import "AppDelegate.h"
-#import "postCell.h"
+#import "ComposeViewController.h"
+#import "FilterViewController.h"
+#import "PostCell.h"
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
-#import "FilterViewController.h"
+#import "TimelineViewController.h"
 
 
 @interface TimelineViewController ()
@@ -49,14 +49,14 @@
     [self writeNewPost];
     [self filterResults];
     
-    [tableView registerClass:[postCell class] forCellReuseIdentifier:@"postCellIdentifier"];
+    [tableView registerClass:[PostCell class] forCellReuseIdentifier:@"postCellIdentifier"];
 
     // set up the search bar
     // UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
     //[tableView setTableHeaderView:searchBar];
 }
 
-- (UITableView *) configureTableView {
+- (UITableView *)configureTableView {
     CGFloat x = 0;
     CGFloat y = 0;
     CGFloat width = self.view.frame.size.width;
@@ -71,7 +71,7 @@
     return tableView;
 }
 
-- (UIBarButtonItem *) writeNewPost {
+- (UIBarButtonItem *)writeNewPost {
 
     UIBarButtonItem *composeButton = [[UIBarButtonItem alloc] init];
     composeButton.title = @"New Post";
@@ -82,7 +82,7 @@
     return composeButton;
 }
 
-- (UIBarButtonItem *) filterResults {
+- (UIBarButtonItem *)filterResults {
     
     UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] init];
     filterButton.title = @"Filter";
@@ -101,7 +101,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    postCell *cell =[tableView dequeueReusableCellWithIdentifier:@"postCellIdentifier" forIndexPath:indexPath];
+    PostCell *cell =[tableView dequeueReusableCellWithIdentifier:@"postCellIdentifier" forIndexPath:indexPath];
     Post *newPost =self.tempPostsArray[indexPath.row];
     [cell configurePost:newPost];
     
@@ -115,48 +115,35 @@
     return 30;
 }
 
-- (void) didTapCompose {
+- (void)didTapCompose {
     ComposeViewController *composer = [[ComposeViewController alloc] init];
     composer.hidesBottomBarWhenPushed = YES;
     composer.tempPostsArray = self.tempPostsArray;
     [self.navigationController pushViewController:composer animated:YES];
 }
 
-- (void) didTapFilter {
+- (void)didTapFilter {
     FilterViewController *filter = [[FilterViewController alloc]init];
     filter.tempPostsArray = self.tempPostsArray;
     [self.navigationController pushViewController:filter animated:YES];
 }
 
-- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     if (searchText.length != 0) {
         NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSString *evaluatedObject, NSDictionary *bindings) {
             return  [evaluatedObject containsString:searchText];
         }];
         self.filtedData = [self.tempPostsArray filteredArrayUsingPredicate:predicate];
     }
-    
     else {
         self.filtedData = self.tempPostsArray;
     }
     [tableView reloadData];
 }
 
--(void) didTapProfile {
+-(void)didTapProfile {
     ProfileViewController *profile = [[ProfileViewController alloc] init];
     [self.navigationController pushViewController:profile animated:YES];
 }
-
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-
 
 @end

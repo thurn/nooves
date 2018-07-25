@@ -1,45 +1,23 @@
 //
-//  postCell.m
+//  PostCell.m
 //  Nooves
 //
 //  Created by Norette Ingabire on 7/16/18.
 //  Copyright © 2018 Nikki Tran. All rights reserved.
 //
 
-#import "postCell.h"
+#import "PostCell.h"
 #import "Post.h"
 #import "PureLayout/PureLayout.h"
 
-@implementation postCell
+@implementation PostCell
 
-bool going = NO;
-bool interested = NO;
-
-/* - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-
-        // set up the 'going' button
-        self.goingButton = [[UIButton alloc] initWithFrame:CGRectMake(100, size.height+ 50, 5 20)];
-      self.goingButton.backgroundColor = [UIColor blackColor];
-        [self.goingButton setTitle:@"Going" forState:UIControlStateNormal];
-        [self.goingButton sizeToFit];
-        [self.contentView addSubview:self.goingButton];
-        [self.goingButton addTarget:self action:@selector(didTapGoing) forControlEvents:UIControlEventTouchUpInside];
-        
-        // set up the 'interested' button
-        self.interestedButton = [[UIButton alloc] initWithFrame:CGRectMake(290, 0, 20, 10)];
-        [self.interestedButton setBackgroundColor:[UIColor blackColor]];
-        [self.interestedButton setTitle:@"Interested" forState:UIControlStateNormal];
-        [self.interestedButton sizeToFit];
-        [self.contentView addSubview:self.interestedButton];
-        [self.interestedButton addTarget:self action:@selector(didTapInterested) forControlEvents:UIControlEventTouchUpInside];
-
-    return self;
-}*/
+    bool going = NO;
+    bool interested = NO;
 
 - (void) awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -47,7 +25,7 @@ bool interested = NO;
     // Configure the view for the selected state
 }
 
-- (void) configurePost: (Post *) post {
+- (void)configurePost: (Post *) post {
     
     // set up the date field
     self.dateField = [[UILabel alloc]init];
@@ -97,7 +75,7 @@ bool interested = NO;
     self.dateField.text = dateString;
 }
 
-- (void) didTapGoing {
+- (void)didTapGoing {
     //  change button color and number/list of people going
     
     if (!interested) {
@@ -133,7 +111,7 @@ bool interested = NO;
     }
 }
 
-- (void) didTapInterested {
+- (void)didTapInterested {
     if (!going) {
         if (interested) {
             // DECREMENT THE NUMBER OF THOSE INTERESTED - REMOVE USER FROM THE LIST
@@ -165,7 +143,7 @@ bool interested = NO;
     }
 }
 
-- (UIButton *) goToProfile {
+- (UIButton *)goToProfile {
     self.profileButton = [[UIButton alloc] initWithFrame:CGRectMake(300, 140, 100, 10)];
     [self.profileButton setImage:[UIImage imageNamed:@"profile_tab.png"] forState:UIControlStateNormal];
     [self.profileButton sizeToFit];
@@ -175,7 +153,7 @@ bool interested = NO;
     return self.profileButton;
 }
 
--(void) didTapProfile {
+-(void)didTapProfile {
     NSLog(@"did tap on profile");
 }
 

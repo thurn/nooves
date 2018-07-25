@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface FilterViewController : UIViewController
-@property(strong, nonatomic) NSArray *tempPostsArray;
+@property(strong, nonatomic) NSMutableArray *tempPostsArray;
 @end

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Post.h"
 
-@interface postCell : UITableViewCell
+@interface PostCell : UITableViewCell
 
 @property (strong, nonatomic) Post *post;
 
