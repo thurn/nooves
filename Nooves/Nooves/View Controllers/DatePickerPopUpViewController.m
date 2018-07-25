@@ -40,6 +40,7 @@
     composer.activityType = self.activityType;
     composer.lat = self.lat;
     composer.lng = self.lng;
+    composer.location = self.location;
     [self.navigationController pushViewController:composer animated:YES];
 }
 

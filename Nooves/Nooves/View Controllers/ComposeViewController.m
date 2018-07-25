@@ -47,7 +47,11 @@
     UILabel *locationLabel = [[UILabel alloc] init];
     NSString *locationColon = @"Location: ";
     locationLabel.frame = CGRectMake(10, 440, 100, 100);
-    locationLabel.text = [locationColon stringByAppendingString:@"test"];
+    if(self.location) {
+        locationLabel.text = [locationColon stringByAppendingString:self.location];
+    } else {
+        locationLabel.text = locationColon;
+    }
     [locationLabel sizeToFit];
     
     // set activity display label properties
@@ -143,6 +147,7 @@
     datePicker.activityType = self.activityType;
     datePicker.lat = self.lat;
     datePicker.lng = self.lng;
+    datePicker.location = self.location;
     [self.navigationController pushViewController:datePicker animated:YES];
     datePicker.hidesBottomBarWhenPushed = YES;
 }
@@ -166,6 +171,7 @@
     locationPicker.activityType = self.activityType;
     locationPicker.lat = self.lat;
     locationPicker.lng = self.lng;
+    locationPicker.location = self.location;
     [self.navigationController pushViewController:locationPicker animated:YES];
     locationPicker.hidesBottomBarWhenPushed = YES;
 }
@@ -190,6 +196,7 @@
     categoryPicker.activityType = self.activityType;
     categoryPicker.lat = self.lat;
     categoryPicker.lng = self.lng;
+    categoryPicker.location = self.location;
     [self.navigationController pushViewController:categoryPicker animated:YES];
     categoryPicker.hidesBottomBarWhenPushed = YES;
 }
@@ -226,7 +233,7 @@
 // passes post data and adds to post array and jump back to timeline view
 - (void)didTapPost {
     // post to timeline
-    self.post = [[Post alloc] initPostWithDetails:self.date withTitle:self.eventTitle.text withDescription:self.eventDescription.text withType:self.activityType];
+    self.post = [[Post alloc] initPostWithDetails:self.date withTitle:self.eventTitle.text withDescription:self.eventDescription.text withType:self.activityType withLat:self.lat withLng:self.lng];
     [Post postToFireBase:self.post];
     [self.tempPostsArray addObject:self.post];
     TimelineViewController *timeline = [[TimelineViewController alloc]init];
