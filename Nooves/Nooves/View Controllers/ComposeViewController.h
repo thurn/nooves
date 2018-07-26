@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 #import "Post.h"
+#import "DatePickerPopUpViewController.h"
 
 @interface ComposeViewController : UIViewController
 
@@ -10,5 +11,8 @@
 @property (nonatomic) NSNumber *lat;
 @property (nonatomic) NSNumber *lng;
 @property (nonatomic) NSString *location;
+@property (nonatomic) UITextField *eventTitle;
+@property (nonatomic) UITextView *eventDescription;
+// @property (nonatomic) DatePickerPopUpViewController *datePicker;
 
 @end

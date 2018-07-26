@@ -7,7 +7,7 @@
 
 @implementation DatePickerPopUpViewController
 
-- (void)viewDidLoad{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.datepicker = [[UIDatePicker alloc]init];
@@ -23,7 +23,7 @@
     self.tabBarController.tabBar.hidden = YES;
 }
 
-- (UIButton *)selectDate{
+- (UIButton *)selectDate {
     UIButton *selectDate = [UIButton buttonWithType:UIButtonTypeSystem];
     [selectDate setTitle:@"Select Date" forState:UIControlStateNormal];
     [selectDate addTarget:self action:@selector(didSelectDate) forControlEvents:UIControlEventTouchUpInside];
@@ -31,7 +31,7 @@
     return selectDate;
 }
 
-- (void)didSelectDate{
+- (void)didSelectDate {
     ComposeViewController *composer = [ComposeViewController new];
     composer.tempPostsArray = self.tempPostsArray;
     self.date = [[NSDate alloc] init];
@@ -44,7 +44,7 @@
     [self.navigationController pushViewController:composer animated:YES];
 }
 
-- (void)didReceiveMemoryWarning{
+- (void)didReceiveMemoryWarning {
 }
 
 @end
