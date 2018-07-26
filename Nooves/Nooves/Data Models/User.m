@@ -10,11 +10,14 @@
 
 @implementation User
 
-- (instancetype)initProfileWithInfo:(NSString *)userName withBio:(NSString *)bio {
-    User *user = [[User alloc]init];
-    user.name = userName;
-    user.biography = bio;
-    return user;
+
+- (instancetype)initProfileWithInfo: (NSString *)userName withBio: (NSString *)bio {
+    self = [super init];
+    if(self){
+        self.name = userName;
+        self.biography = bio;
+    }
+    return self;
 }
 
 @end
