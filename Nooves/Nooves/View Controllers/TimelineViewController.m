@@ -51,14 +51,13 @@
         self.firArray = [NSArray arrayWithArray:tempArray];
         [tableView reloadData];
     }];
-     tableView = [self configureTableView];
+    tableView = [self configureTableView];
+    
     // Do any additional setup after loading the view.
     if(!self.tempPostsArray){
         self.tempPostsArray = [[NSMutableArray alloc]init];
     }
 
-    
-    
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.rowHeight = UITableViewAutomaticDimension;
