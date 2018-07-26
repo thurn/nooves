@@ -142,7 +142,7 @@
 }
 
 - (void)didTapCompose {
-    ComposeViewController *composer = [[ComposeViewController alloc] init]; 
+    ComposeViewController *composer = [[ComposeViewController alloc] init];
     [self.navigationController pushViewController:composer animated:YES];
 }
 
