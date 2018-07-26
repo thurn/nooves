@@ -37,6 +37,10 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     [self.tableView reloadData];
 }
 
+- (void)viewWillAppear: (BOOL)animated {
+    self.hidesBottomBarWhenPushed = YES;
+}
+
 - (void)configureTableView {
     CGFloat x = 0;
     CGFloat y = 0;
@@ -98,7 +102,6 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     
     ComposeViewController *composer = [[ComposeViewController alloc] init];
     
-    composer.tempPostsArray = self.tempPostsArray;
     composer.date = self.date;
     composer.activityType = self.activityType;
     composer.lat = self.lat;

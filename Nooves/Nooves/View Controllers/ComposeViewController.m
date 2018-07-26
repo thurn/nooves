@@ -17,10 +17,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    if(!self.tempPostsArray) {
-        self.tempPostsArray = [[NSMutableArray alloc] init];
-    }
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
@@ -133,14 +129,12 @@
 // pass post data and jump to date picker view
 - (void)didSelectDate {
     DatePickerModalViewController *datePicker = [DatePickerModalViewController new];
-    datePicker.tempPostsArray = self.tempPostsArray;
     datePicker.date = self.date;
     datePicker.activityType = self.activityType;
     datePicker.lat = self.lat;
     datePicker.lng = self.lng;
     datePicker.location = self.location;
     [self.navigationController pushViewController:datePicker animated:YES];
-    //datePicker.hidesBottomBarWhenPushed = YES;
 }
 
 // set up select location properties
@@ -157,14 +151,12 @@
 // pass post data and jump to location picker view
 - (void)didSelectLocation {
     LocationPickerModalViewController *locationPicker = [LocationPickerModalViewController new];
-    locationPicker.tempPostsArray = self.tempPostsArray;
     locationPicker.date = self.date;
     locationPicker.activityType = self.activityType;
     locationPicker.lat = self.lat;
     locationPicker.lng = self.lng;
     locationPicker.location = self.location;
     [self.navigationController pushViewController:locationPicker animated:YES];
-    //locationPicker.hidesBottomBarWhenPushed = YES;
 }
 
 // set up selection category button properties
@@ -182,14 +174,13 @@
 // pass post data and jump to category picker view
 - (void)didSelectCategory {
     CategoryPickerModalViewController *categoryPicker = [CategoryPickerModalViewController new];
-    categoryPicker.tempPostsArray = self.tempPostsArray;
     categoryPicker.date = self.date;
     categoryPicker.activityType = self.activityType;
     categoryPicker.lat = self.lat;
     categoryPicker.lng = self.lng;
     categoryPicker.location = self.location;
     [self.navigationController pushViewController:categoryPicker animated:YES];
-    categoryPicker.hidesBottomBarWhenPushed = YES;
+    // [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:3] animated:YES];
 }
 
 // set up back button properties
@@ -224,12 +215,9 @@
 // passes post data and adds to post array and jump back to timeline view
 - (void)didTapPost {
     // post to timeline
-//    self.post = [[Post alloc] initPostWithDetails:self.date withTitle:self.eventTitle.text withDescription:self.eventDescription.text withType:self.activityType withLat:self.lat withLng:self.lng];
     self.post = [[Post alloc] initPostWithDetails:self.date withTitle:self.eventTitle.text withDescription:self.eventDescription.text withType:self.activityType withLat:self.lat withLng:self.lng withID:nil];
     [Post postToFireBase:self.post];
-    [self.tempPostsArray addObject:self.post];
     TimelineViewController *timeline = [[TimelineViewController alloc]init];
-    timeline.tempPostsArray = self.tempPostsArray;
     [self.navigationController pushViewController:timeline animated:YES];
     NSLog(@"User posted successfully");
 }
