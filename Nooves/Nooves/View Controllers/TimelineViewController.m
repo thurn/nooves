@@ -30,7 +30,7 @@
 
     [super viewDidLoad];
     FIRDatabaseReference * ref =[[FIRDatabase database] reference];
-    FIRDatabaseHandle *handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+    FIRDatabaseHandle *handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
         self.postsDict = snapshot.value;
         for(NSString *key in self.postsDict){
@@ -48,7 +48,6 @@
             posty.activityDateAndTime = daty;
             [tempArray addObject:posty];
         }
-        self.firArray = [[NSArray alloc] init];
         self.firArray = [NSArray arrayWithArray:tempArray];
     }];
     // Do any additional setup after loading the view.
