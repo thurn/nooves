@@ -9,7 +9,7 @@
 #import "EditProfileViewController.h"
 #import "ProfileViewController.h"
 
-@interface EditProfileViewController () <UITextViewDelegate>
+@interface EditProfileViewController () <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property(strong, nonatomic) UIImageView *profilePic;
 @property(strong, nonatomic) UITextField *userName;
@@ -38,12 +38,32 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (void)selectProfilePic {
+    UIImagePickerController *picker = [UIImagePickerController new];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    [self presentViewController:picker animated:YES completion:nil];
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    NSLog(@"cancelled");
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    if(info[@"UIImagePickerControllerEditedImage"]){
+        UIImage *profilePic = info[@"UIImagePickerControllerEditedImage"];
+        self.profilePic.image = profilePic;
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 - (void)configureView {
     
     //set up the profile pic field
     self.profilePic = [[UIImageView alloc]initWithFrame:CGRectMake(10, 80, 100, 100)];
     [self.profilePic setImage:[UIImage imageNamed:@"profile-blank"]];
+    UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] init];
+    [tapped addTarget:self action:@selector(selectProfilePic)];
+    [self.profilePic addGestureRecognizer:tapped];
+    self.profilePic.userInteractionEnabled = YES;
     [self.profilePic sizeToFit];
     
     // set up the name field
@@ -96,6 +116,5 @@
     [self.navigationController popViewControllerAnimated:YES];
     NSLog(@"calling didUpdateProfile");
 }
-
 
 @end

@@ -13,6 +13,7 @@ target 'Nooves' do
   pod 'PureLayout'
   pod 'Firebase/Auth'
   pod 'FBSDKLoginKit'
+  pod 'Firebase/Storage'
 
   target 'NoovesTests' do
     inherit! :search_paths

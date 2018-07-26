@@ -31,26 +31,8 @@
     [super viewDidLoad];
     FIRDatabaseReference * ref =[[FIRDatabase database] reference];
     FIRDatabaseHandle *handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-        self.postsDict = snapshot.value;
-        for(NSString *userKey in self.postsDict){
-            for(NSString *IDKey in self.postsDict[userKey]){
-                Post *posty = [[Post alloc]init];
-                posty.fireBaseID = IDKey;
-                posty.activityTitle = self.postsDict[userKey][IDKey][@"Title"];
-                posty.activityDescription = self.postsDict[userKey][IDKey][@"Description"];
-                posty.userID = userKey;
-                posty.activityLat = self.postsDict[userKey][IDKey][@"Latitude"];
-                posty.activityLng = self.postsDict[userKey][IDKey][@"Longitude"];
-                ActivityType type = [self.postsDict[userKey][IDKey][@"Activity Type"] integerValue];
-                posty.activityType = type;
-                NSInteger date = [self.postsDict[userKey][IDKey][@"Date"] integerValue];
-                NSDate *daty = [NSDate dateWithTimeIntervalSince1970:date];
-                posty.activityDateAndTime = daty;
-                [tempArray addObject:posty];
-            }
-        }
-        self.firArray = [NSArray arrayWithArray:tempArray];
+        NSDictionary *postsDict = snapshot.value;
+        self.firArray = [Post readPostsFromFIRDict:postsDict];
         [tableView reloadData];
     }];
     tableView = [self configureTableView];
