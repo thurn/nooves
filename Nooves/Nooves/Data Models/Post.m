@@ -83,17 +83,25 @@
     return Other;
 }
 
-- (instancetype)initPostWithDetails:(NSDate *)eventDate withTitle:(NSString *) postTitle withDescription:(NSString *) postDescription withType:(ActivityType ) activityType withLat:(NSNumber *) lat withLng:(NSNumber *) lng withID:(NSString *)postID{
-    Post *post = [[Post alloc]init];
-    post.activityDateAndTime = eventDate;
-    post.activityTitle = postTitle;
-    post.activityDescription = postDescription;
-    post.activityType = activityType;
-    post.activityLat = lat;
-    post.activityLng = lng;
-    post.userID = FIRAuth.auth.currentUser.uid;
-    post.fireBaseID = postID;
-    return post;
+- (instancetype)initPostWithDetails:(NSDate *)eventDate
+                          withTitle:(NSString *)postTitle
+                    withDescription:(NSString *) postDescription
+                           withType:(ActivityType ) activityType
+                            withLat:(NSNumber *) lat
+                            withLng:(NSNumber *) lng
+                             withID:(NSString *)postID{
+    self = [super init];
+    if (self){
+        self.activityDateAndTime = eventDate;
+        self.activityTitle = postTitle;
+        self.activityDescription = postDescription;
+        self.activityType = activityType;
+        self.activityLat = lat;
+        self.activityLng = lng;
+        self.userID = FIRAuth.auth.currentUser.uid;
+        self.fireBaseID = postID;
+    }
+    return self;
 }
 - (void)initFromFirebase{
 }
