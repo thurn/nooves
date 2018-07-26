@@ -2,4 +2,6 @@
 
 @interface ProfileViewController : UIViewController
 
+@property(nonatomic) NSMutableArray *usersArray;
+
 @end

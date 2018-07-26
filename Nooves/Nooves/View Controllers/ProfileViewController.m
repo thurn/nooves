@@ -1,4 +1,5 @@
 #import "EditProfileViewController.h"
+#import "User.h"
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
 
@@ -6,8 +7,9 @@
 
 @property(strong, nonatomic) UIImageView *profilePicture;
 @property(strong, nonatomic) UILabel *nameLabel;
-@property(strong, nonatomic) UILabel *bio;
+@property(strong, nonatomic) UILabel *bioLabel;
 @property(strong, nonatomic) UIButton *editProfile;
+@property(nonatomic) User *user;
 
 @end
 
@@ -18,6 +20,13 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self configureProfile];
+    
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationItem.title = @"Profile";
+    
+    if (!self.usersArray) {
+        self.usersArray = [[NSMutableArray alloc]init];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,9 +47,9 @@
     [self.nameLabel sizeToFit];
     
     // set up the bio field
-    self.bio = [[UILabel alloc]initWithFrame:CGRectMake(20, 150, 200, 50)];
-    self.bio.text = @"Bio";
-    [self.bio sizeToFit];
+    self.bioLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 150, 200, 50)];
+    self.bioLabel.text = @"Bio";
+    [self.bioLabel sizeToFit];
     
     // set up the edit profile button
     self.editProfile = [[UIButton alloc]initWithFrame:CGRectMake(150, 200, 30, 30)];
@@ -52,7 +61,7 @@
     // add all subviews to the view
     [self.view addSubview:self.profilePicture];
     [self.view addSubview:self.nameLabel];
-    [self.view addSubview:self.bio];
+    [self.view addSubview:self.bioLabel];
     [self.view addSubview:self.editProfile];
     
 }
