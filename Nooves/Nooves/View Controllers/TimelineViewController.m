@@ -27,8 +27,15 @@
     [super viewWillAppear:YES];
 }
 - (void)viewDidLoad {
+    FIRDatabaseReference * ref =[[FIRDatabase database] reference];
+    FIRDatabaseHandle *handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+        self.postsDict = snapshot.value;
+        for(NSString *key in self.postsDict){
+            
+        }
+        
+    }];
     [super viewDidLoad];
-    FIRDatabaseReference *ref = [[FIRDatabase database] reference];
     // Do any additional setup after loading the view.
     if(!self.tempPostsArray){
         self.tempPostsArray = [[NSMutableArray alloc]init];

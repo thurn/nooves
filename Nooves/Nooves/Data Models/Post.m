@@ -8,6 +8,7 @@
 
 #import "Post.h"
 #import <FIRDatabase.h>
+#import <FIRAuth.h>
 @implementation Post
 
 + (NSString *)activityTypeToString:(ActivityType) activityType{
@@ -89,6 +90,8 @@
     post.activityLat = lat;
     post.activityLng = lng;
     return post;
+}
+- (void)initFromFirebase{
 }
 
 + (void)postToFireBase:(Post *)post {
