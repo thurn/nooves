@@ -103,8 +103,8 @@
     NSNumber *dateAndTimeStamp = @(timestamp);
     NSNumber *activityType = @(post.activityType);
     post.ref = [[FIRDatabase database] reference];
-    FIRDatabaseReference *ref = [[post.ref child:@"Posts"] childByAutoId];
-    [ref setValue:@{@"Date":dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription, @"Latitude":post.activityLat, @"Longitude":post.activityLng, @"User ID":post.userID}];
+    FIRDatabaseReference *ref = [[[post.ref child:@"Posts"] child:[FIRAuth auth].currentUser.uid] childByAutoId];
+    [ref setValue:@{@"Date":dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription, @"Latitude":post.activityLat, @"Longitude":post.activityLng}];
 }
 
 @end

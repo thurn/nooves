@@ -23,6 +23,10 @@
     self.tabBarController.tabBar.hidden = YES;
 }
 
+- (void)viewWillAppear: (BOOL)animated {
+    self.hidesBottomBarWhenPushed = YES;
+}
+
 - (UIButton *)selectDate {
     UIButton *selectDate = [UIButton buttonWithType:UIButtonTypeSystem];
     [selectDate setTitle:@"Select Date" forState:UIControlStateNormal];
@@ -33,7 +37,6 @@
 
 - (void)didSelectDate {
     ComposeViewController *composer = [ComposeViewController new];
-    composer.tempPostsArray = self.tempPostsArray;
     self.date = [[NSDate alloc] init];
     self.date = self.datepicker.date;
     composer.date = self.date;
@@ -41,7 +44,8 @@
     composer.lat = self.lat;
     composer.lng = self.lng;
     composer.location = self.location;
-    [self.navigationController pushViewController:composer animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
+    // [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -47,9 +47,11 @@
     // the leaf controllers
     ProfileViewController* profileViewController = [[ProfileViewController alloc] init];
     LoginViewController *loginController = [[LoginViewController alloc] init];
+    ComposeViewController *composeController = [[ComposeViewController alloc] init];
     
-    UINavigationController* timelineNavCont = [[UINavigationController alloc] initWithRootViewController:loginController];
-    UINavigationController* profileNavCont = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+    UINavigationController *timelineNavCont = [[UINavigationController alloc] initWithRootViewController:loginController];
+    UINavigationController *profileNavCont = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+    UINavigationController *composeNavCont = [[UINavigationController alloc] initWithRootViewController:composeController];
     
     //    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     //    self.window.backgroundColor = [UIColor whiteColor];
