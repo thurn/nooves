@@ -33,20 +33,22 @@
     FIRDatabaseHandle *handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSMutableArray *tempArray = [[NSMutableArray alloc] init];
         self.postsDict = snapshot.value;
-        for(NSString *key in self.postsDict){
-            Post *posty = [[Post alloc]init];
-            posty.fireBaseID = key;
-            posty.activityTitle = self.postsDict[key][@"Title"];
-            posty.activityDescription = self.postsDict[key][@"Description"];
-            posty.userID = self.postsDict[key][@"User ID"];
-            posty.activityLat = self.postsDict[key][@"Latitude"];
-            posty.activityLng = self.postsDict[key][@"Longitude"];
-            ActivityType type = [self.postsDict[key][@"Activity Type"] integerValue];
-            posty.activityType = type;
-            NSInteger date = [self.postsDict[key][@"Date"] integerValue];
-            NSDate *daty = [NSDate dateWithTimeIntervalSince1970:date];
-            posty.activityDateAndTime = daty;
-            [tempArray addObject:posty];
+        for(NSString *userKey in self.postsDict){
+            for(NSString *IDKey in self.postsDict[userKey]){
+                Post *posty = [[Post alloc]init];
+                posty.fireBaseID = IDKey;
+                posty.activityTitle = self.postsDict[userKey][IDKey][@"Title"];
+                posty.activityDescription = self.postsDict[userKey][IDKey][@"Description"];
+                posty.userID = userKey;
+                posty.activityLat = self.postsDict[userKey][IDKey][@"Latitude"];
+                posty.activityLng = self.postsDict[userKey][IDKey][@"Longitude"];
+                ActivityType type = [self.postsDict[userKey][IDKey][@"Activity Type"] integerValue];
+                posty.activityType = type;
+                NSInteger date = [self.postsDict[userKey][IDKey][@"Date"] integerValue];
+                NSDate *daty = [NSDate dateWithTimeIntervalSince1970:date];
+                posty.activityDateAndTime = daty;
+                [tempArray addObject:posty];
+            }
         }
         self.firArray = [NSArray arrayWithArray:tempArray];
         [tableView reloadData];
