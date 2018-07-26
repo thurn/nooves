@@ -10,17 +10,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBarHidden = NO;
+    
     self.datepicker = [[UIDatePicker alloc]init];
-    self.datepicker.frame = CGRectMake(10.0, 30.0, self.view.frame.size.width, 200);
+    self.datepicker.frame = CGRectMake(10.0, 50.0, self.view.frame.size.width, 200);
     self.datepicker.timeZone = [NSTimeZone localTimeZone];
     UIButton *selectedDate = [self selectDate];
-    selectedDate.frame = CGRectMake(10.0, 250.0, 20, 30);
+    selectedDate.frame = CGRectMake(10.0, 300.0, 20, 30);
     [selectedDate sizeToFit];
     [self.view addSubview:selectedDate];
     self.datepicker.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.datepicker];
     
     self.tabBarController.tabBar.hidden = YES;
+    [self goBack];
 }
 
 - (void)viewWillAppear: (BOOL)animated {
@@ -44,9 +47,24 @@
     composer.lat = self.lat;
     composer.lng = self.lng;
     composer.location = self.location;
-    [self.navigationController popViewControllerAnimated:YES];
-    // [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:2] animated:YES];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
+
+- (UIBarButtonItem *)goBack {
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon"]
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(didTapBack)];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
+    return backButton;
+}
+
+- (void)didTapBack {
+    [self dismissViewControllerAnimated:true completion:nil];
+}
+
+// TODO(ntran): add a back button
 
 - (void)didReceiveMemoryWarning {
 }

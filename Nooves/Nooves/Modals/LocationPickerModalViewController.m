@@ -18,8 +18,8 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBarHidden = NO;
     
     [self configureTableView];
     [self.view addSubview:self.tableView];
@@ -34,6 +34,7 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     
     self.tabBarController.tabBar.hidden = YES;
     
+    [self goBack];
     [self.tableView reloadData];
 }
 
@@ -108,7 +109,8 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     composer.lng = self.lng;
     composer.location = self.location;
     
-    [self.navigationController pushViewController:composer animated:YES];
+    // [self.navigationController pushViewController:composer animated:YES];
+    [self dismissViewControllerAnimated:NO completion:nil];
     
     //Change the selected background view of the cell.
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -142,6 +144,20 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
         }
     }];
     [task resume];
+}
+
+- (UIBarButtonItem *)goBack {
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon"]
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(didTapBack)];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
+    return backButton;
+}
+
+- (void)didTapBack {
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 - (void)locationsPickerPopUpViewController:(LocationPickerModalViewController *)controller didPickLocationWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude location:(NSString *)location {

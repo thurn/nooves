@@ -37,7 +37,14 @@ typedef NS_ENUM(NSInteger, ActivityType){
 
 + (NSString *)activityTypeToString:(ActivityType) activityType;
 + (ActivityType)stringToActivityType:(NSString *)activityString;
-- (instancetype)initPostWithDetails:(NSDate *)eventDate withTitle:(NSString *) postTitle withDescription:(NSString *) postDescription withType:(ActivityType ) activityType withLat:(NSNumber *) lat withLng:(NSNumber *) lng withID:(NSString *)postID;
+- (instancetype)initPostWithDetails:(NSDate *)eventDate
+                          withTitle:(NSString *) postTitle
+                    withDescription:(NSString *) postDescription
+                           withType:(ActivityType ) activityType
+                            withLat:(NSNumber *) lat
+                            withLng:(NSNumber *) lng
+                             withID:(NSString *)postID;
 + (void)postToFireBase:(Post *)post;
 - (void)initFromFirebase;
++ (NSArray *)readPostsFromFIRDict:(NSDictionary *)postsDict;
 @end
