@@ -9,6 +9,8 @@
 #import "Post.h"
 #import <FIRDatabase.h>
 #import <FIRAuth.h>
+#import "LoginViewController.h"
+#import <FirebaseAuth.h>
 @implementation Post
 
 + (NSString *)activityTypeToString:(ActivityType) activityType{
@@ -81,7 +83,7 @@
     return Other;
 }
 
-- (instancetype)initPostWithDetails:(NSDate *)eventDate withTitle:(NSString *) postTitle withDescription:(NSString *) postDescription withType:(ActivityType ) activityType withLat:(NSNumber *) lat withLng:(NSNumber *) lng {
+- (instancetype)initPostWithDetails:(NSDate *)eventDate withTitle:(NSString *) postTitle withDescription:(NSString *) postDescription withType:(ActivityType ) activityType withLat:(NSNumber *) lat withLng:(NSNumber *) lng withID:(NSString *)postID{
     Post *post = [[Post alloc]init];
     post.activityDateAndTime = eventDate;
     post.activityTitle = postTitle;
@@ -89,6 +91,8 @@
     post.activityType = activityType;
     post.activityLat = lat;
     post.activityLng = lng;
+    post.userID = FIRAuth.auth.currentUser.uid;
+    post.fireBaseID = postID;
     return post;
 }
 - (void)initFromFirebase{
@@ -100,7 +104,7 @@
     NSNumber *activityType = @(post.activityType);
     post.ref = [[FIRDatabase database] reference];
     FIRDatabaseReference *ref = [[post.ref child:@"Posts"] childByAutoId];
-    [ref setValue:@{@"Date":dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription, @"Latitute":post.activityLat, @"Longitute":post.activityLng}];
+    [ref setValue:@{@"Date":dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription, @"Latitude":post.activityLat, @"Longitude":post.activityLng, @"User ID":post.userID}];
 }
 
 @end
