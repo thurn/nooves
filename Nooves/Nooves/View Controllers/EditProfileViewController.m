@@ -26,7 +26,6 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self configureView];
-    
     if (!self.usersArray) {
         self.usersArray = [[NSMutableArray alloc]init];
     }
@@ -90,13 +89,12 @@
 }
 
 - (void)didTapSaveProfile {
+    
     // save all the info to the profile page
     self.user = [[User alloc]initProfileWithInfo:self.userName.text withBio:self.bioInfo.text];
-    [self.usersArray addObject:self.user];
-    ProfileViewController *profile = [[ProfileViewController alloc]init];
-    profile.usersArray = self.usersArray;
-    [self.navigationController pushViewController:profile animated:YES];
-    NSLog(@"user profile saved successfully");
+    [self.delegate didUpdateProfile:self.user];
+    [self.navigationController popViewControllerAnimated:YES];
+    NSLog(@"calling didUpdateProfile");
 }
 
 
