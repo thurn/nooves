@@ -9,9 +9,6 @@
 
 @interface ComposeViewController () <UITextViewDelegate>
 
-@property (nonatomic) UILabel *eventNameLabel;
-@property (nonatomic) UITextField *eventTitle;
-@property (nonatomic) UITextView *eventDescription;
 @property (nonatomic) UIPickerView *pickerView;
 
 @end
@@ -28,13 +25,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"New Event";
-    
-    //set up event name label
-    self.eventNameLabel = [[UILabel alloc]init];
-    self.eventNameLabel.frame = CGRectMake(0, 0, 100, 100);
-    self.eventNameLabel.hidden = NO;
-    self.eventNameLabel.text = @"Event Name";
-    [self.eventNameLabel sizeToFit];
     
     // set up event title properties
     self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 1000, 150)];
@@ -91,7 +81,6 @@
     }
 
     // add components to view
-    [self.view addSubview:self.eventNameLabel];
     [self.view addSubview:self.eventTitle];
     [self.view addSubview:self.eventDescription];
     [self.view addSubview:activityLabel];
@@ -106,6 +95,8 @@
     // add tab bar buttons to controller
     [self postButton];
     [self goBack];
+    
+    [self becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -113,18 +104,18 @@
 }
 
 // checks to see if user is editing event description and changes text color if true
-- (void)textViewDidBeginEditing:(UITextView *)textView {
-    if (textView.textColor == UIColor.grayColor) {
-        textView.text = nil;
-        textView.textColor = UIColor.blackColor;
+- (void)textViewDidBeginEditing:(UITextView *)eventDescription {
+    if (eventDescription.textColor == UIColor.grayColor) {
+        eventDescription.text = nil;
+        eventDescription.textColor = UIColor.blackColor;
     }
 }
 
 // if event description is nil continue setting text color to grey
-- (void)textViewDidEndEditing:(UITextView *)textView {
-    if (textView.text == nil) {
-        textView.text = @"Add description";
-        textView.textColor = UIColor.grayColor;
+- (void)textViewDidEndEditing:(UITextView *)eventDescription {
+    if (eventDescription.text == nil) {
+        eventDescription.text = @"Add description";
+        eventDescription.textColor = UIColor.grayColor;
     }
 }
 
@@ -149,7 +140,7 @@
     datePicker.lng = self.lng;
     datePicker.location = self.location;
     [self.navigationController pushViewController:datePicker animated:YES];
-    datePicker.hidesBottomBarWhenPushed = YES;
+    //datePicker.hidesBottomBarWhenPushed = YES;
 }
 
 // set up select location properties
@@ -173,7 +164,7 @@
     locationPicker.lng = self.lng;
     locationPicker.location = self.location;
     [self.navigationController pushViewController:locationPicker animated:YES];
-    locationPicker.hidesBottomBarWhenPushed = YES;
+    //locationPicker.hidesBottomBarWhenPushed = YES;
 }
 
 // set up selection category button properties

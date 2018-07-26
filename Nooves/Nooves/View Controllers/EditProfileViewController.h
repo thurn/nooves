@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "User.h"
 
 @interface EditProfileViewController : UIViewController
+
+@property(nonatomic) User *user;
+@property(nonatomic) NSMutableArray *usersArray;
 
 @end

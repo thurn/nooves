@@ -9,5 +9,7 @@
 @property (nonatomic) NSNumber *lat;
 @property (nonatomic) NSNumber *lng;
 @property (nonatomic) NSString *location;
+@property (nonatomic) UITextField *eventTitle;
+@property (nonatomic) UITextView *eventDescription;
 
 @end
