@@ -106,5 +106,27 @@
     FIRDatabaseReference *ref = [[[post.ref child:@"Posts"] child:[FIRAuth auth].currentUser.uid] childByAutoId];
     [ref setValue:@{@"Date":dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription, @"Latitude":post.activityLat, @"Longitude":post.activityLng}];
 }
++ (NSArray *)readPostsFromFIRDict:(NSDictionary *)postsDict{
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+    for(NSString *userKey in postsDict){
+        for(NSString *IDKey in postsDict[userKey]){
+            Post *posty = [[Post alloc]init];
+            posty.fireBaseID = IDKey;
+            posty.activityTitle = postsDict[userKey][IDKey][@"Title"];
+            posty.activityDescription = postsDict[userKey][IDKey][@"Description"];
+            posty.userID = userKey;
+            posty.activityLat = postsDict[userKey][IDKey][@"Latitude"];
+            posty.activityLng = postsDict[userKey][IDKey][@"Longitude"];
+            ActivityType type = [postsDict[userKey][IDKey][@"Activity Type"] integerValue];
+            posty.activityType = type;
+            NSInteger date = [postsDict[userKey][IDKey][@"Date"] integerValue];
+            NSDate *daty = [NSDate dateWithTimeIntervalSince1970:date];
+            posty.activityDateAndTime = daty;
+            [tempArray addObject:posty];
+        }
+    }
+    NSArray *postsArray = [NSArray arrayWithArray:tempArray];
+    return postsArray;
+}
 
 @end

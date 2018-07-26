@@ -14,5 +14,4 @@
 @property (strong, nonatomic) UILabel *label;
 @property (strong, nonatomic) NSArray *postsArray;
 @property (strong, nonatomic) NSArray *firArray;
-@property (strong, nonatomic) NSDictionary *postsDict;
 @end
