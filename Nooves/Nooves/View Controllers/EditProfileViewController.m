@@ -7,6 +7,7 @@
 //
 
 #import "EditProfileViewController.h"
+#import "ProfileViewController.h"
 
 @interface EditProfileViewController () <UITextViewDelegate>
 
@@ -25,6 +26,12 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self configureView];
+    if (!self.usersArray) {
+        self.usersArray = [[NSMutableArray alloc]init];
+    }
+    
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationItem.title = @"Edit Profile";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,7 +89,12 @@
 }
 
 - (void)didTapSaveProfile {
-    NSLog(@"saving profile");
+    
+    // save all the info to the profile page
+    self.user = [[User alloc]initProfileWithInfo:self.userName.text withBio:self.bioInfo.text];
+    [self.delegate didUpdateProfile:self.user];
+    [self.navigationController popViewControllerAnimated:YES];
+    NSLog(@"calling didUpdateProfile");
 }
 
 

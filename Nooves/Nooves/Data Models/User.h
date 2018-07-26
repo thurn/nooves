@@ -13,6 +13,6 @@
 @property(strong, nonatomic) NSString *name;
 @property(strong, nonatomic) NSString *biography;
 
-- (instancetype)initProfileWithInfo: (NSString *)userName withBio: (NSString *)bio;
+- (instancetype)initProfileWithInfo:(NSString *)userName withBio:(NSString *)bio;
 
 @end

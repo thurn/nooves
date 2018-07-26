@@ -27,15 +27,30 @@
     [super viewWillAppear:YES];
 }
 - (void)viewDidLoad {
+
+    [super viewDidLoad];
     FIRDatabaseReference * ref =[[FIRDatabase database] reference];
     FIRDatabaseHandle *handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot *snapshot) {
+        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
         self.postsDict = snapshot.value;
         for(NSString *key in self.postsDict){
-            
+            Post *posty = [[Post alloc]init];
+            posty.fireBaseID = key;
+            posty.activityTitle = self.postsDict[key][@"Title"];
+            posty.activityDescription = self.postsDict[key][@"Description"];
+            posty.userID = self.postsDict[key][@"User ID"];
+            posty.activityLat = self.postsDict[key][@"Latitude"];
+            posty.activityLng = self.postsDict[key][@"Longitude"];
+            ActivityType type = [self.postsDict[key][@"Activity Type"] integerValue];
+            posty.activityType = type;
+            NSInteger date = [self.postsDict[key][@"Date"] integerValue];
+            NSDate *daty = [NSDate dateWithTimeIntervalSince1970:date];
+            posty.activityDateAndTime = daty;
+            [tempArray addObject:posty];
         }
-        
+        self.firArray = [[NSArray alloc] init];
+        self.firArray = [NSArray arrayWithArray:tempArray];
     }];
-    [super viewDidLoad];
     // Do any additional setup after loading the view.
     if(!self.tempPostsArray){
         self.tempPostsArray = [[NSMutableArray alloc]init];
