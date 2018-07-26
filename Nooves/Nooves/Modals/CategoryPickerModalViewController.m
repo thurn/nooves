@@ -40,6 +40,10 @@
     [self.view addSubview:selectedCategory];
 }
 
+- (void)viewWillAppear: (BOOL)animated {
+    self.hidesBottomBarWhenPushed = YES;
+}
+
 // opens category picker view
 - (UIButton *)selectCategory{
     UIButton *selectCategory = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -52,7 +56,6 @@
 // passes post data and jumps back to composer view controller
 - (void)didTapSelectCategory{
     ComposeViewController *composer = [[ComposeViewController alloc] init];
-    composer.tempPostsArray = self.tempPostsArray;
     composer.date = self.date;
     composer.activityType = self.activityType;
     composer.lat = self.lat;

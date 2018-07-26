@@ -135,8 +135,7 @@
 }
 
 - (void)didTapCompose {
-    ComposeViewController *composer = [[ComposeViewController alloc] init];
-    composer.tempPostsArray = self.tempPostsArray;
+    ComposeViewController *composer = [[ComposeViewController alloc] init]; 
     [self.navigationController pushViewController:composer animated:YES];
 }
 
