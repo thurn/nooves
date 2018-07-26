@@ -1,11 +1,11 @@
 #import "ComposeViewController.h"
 #import "LocationCell.h"
-#import "LocationPickerPopUpViewController.h"
+#import "LocationPickerModalViewController.h"
 
 static NSString * const clientID = @"4FYRZKNIIFJQG25SUYJ55KINHUMVGWMYWFGQUFO5H4AQPQN2";
 static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ40WABD5VUP";
 
-@interface LocationPickerPopUpViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface LocationPickerModalViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) UISearchBar *searchBar;
@@ -14,7 +14,7 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
 
 @end
 
-@implementation LocationPickerPopUpViewController
+@implementation LocationPickerModalViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -94,7 +94,7 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     NSLog(@"%@", self.location);
     NSLog(@"%@, %@", self.lat, self.lng);
     
-    [self.delegate locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)self didPickLocationWithLatitude:self.lat longitude:self.lng location:self.location];
+    [self.delegate locationsPickerPopUpViewController:(LocationPickerModalViewController *)self didPickLocationWithLatitude:self.lat longitude:self.lng location:self.location];
     
     ComposeViewController *composer = [[ComposeViewController alloc] init];
     
@@ -141,7 +141,7 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     [task resume];
 }
 
-- (void)locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)controller didPickLocationWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude location:(NSString *)location {
+- (void)locationsPickerPopUpViewController:(LocationPickerModalViewController *)controller didPickLocationWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude location:(NSString *)location {
 }
 
 @end

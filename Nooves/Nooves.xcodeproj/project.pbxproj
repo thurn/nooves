@@ -10,7 +10,7 @@
 		0912E12A9BE72B7CBF8E847C /* libPods-NoovesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAC0FF4AA347803CC4295B8 /* libPods-NoovesTests.a */; };
 		0A6C937D2107A68800097F37 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C937C2107A68800097F37 /* LoginViewController.m */; };
 		0A6C93802107A6A000097F37 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C937F2107A6A000097F37 /* SignUpViewController.m */; };
-		0AADDFE121015B3C00C173CB /* DatePickerPopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AADDFE021015B3C00C173CB /* DatePickerPopUpViewController.m */; };
+		0AADDFE121015B3C00C173CB /* DatePickerModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AADDFE021015B3C00C173CB /* DatePickerModalViewController.m */; };
 		267B7E70BA2D0E758F0BFE59 /* libPods-NoovesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F11FDD6185EBC6FB54794B48 /* libPods-NoovesUITests.a */; };
 		327D408421093011002E8513 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327D408321093011002E8513 /* EditProfileViewController.m */; };
 		327D408721094087002E8513 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 327D408621094087002E8513 /* User.m */; };
@@ -21,13 +21,13 @@
 		32C735D6210684F0002F8689 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C735D5210684F0002F8689 /* FilterViewController.m */; };
 		32C7361D210842E3002F8689 /* FilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C7361C210842E3002F8689 /* FilterCell.m */; };
 		843CEC35ED5431BAB141B183 /* libPods-Nooves.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 490196513151D701FAFA5567 /* libPods-Nooves.a */; };
-		CE57768B21064FDA00C7637C /* LocationPickerPopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57768A21064FDA00C7637C /* LocationPickerPopUpViewController.m */; };
+		CE57768B21064FDA00C7637C /* LocationPickerModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57768A21064FDA00C7637C /* LocationPickerModalViewController.m */; };
 		CE57768F210654E400C7637C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE57768E210654E400C7637C /* CoreLocation.framework */; };
 		CE57769221068ADB00C7637C /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57769121068ADB00C7637C /* LocationCell.m */; };
 		CED91F6C2101305000E0E2F6 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F6A2101304F00E0E2F6 /* TabBarController.m */; };
 		CED91F6F2101306800E0E2F6 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F6D2101306800E0E2F6 /* ProfileViewController.m */; };
 		CED91F77210132DC00E0E2F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CED91F76210132DC00E0E2F6 /* GoogleService-Info.plist */; };
-		CED91F7A2101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F792101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.m */; };
+		CED91F7A2101A2DC00E0E2F6 /* CategoryPickerModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F792101A2DC00E0E2F6 /* CategoryPickerModalViewController.m */; };
 		CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBC020F95554004BD3A0 /* AppDelegate.m */; };
 		CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBC820F95555004BD3A0 /* Assets.xcassets */; };
 		CEDDCBCC20F95555004BD3A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */; };
@@ -59,8 +59,8 @@
 		0A6C937E2107A6A000097F37 /* SignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		0A6C937F2107A6A000097F37 /* SignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		0A6C93812107CE8C00097F37 /* Nooves.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nooves.entitlements; sourceTree = "<group>"; };
-		0AADDFDF21015B3C00C173CB /* DatePickerPopUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatePickerPopUpViewController.h; sourceTree = "<group>"; };
-		0AADDFE021015B3C00C173CB /* DatePickerPopUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatePickerPopUpViewController.m; sourceTree = "<group>"; };
+		0AADDFDF21015B3C00C173CB /* DatePickerModalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatePickerModalViewController.h; sourceTree = "<group>"; };
+		0AADDFE021015B3C00C173CB /* DatePickerModalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatePickerModalViewController.m; sourceTree = "<group>"; };
 		0D8B5D3B0AE946E5196167DD /* Pods-NoovesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesTests/Pods-NoovesTests.debug.xcconfig"; sourceTree = "<group>"; };
 		327D408221093011002E8513 /* EditProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
 		327D408321093011002E8513 /* EditProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
@@ -84,8 +84,8 @@
 		7EAC0FF4AA347803CC4295B8 /* libPods-NoovesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NoovesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC12C5A6DFAD290C2F56A434 /* Pods-Nooves.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nooves.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nooves/Pods-Nooves.debug.xcconfig"; sourceTree = "<group>"; };
 		AC46F66A7E379DBE1F02E0AC /* Pods-NoovesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesTests/Pods-NoovesTests.release.xcconfig"; sourceTree = "<group>"; };
-		CE57768921064FDA00C7637C /* LocationPickerPopUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationPickerPopUpViewController.h; sourceTree = "<group>"; };
-		CE57768A21064FDA00C7637C /* LocationPickerPopUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationPickerPopUpViewController.m; sourceTree = "<group>"; };
+		CE57768921064FDA00C7637C /* LocationPickerModalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationPickerModalViewController.h; sourceTree = "<group>"; };
+		CE57768A21064FDA00C7637C /* LocationPickerModalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationPickerModalViewController.m; sourceTree = "<group>"; };
 		CE57768E210654E400C7637C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CE57769021068ADB00C7637C /* LocationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationCell.h; sourceTree = "<group>"; };
 		CE57769121068ADB00C7637C /* LocationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationCell.m; sourceTree = "<group>"; };
@@ -94,8 +94,8 @@
 		CED91F6D2101306800E0E2F6 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		CED91F6E2101306800E0E2F6 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		CED91F76210132DC00E0E2F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		CED91F782101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryPickerPopUpViewController.h; sourceTree = "<group>"; };
-		CED91F792101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryPickerPopUpViewController.m; sourceTree = "<group>"; };
+		CED91F782101A2DC00E0E2F6 /* CategoryPickerModalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryPickerModalViewController.h; sourceTree = "<group>"; };
+		CED91F792101A2DC00E0E2F6 /* CategoryPickerModalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryPickerModalViewController.m; sourceTree = "<group>"; };
 		CEDDCBBC20F95554004BD3A0 /* Nooves.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nooves.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CEDDCBC020F95554004BD3A0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -162,14 +162,8 @@
 				CED91F6A2101304F00E0E2F6 /* TabBarController.m */,
 				327FA7C020FD2014009C55BA /* ComposeViewController.h */,
 				327FA7C120FD2014009C55BA /* ComposeViewController.m */,
-				0AADDFDF21015B3C00C173CB /* DatePickerPopUpViewController.h */,
-				0AADDFE021015B3C00C173CB /* DatePickerPopUpViewController.m */,
 				327FA7D520FEAA63009C55BA /* TimelineViewController.h */,
 				327FA7D620FEAA63009C55BA /* TimelineViewController.m */,
-				CED91F782101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.h */,
-				CED91F792101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.m */,
-				CE57768921064FDA00C7637C /* LocationPickerPopUpViewController.h */,
-				CE57768A21064FDA00C7637C /* LocationPickerPopUpViewController.m */,
 				32C735D4210684E7002F8689 /* FilterViewController.h */,
 				32C735D5210684F0002F8689 /* FilterViewController.m */,
 				0A6C937B2107A68800097F37 /* LoginViewController.h */,
@@ -219,6 +213,19 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		CE062CAC210A4E330045273E /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				0AADDFDF21015B3C00C173CB /* DatePickerModalViewController.h */,
+				0AADDFE021015B3C00C173CB /* DatePickerModalViewController.m */,
+				CED91F782101A2DC00E0E2F6 /* CategoryPickerModalViewController.h */,
+				CED91F792101A2DC00E0E2F6 /* CategoryPickerModalViewController.m */,
+				CE57768921064FDA00C7637C /* LocationPickerModalViewController.h */,
+				CE57768A21064FDA00C7637C /* LocationPickerModalViewController.m */,
+			);
+			path = Modals;
+			sourceTree = "<group>";
+		};
 		CEDDCBB320F95554004BD3A0 = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +253,7 @@
 			children = (
 				0A6C93812107CE8C00097F37 /* Nooves.entitlements */,
 				0A9C2ADB20FEA9D60044A972 /* Data Models */,
+				CE062CAC210A4E330045273E /* Modals */,
 				327FA7D220FE5736009C55BA /* Views */,
 				327FA7D120FE56F7009C55BA /* View Controllers */,
 				CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */,
@@ -492,7 +500,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEDDCBCF20F95555004BD3A0 /* main.m in Sources */,
-				0AADDFE121015B3C00C173CB /* DatePickerPopUpViewController.m in Sources */,
+				0AADDFE121015B3C00C173CB /* DatePickerModalViewController.m in Sources */,
 				CE57769221068ADB00C7637C /* LocationCell.m in Sources */,
 				327D408721094087002E8513 /* User.m in Sources */,
 				CED91F6F2101306800E0E2F6 /* ProfileViewController.m in Sources */,
@@ -500,10 +508,10 @@
 				0A6C93802107A6A000097F37 /* SignUpViewController.m in Sources */,
 				327FA7CE20FD2858009C55BA /* Post.m in Sources */,
 				327D408421093011002E8513 /* EditProfileViewController.m in Sources */,
-				CED91F7A2101A2DC00E0E2F6 /* CategoryPickerPopUpViewController.m in Sources */,
+				CED91F7A2101A2DC00E0E2F6 /* CategoryPickerModalViewController.m in Sources */,
 				327FA7C520FD273E009C55BA /* PostCell.m in Sources */,
 				CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */,
-				CE57768B21064FDA00C7637C /* LocationPickerPopUpViewController.m in Sources */,
+				CE57768B21064FDA00C7637C /* LocationPickerModalViewController.m in Sources */,
 				CED91F6C2101305000E0E2F6 /* TabBarController.m in Sources */,
 				327FA7C220FD2014009C55BA /* ComposeViewController.m in Sources */,
 				327FA7D720FEAA63009C55BA /* TimelineViewController.m in Sources */,
