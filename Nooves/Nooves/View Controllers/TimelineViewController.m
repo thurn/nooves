@@ -136,7 +136,7 @@
 
 - (void)didTapCompose {
     ComposeViewController *composer = [[ComposeViewController alloc] init];
-    composer.tempPostsArray = self.tempPostsArray;
+
     [self.navigationController pushViewController:composer animated:YES];
 }
 
