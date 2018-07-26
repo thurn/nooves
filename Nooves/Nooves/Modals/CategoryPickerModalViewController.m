@@ -1,7 +1,7 @@
-#import "CategoryPickerPopUpViewController.h"
+#import "CategoryPickerModalViewController.h"
 #import "ComposeViewController.h"
 
-@interface CategoryPickerPopUpViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface CategoryPickerModalViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic) NSArray *categories;
 @property (nonatomic) UIPickerView *pickerView;
@@ -9,7 +9,7 @@
 
 @end
 
-@implementation CategoryPickerPopUpViewController
+@implementation CategoryPickerModalViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 #import "Post.h"
-#import "DatePickerPopUpViewController.h"
+#import "DatePickerModalViewController.h"
 
 @interface ComposeViewController : UIViewController
 

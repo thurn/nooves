@@ -11,6 +11,7 @@
 @implementation User
 
 - (instancetype)initProfileWithInfo: (NSString *)userName withBio: (NSString *)bio {
+    return nil;
 }
 
 @end
