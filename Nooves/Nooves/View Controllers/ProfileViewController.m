@@ -61,8 +61,7 @@
     [self.view addSubview:self.profilePicture];
     [self.view addSubview:self.nameLabel];
     [self.view addSubview:self.bioLabel];
-    [self.view addSubview:self.editProfile];
-    
+    [self.view addSubview:self.editProfile];    
 }
 
 - (void)didTapEditProfile {
@@ -70,20 +69,11 @@
     [self.navigationController pushViewController:newProfile animated:YES];
 }
 
-- (void)initProfileWithUser:(User *)newUser {
-    self.user = newUser;
-    self.nameLabel.text = newUser.name;
-    self.bioLabel.text = newUser.biography;
-    NSLog(@"new user: %@", newUser);
-    NSLog(@"profile page name: %@", self.nameLabel.text);
-    NSLog(@"profile page bio: %@", self.bioLabel.text);
-}
-
 - (void)didUpdateProfile:(User *)user {
     self.user = user;
     self.nameLabel.text = user.name;
     self.bioLabel.text = user.biography;
-    [self.view reloadInputViews];
+    //[self.view reloadInputViews];
     NSLog(@"profile page name: %@", self.nameLabel.text);
     NSLog(@"profile page bio: %@", self.bioLabel.text);
     NSLog(@"didupdateProfile was called");

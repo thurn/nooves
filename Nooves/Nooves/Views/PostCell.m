@@ -26,42 +26,41 @@
 }
 
 - (void)configurePost: (Post *) post {
-    
-    // set up the date field
-    self.dateField = [[UILabel alloc]init];
-    self.dateField.hidden = NO;
-    [self.dateField sizeToFit];
-    [self.contentView addSubview:self.dateField];
-    [self.dateField autoPinEdgeToSuperviewMargin:ALEdgeLeft];
-    [self.dateField autoPinEdgeToSuperviewMargin:ALEdgeTop];
-    
-    //self up the event title field
-    self.eventTitleField = [[UILabel alloc]init];
-    self.eventTitleField.hidden = NO;
-    [self.eventTitleField sizeToFit];
-    [self.contentView addSubview:self.eventTitleField];
-    [self.eventTitleField autoPinEdgeToSuperviewMargin:ALEdgeTop];
-    [self.eventTitleField autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.dateField withOffset:15.0f];
-    
-    // set up the activity description field
-    self.activityDescriptionField = [[UILabel alloc]init];
-    self.activityDescriptionField.hidden = NO;
-    [self.activityDescriptionField sizeToFit];
-    [self.contentView addSubview:self.activityDescriptionField];
-    [self.activityDescriptionField autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.eventTitleField withOffset:10.0f];
-    [self.activityDescriptionField autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.dateField withOffset:5.0f];
-    [self.activityDescriptionField autoPinEdgeToSuperviewMargin:ALEdgeBottom];
-    
-    // set up activityType
-    self.activityTypeField = [[UILabel alloc]init];
-    self.activityTypeField.hidden = NO;
-    [self.activityTypeField sizeToFit];
-    [self.contentView addSubview:self.activityTypeField];
-    [self.activityTypeField autoPinEdgeToSuperviewMargin:ALEdgeTop];
-    [self.activityTypeField autoPinEdgeToSuperviewMargin:ALEdgeRight];
-    
     self.post = post;
     if(self.post){
+        // set up the date field
+        self.dateField = [[UILabel alloc]init];
+        self.dateField.hidden = NO;
+        [self.dateField sizeToFit];
+        [self.contentView addSubview:self.dateField];
+        [self.dateField autoPinEdgeToSuperviewMargin:ALEdgeLeft];
+        [self.dateField autoPinEdgeToSuperviewMargin:ALEdgeTop];
+        
+        //self up the event title field
+        self.eventTitleField = [[UILabel alloc]init];
+        self.eventTitleField.hidden = NO;
+        [self.eventTitleField sizeToFit];
+        [self.contentView addSubview:self.eventTitleField];
+        [self.eventTitleField autoPinEdgeToSuperviewMargin:ALEdgeTop];
+        [self.eventTitleField autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.dateField withOffset:15.0f];
+        
+        // set up the activity description field
+        self.activityDescriptionField = [[UILabel alloc]init];
+        self.activityDescriptionField.hidden = NO;
+        [self.activityDescriptionField sizeToFit];
+        [self.contentView addSubview:self.activityDescriptionField];
+        [self.activityDescriptionField autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.eventTitleField withOffset:10.0f];
+        [self.activityDescriptionField autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:self.dateField withOffset:5.0f];
+        [self.activityDescriptionField autoPinEdgeToSuperviewMargin:ALEdgeBottom];
+        
+        // set up activityType
+        self.activityTypeField = [[UILabel alloc]init];
+        self.activityTypeField.hidden = NO;
+        [self.activityTypeField sizeToFit];
+        [self.contentView addSubview:self.activityTypeField];
+        [self.activityTypeField autoPinEdgeToSuperviewMargin:ALEdgeTop];
+        [self.activityTypeField autoPinEdgeToSuperviewMargin:ALEdgeRight];
+        
         self.activityDescriptionField.text = post.activityDescription;
         self.activityTypeField.text = [Post activityTypeToString:post.activityType];
         self.eventTitleField.text = post.activityTitle;
