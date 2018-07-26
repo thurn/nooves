@@ -7,6 +7,8 @@
 @property(strong, nonatomic) UIImageView *profilePicture;
 @property(strong, nonatomic) UILabel *nameLabel;
 @property(strong, nonatomic) UILabel *bioLabel;
+@property(strong, nonatomic) UILabel *ageLabel;
+@property(strong, nonatomic) UILabel *contactNumberLabel;
 @property(strong, nonatomic) UIButton *editProfile;
 @property(nonatomic) User *user;
 
@@ -45,13 +47,23 @@
     self.nameLabel.text = @"Name";
     [self.nameLabel sizeToFit];
     
+    //set up the age field
+    self.ageLabel = [[UILabel alloc]initWithFrame:CGRectMake(150, 130, 30, 30)];
+    self.ageLabel.text = @"Age";
+    [self.ageLabel sizeToFit];
+    
+    // set up the phone number field
+    self.contactNumberLabel = [[UILabel alloc]initWithFrame:CGRectMake(150, 170, 30, 30)];
+    self.contactNumberLabel.text = @"Phone number";
+    [self.contactNumberLabel sizeToFit];
+    
     // set up the bio field
-    self.bioLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 150, 200, 50)];
+    self.bioLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 220, 200, 50)];
     self.bioLabel.text = @"Bio";
     [self.bioLabel sizeToFit];
     
     // set up the edit profile button
-    self.editProfile = [[UIButton alloc]initWithFrame:CGRectMake(150, 200, 30, 30)];
+    self.editProfile = [[UIButton alloc]initWithFrame:CGRectMake(150, 350, 30, 30)];
     [self.editProfile setTitle:@"Edit Profile" forState:UIControlStateNormal];
     [self.editProfile setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [self.editProfile sizeToFit];
@@ -60,6 +72,8 @@
     // add all subviews to the view
     [self.view addSubview:self.profilePicture];
     [self.view addSubview:self.nameLabel];
+    [self.view addSubview:self.ageLabel];
+    [self.view addSubview:self.contactNumberLabel];
     [self.view addSubview:self.bioLabel];
     [self.view addSubview:self.editProfile];    
 }
@@ -70,10 +84,20 @@
 }
 
 - (void)didUpdateProfile:(User *)user {
+    
+    //convert age to a string
+    NSNumber *userAge = user.age;
+    NSString *ageInString = [userAge stringValue];
+    
+    //convert phone number to string
+    NSNumber *userNumber = user.phoneNumber;
+    NSString *phoneNumberInString = [userNumber stringValue];
+    
     self.user = user;
     self.nameLabel.text = user.name;
+    self.ageLabel.text = ageInString;
+    self.contactNumberLabel.text = phoneNumberInString;
     self.bioLabel.text = user.biography;
-    //[self.view reloadInputViews];
     NSLog(@"profile page name: %@", self.nameLabel.text);
     NSLog(@"profile page bio: %@", self.bioLabel.text);
     NSLog(@"didupdateProfile was called");

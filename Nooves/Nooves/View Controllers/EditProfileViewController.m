@@ -14,6 +14,8 @@
 @property(strong, nonatomic) UIImageView *profilePic;
 @property(strong, nonatomic) UITextField *userName;
 @property(strong, nonatomic) UITextView *bioInfo;
+@property(strong, nonatomic) UITextField *age;
+@property(strong, nonatomic) UITextField *userPhoneNumber;
 @property(strong, nonatomic) UIBarButtonItem *saveProfile;
 
 @end
@@ -72,6 +74,18 @@
     [self.userName sizeToFit];
     self.userName.textColor = [UIColor grayColor];
     
+    //set up the age field
+    self.age = [[UITextField alloc]initWithFrame:CGRectMake(180, 80,  100, 100)];
+    self.age.placeholder = @"Enter age";
+    [self.age sizeToFit];
+    self.age.textColor = [UIColor grayColor];
+    
+    // set up the phone number field
+    self.userPhoneNumber = [[UITextField alloc]initWithFrame:CGRectMake(180, 150, 100, 100)];
+    self.userPhoneNumber.placeholder = @"Enter phone number";
+    [self.userPhoneNumber sizeToFit];
+    self.userPhoneNumber.textColor = [UIColor grayColor];
+    
     // set up the bio field
     self.bioInfo = [[UITextView alloc]initWithFrame:CGRectMake(10, 230, 500, 100)];
     self.bioInfo.delegate = self;
@@ -89,6 +103,8 @@
     // add all the subviews to the view
     [self.view addSubview:self.profilePic];
     [self.view addSubview:self.userName];
+    [self.view addSubview:self.age];
+    [self.view addSubview:self.userPhoneNumber];
     [self.view addSubview:self.bioInfo];
 }
 
@@ -110,8 +126,14 @@
 
 - (void)didTapSaveProfile {
     
+    // convert 'age' and 'phone number' to NSNumber
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *ageNumber = [formatter numberFromString:self.age.text];
+    NSNumber *phoneNum = [formatter numberFromString:self.userPhoneNumber.text];
+    
     // save all the info to the profile page
-    self.user = [[User alloc]initProfileWithInfo:self.userName.text withBio:self.bioInfo.text];
+    self.user = [[User alloc]initProfileWithInfo:self.userName.text withBio:self.bioInfo.text withAge:ageNumber withNumber:phoneNum];
     [self.delegate didUpdateProfile:self.user];
     [self.navigationController popViewControllerAnimated:YES];
     NSLog(@"calling didUpdateProfile");
