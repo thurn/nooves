@@ -47,16 +47,12 @@
     // the leaf controllers
     ProfileViewController* profileViewController = [[ProfileViewController alloc] init];
     LoginViewController *loginController = [[LoginViewController alloc] init];
-    ComposeViewController *composeController = [[ComposeViewController alloc] init];
     
     UINavigationController *timelineNavCont = [[UINavigationController alloc] initWithRootViewController:loginController];
     UINavigationController *profileNavCont = [[UINavigationController alloc] initWithRootViewController:profileViewController];
-    UINavigationController *composeNavCont = [[UINavigationController alloc] initWithRootViewController:composeController];
     
-    //    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    //    self.window.backgroundColor = [UIColor whiteColor];
-    TabBarController *baseController = [[TabBarController alloc] init];
-    baseController.viewControllers = @[timelineNavCont, profileNavCont];
+    TabBarController *tabBarController = [[TabBarController alloc] init];
+    tabBarController.viewControllers = @[timelineNavCont, profileNavCont];
     
     UIImage *feedImage = [UIImage imageNamed:@"feed_tab"];
     UIImage *profileImage = [UIImage imageNamed:@"profile_tab"];
@@ -64,9 +60,9 @@
     loginController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Home" image:feedImage tag:0];
     profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Profile" image:profileImage tag:1];
     
-    self.window.rootViewController = baseController;
-    
+    self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
+    
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
     return YES;

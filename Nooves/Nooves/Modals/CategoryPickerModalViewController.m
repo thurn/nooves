@@ -14,6 +14,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBarHidden = NO;
 
     self.categories = @[@"Outdoors", @"Shopping", @"Partying", @"Eating", @"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
     
@@ -38,6 +39,8 @@
     [self.view addSubview:self.pickerView];
     [self.view addSubview:self.categoryLabel];
     [self.view addSubview:selectedCategory];
+    
+    [self goBack];
 }
 
 - (void)viewWillAppear: (BOOL)animated {
@@ -61,7 +64,8 @@
     composer.lat = self.lat;
     composer.lng = self.lng;
     composer.location = self.location;
-    [self.navigationController pushViewController:composer animated:YES];
+    // [self.navigationController pushViewController:composer animated:YES];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 // returns the picker view column size
@@ -85,6 +89,20 @@ numberOfRowsInComponent:(NSInteger)component {
     self.categoryLabel.text = self.categories[row];
     ActivityType type = [Post stringToActivityType:self.categoryLabel.text];
     self.activityType = type;
+}
+
+- (UIBarButtonItem *)goBack {
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon"]
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(didTapBack)];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
+    return backButton;
+}
+
+- (void)didTapBack {
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {

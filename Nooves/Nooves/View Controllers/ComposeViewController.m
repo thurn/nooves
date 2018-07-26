@@ -134,7 +134,9 @@
     datePicker.lat = self.lat;
     datePicker.lng = self.lng;
     datePicker.location = self.location;
-    [self.navigationController pushViewController:datePicker animated:YES];
+    
+    UINavigationController *navCont = [[UINavigationController alloc] initWithRootViewController:datePicker];
+    [self presentViewController:navCont animated:YES completion:nil];
 }
 
 // set up select location properties
@@ -156,7 +158,9 @@
     locationPicker.lat = self.lat;
     locationPicker.lng = self.lng;
     locationPicker.location = self.location;
-    [self.navigationController pushViewController:locationPicker animated:YES];
+    
+    UINavigationController *navCont = [[UINavigationController alloc] initWithRootViewController:locationPicker];
+    [self presentViewController:navCont animated:YES completion:nil];
 }
 
 // set up selection category button properties
@@ -179,8 +183,9 @@
     categoryPicker.lat = self.lat;
     categoryPicker.lng = self.lng;
     categoryPicker.location = self.location;
-    [self.navigationController pushViewController:categoryPicker animated:YES];
-    // [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:3] animated:YES];
+    
+    UINavigationController *navCont = [[UINavigationController alloc] initWithRootViewController:categoryPicker];
+    [self presentViewController:navCont animated:YES completion:nil];
 }
 
 // set up back button properties

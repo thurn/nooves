@@ -142,8 +142,9 @@
 }
 
 - (void)didTapCompose {
-    ComposeViewController *composer = [[ComposeViewController alloc] init];
-    [self.navigationController pushViewController:composer animated:YES];
+    ComposeViewController *composeViewCont = [[ComposeViewController alloc] init];
+    UINavigationController *composeNavCont = [[UINavigationController alloc] initWithRootViewController:composeViewCont];
+    [self.navigationController presentViewController:composeNavCont animated:YES completion:nil];
 }
 
 - (void)didTapFilter {
