@@ -1,8 +1,8 @@
 #import "AppDelegate.h"
-#import "CategoryPickerPopUpViewController.h"
+#import "CategoryPickerModalViewController.h"
 #import "ComposeViewController.h"
-#import "DatePickerPopUpViewController.h"
-#import "LocationPickerPopUpViewController.h"
+#import "DatePickerModalViewController.h"
+#import "LocationPickerModalViewController.h"
 #import "PureLayout/PureLayout.h"
 #import "TabBarController.h"
 #import "TimelineViewController.h"
@@ -132,7 +132,7 @@
 
 // pass post data and jump to date picker view
 - (void)didSelectDate {
-    DatePickerPopUpViewController *datePicker = [DatePickerPopUpViewController new];
+    DatePickerModalViewController *datePicker = [DatePickerModalViewController new];
     datePicker.tempPostsArray = self.tempPostsArray;
     datePicker.date = self.date;
     datePicker.activityType = self.activityType;
@@ -156,7 +156,7 @@
 
 // pass post data and jump to location picker view
 - (void)didSelectLocation {
-    LocationPickerPopUpViewController *locationPicker = [LocationPickerPopUpViewController new];
+    LocationPickerModalViewController *locationPicker = [LocationPickerModalViewController new];
     locationPicker.tempPostsArray = self.tempPostsArray;
     locationPicker.date = self.date;
     locationPicker.activityType = self.activityType;
@@ -181,7 +181,7 @@
 
 // pass post data and jump to category picker view
 - (void)didSelectCategory {
-    CategoryPickerPopUpViewController *categoryPicker = [CategoryPickerPopUpViewController new];
+    CategoryPickerModalViewController *categoryPicker = [CategoryPickerModalViewController new];
     categoryPicker.tempPostsArray = self.tempPostsArray;
     categoryPicker.date = self.date;
     categoryPicker.activityType = self.activityType;

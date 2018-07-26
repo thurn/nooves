@@ -10,6 +10,7 @@
 
 @implementation User
 
+
 - (instancetype)initProfileWithInfo: (NSString *)userName withBio: (NSString *)bio {
     self = [super init];
     if(self){

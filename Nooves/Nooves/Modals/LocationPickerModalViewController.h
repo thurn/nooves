@@ -2,18 +2,18 @@
 #import "Post.h"
 #import <UIKit/UIKit.h>
 
-@class LocationPickerPopUpViewController;
+@class LocationPickerModalViewController;
 
 @protocol LocationPickerPopUpViewControllerDelegate
 
-- (void)locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)controller
+- (void)locationsPickerPopUpViewController:(LocationPickerModalViewController *)controller
                didPickLocationWithLatitude:(NSNumber *)latitude
                                  longitude:(NSNumber *)longitude
                                   location:(NSString *)location;
 
 @end
 
-@interface LocationPickerPopUpViewController : UIViewController <LocationPickerPopUpViewControllerDelegate>
+@interface LocationPickerModalViewController : UIViewController <LocationPickerPopUpViewControllerDelegate>
 
 @property (weak, nonatomic) id<LocationPickerPopUpViewControllerDelegate> delegate;
 

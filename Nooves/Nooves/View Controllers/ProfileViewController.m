@@ -1,9 +1,8 @@
 #import "EditProfileViewController.h"
-#import "User.h"
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
 
-@interface ProfileViewController ()
+@interface ProfileViewController () <editProfileDelegate>
 
 @property(strong, nonatomic) UIImageView *profilePicture;
 @property(strong, nonatomic) UILabel *nameLabel;
@@ -70,6 +69,26 @@
     EditProfileViewController *newProfile = [[EditProfileViewController alloc]init];
     [self.navigationController pushViewController:newProfile animated:YES];
 }
+
+- (void)initProfileWithUser:(User *)newUser {
+    self.user = newUser;
+    self.nameLabel.text = newUser.name;
+    self.bioLabel.text = newUser.biography;
+    NSLog(@"new user: %@", newUser);
+    NSLog(@"profile page name: %@", self.nameLabel.text);
+    NSLog(@"profile page bio: %@", self.bioLabel.text);
+}
+
+- (void)didUpdateProfile:(User *)user {
+    self.user = user;
+    self.nameLabel.text = user.name;
+    self.bioLabel.text = user.biography;
+    [self.view reloadInputViews];
+    NSLog(@"profile page name: %@", self.nameLabel.text);
+    NSLog(@"profile page bio: %@", self.bioLabel.text);
+    NSLog(@"didupdateProfile was called");
+}
+
 
 
 @end

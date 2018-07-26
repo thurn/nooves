@@ -1,11 +1,11 @@
 #import "ComposeViewController.h"
-#import "DatePickerPopUpViewController.h"
+#import "DatePickerModalViewController.h"
 
-@interface DatePickerPopUpViewController()
+@interface DatePickerModalViewController()
 
 @end
 
-@implementation DatePickerPopUpViewController
+@implementation DatePickerModalViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
