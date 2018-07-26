@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 @interface User : NSObject
 
 @property(strong, nonatomic) NSString *name;
 @property(strong, nonatomic) NSString *biography;
-
+@property(strong, nonatomic) UIImage *profilePic;
 - (instancetype)initProfileWithInfo: (NSString *)userName withBio: (NSString *)bio;
 
 
