@@ -67,26 +67,6 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     [self.searchBar resignFirstResponder];
 }
 
-// opens category picker view
-- (UIButton *)selectLocation{
-    UIButton *selectLocation = [UIButton buttonWithType:UIButtonTypeSystem];
-    [selectLocation setTitle:@"Select location" forState:UIControlStateNormal];
-    [selectLocation addTarget:self action:@selector(didTapSelectLocation) forControlEvents:UIControlEventTouchUpInside];
-    [selectLocation sizeToFit];
-    return selectLocation;
-}
-
-// passes post data and jumps back to composer view controller
-- (void)didTapSelectLocation{
-    ComposeViewController *composer = [[ComposeViewController alloc] init];
-    composer.tempPostsArray = self.tempPostsArray;
-    composer.date = self.date;
-    composer.activityType = self.activityType;
-    composer.lat = self.lat;
-    composer.lng = self.lng;
-    [self.navigationController pushViewController:composer animated:YES];
-}
-
 // returns number of results from search
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.results.count;
@@ -114,10 +94,13 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     NSLog(@"%@", self.location);
     NSLog(@"%@, %@", self.lat, self.lng);
     
-    // [self.delegate locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)self didPickLocationWithLatitude:self.lat longitude:self.lng];
     [self.delegate locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)self didPickLocationWithLatitude:self.lat longitude:self.lng location:self.location];
     
     ComposeViewController *composer = [[ComposeViewController alloc] init];
+    
+    composer.tempPostsArray = self.tempPostsArray;
+    composer.date = self.date;
+    composer.activityType = self.activityType;
     composer.lat = self.lat;
     composer.lng = self.lng;
     composer.location = self.location;

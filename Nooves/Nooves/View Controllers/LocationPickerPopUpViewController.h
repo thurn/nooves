@@ -6,9 +6,6 @@
 
 @protocol LocationPickerPopUpViewControllerDelegate
 
-//- (void)locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)controller
-//               didPickLocationWithLatitude:(NSNumber *)latitude
-//                                 longitude:(NSNumber *)longitude;
 - (void)locationsPickerPopUpViewController:(LocationPickerPopUpViewController *)controller
                didPickLocationWithLatitude:(NSNumber *)latitude
                                  longitude:(NSNumber *)longitude
