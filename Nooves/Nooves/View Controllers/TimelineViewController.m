@@ -48,23 +48,22 @@
             posty.activityDateAndTime = daty;
             [tempArray addObject:posty];
         }
-        self.firArray = [[NSArray alloc] init];
         self.firArray = [NSArray arrayWithArray:tempArray];
+        [tableView reloadData];
     }];
+     tableView = [self configureTableView];
     // Do any additional setup after loading the view.
     if(!self.tempPostsArray){
         self.tempPostsArray = [[NSMutableArray alloc]init];
     }
-    
-    tableView = [self configureTableView];
 
+    
     
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.rowHeight = UITableViewAutomaticDimension;
     tableView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:tableView];
-    [tableView reloadData];
     
     self.navigationItem.title = @"Home";
     [self writeNewPost];
@@ -123,15 +122,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PostCell *cell =[tableView dequeueReusableCellWithIdentifier:@"postCellIdentifier" forIndexPath:indexPath];
-    Post *newPost =self.tempPostsArray[indexPath.row];
+    Post *newPost =self.firArray[indexPath.row];
     [cell configurePost:newPost];
     
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(self.tempPostsArray){
-        return self.tempPostsArray.count;
+    if(self.firArray){
+        return self.firArray.count;
     }
     return 30;
 }
