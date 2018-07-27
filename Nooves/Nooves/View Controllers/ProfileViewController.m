@@ -24,6 +24,10 @@
     // set the database reference
     FIRDatabaseReference *reference = [[FIRDatabase database]reference];
     FIRDatabaseHandle *databaseHandle = [[reference child:@"Users"]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        self.usersDictionary = snapshot.value;
+        for(NSString *userID in self.usersDictionary)   {
+            User *user = [[User alloc]init];
+        }
     }];
     
     self.view.backgroundColor = [UIColor whiteColor];

@@ -20,6 +20,8 @@
 @property(strong, nonatomic) NSNumber *phoneNumber;
 @property(strong, nonatomic) UIImage *profilePic;
 @property(strong, nonatomic) NSString *profilePicURL;
+@property(strong, nonatomic) NSString *userID;
+
 - (instancetype)initProfileWithInfo: (NSString *)userName
                             withBio: (NSString *)bio
                             withAge: (NSNumber *)age
