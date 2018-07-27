@@ -12,26 +12,20 @@
 @implementation User
 
 
-- (instancetype)initProfileWithInfo: (NSString *)userName
+- (void)addToProfileWithInfo: (NSString *)userName
                             withBio: (NSString *)bio
                             withAge: (NSNumber *)age
-                         withNumber: (NSNumber *)number{
-    self = [super init];
-    if(self){
+                          withNumber: (NSNumber *)number {
         self.name = userName;
         self.biography = bio;
         self.age = age;
         self.phoneNumber = number;
-    }
-    return self;
 }
 
 + (void) saveUserProfile:(User *)user {
-    //FIRStorageReference *storageRef = [[FIRStorage storage]reference];
-    
     FIRDatabaseReference *ref = [[FIRDatabase database] reference];
     FIRDatabaseReference *reference = [[ref child:@"Users"]child:[FIRAuth auth].currentUser.uid];
-    [reference setValue:@{@"Name":user.name,@"Age":user.age, @"Bio":user.biography, @"Phone number":user.phoneNumber}];
+    [reference setValue:@{@"Name":user.name,@"Age":user.age, @"Bio":user.biography, @"Phone number":user.phoneNumber, @"ProfilePicURL":user.profilePicURL}];
 }
 
 @end
