@@ -155,7 +155,11 @@
     NSNumber *phoneNum = [formatter numberFromString:self.userPhoneNumber.text];
     
     // save all the info to the profile page
-    self.user = [[User alloc]initProfileWithInfo:self.userName.text withBio:self.bioInfo.text withAge:ageNumber withNumber:phoneNum];
+//    self.user = [[User alloc]initProfileWithInfo:self.userName.text withBio:self.bioInfo.text withAge:ageNumber withNumber:phoneNum];
+    if(!self.user){
+        self.user = [[User alloc] init];
+    }
+    [self.user addToProfileWithInfo:self.userName.text withBio:self.bioInfo.text withAge:ageNumber withNumber:phoneNum];
     [self.delegate didUpdateProfile:self.user];
     [self.navigationController popViewControllerAnimated:YES];
     
