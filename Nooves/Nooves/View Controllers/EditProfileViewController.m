@@ -8,7 +8,8 @@
 
 #import "EditProfileViewController.h"
 #import "ProfileViewController.h"
-
+#import <FIRStorage.h>
+#import "User.h"
 @interface EditProfileViewController () <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property(strong, nonatomic) UIImageView *profilePic;
@@ -17,7 +18,7 @@
 @property(strong, nonatomic) UITextField *age;
 @property(strong, nonatomic) UITextField *userPhoneNumber;
 @property(strong, nonatomic) UIBarButtonItem *saveProfile;
-
+@property(strong, nonatomic) User *myUser;
 @end
 
 @implementation EditProfileViewController
@@ -54,6 +55,27 @@
     if(info[@"UIImagePickerControllerEditedImage"]){
         UIImage *profilePic = info[@"UIImagePickerControllerEditedImage"];
         self.profilePic.image = profilePic;
+        NSData *picRef = UIImagePNGRepresentation(profilePic);
+        FIRStorageReference *ref = [[[FIRStorage storage] reference] child:[FIRAuth auth].currentUser.uid];
+        [ref putData:picRef metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
+            if(error){
+                NSLog(@"%@", error);
+            }
+            else{
+                NSLog(@"%@", metadata);
+                [ref downloadURLWithCompletion:^(NSURL * _Nullable URL, NSError * _Nullable error) {
+                    if (error){
+                        NSLog(@"%@", error);
+                    }
+                    else {
+                        if(!self.user){
+                            self.user = [[User alloc] init];
+                        }
+                        self.user.profilePicURL = [URL absoluteString];
+                    }
+                }];
+            }
+        }];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }
