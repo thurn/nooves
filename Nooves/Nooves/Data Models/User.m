@@ -26,12 +26,12 @@
     return self;
 }
 
-/*+ (void) saveUserProfile:(User *)user {
-    FIRStorageReference *storageRef = [[FIRStorage storage]reference];
++ (void) saveUserProfile:(User *)user {
+    //FIRStorageReference *storageRef = [[FIRStorage storage]reference];
     
     FIRDatabaseReference *ref = [[FIRDatabase database] reference];
     FIRDatabaseReference *reference = [[ref child:@"Users"]child:[FIRAuth auth].currentUser.uid];
-    [reference setValue:@{@"Name":user.name, @"Bio":user.biography}];
+    [reference setValue:@{@"Name":user.name,@"Age":user.age, @"Bio":user.biography, @"Phone number":user.phoneNumber}];
 }
-*/
+
 @end

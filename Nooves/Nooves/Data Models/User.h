@@ -25,6 +25,6 @@
                             withAge: (NSNumber *)age
                             withNumber: (NSNumber *)number;
 
-//+ (void) saveUserProfile:(User *)user;
++ (void) saveUserProfile:(User *)user;
 
 @end

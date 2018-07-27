@@ -136,6 +136,8 @@
     self.user = [[User alloc]initProfileWithInfo:self.userName.text withBio:self.bioInfo.text withAge:ageNumber withNumber:phoneNum];
     [self.delegate didUpdateProfile:self.user];
     [self.navigationController popViewControllerAnimated:YES];
+    
+    [User saveUserProfile:self.user];
     NSLog(@"calling didUpdateProfile");
 }
 
