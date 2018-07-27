@@ -11,6 +11,7 @@
 @property(strong, nonatomic) UILabel *contactNumberLabel;
 @property(strong, nonatomic) UIButton *editProfile;
 @property(nonatomic) User *user;
+@property(strong, nonatomic) NSDictionary *usersDictionary;
 
 @end
 
@@ -19,6 +20,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // set the database reference
+    FIRDatabaseReference *reference = [[FIRDatabase database]reference];
+    FIRDatabaseHandle *databaseHandle = [[reference child:@"Users"]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    }];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     [self configureProfile];
     
