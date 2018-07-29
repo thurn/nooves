@@ -4,18 +4,18 @@
 
 @class LocationPickerModalViewController;
 
-@protocol LocationPickerPopUpViewControllerDelegate
+@protocol LocationPickerDelegate
 
-- (void)locationsPickerPopUpViewController:(LocationPickerModalViewController *)controller
+- (void)locationsPickerModalViewController:(LocationPickerModalViewController *)controller
                didPickLocationWithLatitude:(NSNumber *)latitude
                                  longitude:(NSNumber *)longitude
                                   location:(NSString *)location;
 
 @end
 
-@interface LocationPickerModalViewController : UIViewController <LocationPickerPopUpViewControllerDelegate>
+@interface LocationPickerModalViewController : UIViewController <LocationPickerDelegate>
 
-@property (weak, nonatomic) id<LocationPickerPopUpViewControllerDelegate> delegate;
+@property (weak, nonatomic) id<LocationPickerDelegate>delegate;
 
 @property (nonatomic) NSDate *date;
 @property (nonatomic) ActivityType activityType;

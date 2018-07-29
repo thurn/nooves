@@ -12,6 +12,5 @@
 @property (nonatomic) NSString *location;
 @property (nonatomic) UITextField *eventTitle;
 @property (nonatomic) UITextView *eventDescription;
-// @property (nonatomic) DatePickerPopUpViewController *datePicker;
 
 @end

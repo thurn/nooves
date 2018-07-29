@@ -24,6 +24,10 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     [self configureTableView];
     [self.view addSubview:self.tableView];
     
+    self.lat = [[NSNumber alloc] init];
+    self.lng = [[NSNumber alloc] init];
+    self.location = [[NSString alloc] init];
+    
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(-5.0, 0.0, 320.0, 44.0)];
     self.searchBar.delegate = self;
     self.searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -47,7 +51,7 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     CGFloat y = 0;
     CGFloat width = self.view.frame.size.width;
     CGFloat height = self.view.frame.size.height;
-    CGRect tableViewFrame = CGRectMake( x, y, width, height);
+    CGRect tableViewFrame = CGRectMake(x, y, width, height);
     
     self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
     [self.tableView registerClass:[LocationCell class] forCellReuseIdentifier:@"LocationCell"];
@@ -99,17 +103,10 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     NSLog(@"%@", self.location);
     NSLog(@"%@, %@", self.lat, self.lng);
     
-    [self.delegate locationsPickerPopUpViewController:(LocationPickerModalViewController *)self didPickLocationWithLatitude:self.lat longitude:self.lng location:self.location];
+    [self locationsPickerModalViewController:self didPickLocationWithLatitude:self.lat longitude:self.lng location:self.location];
     
-    ComposeViewController *composer = [[ComposeViewController alloc] init];
+    // [self.delegate locationsPickerModalViewController:self didPickLocationWithLatitude:self.lat longitude:self.lng location:self.location];
     
-    composer.date = self.date;
-    composer.activityType = self.activityType;
-    composer.lat = self.lat;
-    composer.lng = self.lng;
-    composer.location = self.location;
-    
-    // [self.navigationController pushViewController:composer animated:YES];
     [self dismissViewControllerAnimated:NO completion:nil];
     
     //Change the selected background view of the cell.
@@ -160,7 +157,8 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
-- (void)locationsPickerPopUpViewController:(LocationPickerModalViewController *)controller didPickLocationWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude location:(NSString *)location {
+- (void)locationsPickerModalViewController:(LocationPickerModalViewController *)controller didPickLocationWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude location:(NSString *)location {
+    [self.delegate locationsPickerModalViewController:self didPickLocationWithLatitude:self.lat longitude:self.lng location:self.location];
 }
 
 @end

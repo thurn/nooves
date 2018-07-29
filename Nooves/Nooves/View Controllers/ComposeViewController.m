@@ -7,7 +7,7 @@
 #import "TabBarController.h"
 #import "TimelineViewController.h"
 
-@interface ComposeViewController () <UITextViewDelegate>
+@interface ComposeViewController () <UITextViewDelegate, LocationPickerDelegate>
 
 @property (nonatomic) UIPickerView *pickerView;
 
@@ -21,6 +21,10 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"New Event";
+    
+    self.lat = [[NSNumber alloc] init];
+    self.lng = [[NSNumber alloc] init];
+    self.location = [[NSString alloc] init];
     
     // set up event title properties
     self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 1000, 150)];
@@ -153,12 +157,7 @@
 // pass post data and jump to location picker view
 - (void)didSelectLocation {
     LocationPickerModalViewController *locationPicker = [LocationPickerModalViewController new];
-    locationPicker.date = self.date;
-    locationPicker.activityType = self.activityType;
-    locationPicker.lat = self.lat;
-    locationPicker.lng = self.lng;
-    locationPicker.location = self.location;
-    
+    locationPicker.delegate = self;
     UINavigationController *navCont = [[UINavigationController alloc] initWithRootViewController:locationPicker];
     [self presentViewController:navCont animated:YES completion:nil];
 }
@@ -225,6 +224,15 @@
     TimelineViewController *timeline = [[TimelineViewController alloc]init];
     [self.navigationController pushViewController:timeline animated:YES];
     NSLog(@"User posted successfully");
+}
+
+- (void)locationsPickerModalViewController:(LocationPickerModalViewController *)controller didPickLocationWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude location:(NSString *)location {
+    
+    self.location = location;
+    self.lat = latitude;
+    self.lng = longitude;
+
+    [self.navigationController popToViewController:self animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
