@@ -8,12 +8,27 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <FirebaseStorage.h>
+#import <FirebaseDatabase.h>
+#import <FirebaseAuth.h>
+
 @interface User : NSObject
 
 @property(strong, nonatomic) NSString *name;
 @property(strong, nonatomic) NSString *biography;
+@property(strong, nonatomic) NSNumber *age;
+@property(strong, nonatomic) NSNumber *phoneNumber;
 @property(strong, nonatomic) UIImage *profilePic;
-- (instancetype)initProfileWithInfo: (NSString *)userName withBio: (NSString *)bio;
+@property(strong, nonatomic) NSString *profilePicURL;
+@property(strong, nonatomic) NSString *userID;
 
+
+- (void)addToProfileWithInfo: (NSString *)userName
+                     withBio: (NSString *)bio
+                     withAge: (NSNumber *)age
+                  withNumber: (NSNumber *)number;
+
+
++ (void) saveUserProfile:(User *)user;
 
 @end
