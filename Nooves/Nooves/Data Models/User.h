@@ -30,5 +30,6 @@
 
 
 + (void) saveUserProfile:(User *)user;
++ (NSArray *)readUsersFromDatabase:(NSDictionary *)usersDict;
 
 @end
