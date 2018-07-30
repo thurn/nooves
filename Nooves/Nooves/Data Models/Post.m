@@ -1,10 +1,8 @@
 #import <FIRDatabase.h>
 #import <FIRAuth.h>
 #import <FirebaseAuth.h>
-
-#import "LoginViewController.h"
 #import "Post.h"
-
+#import "LoginViewController.h"
 @implementation Post
 
 + (NSString *)activityTypeToString:(ActivityType) activityType{
@@ -37,45 +35,6 @@
             return @"Other";
     }
 };
-+ (ActivityType)stringToActivityType:(NSString *)activityString {
-    if([activityString isEqualToString:@"Outdoors"]) {
-        return ActivityTypeOutdoors;
-    }
-    else if([activityString isEqualToString:@"Shopping"]) {
-        return ActivityTypeShopping;
-    }
-    else if([activityString isEqualToString:@"Partying"]){
-        return ActivityTypePartying;
-    }
-    else if([activityString isEqualToString:@"Eating"]) {
-        return ActivityTypeEating;
-    }
-    else if([activityString isEqualToString:@"Arts"]) {
-        return ActivityTypeArts;
-    }
-    else if([activityString isEqualToString:@"Sports"]) {
-        return ActivityTypeSports;
-    }
-    else if([activityString isEqualToString:@"Networking"]) {
-        return ActivityTypeNetworking;
-    }
-    else if([activityString isEqualToString:@"Fitness"]){
-        return ActivityTypeFitness;
-    }
-    else if([activityString isEqualToString:@"Games"]) {
-        return ActivityTypeGames;
-    }
-    else if([activityString isEqualToString:@"Concert"]) {
-        return ActivityTypeConcert;
-    }
-    else if([activityString isEqualToString:@"Cinema"]) {
-        return ActivityTypeCinema;
-    }
-    else if([activityString isEqualToString:@"Festival"]) {
-        return ActivityTypeFestival;
-    }
-    return ActivityTypeOther;
-}
 
 - (instancetype)initPostWithDetails:(NSDate *)eventDate
                           withTitle:(NSString *)postTitle

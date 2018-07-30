@@ -20,17 +20,16 @@ typedef NS_ENUM(NSInteger, ActivityType){
 };
 
 @property (nonatomic) ActivityType activityType;
-@property (strong, nonatomic) NSString *activityTitle;
-@property (strong, nonatomic) NSString *activityDescription;
-@property (strong, nonatomic) NSDate *activityDateAndTime;
-@property (strong, nonatomic) FIRDatabaseReference *ref;
-@property (strong, nonatomic) NSNumber *activityLat;
-@property (strong, nonatomic) NSNumber *activityLng;
-@property (strong, nonatomic) NSString *fireBaseID;
-@property (strong, nonatomic) NSString *userID;
+@property (nonatomic) NSString *activityTitle;
+@property (nonatomic) NSString *activityDescription;
+@property (nonatomic) NSDate *activityDateAndTime;
+@property (nonatomic) FIRDatabaseReference *ref;
+@property (nonatomic) NSNumber *activityLat;
+@property (nonatomic) NSNumber *activityLng;
+@property (nonatomic) NSString *fireBaseID;
+@property (nonatomic) NSString *userID;
 
 + (NSString *)activityTypeToString:(ActivityType) activityType;
-+ (ActivityType)stringToActivityType:(NSString *)activityString;
 - (instancetype)initPostWithDetails:(NSDate *)eventDate
                           withTitle:(NSString *) postTitle
                     withDescription:(NSString *) postDescription

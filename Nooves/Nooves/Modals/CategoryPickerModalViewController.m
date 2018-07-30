@@ -1,4 +1,5 @@
 #import "CategoryPickerModalViewController.h"
+#import "Post.h"
 
 @interface CategoryPickerModalViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
@@ -14,9 +15,6 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
-
-    // TODO(Nikki): directly use firebase array of categories
-    self.categories = @[@"Outdoors", @"Shopping", @"Partying", @"Eating", @"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
     
     // instantiate picker view
     self.pickerView = [[UIPickerView alloc] init];
@@ -73,21 +71,24 @@
 // returns the array count to determine rows in picker view
 - (NSInteger)pickerView:(UIPickerView *)pickerView
 numberOfRowsInComponent:(NSInteger)component {
-    return self.categories.count;
+    
+    return ActivityTypeOther+1;
 }
 
 // returns the array element at each row
 - (NSString *)pickerView:(UIPickerView *)pickerView
              titleForRow:(NSInteger)row
             forComponent:(NSInteger)component {
-    return self.categories[row];
+    
+    return [Post activityTypeToString:row];
 }
 
 // assigns the selected category from picker view to label and activity type
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
                                                inComponent:(NSInteger)component {
-    self.categoryLabel.text = self.categories[row];
-    ActivityType type = [Post stringToActivityType:self.categoryLabel.text];
+
+    self.categoryLabel.text = [Post activityTypeToString:row];
+    ActivityType type = row;
     self.activityType = type;
 }
 

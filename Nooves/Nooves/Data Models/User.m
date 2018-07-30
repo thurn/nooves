@@ -2,7 +2,6 @@
 
 @implementation User
 
-
 - (void)addToProfileWithInfo: (NSString *)userName
                             withBio: (NSString *)bio
                             withAge: (NSNumber *)age
