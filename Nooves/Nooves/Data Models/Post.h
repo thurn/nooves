@@ -23,7 +23,6 @@ typedef NS_ENUM(NSInteger, ActivityType){
 @property (strong, nonatomic) NSString *activityTitle;
 @property (strong, nonatomic) NSString *activityDescription;
 @property (strong, nonatomic) NSDate *activityDateAndTime;
-@property (strong, nonatomic) FIRDatabaseReference *ref;
 @property (strong, nonatomic) NSNumber *activityLat;
 @property (strong, nonatomic) NSNumber *activityLng;
 @property (strong, nonatomic) NSString *fireBaseID;

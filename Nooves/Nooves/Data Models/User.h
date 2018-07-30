@@ -22,6 +22,6 @@
 
 
 + (void) saveUserProfile:(User *)user;
-+ (NSArray *)readUsersFromDatabase:(NSDictionary *)usersDict;
+- (instancetype)initFromDatabase:(NSDictionary *)usersDict;
 
 @end

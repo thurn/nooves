@@ -45,10 +45,6 @@
     [self filterResults];
     
     [tableView registerClass:[PostCell class] forCellReuseIdentifier:@"postCellIdentifier"];
-
-    // set up the search bar
-    // UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
-    //[tableView setTableHeaderView:searchBar];
 }
 
 - (UITableView *)configureTableView {

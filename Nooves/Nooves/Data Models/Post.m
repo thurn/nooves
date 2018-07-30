@@ -104,9 +104,9 @@
     int timestamp = [post.activityDateAndTime timeIntervalSince1970];
     NSNumber *dateAndTimeStamp = @(timestamp);
     NSNumber *activityType = @(post.activityType);
-    post.ref = [[FIRDatabase database] reference];
-    FIRDatabaseReference *ref = [[[post.ref child:@"Posts"] child:[FIRAuth auth].currentUser.uid] childByAutoId];
-    [ref setValue:@{@"Date":dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription, @"Latitude":post.activityLat, @"Longitude":post.activityLng}];
+    FIRDatabaseReference *ref = [[FIRDatabase database] reference];
+    FIRDatabaseReference *reffy = [[[ref child:@"Posts"] child:[FIRAuth auth].currentUser.uid] childByAutoId];
+    [reffy setValue:@{@"Date":dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription, @"Latitude":post.activityLat, @"Longitude":post.activityLng}];
 }
 + (NSArray *)readPostsFromFIRDict:(NSDictionary *)postsDict{
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
