@@ -1,20 +1,22 @@
-#import <Foundation/Foundation.h>
 #import <FirebaseDatabase/FirebaseDatabase.h>
+#import <Foundation/Foundation.h>
+
 @interface Post : NSObject
+
 typedef NS_ENUM(NSInteger, ActivityType){
-    Outdoors,
-    Arts,
-    Sports,
-    Shopping,
-    Partying,
-    Networking,
-    Fitness,
-    Games,
-    Eating,
-    Cinema,
-    Festival,
-    Concert,
-    Other
+    ActivityTypeOutdoors,
+    ActivityTypeArts,
+    ActivityTypeSports,
+    ActivityTypeShopping,
+    ActivityTypePartying,
+    ActivityTypeNetworking,
+    ActivityTypeFitness,
+    ActivityTypeGames,
+    ActivityTypeEating,
+    ActivityTypeCinema,
+    ActivityTypeFestival,
+    ActivityTypeConcert,
+    ActivityTypeOther
 };
 
 @property (nonatomic) ActivityType activityType;

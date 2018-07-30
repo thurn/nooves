@@ -1,35 +1,37 @@
-#import "Post.h"
 #import <FIRDatabase.h>
 #import <FIRAuth.h>
-#import "LoginViewController.h"
 #import <FirebaseAuth.h>
+
+#import "LoginViewController.h"
+#import "Post.h"
+
 @implementation Post
 
 + (NSString *)activityTypeToString:(ActivityType) activityType{
     switch (activityType) {
-        case Outdoors:
+        case ActivityTypeOutdoors:
             return @"Outdoors";
-        case Shopping:
+        case ActivityTypeShopping:
             return @"Shopping";
-        case Partying:
+        case ActivityTypePartying:
             return @"Partying";
-        case Eating:
+        case ActivityTypeEating:
             return @"Eating";
-        case Arts:
+        case ActivityTypeArts:
             return @"Arts";
-        case Sports:
+        case ActivityTypeSports:
             return @"Sports";
-        case Networking:
+        case ActivityTypeNetworking:
             return @"Networking";
-        case Fitness:
+        case ActivityTypeFitness:
             return @"Fitness";
-        case Games:
+        case ActivityTypeGames:
             return @"Games";
-        case Concert:
+        case ActivityTypeConcert:
             return @"Concert";
-        case Cinema:
+        case ActivityTypeCinema:
             return @"Cinema";
-        case Festival:
+        case ActivityTypeFestival:
             return @"Festival";
         default:
             return @"Other";
@@ -37,42 +39,42 @@
 };
 + (ActivityType)stringToActivityType:(NSString *)activityString {
     if([activityString isEqualToString:@"Outdoors"]) {
-        return Outdoors;
+        return ActivityTypeOutdoors;
     }
     else if([activityString isEqualToString:@"Shopping"]) {
-        return Shopping;
+        return ActivityTypeShopping;
     }
     else if([activityString isEqualToString:@"Partying"]){
-        return Partying;
+        return ActivityTypePartying;
     }
     else if([activityString isEqualToString:@"Eating"]) {
-        return Eating;
+        return ActivityTypeEating;
     }
     else if([activityString isEqualToString:@"Arts"]) {
-        return Arts;
+        return ActivityTypeArts;
     }
     else if([activityString isEqualToString:@"Sports"]) {
-        return Sports;
+        return ActivityTypeSports;
     }
     else if([activityString isEqualToString:@"Networking"]) {
-        return Networking;
+        return ActivityTypeNetworking;
     }
     else if([activityString isEqualToString:@"Fitness"]){
-        return Fitness;
+        return ActivityTypeFitness;
     }
     else if([activityString isEqualToString:@"Games"]) {
-        return Games;
+        return ActivityTypeGames;
     }
     else if([activityString isEqualToString:@"Concert"]) {
-        return Concert;
+        return ActivityTypeConcert;
     }
     else if([activityString isEqualToString:@"Cinema"]) {
-        return Cinema;
+        return ActivityTypeCinema;
     }
     else if([activityString isEqualToString:@"Festival"]) {
-        return Festival;
+        return ActivityTypeFestival;
     }
-    return Other;
+    return ActivityTypeOther;
 }
 
 - (instancetype)initPostWithDetails:(NSDate *)eventDate

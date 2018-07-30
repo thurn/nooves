@@ -3,6 +3,7 @@
 
 @class CategoryPickerModalViewController;
 
+// A protocol implemented by Compose View to store the user's selected activity type for an event
 @protocol CategoryPickerDelegate
 
 - (void)categoryPickerModalViewController:(CategoryPickerModalViewController *)controller

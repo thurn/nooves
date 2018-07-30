@@ -1,15 +1,19 @@
 #import "AppDelegate.h"
-#import "CategoryPickerModalViewController.h"
 #import "ComposeViewController.h"
-#import "DatePickerModalViewController.h"
-#import "LocationPickerModalViewController.h"
 #import "PureLayout/PureLayout.h"
 #import "TabBarController.h"
 #import "TimelineViewController.h"
 
+#import "CategoryPickerModalViewController.h"
+#import "DatePickerModalViewController.h"
+#import "LocationPickerModalViewController.h"
+
 @interface ComposeViewController () <UITextViewDelegate, LocationPickerDelegate, CategoryPickerDelegate, DatePickerDelegate>
 
 @property (nonatomic) UIPickerView *pickerView;
+@property (nonatomic) UILabel *locationLabel;
+@property (nonatomic) UILabel *activityLabel;
+@property (nonatomic) UILabel *dateLabel;
 
 @end
 
@@ -18,11 +22,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // set up controller properties
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"New Event";
     self.tabBarController.tabBar.hidden = YES;
+
+    CGRect contentRect = CGRectZero;
+    for (UIView *view in self.view.subviews) {
+        contentRect = CGRectUnion(contentRect, view.frame);
+    }
     
+    self.locationLabel = [[UILabel alloc] init];
+    self.activityLabel = [[UILabel alloc] init];
+    self.dateLabel = [[UILabel alloc] init];
+    
+    // initiate location properties
     self.lat = [[NSNumber alloc] init];
     self.lng = [[NSNumber alloc] init];
     self.location = [[NSString alloc] init];
@@ -39,17 +54,10 @@
     self.eventDescription.delegate = self;
     self.eventDescription.text = @"Add a description";
     self.eventDescription.textColor = UIColor.grayColor;
-    
-    CGRect contentRect = CGRectZero;
-
-    for (UIView *view in self.view.subviews) {
-        contentRect = CGRectUnion(contentRect, view.frame);
-    }
 
     // add components to view
     [self.view addSubview:self.eventTitle];
     [self.view addSubview:self.eventDescription];
-    
     [self.view addSubview:[self selectDate]];
     [self.view addSubview:[self selectCategory]];
     [self.view addSubview:[self selectLocation]];
@@ -67,42 +75,39 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     // set location display properties
-    UILabel *locationLabel = [[UILabel alloc] init];
     NSString *locationColon = @"Location: ";
-    locationLabel.frame = CGRectMake(10, 440, 100, 100);
+    self.locationLabel.frame = CGRectMake(10, 440, 100, 100);
     if(self.location) {
-        locationLabel.text = [locationColon stringByAppendingString:self.location];
+        self.locationLabel.text = [locationColon stringByAppendingString:self.location];
     } else {
-        locationLabel.text = locationColon;
+        self.locationLabel.text = locationColon;
     }
-    [locationLabel sizeToFit];
+    [self.locationLabel sizeToFit];
     
     // set activity display label properties
-    UILabel *activityLabel = [[UILabel alloc] init];
     NSString *activityColon = @"Category: ";
-    activityLabel.frame = CGRectMake(10, 420, 150, 150);
+    self.activityLabel.frame = CGRectMake(10, 420, 150, 150);
     NSString *activity = [Post activityTypeToString:self.activityType];
-    activityLabel.text = [activityColon stringByAppendingString:activity];
-    [activityLabel sizeToFit];
+    self.activityLabel.text = [activityColon stringByAppendingString:activity];
+    [self.activityLabel sizeToFit];
     
     // set date display label properties
-    UILabel *dateLabel = [[UILabel alloc] init];
     NSString *dateColon = @"Date: ";
-    dateLabel.frame = CGRectMake(10, 500, 100, 100);
+    self.dateLabel.frame = CGRectMake(10, 500, 100, 100);
     NSDateFormatter *formatter = [NSDateFormatter new];
     formatter.dateFormat = @"MM-dd HH:mm";
     NSString *dateDetails = [formatter stringFromDate:self.date];
     self.eventDescription.textColor = UIColor.grayColor;
     if(self.date) {
-        dateLabel.text = [dateColon stringByAppendingString:dateDetails];
+        self.dateLabel.text = [dateColon stringByAppendingString:dateDetails];
     } else {
-        dateLabel.text = dateColon;
+        self.dateLabel.text = dateColon;
     }
-    [dateLabel sizeToFit];
+    [self.dateLabel sizeToFit];
     
-    [self.view addSubview:dateLabel];
-    [self.view addSubview:locationLabel];
-    [self.view addSubview:activityLabel];
+    [self.view addSubview:self.dateLabel];
+    [self.view addSubview:self.locationLabel];
+    [self.view addSubview:self.activityLabel];
 }
 
 // checks to see if user is editing event description and changes text color if true
