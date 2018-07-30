@@ -28,4 +28,5 @@
     self.phoneNumber = usersDict[@"PhoneNumber"];
     return self;
 }
+
 @end

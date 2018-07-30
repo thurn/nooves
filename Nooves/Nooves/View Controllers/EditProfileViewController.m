@@ -110,8 +110,7 @@
     // set up the save profile button
     self.saveProfile = [[UIBarButtonItem alloc]init];
     self.saveProfile.title = @"Done";
-    self.navigationItem.rightBarButtonItem = self.saveProfile;
-    
+    self.navigationItem.rightBarButtonItem = self.saveProfile;    
     self.saveProfile.target = self;
     self.saveProfile.action = @selector(didTapSaveProfile);
     

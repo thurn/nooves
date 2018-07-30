@@ -11,7 +11,6 @@
 @property(strong, nonatomic) UILabel *ageLabel;
 @property(strong, nonatomic) UILabel *contactNumberLabel;
 @property(strong, nonatomic) UIButton *editProfile;
-@property(nonatomic) NSArray *usersArray;
 @property(strong, nonatomic) User *user;
 
 @end
@@ -25,7 +24,7 @@
     FIRDatabaseReference *reference = [[FIRDatabase database]reference];
     FIRDatabaseHandle *databaseHandle = [[[reference child:@"Users"]child:[FIRAuth auth].currentUser.uid]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSDictionary *usersDictionary= snapshot.value;
-        if (![snapshot.value isEqual:[NSNull null]]){
+        if (![snapshot.value isEqual:[NSNull null]]) {
             self.user = [[User alloc] initFromDatabase:usersDictionary];
             [self didUpdateProfile];
         }
@@ -44,11 +43,10 @@
 }
 
 - (void)configureProfile {
-    
     // set the background color
     self.view.backgroundColor = [UIColor whiteColor];
     
-    if (!self.user)  {
+    if (!self.user) {
         self.user = [[User alloc]init];
         self.user.name = [FIRAuth auth].currentUser.displayName;
         self.user.biography = @"Bio";
@@ -101,6 +99,8 @@
 }
 
 - (void)didUpdateProfile {
+    self.nameLabel.text = self.user.name;
+    self.bioLabel.text = self.user.biography;
     
     //convert age to a string
     if (![self.user.age isEqualToNumber:@(0)]){
@@ -114,10 +114,6 @@
         NSString *phoneNumberInString = [userNumber stringValue];
         self.contactNumberLabel.text = phoneNumberInString;
     }
-    self.nameLabel.text = self.user.name;
-    self.bioLabel.text = self.user.biography;
-
-
     
     [self.nameLabel sizeToFit];
     [self.bioLabel sizeToFit];
