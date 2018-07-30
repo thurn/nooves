@@ -1,11 +1,3 @@
-//
-//  AppDelegate.m
-//  Nooves
-//
-//  Created by Nikki Tran on 7/13/18.
-//  Copyright © 2018 Nikki Tran. All rights reserved.
-//
-
 #import "AppDelegate.h"
 #import "ComposeViewController.h"
 #import "TimelineViewController.h"
@@ -30,7 +22,7 @@
     
     BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
                                                                   openURL:url
-                                                        sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                                                    sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
                                                                annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
                     ];
     // Add any custom logic here.
@@ -41,8 +33,6 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     [FIRApp configure];
-    
-    // This is the top level tab that will contain the navs
     
     // the leaf controllers
     ProfileViewController* profileViewController = [[ProfileViewController alloc] init];

@@ -13,9 +13,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // set controller view properties
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
+    self.tabBarController.tabBar.hidden = YES;
 
+    // TODO(Nikki): directly use firebase array of categories
     self.categories = @[@"Outdoors", @"Shopping", @"Partying", @"Eating", @"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
     
     // instantiate picker view
@@ -32,8 +35,6 @@
     UIButton *selectedCategory = [self selectCategory];
     selectedCategory.frame = CGRectMake(10.0, 250.0, 20, 30);
     [selectedCategory sizeToFit];
-    
-    self.tabBarController.tabBar.hidden = YES;
     
     // add components to view
     [self.view addSubview:self.pickerView];
@@ -58,13 +59,9 @@
 
 // passes post data and jumps back to composer view controller
 - (void)didTapSelectCategory{
-    ComposeViewController *composer = [[ComposeViewController alloc] init];
-    composer.date = self.date;
-    composer.activityType = self.activityType;
-    composer.lat = self.lat;
-    composer.lng = self.lng;
-    composer.location = self.location;
-    // [self.navigationController pushViewController:composer animated:YES];
+    
+    [self.categoryDelegate categoryPickerModalViewController:self didPickActivityType:(ActivityType *)self.activityType];
+    
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
@@ -91,6 +88,7 @@ numberOfRowsInComponent:(NSInteger)component {
     self.activityType = type;
 }
 
+// back button
 - (UIBarButtonItem *)goBack {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon"]
                                                                    style:UIBarButtonItemStylePlain
@@ -101,12 +99,9 @@ numberOfRowsInComponent:(NSInteger)component {
     return backButton;
 }
 
+// goes back to parent contoller
 - (void)didTapBack {
     [self dismissViewControllerAnimated:true completion:nil];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 @end

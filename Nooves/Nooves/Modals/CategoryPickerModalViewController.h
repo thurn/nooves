@@ -1,12 +1,19 @@
 #import <UIKit/UIKit.h>
 #import "Post.h"
 
+@class CategoryPickerModalViewController;
+
+// A protocol implemented by Compose View to store the user's selected activity type for an event
+@protocol CategoryPickerDelegate
+
+- (void)categoryPickerModalViewController:(CategoryPickerModalViewController *)controller
+              didPickActivityType:(ActivityType *)activity;
+
+@end
+
 @interface CategoryPickerModalViewController : UIViewController
 
-@property (nonatomic) NSDate *date;
+@property (weak, nonatomic) id<CategoryPickerDelegate>categoryDelegate;
 @property (nonatomic) ActivityType activityType;
-@property (nonatomic) NSNumber *lat;
-@property (nonatomic) NSNumber *lng;
-@property (nonatomic) NSString *location;
 
 @end

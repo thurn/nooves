@@ -12,24 +12,28 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
     
+    // set date picker properties
     self.datepicker = [[UIDatePicker alloc]init];
     self.datepicker.frame = CGRectMake(10.0, 50.0, self.view.frame.size.width, 200);
     self.datepicker.timeZone = [NSTimeZone localTimeZone];
+    self.datepicker.backgroundColor = [UIColor whiteColor];
+    
     UIButton *selectedDate = [self selectDate];
     selectedDate.frame = CGRectMake(10.0, 300.0, 20, 30);
+    
     [selectedDate sizeToFit];
     [self.view addSubview:selectedDate];
-    self.datepicker.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.datepicker];
-    
     self.tabBarController.tabBar.hidden = YES;
     [self goBack];
 }
 
+// hides tab bar
 - (void)viewWillAppear: (BOOL)animated {
     self.hidesBottomBarWhenPushed = YES;
 }
 
+// user confirmatin button when date is selected
 - (UIButton *)selectDate {
     UIButton *selectDate = [UIButton buttonWithType:UIButtonTypeSystem];
     [selectDate setTitle:@"Select Date" forState:UIControlStateNormal];
@@ -38,18 +42,13 @@
     return selectDate;
 }
 
+// sends data to parent controller
 - (void)didSelectDate {
-    ComposeViewController *composer = [ComposeViewController new];
-    self.date = [[NSDate alloc] init];
-    self.date = self.datepicker.date;
-    composer.date = self.date;
-    composer.activityType = self.activityType;
-    composer.lat = self.lat;
-    composer.lng = self.lng;
-    composer.location = self.location;
+    [self.dateDelegate datePickerModalViewController:self didPickDate:self.datepicker.date];
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
+// back button
 - (UIBarButtonItem *)goBack {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon"]
                                                                    style:UIBarButtonItemStylePlain
@@ -60,13 +59,9 @@
     return backButton;
 }
 
+// goes back to parent controller
 - (void)didTapBack {
     [self dismissViewControllerAnimated:true completion:nil];
-}
-
-// TODO(ntran): add a back button
-
-- (void)didReceiveMemoryWarning {
 }
 
 @end
