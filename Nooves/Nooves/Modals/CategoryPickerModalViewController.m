@@ -1,5 +1,4 @@
 #import "CategoryPickerModalViewController.h"
-#import "ComposeViewController.h"
 
 @interface CategoryPickerModalViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
@@ -13,10 +12,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // set controller view properties
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
-    self.tabBarController.tabBar.hidden = YES;
 
     // TODO(Nikki): directly use firebase array of categories
     self.categories = @[@"Outdoors", @"Shopping", @"Partying", @"Eating", @"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
@@ -40,10 +37,10 @@
     [self.view addSubview:self.pickerView];
     [self.view addSubview:self.categoryLabel];
     [self.view addSubview:selectedCategory];
-    
     [self goBack];
 }
 
+// hides tab bar
 - (void)viewWillAppear: (BOOL)animated {
     self.hidesBottomBarWhenPushed = YES;
 }
@@ -52,7 +49,9 @@
 - (UIButton *)selectCategory{
     UIButton *selectCategory = [UIButton buttonWithType:UIButtonTypeSystem];
     [selectCategory setTitle:@"Select category" forState:UIControlStateNormal];
-    [selectCategory addTarget:self action:@selector(didTapSelectCategory) forControlEvents:UIControlEventTouchUpInside];
+    [selectCategory addTarget:self
+                       action:@selector(didTapSelectCategory)
+             forControlEvents:UIControlEventTouchUpInside];
     [selectCategory sizeToFit];
     return selectCategory;
 }
@@ -60,7 +59,8 @@
 // passes post data and jumps back to composer view controller
 - (void)didTapSelectCategory{
     
-    [self.categoryDelegate categoryPickerModalViewController:self didPickActivityType:(ActivityType *)self.activityType];
+    [self.categoryDelegate categoryPickerModalViewController:self
+                                         didPickActivityType:(ActivityType *)self.activityType];
     
     [self dismissViewControllerAnimated:NO completion:nil];
 }
@@ -70,19 +70,22 @@
     return 1;
 }
 
-// returns the array count
+// returns the array count to determine rows in picker view
 - (NSInteger)pickerView:(UIPickerView *)pickerView
 numberOfRowsInComponent:(NSInteger)component {
     return self.categories.count;
 }
 
-// returns the array at each row
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+// returns the array element at each row
+- (NSString *)pickerView:(UIPickerView *)pickerView
+             titleForRow:(NSInteger)row
+            forComponent:(NSInteger)component {
     return self.categories[row];
 }
 
 // assigns the selected category from picker view to label and activity type
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
+                                               inComponent:(NSInteger)component {
     self.categoryLabel.text = self.categories[row];
     ActivityType type = [Post stringToActivityType:self.categoryLabel.text];
     self.activityType = type;
@@ -90,12 +93,12 @@ numberOfRowsInComponent:(NSInteger)component {
 
 // back button
 - (UIBarButtonItem *)goBack {
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon"]
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(didTapBack)];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                   initWithImage:[UIImage imageNamed:@"back-icon"]
+                                           style:UIBarButtonItemStylePlain
+                                          target:self
+                                         action:@selector(didTapBack)];
     self.navigationItem.leftBarButtonItem = backButton;
-    
     return backButton;
 }
 

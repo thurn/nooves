@@ -19,8 +19,9 @@
     [super viewWillAppear:YES];
 }
 - (void)viewDidLoad {
-
     [super viewDidLoad];
+    self.tabBarController.hidesBottomBarWhenPushed = NO;
+    
     FIRDatabaseReference * ref =[[FIRDatabase database] reference];
     FIRDatabaseHandle *handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSDictionary *postsDict = snapshot.value;

@@ -1,16 +1,16 @@
-#import "ComposeViewController.h"
 #import "LocationCell.h"
 #import "LocationPickerModalViewController.h"
 
 static NSString * const clientID = @"4FYRZKNIIFJQG25SUYJ55KINHUMVGWMYWFGQUFO5H4AQPQN2";
 static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ40WABD5VUP";
 
-@interface LocationPickerModalViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface LocationPickerModalViewController () <UITableViewDelegate, UITableViewDataSource,
+UISearchBarDelegate>
 
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) UISearchBar *searchBar;
+
 @property (nonatomic) NSArray *results;
-@property (nonatomic) UIPickerView *pickerView;
 
 @end
 
@@ -20,14 +20,15 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
-    
     [self configureTableView];
     [self.view addSubview:self.tableView];
     
+    // instantiates properties
     self.lat = [[NSNumber alloc] init];
     self.lng = [[NSNumber alloc] init];
     self.location = [[NSString alloc] init];
     
+    // instantiates search bar properties
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(-5.0, 0.0, 320.0, 44.0)];
     self.searchBar.delegate = self;
     self.searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -36,9 +37,10 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     [searchBarView addSubview:self.searchBar];
     self.navigationItem.titleView = searchBarView;
     
-    self.tabBarController.tabBar.hidden = YES;
-    
+    // adds component to view
     [self goBack];
+    
+    // updates table view
     [self.tableView reloadData];
 }
 
@@ -47,7 +49,7 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     self.hidesBottomBarWhenPushed = YES;
 }
 
-// table view property configuration
+// congigures table view properties
 - (void)configureTableView {
     CGFloat x = 0;
     CGFloat y = 0;
@@ -66,12 +68,12 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     self.tableView.userInteractionEnabled = YES;
 }
 
-// cancel button appears when user edits search
+// cancel button appears when user edits search bar
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     self.searchBar.showsCancelButton = YES;
 }
 
-// will delete search text when cancel button click
+// will delete search text when cancel button clicked
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     self.searchBar.showsCancelButton = NO;
     self.searchBar.text = @"";
@@ -97,6 +99,7 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     return 50;
 }
 
+// saves location properties to compose view when cell selected
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // This is the selected venue
     NSDictionary *venue = self.results[indexPath.row];
@@ -110,20 +113,23 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     
     [self dismissViewControllerAnimated:NO completion:nil];
     
-    //Change the selected background view of the cell.
+    // changes the selected background view of the cell
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+// finds places in a certain range of a city during search
 - (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     NSString *newText = [searchBar.text stringByReplacingCharactersInRange:range withString:text];
     [self fetchLocationsWithQuery:newText nearCity:@"San Francisco"];
     return true;
 }
 
+// fetches places from search
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self fetchLocationsWithQuery:searchBar.text nearCity:@"San Francisco"];
 }
 
+// completes api request and stores searched results in dictionary
 - (void)fetchLocationsWithQuery:(NSString *)query nearCity:(NSString *)city {
     NSString *baseURLString = @"https://api.foursquare.com/v2/venues/search?";
     NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&v=20141020&near=%@,CA&query=%@", clientID, clientSecret, city, query];
@@ -144,14 +150,13 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     [task resume];
 }
 
-// back button
+// sets up back button properties
 - (UIBarButtonItem *)goBack {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon"]
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
                                                                   action:@selector(didTapBack)];
     self.navigationItem.leftBarButtonItem = backButton;
-    
     return backButton;
 }
 
