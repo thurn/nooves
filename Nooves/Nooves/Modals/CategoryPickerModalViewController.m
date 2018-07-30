@@ -1,7 +1,7 @@
 #import "CategoryPickerModalViewController.h"
 #import "ComposeViewController.h"
 
-@interface CategoryPickerModalViewController () <UIPickerViewDataSource, UIPickerViewDelegate, CategoryPickerDelegate>
+@interface CategoryPickerModalViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic) NSArray *categories;
 @property (nonatomic) UIPickerView *pickerView;

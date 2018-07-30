@@ -7,7 +7,7 @@
 #import "TabBarController.h"
 #import "TimelineViewController.h"
 
-@interface ComposeViewController () <UITextViewDelegate, LocationPickerDelegate, CategoryPickerDelegate>
+@interface ComposeViewController () <UITextViewDelegate, LocationPickerDelegate, CategoryPickerDelegate, DatePickerDelegate>
 
 @property (nonatomic) UIPickerView *pickerView;
 
@@ -133,12 +133,7 @@
 // pass post data and jump to date picker view
 - (void)didSelectDate {
     DatePickerModalViewController *datePicker = [DatePickerModalViewController new];
-    datePicker.date = self.date;
-    datePicker.activityType = self.activityType;
-    datePicker.lat = self.lat;
-    datePicker.lng = self.lng;
-    datePicker.location = self.location;
-    
+    datePicker.dateDelegate = self;
     UINavigationController *navCont = [[UINavigationController alloc] initWithRootViewController:datePicker];
     [self presentViewController:navCont animated:YES completion:nil];
 }
@@ -231,8 +226,13 @@
 }
 
 - (void)categoryPickerModalViewController:(CategoryPickerModalViewController *)controller didPickActivityType:(ActivityType *)activity {
-    self.activityType = *(activity);
+    self.activityType = activity;
     
+    [self.navigationController popToViewController:self animated:YES];
+}
+
+- (void)datePickerModalViewController:(DatePickerModalViewController *)dateController didPickDate:(NSDate *)date {
+    self.date = date;
     [self.navigationController popToViewController:self animated:YES];
 }
 
