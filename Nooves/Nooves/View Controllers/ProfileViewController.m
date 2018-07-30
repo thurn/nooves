@@ -1,6 +1,7 @@
 #import "EditProfileViewController.h"
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
+#import "User.h"
 
 @interface ProfileViewController () <editProfileDelegate>
 
@@ -10,8 +11,9 @@
 @property(strong, nonatomic) UILabel *ageLabel;
 @property(strong, nonatomic) UILabel *contactNumberLabel;
 @property(strong, nonatomic) UIButton *editProfile;
-@property(nonatomic) User *user;
 @property(strong, nonatomic) NSDictionary *usersDictionary;
+@property(nonatomic) NSArray *usersArray;
+@property(strong, nonatomic) User *user;
 
 @end
 
@@ -25,19 +27,24 @@
     FIRDatabaseReference *reference = [[FIRDatabase database]reference];
     FIRDatabaseHandle *databaseHandle = [[reference child:@"Users"]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         self.usersDictionary = snapshot.value;
-        for(NSString *userID in self.usersDictionary)   {
-            User *user = [[User alloc]init];
-        }
+        self.usersArray = [User readUsersFromDatabase:self.usersDictionary];
     }];
     
-    self.view.backgroundColor = [UIColor whiteColor];
     [self configureProfile];
-    
+
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"Profile";
     
     if (!self.usersArray) {
         self.usersArray = [[NSMutableArray alloc]init];
+    }
+    
+    if (self.user) {
+        [self didUpdateProfile:self.user];
+    }
+    
+    if (!self.user) {
+        NSLog(@"self.user does not exist");
     }
 }
 
@@ -47,11 +54,13 @@
 
 - (void)configureProfile {
     
+    // set the background color
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     // set up the profile picture field
     self.profilePicture = [[UIImageView alloc]initWithFrame:CGRectMake(10, 80, 100, 100)];
     [self.profilePicture setImage:[UIImage imageNamed:@"profile-blank"]];
     [self.profilePicture sizeToFit];
-    
     
     //set up the name label field
     self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(150, 80, 30, 30)];
@@ -86,7 +95,7 @@
     [self.view addSubview:self.ageLabel];
     [self.view addSubview:self.contactNumberLabel];
     [self.view addSubview:self.bioLabel];
-    [self.view addSubview:self.editProfile];    
+    [self.view addSubview:self.editProfile];
 }
 
 - (void)didTapEditProfile {
@@ -95,20 +104,20 @@
 }
 
 - (void)didUpdateProfile:(User *)user {
+     self.user = user;
     
     //convert age to a string
     NSNumber *userAge = user.age;
     NSString *ageInString = [userAge stringValue];
     
     //convert phone number to string
-    NSNumber *userNumber = user.phoneNumber;
+    NSNumber *userNumber = user.phoneNumber ;
     NSString *phoneNumberInString = [userNumber stringValue];
     
-    self.user = user;
     self.nameLabel.text = user.name;
-    self.ageLabel.text = ageInString;
-    self.contactNumberLabel.text = phoneNumberInString;
     self.bioLabel.text = user.biography;
+    self.contactNumberLabel.text = phoneNumberInString;
+    self.ageLabel.text = ageInString;
     NSLog(@"profile page name: %@", self.nameLabel.text);
     NSLog(@"profile page bio: %@", self.bioLabel.text);
     NSLog(@"didupdateProfile was called");

@@ -33,16 +33,19 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (void)selectProfilePic {
     UIImagePickerController *picker = [UIImagePickerController new];
     picker.delegate = self;
     picker.allowsEditing = YES;
     [self presentViewController:picker animated:YES completion:nil];
 }
+
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     NSLog(@"cancelled");
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     if(info[@"UIImagePickerControllerEditedImage"]){
         UIImage *profilePic = info[@"UIImagePickerControllerEditedImage"];
@@ -147,7 +150,6 @@
     NSNumber *phoneNum = [formatter numberFromString:self.userPhoneNumber.text];
     
     // save all the info to the profile page
-//    self.user = [[User alloc]initProfileWithInfo:self.userName.text withBio:self.bioInfo.text withAge:ageNumber withNumber:phoneNum];
     if(!self.user){
         self.user = [[User alloc] init];
     }
