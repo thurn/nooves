@@ -13,9 +13,9 @@
 
 @end
 
-@interface LocationPickerModalViewController : UIViewController <LocationPickerDelegate>
+@interface LocationPickerModalViewController : UIViewController
 
-@property (weak, nonatomic) id<LocationPickerDelegate>delegate;
+@property (weak, nonatomic) id<LocationPickerDelegate>locationDelegate;
 
 @property (nonatomic) NSDate *date;
 @property (nonatomic) ActivityType activityType;

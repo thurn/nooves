@@ -103,9 +103,7 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     NSLog(@"%@", self.location);
     NSLog(@"%@, %@", self.lat, self.lng);
     
-    [self locationsPickerModalViewController:self didPickLocationWithLatitude:self.lat longitude:self.lng location:self.location];
-    
-    // [self.delegate locationsPickerModalViewController:self didPickLocationWithLatitude:self.lat longitude:self.lng location:self.location];
+    [self.locationDelegate locationsPickerModalViewController:self didPickLocationWithLatitude:self.lat longitude:self.lng location:self.location];
     
     [self dismissViewControllerAnimated:NO completion:nil];
     
@@ -155,10 +153,6 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
 
 - (void)didTapBack {
     [self dismissViewControllerAnimated:true completion:nil];
-}
-
-- (void)locationsPickerModalViewController:(LocationPickerModalViewController *)controller didPickLocationWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude location:(NSString *)location {
-    [self.delegate locationsPickerModalViewController:self didPickLocationWithLatitude:self.lat longitude:self.lng location:self.location];
 }
 
 @end

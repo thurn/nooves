@@ -2,9 +2,11 @@
 #import "Post.h"
 
 @class DatePickerModalViewController;
+
 @protocol DatePickerDelegate
 
-- (void)didSelectWith:(DatePickerModalViewController *)dateController date:(NSDate *)date;
+- (void)datePickerModalViewController:(DatePickerModalViewController *)dateController
+                          didPickDate:(NSDate *)date;
 
 @end
 

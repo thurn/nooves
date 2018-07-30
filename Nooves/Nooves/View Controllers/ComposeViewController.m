@@ -7,7 +7,7 @@
 #import "TabBarController.h"
 #import "TimelineViewController.h"
 
-@interface ComposeViewController () <UITextViewDelegate, LocationPickerDelegate>
+@interface ComposeViewController () <UITextViewDelegate, LocationPickerDelegate, CategoryPickerDelegate>
 
 @property (nonatomic) UIPickerView *pickerView;
 
@@ -157,7 +157,7 @@
 // pass post data and jump to location picker view
 - (void)didSelectLocation {
     LocationPickerModalViewController *locationPicker = [LocationPickerModalViewController new];
-    locationPicker.delegate = self;
+    locationPicker.locationDelegate = self;
     UINavigationController *navCont = [[UINavigationController alloc] initWithRootViewController:locationPicker];
     [self presentViewController:navCont animated:YES completion:nil];
 }
@@ -177,12 +177,7 @@
 // pass post data and jump to category picker view
 - (void)didSelectCategory {
     CategoryPickerModalViewController *categoryPicker = [CategoryPickerModalViewController new];
-    categoryPicker.date = self.date;
-    categoryPicker.activityType = self.activityType;
-    categoryPicker.lat = self.lat;
-    categoryPicker.lng = self.lng;
-    categoryPicker.location = self.location;
-    
+    categoryPicker.categoryDelegate = self;
     UINavigationController *navCont = [[UINavigationController alloc] initWithRootViewController:categoryPicker];
     [self presentViewController:navCont animated:YES completion:nil];
 }
@@ -232,6 +227,12 @@
     self.lat = latitude;
     self.lng = longitude;
 
+    [self.navigationController popToViewController:self animated:YES];
+}
+
+- (void)categoryPickerModalViewController:(CategoryPickerModalViewController *)controller didPickActivityType:(ActivityType *)activity {
+    self.activityType = *(activity);
+    
     [self.navigationController popToViewController:self animated:YES];
 }
 

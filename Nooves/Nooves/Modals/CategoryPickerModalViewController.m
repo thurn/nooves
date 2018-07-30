@@ -1,7 +1,7 @@
 #import "CategoryPickerModalViewController.h"
 #import "ComposeViewController.h"
 
-@interface CategoryPickerModalViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface CategoryPickerModalViewController () <UIPickerViewDataSource, UIPickerViewDelegate, CategoryPickerDelegate>
 
 @property (nonatomic) NSArray *categories;
 @property (nonatomic) UIPickerView *pickerView;
@@ -58,13 +58,9 @@
 
 // passes post data and jumps back to composer view controller
 - (void)didTapSelectCategory{
-    ComposeViewController *composer = [[ComposeViewController alloc] init];
-    composer.date = self.date;
-    composer.activityType = self.activityType;
-    composer.lat = self.lat;
-    composer.lng = self.lng;
-    composer.location = self.location;
-    // [self.navigationController pushViewController:composer animated:YES];
+    
+    [self.categoryDelegate categoryPickerModalViewController:self didPickActivityType:(ActivityType *)self.activityType];
+    
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
