@@ -11,7 +11,8 @@
 @implementation LoginViewController
 
 - (void)viewDidLoad {
-    if(FIRAuth.auth.currentUser){
+    self.user = [FIRAuth auth].currentUser;
+    if(self.user!=nil){
         [self.navigationController pushViewController:[TimelineViewController new] animated:YES];
     }
     [super viewDidLoad];

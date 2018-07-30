@@ -21,7 +21,7 @@
                   withNumber: (NSNumber *)number;
 
 
-+ (void) saveUserProfile:(User *)user;
-+ (NSArray *)readUsersFromDatabase:(NSDictionary *)usersDict;
++ (void)saveUserProfile:(User *)user;
+- (instancetype)initFromDatabase:(NSDictionary *)usersDict;
 
 @end
