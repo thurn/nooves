@@ -13,12 +13,8 @@
 @interface DatePickerModalViewController : UIViewController
 
 @property (nonatomic, weak) id<DatePickerDelegate>dateDelegate;
-@property (nonatomic) UIDatePicker *datepicker;
-@property (nonatomic) NSDate *date;
 @property (nonatomic) ActivityType activityType;
-@property (nonatomic) NSNumber *lat;
-@property (nonatomic) NSNumber *lng;
-@property (nonatomic) NSString *location;
+@property (nonatomic) UIDatePicker *datepicker;
 @property (nonatomic) UITextField *eventTitle;
 @property (nonatomic) UITextView *eventDescription;
 

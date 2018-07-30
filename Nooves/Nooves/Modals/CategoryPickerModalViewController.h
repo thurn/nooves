@@ -13,11 +13,6 @@
 @interface CategoryPickerModalViewController : UIViewController
 
 @property (weak, nonatomic) id<CategoryPickerDelegate>categoryDelegate;
-
-@property (nonatomic) NSDate *date;
 @property (nonatomic) ActivityType activityType;
-@property (nonatomic) NSNumber *lat;
-@property (nonatomic) NSNumber *lng;
-@property (nonatomic) NSString *location;
 
 @end

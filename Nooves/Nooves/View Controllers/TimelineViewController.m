@@ -1,19 +1,11 @@
-//
-//  TimelineViewController.m
-//  Nooves
-//
-//  Created by Norette Ingabire on 7/17/18.
-//  Copyright © 2018 Nikki Tran. All rights reserved.
-//
-
 #import "AppDelegate.h"
 #import "ComposeViewController.h"
 #import "FilterViewController.h"
+#import <FIRDatabase.h>
 #import "PostCell.h"
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
 #import "TimelineViewController.h"
-#import <FIRDatabase.h>
 
 @interface TimelineViewController ()
 @end

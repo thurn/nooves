@@ -42,10 +42,12 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     [self.tableView reloadData];
 }
 
+// hides tab bar
 - (void)viewWillAppear: (BOOL)animated {
     self.hidesBottomBarWhenPushed = YES;
 }
 
+// table view property configuration
 - (void)configureTableView {
     CGFloat x = 0;
     CGFloat y = 0;
@@ -89,6 +91,7 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     return cell;
 }
 
+// sets cell height
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 50;
@@ -141,6 +144,7 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     [task resume];
 }
 
+// back button
 - (UIBarButtonItem *)goBack {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon"]
                                                                    style:UIBarButtonItemStylePlain
@@ -151,6 +155,7 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
     return backButton;
 }
 
+// goes back to parent controller
 - (void)didTapBack {
     [self dismissViewControllerAnimated:true completion:nil];
 }
