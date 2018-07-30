@@ -208,10 +208,7 @@ CategoryPickerDelegate, DatePickerDelegate>
 
 // jumps back to root view controller
 - (void)didTapBack {
-    TimelineViewController *timeline = [[TimelineViewController alloc] init];
-    // timeline.hidesBottomBarWhenPushed = NO;
-    [self.navigationController pushViewController:timeline animated:YES];
-    NSLog(@"User pressed to go back");
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 // sets up post button properties

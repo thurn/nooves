@@ -157,7 +157,6 @@ UISearchBarDelegate>
                                                                   target:self
                                                                   action:@selector(didTapBack)];
     self.navigationItem.leftBarButtonItem = backButton;
-    
     return backButton;
 }
 
