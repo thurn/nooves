@@ -21,6 +21,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"New Event";
+    self.tabBarController.tabBar.hidden = YES;
     
     self.lat = [[NSNumber alloc] init];
     self.lng = [[NSNumber alloc] init];
@@ -33,7 +34,39 @@
     self.eventTitle.borderStyle = UITextBorderStyleRoundedRect;
     self.eventTitle.textColor = UIColor.grayColor;
     
-    // set location display label properties
+    // set event description properties
+    self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 150, 1000, 150)];
+    self.eventDescription.delegate = self;
+    self.eventDescription.text = @"Add a description";
+    self.eventDescription.textColor = UIColor.grayColor;
+    
+    CGRect contentRect = CGRectZero;
+
+    for (UIView *view in self.view.subviews) {
+        contentRect = CGRectUnion(contentRect, view.frame);
+    }
+
+    // add components to view
+    [self.view addSubview:self.eventTitle];
+    [self.view addSubview:self.eventDescription];
+    
+    [self.view addSubview:[self selectDate]];
+    [self.view addSubview:[self selectCategory]];
+    [self.view addSubview:[self selectLocation]];
+    
+    // add tab bar buttons to controller
+    [self postButton];
+    [self goBack];
+    
+    [self becomeFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    self.tabBarController.tabBar.hidden = NO;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    // set location display properties
     UILabel *locationLabel = [[UILabel alloc] init];
     NSString *locationColon = @"Location: ";
     locationLabel.frame = CGRectMake(10, 440, 100, 100);
@@ -51,7 +84,7 @@
     NSString *activity = [Post activityTypeToString:self.activityType];
     activityLabel.text = [activityColon stringByAppendingString:activity];
     [activityLabel sizeToFit];
-
+    
     // set date display label properties
     UILabel *dateLabel = [[UILabel alloc] init];
     NSString *dateColon = @"Date: ";
@@ -66,41 +99,10 @@
         dateLabel.text = dateColon;
     }
     [dateLabel sizeToFit];
-    [self.view addSubview:dateLabel];
     
-    // set event description properties
-    self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 150, 1000, 150)];
-    self.eventDescription.delegate = self;
-    self.eventDescription.text = @"Add a description";
-    self.eventDescription.textColor = UIColor.grayColor;
-    
-    CGRect contentRect = CGRectZero;
-
-    for (UIView *view in self.view.subviews) {
-        contentRect = CGRectUnion(contentRect, view.frame);
-    }
-
-    // add components to view
-    [self.view addSubview:self.eventTitle];
-    [self.view addSubview:self.eventDescription];
-    [self.view addSubview:activityLabel];
-    [self.view addSubview:[self selectDate]];
     [self.view addSubview:dateLabel];
-    [self.view addSubview:[self selectCategory]];
-    [self.view addSubview:[self selectLocation]];
     [self.view addSubview:locationLabel];
-    
-    self.tabBarController.tabBar.hidden = YES;
-    
-    // add tab bar buttons to controller
-    [self postButton];
-    [self goBack];
-    
-    [self becomeFirstResponder];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    self.tabBarController.tabBar.hidden = NO;
+    [self.view addSubview:activityLabel];
 }
 
 // checks to see if user is editing event description and changes text color if true
