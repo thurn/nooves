@@ -1,4 +1,3 @@
-#import "ComposeViewController.h"
 #import "DatePickerModalViewController.h"
 
 @interface DatePickerModalViewController()
@@ -10,21 +9,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBarHidden = NO;
     
-    // set date picker properties
+    // sets date picker properties
     self.datepicker = [[UIDatePicker alloc]init];
     self.datepicker.frame = CGRectMake(10.0, 50.0, self.view.frame.size.width, 200);
     self.datepicker.timeZone = [NSTimeZone localTimeZone];
     self.datepicker.backgroundColor = [UIColor whiteColor];
     
+    // instantiates button and its properties
     UIButton *selectedDate = [self selectDate];
     selectedDate.frame = CGRectMake(10.0, 300.0, 20, 30);
-    
     [selectedDate sizeToFit];
+    
+    // add components to view
     [self.view addSubview:selectedDate];
     [self.view addSubview:self.datepicker];
-    self.tabBarController.tabBar.hidden = YES;
     [self goBack];
 }
 
@@ -37,7 +36,9 @@
 - (UIButton *)selectDate {
     UIButton *selectDate = [UIButton buttonWithType:UIButtonTypeSystem];
     [selectDate setTitle:@"Select Date" forState:UIControlStateNormal];
-    [selectDate addTarget:self action:@selector(didSelectDate) forControlEvents:UIControlEventTouchUpInside];
+    [selectDate addTarget:self
+                   action:@selector(didSelectDate)
+         forControlEvents:UIControlEventTouchUpInside];
     [selectDate sizeToFit];
     return selectDate;
 }
@@ -50,12 +51,12 @@
 
 // back button
 - (UIBarButtonItem *)goBack {
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon"]
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(didTapBack)];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                   initWithImage:[UIImage imageNamed:@"back-icon"]
+                                           style:UIBarButtonItemStylePlain
+                                          target:self
+                                         action:@selector(didTapBack)];
     self.navigationItem.leftBarButtonItem = backButton;
-    
     return backButton;
 }
 
