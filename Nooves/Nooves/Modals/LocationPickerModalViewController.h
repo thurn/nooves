@@ -1,4 +1,3 @@
-#import <CoreLocation/CoreLocation.h>
 #import <UIKit/UIKit.h>
 
 #import "Post.h"
@@ -15,11 +14,9 @@
 
 @end
 
-@interface LocationPickerModalViewController : UIViewController <CLLocationManagerDelegate>
+@interface LocationPickerModalViewController : UIViewController
 
 @property (weak, nonatomic) id<LocationPickerDelegate> locationDelegate;
-
-@property (nonatomic, readonly) CLLocationManager *userLocation;
 
 @property (nonatomic) NSNumber *lat;
 @property (nonatomic) NSNumber *lng;
