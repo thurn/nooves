@@ -22,7 +22,6 @@
     if(self.post){
         // set up the date field
         self.dateField = [[UILabel alloc]init];
-        self.dateField.hidden = NO;
         [self.dateField sizeToFit];
         [self.contentView addSubview:self.dateField];
         [self.dateField autoPinEdgeToSuperviewMargin:ALEdgeLeft];
@@ -30,7 +29,6 @@
         
         //self up the event title field
         self.eventTitleField = [[UILabel alloc]init];
-        self.eventTitleField.hidden = NO;
         [self.eventTitleField sizeToFit];
         [self.contentView addSubview:self.eventTitleField];
         [self.eventTitleField autoPinEdgeToSuperviewMargin:ALEdgeTop];
@@ -38,7 +36,6 @@
         
         // set up the activity description field
         self.activityDescriptionField = [[UILabel alloc]init];
-        self.activityDescriptionField.hidden = NO;
         [self.activityDescriptionField sizeToFit];
         [self.contentView addSubview:self.activityDescriptionField];
         [self.activityDescriptionField autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.eventTitleField withOffset:10.0f];
@@ -47,7 +44,6 @@
         
         // set up activityType
         self.activityTypeField = [[UILabel alloc]init];
-        self.activityTypeField.hidden = NO;
         [self.activityTypeField sizeToFit];
         [self.contentView addSubview:self.activityTypeField];
         [self.activityTypeField autoPinEdgeToSuperviewMargin:ALEdgeTop];

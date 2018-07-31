@@ -34,7 +34,6 @@
         }
     }];
     [self configureProfile];
-    self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"Profile";
 }
 
