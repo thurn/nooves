@@ -27,6 +27,18 @@
         if (![snapshot.value isEqual:[NSNull null]]) {
             self.user = [[User alloc] initFromDatabase:usersDictionary];
             [self didUpdateProfile];
+            if (![self.user.profilePicURL isEqualToString:@"nil"]){
+                NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:self.user.profilePicURL] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                    if(error){
+                        NSLog(@"%@", error);
+                        return;
+                    }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.profilePicture.image = [UIImage imageWithData:data];
+                    });
+                }];
+                [task resume];
+            }
         }
         else {
             FIRDatabaseReference *userRef = [[reference child:@"Users"]child:[FIRAuth auth].currentUser.uid];

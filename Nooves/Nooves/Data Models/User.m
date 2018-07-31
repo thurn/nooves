@@ -25,6 +25,7 @@
     self.biography = usersDict[@"Bio"];
     self.name = usersDict[@"Name"];
     self.phoneNumber = usersDict[@"PhoneNumber"];
+    self.profilePicURL = usersDict[@"ProfilePicURL"];
     return self;
 }
 

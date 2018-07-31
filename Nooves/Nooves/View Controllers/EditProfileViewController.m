@@ -11,16 +11,43 @@
 @property(strong, nonatomic) UITextField *age;
 @property(strong, nonatomic) UITextField *userPhoneNumber;
 @property(strong, nonatomic) UIBarButtonItem *saveProfile;
-@property(nonatomic) User *user;
-
+@property(strong, nonatomic) User *user;
+@property(nonatomic) BOOL picEdited;
 @end
 
 @implementation EditProfileViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    FIRDatabaseReference *reference = [[FIRDatabase database]reference];
+    FIRDatabaseHandle *databaseHandle = [[[reference child:@"Users"]child:[FIRAuth auth].currentUser.uid]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        NSDictionary *usersDictionary= snapshot.value;
+        if (![snapshot.value isEqual:[NSNull null]]) {
+            self.user = [[User alloc] initFromDatabase:usersDictionary];
+            self.age.text = [self.user.age stringValue];
+            self.bioInfo.text = self.user.biography;
+            self.userName.text = self.user.name;
+            self.userPhoneNumber.text = [self.user.phoneNumber stringValue];
+            if (![self.user.profilePicURL isEqualToString:@"nil"]){
+                NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:self.user.profilePicURL] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                    if(error){
+                        NSLog(@"%@", error);
+                        return;
+                    }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.profilePic.image = [UIImage imageWithData:data];
+                    });
+                }];
+                [task resume];
+            }
+        }
+        else {
+            FIRDatabaseReference *userRef = [[reference child:@"Users"]child:[FIRAuth auth].currentUser.uid];
+            [userRef setValue:@{@"Age":@(0), @"Bio":@"nil", @"Name":[FIRAuth auth].currentUser.displayName,@"PhoneNumber":@(0), @"ProfilePicURL":@"nil"}];
+        }
+    }];
     // Do any additional setup after loading the view.
-    
+    self.picEdited = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     [self configureView];
     self.navigationController.navigationBarHidden = NO;
@@ -48,6 +75,7 @@
     if(info[@"UIImagePickerControllerEditedImage"]){
         UIImage *profilePic = info[@"UIImagePickerControllerEditedImage"];
         self.profilePic.image = profilePic;
+        self.picEdited = YES;
         NSData *picRef = UIImagePNGRepresentation(profilePic);
         FIRStorageReference *ref = [[[FIRStorage storage] reference] child:[FIRAuth auth].currentUser.uid];
         [ref putData:picRef metadata:nil completion:^(FIRStorageMetadata * _Nullable metadata, NSError * _Nullable error) {
