@@ -6,7 +6,7 @@
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
 #import "TimelineViewController.h"
-
+#import "PostDetailsViewController.h"
 @interface TimelineViewController ()
 @end
 
@@ -84,7 +84,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Change the selected background view of the cell
+    Post *pickedPost = self.firArray[indexPath.row];
+    PostDetailsViewController *postDetail = [[PostDetailsViewController alloc] initFromTimeline:pickedPost];
+    [self.navigationController pushViewController:postDetail animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
