@@ -1,6 +1,7 @@
 #import "EditProfileViewController.h"
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
+#import "User.h"
 
 @interface ProfileViewController () <editProfileDelegate>
 
@@ -10,31 +11,31 @@
 @property(strong, nonatomic) UILabel *ageLabel;
 @property(strong, nonatomic) UILabel *contactNumberLabel;
 @property(strong, nonatomic) UIButton *editProfile;
-@property(nonatomic) User *user;
-@property(strong, nonatomic) NSDictionary *usersDictionary;
+@property(strong, nonatomic) User *user;
 
 @end
 
 @implementation ProfileViewController
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     // set the database reference
     FIRDatabaseReference *reference = [[FIRDatabase database]reference];
-    FIRDatabaseHandle *databaseHandle = [[reference child:@"Users"]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    FIRDatabaseHandle *databaseHandle = [[[reference child:@"Users"]child:[FIRAuth auth].currentUser.uid]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        NSDictionary *usersDictionary= snapshot.value;
+        if (![snapshot.value isEqual:[NSNull null]]) {
+            self.user = [[User alloc] initFromDatabase:usersDictionary];
+            [self didUpdateProfile];
+        }
+        else {
+            FIRDatabaseReference *userRef = [[reference child:@"Users"]child:[FIRAuth auth].currentUser.uid];
+            [userRef setValue:@{@"Age":@(0), @"Bio":@"nil", @"Name":[FIRAuth auth].currentUser.displayName,@"PhoneNumber":@(0), @"ProfilePicURL":@"nil"}];
+        }
     }];
-    
-    self.view.backgroundColor = [UIColor whiteColor];
     [self configureProfile];
-    
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"Profile";
-    
-    if (!self.usersArray) {
-        self.usersArray = [[NSMutableArray alloc]init];
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,12 +43,19 @@
 }
 
 - (void)configureProfile {
+    // set the background color
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    if (!self.user) {
+        self.user = [[User alloc]init];
+        self.user.name = [FIRAuth auth].currentUser.displayName;
+        self.user.biography = @"Bio";
+    }
     
     // set up the profile picture field
     self.profilePicture = [[UIImageView alloc]initWithFrame:CGRectMake(10, 80, 100, 100)];
     [self.profilePicture setImage:[UIImage imageNamed:@"profile-blank"]];
     [self.profilePicture sizeToFit];
-    
     
     //set up the name label field
     self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(150, 80, 30, 30)];
@@ -82,7 +90,7 @@
     [self.view addSubview:self.ageLabel];
     [self.view addSubview:self.contactNumberLabel];
     [self.view addSubview:self.bioLabel];
-    [self.view addSubview:self.editProfile];    
+    [self.view addSubview:self.editProfile];
 }
 
 - (void)didTapEditProfile {
@@ -90,26 +98,27 @@
     [self.navigationController pushViewController:newProfile animated:YES];
 }
 
-- (void)didUpdateProfile:(User *)user {
+- (void)didUpdateProfile {
+    self.nameLabel.text = self.user.name;
+    self.bioLabel.text = self.user.biography;
     
     //convert age to a string
-    NSNumber *userAge = user.age;
-    NSString *ageInString = [userAge stringValue];
+    if (![self.user.age isEqualToNumber:@(0)]){
+        NSNumber *userAge = self.user.age;
+        NSString *ageInString = [userAge stringValue];
+        self.ageLabel.text = ageInString;
+    }
+    //convert phone number to a string
+    if (![self.user.phoneNumber isEqualToNumber:@(0)]){
+        NSNumber *userNumber = self.user.phoneNumber ;
+        NSString *phoneNumberInString = [userNumber stringValue];
+        self.contactNumberLabel.text = phoneNumberInString;
+    }
     
-    //convert phone number to string
-    NSNumber *userNumber = user.phoneNumber;
-    NSString *phoneNumberInString = [userNumber stringValue];
-    
-    self.user = user;
-    self.nameLabel.text = user.name;
-    self.ageLabel.text = ageInString;
-    self.contactNumberLabel.text = phoneNumberInString;
-    self.bioLabel.text = user.biography;
-    NSLog(@"profile page name: %@", self.nameLabel.text);
-    NSLog(@"profile page bio: %@", self.bioLabel.text);
-    NSLog(@"didupdateProfile was called");
+    [self.nameLabel sizeToFit];
+    [self.bioLabel sizeToFit];
+    [self.contactNumberLabel sizeToFit];
+    [self.ageLabel sizeToFit];
 }
-
-
 
 @end

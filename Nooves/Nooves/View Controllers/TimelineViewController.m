@@ -1,19 +1,11 @@
-//
-//  TimelineViewController.m
-//  Nooves
-//
-//  Created by Norette Ingabire on 7/17/18.
-//  Copyright © 2018 Nikki Tran. All rights reserved.
-//
-
 #import "AppDelegate.h"
 #import "ComposeViewController.h"
 #import "FilterViewController.h"
+#import <FIRDatabase.h>
 #import "PostCell.h"
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
 #import "TimelineViewController.h"
-#import <FIRDatabase.h>
 
 @interface TimelineViewController ()
 @end
@@ -27,8 +19,9 @@
     [super viewWillAppear:YES];
 }
 - (void)viewDidLoad {
-
     [super viewDidLoad];
+    self.tabBarController.hidesBottomBarWhenPushed = NO;
+    
     FIRDatabaseReference * ref =[[FIRDatabase database] reference];
     FIRDatabaseHandle *handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSDictionary *postsDict = snapshot.value;
@@ -53,10 +46,6 @@
     [self filterResults];
     
     [tableView registerClass:[PostCell class] forCellReuseIdentifier:@"postCellIdentifier"];
-
-    // set up the search bar
-    // UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 70, 320, 44)];
-    //[tableView setTableHeaderView:searchBar];
 }
 
 - (UITableView *)configureTableView {

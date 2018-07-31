@@ -1,11 +1,3 @@
-//
-//  FilterViewController.m
-//  Nooves
-//
-//  Created by Nikki Tran on 7/19/18.
-//  Copyright © 2018 Nikki Tran. All rights reserved.
-//
-
 #import "ComposeViewController.h"
 #import "FilterCell.h"
 #import "FilterViewController.h"
@@ -135,14 +127,14 @@
         }
     }
 
-    for (Post *post in self.tempPostsArray) {
-        for (NSString *activity in self.selectedCategories) {
-            ActivityType tagType = [Post stringToActivityType:activity];
-            if (post.activityType == tagType) {
-                [self.filteredData addObject:post];
-            }
-        }
-    }
+//    for (Post *post in self.tempPostsArray) {
+//        for (NSString *activity in self.selectedCategories) {
+//            ActivityType tagType = [Post stringToActivityType:activity];
+//            if (post.activityType == tagType) {
+//                [self.filteredData addObject:post];
+//            }
+//        }
+//    }
     
     TimelineViewController *feed = [[TimelineViewController alloc]init];
     feed.tempPostsArray = self.filteredData;

@@ -1,87 +1,40 @@
-//
-//  Post.m
-//  Nooves
-//
-//  Created by Norette Ingabire on 7/16/18.
-//  Copyright © 2018 Nikki Tran. All rights reserved.
-//
-
-#import "Post.h"
 #import <FIRDatabase.h>
 #import <FIRAuth.h>
-#import "LoginViewController.h"
 #import <FirebaseAuth.h>
+#import "Post.h"
+#import "LoginViewController.h"
 @implementation Post
 
 + (NSString *)activityTypeToString:(ActivityType) activityType{
     switch (activityType) {
-        case Outdoors:
+        case ActivityTypeOutdoors:
             return @"Outdoors";
-        case Shopping:
+        case ActivityTypeShopping:
             return @"Shopping";
-        case Partying:
+        case ActivityTypePartying:
             return @"Partying";
-        case Eating:
+        case ActivityTypeEating:
             return @"Eating";
-        case Arts:
+        case ActivityTypeArts:
             return @"Arts";
-        case Sports:
+        case ActivityTypeSports:
             return @"Sports";
-        case Networking:
+        case ActivityTypeNetworking:
             return @"Networking";
-        case Fitness:
+        case ActivityTypeFitness:
             return @"Fitness";
-        case Games:
+        case ActivityTypeGames:
             return @"Games";
-        case Concert:
+        case ActivityTypeConcert:
             return @"Concert";
-        case Cinema:
+        case ActivityTypeCinema:
             return @"Cinema";
-        case Festival:
+        case ActivityTypeFestival:
             return @"Festival";
         default:
             return @"Other";
     }
 };
-+ (ActivityType)stringToActivityType:(NSString *)activityString {
-    if([activityString isEqualToString:@"Outdoors"]) {
-        return Outdoors;
-    }
-    else if([activityString isEqualToString:@"Shopping"]) {
-        return Shopping;
-    }
-    else if([activityString isEqualToString:@"Partying"]){
-        return Partying;
-    }
-    else if([activityString isEqualToString:@"Eating"]) {
-        return Eating;
-    }
-    else if([activityString isEqualToString:@"Arts"]) {
-        return Arts;
-    }
-    else if([activityString isEqualToString:@"Sports"]) {
-        return Sports;
-    }
-    else if([activityString isEqualToString:@"Networking"]) {
-        return Networking;
-    }
-    else if([activityString isEqualToString:@"Fitness"]){
-        return Fitness;
-    }
-    else if([activityString isEqualToString:@"Games"]) {
-        return Games;
-    }
-    else if([activityString isEqualToString:@"Concert"]) {
-        return Concert;
-    }
-    else if([activityString isEqualToString:@"Cinema"]) {
-        return Cinema;
-    }
-    else if([activityString isEqualToString:@"Festival"]) {
-        return Festival;
-    }
-    return Other;
-}
 
 - (instancetype)initPostWithDetails:(NSDate *)eventDate
                           withTitle:(NSString *)postTitle
@@ -110,9 +63,9 @@
     int timestamp = [post.activityDateAndTime timeIntervalSince1970];
     NSNumber *dateAndTimeStamp = @(timestamp);
     NSNumber *activityType = @(post.activityType);
-    post.ref = [[FIRDatabase database] reference];
-    FIRDatabaseReference *ref = [[[post.ref child:@"Posts"] child:[FIRAuth auth].currentUser.uid] childByAutoId];
-    [ref setValue:@{@"Date":dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription, @"Latitude":post.activityLat, @"Longitude":post.activityLng}];
+    FIRDatabaseReference *ref = [[FIRDatabase database] reference];
+    FIRDatabaseReference *reffy = [[[ref child:@"Posts"] child:[FIRAuth auth].currentUser.uid] childByAutoId];
+    [reffy setValue:@{@"Date":dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription, @"Latitude":post.activityLat, @"Longitude":post.activityLng}];
 }
 + (NSArray *)readPostsFromFIRDict:(NSDictionary *)postsDict{
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];

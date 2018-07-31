@@ -1,15 +1,8 @@
-//
-//  EditProfileViewController.m
-//  Nooves
-//
-//  Created by Norette Ingabire on 7/25/18.
-//  Copyright © 2018 Nikki Tran. All rights reserved.
-//
-
 #import "EditProfileViewController.h"
 #import "ProfileViewController.h"
 #import <FIRStorage.h>
 #import "User.h"
+
 @interface EditProfileViewController () <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property(strong, nonatomic) UIImageView *profilePic;
@@ -18,7 +11,8 @@
 @property(strong, nonatomic) UITextField *age;
 @property(strong, nonatomic) UITextField *userPhoneNumber;
 @property(strong, nonatomic) UIBarButtonItem *saveProfile;
-@property(strong, nonatomic) User *myUser;
+@property(nonatomic) User *user;
+
 @end
 
 @implementation EditProfileViewController
@@ -29,10 +23,6 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self configureView];
-    if (!self.usersArray) {
-        self.usersArray = [[NSMutableArray alloc]init];
-    }
-    
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"Edit Profile";
 }
@@ -41,16 +31,19 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (void)selectProfilePic {
     UIImagePickerController *picker = [UIImagePickerController new];
     picker.delegate = self;
     picker.allowsEditing = YES;
     [self presentViewController:picker animated:YES completion:nil];
 }
+
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     NSLog(@"cancelled");
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     if(info[@"UIImagePickerControllerEditedImage"]){
         UIImage *profilePic = info[@"UIImagePickerControllerEditedImage"];
@@ -117,8 +110,7 @@
     // set up the save profile button
     self.saveProfile = [[UIBarButtonItem alloc]init];
     self.saveProfile.title = @"Done";
-    self.navigationItem.rightBarButtonItem = self.saveProfile;
-    
+    self.navigationItem.rightBarButtonItem = self.saveProfile;    
     self.saveProfile.target = self;
     self.saveProfile.action = @selector(didTapSaveProfile);
     
@@ -147,7 +139,6 @@
 }
 
 - (void)didTapSaveProfile {
-    
     // convert 'age' and 'phone number' to NSNumber
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
     formatter.numberStyle = NSNumberFormatterDecimalStyle;
@@ -155,17 +146,12 @@
     NSNumber *phoneNum = [formatter numberFromString:self.userPhoneNumber.text];
     
     // save all the info to the profile page
-//    self.user = [[User alloc]initProfileWithInfo:self.userName.text withBio:self.bioInfo.text withAge:ageNumber withNumber:phoneNum];
-    
-    if(!self.user){
+    if (!self.user){
         self.user = [[User alloc] init];
     }
     [self.user addToProfileWithInfo:self.userName.text withBio:self.bioInfo.text withAge:ageNumber withNumber:phoneNum];
-    [self.delegate didUpdateProfile:self.user];
     [self.navigationController popViewControllerAnimated:YES];
-    
     [User saveUserProfile:self.user];
-    NSLog(@"calling didUpdateProfile");
 }
 
 @end

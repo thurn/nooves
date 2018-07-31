@@ -1,5 +1,5 @@
 #import "CategoryPickerModalViewController.h"
-#import "ComposeViewController.h"
+#import "Post.h"
 
 @interface CategoryPickerModalViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
@@ -15,8 +15,6 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
-
-    self.categories = @[@"Outdoors", @"Shopping", @"Partying", @"Eating", @"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
     
     // instantiate picker view
     self.pickerView = [[UIPickerView alloc] init];
@@ -33,17 +31,15 @@
     selectedCategory.frame = CGRectMake(10.0, 250.0, 20, 30);
     [selectedCategory sizeToFit];
     
-    self.tabBarController.tabBar.hidden = YES;
-    
     // add components to view
     [self.view addSubview:self.pickerView];
     [self.view addSubview:self.categoryLabel];
     [self.view addSubview:selectedCategory];
-    
     [self goBack];
 }
 
-- (void)viewWillAppear: (BOOL)animated {
+// hides tab bar
+- (void)viewWillAppear:(BOOL)animated {
     self.hidesBottomBarWhenPushed = YES;
 }
 
@@ -51,20 +47,19 @@
 - (UIButton *)selectCategory{
     UIButton *selectCategory = [UIButton buttonWithType:UIButtonTypeSystem];
     [selectCategory setTitle:@"Select category" forState:UIControlStateNormal];
-    [selectCategory addTarget:self action:@selector(didTapSelectCategory) forControlEvents:UIControlEventTouchUpInside];
+    [selectCategory addTarget:self
+                       action:@selector(didTapSelectCategory)
+             forControlEvents:UIControlEventTouchUpInside];
     [selectCategory sizeToFit];
     return selectCategory;
 }
 
 // passes post data and jumps back to composer view controller
 - (void)didTapSelectCategory{
-    ComposeViewController *composer = [[ComposeViewController alloc] init];
-    composer.date = self.date;
-    composer.activityType = self.activityType;
-    composer.lat = self.lat;
-    composer.lng = self.lng;
-    composer.location = self.location;
-    // [self.navigationController pushViewController:composer animated:YES];
+    
+    [self.categoryDelegate categoryPickerModalViewController:self
+                                         didPickActivityType:(ActivityType *)self.activityType];
+    
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
@@ -73,40 +68,44 @@
     return 1;
 }
 
-// returns the array count
+// returns the array count to determine rows in picker view
 - (NSInteger)pickerView:(UIPickerView *)pickerView
 numberOfRowsInComponent:(NSInteger)component {
-    return self.categories.count;
+    
+    return ActivityTypeOther+1;
 }
 
-// returns the array at each row
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return self.categories[row];
+// returns the array element at each row
+- (NSString *)pickerView:(UIPickerView *)pickerView
+             titleForRow:(NSInteger)row
+            forComponent:(NSInteger)component {
+    
+    return [Post activityTypeToString:row];
 }
 
 // assigns the selected category from picker view to label and activity type
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    self.categoryLabel.text = self.categories[row];
-    ActivityType type = [Post stringToActivityType:self.categoryLabel.text];
-    self.activityType = type;
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
+                                               inComponent:(NSInteger)component {
+
+    self.categoryLabel.text = [Post activityTypeToString:row];
+    self.activityType = row;
 }
 
+// back button
+// goBack --> createBackButton
 - (UIBarButtonItem *)goBack {
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon"]
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(didTapBack)];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                   initWithImage:[UIImage imageNamed:@"back-icon"]
+                                           style:UIBarButtonItemStylePlain
+                                          target:self
+                                         action:@selector(didTapBack)];
     self.navigationItem.leftBarButtonItem = backButton;
-    
     return backButton;
 }
 
+// goes back to parent contoller
 - (void)didTapBack {
     [self dismissViewControllerAnimated:true completion:nil];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 @end
