@@ -48,7 +48,7 @@
     }];
     // Do any additional setup after loading the view.
     self.picEdited = NO;
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor whiteColor];\
     [self configureView];
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"Edit Profile";

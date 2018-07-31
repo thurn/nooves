@@ -23,7 +23,7 @@
     // set the database reference
     FIRDatabaseReference *reference = [[FIRDatabase database]reference];
     FIRDatabaseHandle *databaseHandle = [[[reference child:@"Users"]child:[FIRAuth auth].currentUser.uid]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        NSDictionary *usersDictionary= snapshot.value;
+        NSDictionary *usersDictionary = snapshot.value;
         if (![snapshot.value isEqual:[NSNull null]]) {
             self.user = [[User alloc] initFromDatabase:usersDictionary];
             [self didUpdateProfile];
