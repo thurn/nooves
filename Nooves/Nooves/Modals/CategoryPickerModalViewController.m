@@ -39,7 +39,7 @@
 }
 
 // hides tab bar
-- (void)viewWillAppear: (BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     self.hidesBottomBarWhenPushed = YES;
 }
 
@@ -88,11 +88,11 @@ numberOfRowsInComponent:(NSInteger)component {
                                                inComponent:(NSInteger)component {
 
     self.categoryLabel.text = [Post activityTypeToString:row];
-    ActivityType type = row;
-    self.activityType = type;
+    self.activityType = row;
 }
 
 // back button
+// goBack --> createBackButton
 - (UIBarButtonItem *)goBack {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
                                    initWithImage:[UIImage imageNamed:@"back-icon"]

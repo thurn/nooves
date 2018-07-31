@@ -13,7 +13,7 @@
 
 @interface CategoryPickerModalViewController : UIViewController
 
-@property (weak, nonatomic) id<CategoryPickerDelegate>categoryDelegate;
+@property (weak, nonatomic) id<CategoryPickerDelegate> categoryDelegate;
 
 @property (nonatomic) ActivityType activityType;
 

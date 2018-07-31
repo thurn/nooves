@@ -17,7 +17,7 @@
 
 @interface LocationPickerModalViewController : UIViewController
 
-@property (weak, nonatomic) id<LocationPickerDelegate>locationDelegate;
+@property (weak, nonatomic) id<LocationPickerDelegate> locationDelegate;
 
 @property (nonatomic) NSNumber *lat;
 @property (nonatomic) NSNumber *lng;

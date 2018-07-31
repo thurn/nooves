@@ -127,14 +127,14 @@
         }
     }
 
-    for (Post *post in self.tempPostsArray) {
-        for (NSString *activity in self.selectedCategories) {
-            ActivityType tagType = [Post stringToActivityType:activity];
-            if (post.activityType == tagType) {
-                [self.filteredData addObject:post];
-            }
-        }
-    }
+//    for (Post *post in self.tempPostsArray) {
+//        for (NSString *activity in self.selectedCategories) {
+//            ActivityType tagType = [Post stringToActivityType:activity];
+//            if (post.activityType == tagType) {
+//                [self.filteredData addObject:post];
+//            }
+//        }
+//    }
     
     TimelineViewController *feed = [[TimelineViewController alloc]init];
     feed.tempPostsArray = self.filteredData;

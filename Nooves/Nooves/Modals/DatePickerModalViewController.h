@@ -14,7 +14,7 @@
 
 @interface DatePickerModalViewController : UIViewController
 
-@property (nonatomic, weak) id<DatePickerDelegate>dateDelegate;
+@property (nonatomic, weak) id<DatePickerDelegate> dateDelegate;
 
 @property (nonatomic) UIDatePicker *datepicker;
 
