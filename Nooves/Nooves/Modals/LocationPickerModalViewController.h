@@ -15,9 +15,11 @@
 
 @end
 
-@interface LocationPickerModalViewController : UIViewController
+@interface LocationPickerModalViewController : UIViewController <CLLocationManagerDelegate>
 
 @property (weak, nonatomic) id<LocationPickerDelegate> locationDelegate;
+
+@property (nonatomic, readonly) CLLocationManager *userLocation;
 
 @property (nonatomic) NSNumber *lat;
 @property (nonatomic) NSNumber *lng;

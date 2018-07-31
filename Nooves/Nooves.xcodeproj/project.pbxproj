@@ -25,6 +25,7 @@
 		CE57768B21064FDA00C7637C /* LocationPickerModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57768A21064FDA00C7637C /* LocationPickerModalViewController.m */; };
 		CE57768F210654E400C7637C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE57768E210654E400C7637C /* CoreLocation.framework */; };
 		CE57769221068ADB00C7637C /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57769121068ADB00C7637C /* LocationCell.m */; };
+		CEAC590A211100A500C08A74 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEAC5909211100A500C08A74 /* MapKit.framework */; };
 		CED91F6C2101305000E0E2F6 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F6A2101304F00E0E2F6 /* TabBarController.m */; };
 		CED91F6F2101306800E0E2F6 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F6D2101306800E0E2F6 /* ProfileViewController.m */; };
 		CED91F77210132DC00E0E2F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CED91F76210132DC00E0E2F6 /* GoogleService-Info.plist */; };
@@ -92,6 +93,7 @@
 		CE57768E210654E400C7637C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CE57769021068ADB00C7637C /* LocationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationCell.h; sourceTree = "<group>"; };
 		CE57769121068ADB00C7637C /* LocationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationCell.m; sourceTree = "<group>"; };
+		CEAC5909211100A500C08A74 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CED91F6A2101304F00E0E2F6 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		CED91F6B2101305000E0E2F6 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		CED91F6D2101306800E0E2F6 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEAC590A211100A500C08A74 /* MapKit.framework in Frameworks */,
 				CE57768F210654E400C7637C /* CoreLocation.framework in Frameworks */,
 				843CEC35ED5431BAB141B183 /* libPods-Nooves.a in Frameworks */,
 			);
@@ -197,6 +200,7 @@
 		C3E0F500FA123CF05118A408 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CEAC5909211100A500C08A74 /* MapKit.framework */,
 				CE57768E210654E400C7637C /* CoreLocation.framework */,
 				490196513151D701FAFA5567 /* libPods-Nooves.a */,
 				7EAC0FF4AA347803CC4295B8 /* libPods-NoovesTests.a */,
