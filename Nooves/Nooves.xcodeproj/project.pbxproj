@@ -26,6 +26,7 @@
 		CE57768F210654E400C7637C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE57768E210654E400C7637C /* CoreLocation.framework */; };
 		CE57769221068ADB00C7637C /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57769121068ADB00C7637C /* LocationCell.m */; };
 		CEAC590A211100A500C08A74 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEAC5909211100A500C08A74 /* MapKit.framework */; };
+		CEAC590D2111118700C08A74 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAC590C2111118700C08A74 /* LocationManager.m */; };
 		CED91F6C2101305000E0E2F6 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F6A2101304F00E0E2F6 /* TabBarController.m */; };
 		CED91F6F2101306800E0E2F6 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F6D2101306800E0E2F6 /* ProfileViewController.m */; };
 		CED91F77210132DC00E0E2F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CED91F76210132DC00E0E2F6 /* GoogleService-Info.plist */; };
@@ -94,6 +95,8 @@
 		CE57769021068ADB00C7637C /* LocationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationCell.h; sourceTree = "<group>"; };
 		CE57769121068ADB00C7637C /* LocationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationCell.m; sourceTree = "<group>"; };
 		CEAC5909211100A500C08A74 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		CEAC590B2111118700C08A74 /* LocationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		CEAC590C2111118700C08A74 /* LocationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		CED91F6A2101304F00E0E2F6 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		CED91F6B2101305000E0E2F6 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		CED91F6D2101306800E0E2F6 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
@@ -267,6 +270,8 @@
 				327FA7D120FE56F7009C55BA /* View Controllers */,
 				CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */,
 				CEDDCBC020F95554004BD3A0 /* AppDelegate.m */,
+				CEAC590B2111118700C08A74 /* LocationManager.h */,
+				CEAC590C2111118700C08A74 /* LocationManager.m */,
 				CEDDCBC820F95555004BD3A0 /* Assets.xcassets */,
 				CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */,
 				CED91F76210132DC00E0E2F6 /* GoogleService-Info.plist */,
@@ -521,6 +526,7 @@
 				CED91F7A2101A2DC00E0E2F6 /* CategoryPickerModalViewController.m in Sources */,
 				327FA7C520FD273E009C55BA /* PostCell.m in Sources */,
 				CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */,
+				CEAC590D2111118700C08A74 /* LocationManager.m in Sources */,
 				CE57768B21064FDA00C7637C /* LocationPickerModalViewController.m in Sources */,
 				CED91F6C2101305000E0E2F6 /* TabBarController.m in Sources */,
 				327FA7C220FD2014009C55BA /* ComposeViewController.m in Sources */,
