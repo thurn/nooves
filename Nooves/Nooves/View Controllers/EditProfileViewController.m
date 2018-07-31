@@ -156,6 +156,7 @@
     
     // save all the info to the profile page
 //    self.user = [[User alloc]initProfileWithInfo:self.userName.text withBio:self.bioInfo.text withAge:ageNumber withNumber:phoneNum];
+    
     if(!self.user){
         self.user = [[User alloc] init];
     }
