@@ -165,6 +165,8 @@
 		327FA7D120FE56F7009C55BA /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0A6C9382211110EE00097F37 /* PostDetailsViewController.h */,
+				0A6C9383211110EE00097F37 /* PostDetailsViewController.m */,
 				CED91F6E2101306800E0E2F6 /* ProfileViewController.h */,
 				CED91F6D2101306800E0E2F6 /* ProfileViewController.m */,
 				CED91F6B2101305000E0E2F6 /* TabBarController.h */,
@@ -181,8 +183,6 @@
 				0A6C937F2107A6A000097F37 /* SignUpViewController.m */,
 				327D408221093011002E8513 /* EditProfileViewController.h */,
 				327D408321093011002E8513 /* EditProfileViewController.m */,
-				0A6C9382211110EE00097F37 /* PostDetailsViewController.h */,
-				0A6C9383211110EE00097F37 /* PostDetailsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
