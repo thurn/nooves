@@ -16,26 +16,22 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
     
-    // instantiate picker view
     self.pickerView = [[UIPickerView alloc] init];
     self.pickerView.delegate = self;
     self.pickerView.dataSource = self;
     self.pickerView.showsSelectionIndicator = YES;
     
-    // set up properties for category display label
     self.categoryLabel = [[UILabel alloc] init];
     self.categoryLabel.frame = CGRectMake(10, 500, 100, 100);
     
-    // set up properties for button
     UIButton *selectedCategory = [self selectCategory];
     selectedCategory.frame = CGRectMake(10.0, 250.0, 20, 30);
     [selectedCategory sizeToFit];
     
-    // add components to view
     [self.view addSubview:self.pickerView];
     [self.view addSubview:self.categoryLabel];
     [self.view addSubview:selectedCategory];
-    [self goBack];
+    [self createBackButton];
 }
 
 // hides tab bar
@@ -92,19 +88,18 @@ numberOfRowsInComponent:(NSInteger)component {
 }
 
 // back button
-// goBack --> createBackButton
-- (UIBarButtonItem *)goBack {
+- (UIBarButtonItem *)createBackButton {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
                                    initWithImage:[UIImage imageNamed:@"back-icon"]
                                            style:UIBarButtonItemStylePlain
                                           target:self
-                                         action:@selector(didTapBack)];
+                                         action:@selector(didTapBackButton)];
     self.navigationItem.leftBarButtonItem = backButton;
     return backButton;
 }
 
 // goes back to parent contoller
-- (void)didTapBack {
+- (void)didTapBackButton {
     [self dismissViewControllerAnimated:true completion:nil];
 }
 

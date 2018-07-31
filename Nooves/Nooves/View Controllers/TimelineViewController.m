@@ -29,12 +29,6 @@
         [tableView reloadData];
     }];
     tableView = [self configureTableView];
-    
-    // Do any additional setup after loading the view.
-    if(!self.tempPostsArray){
-        self.tempPostsArray = [[NSMutableArray alloc]init];
-    }
-
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.rowHeight = UITableViewAutomaticDimension;
@@ -49,11 +43,9 @@
 }
 
 - (UITableView *)configureTableView {
-    CGFloat x = 0;
-    CGFloat y = 0;
     CGFloat width = self.view.frame.size.width;
     CGFloat height = self.view.frame.size.height;
-    CGRect tableViewFrame = CGRectMake( x, y, width, height);
+    CGRect tableViewFrame = CGRectMake(0, 0, width, height);
 
     tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
     tableView.scrollEnabled = YES;
@@ -64,7 +56,6 @@
 }
 
 - (UIBarButtonItem *)writeNewPost {
-
     UIBarButtonItem *composeButton = [[UIBarButtonItem alloc] init];
     composeButton.title = @"New Post";
     self.navigationItem.rightBarButtonItem = composeButton;
@@ -80,7 +71,6 @@
     filterButton.title = @"Filter";
     [filterButton setImage:[UIImage imageNamed:@"filter-icon.png"]];
     self.navigationItem.leftBarButtonItem = filterButton;
-    
     filterButton.target = self;
     filterButton.action = @selector(didTapFilter);
     
@@ -120,7 +110,8 @@
 
 - (void)didTapFilter {
     FilterViewController *filter = [[FilterViewController alloc]init];
-    filter.tempPostsArray = self.tempPostsArray;
+  //  filter.tempPostsArray = self.tempPostsArray;
+    // TODO(Norette): fetch data from the database
     [self.navigationController pushViewController:filter animated:YES];
 }
 

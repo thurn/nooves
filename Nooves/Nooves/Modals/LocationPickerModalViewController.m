@@ -23,12 +23,10 @@ UISearchBarDelegate>
     [self configureTableView];
     [self.view addSubview:self.tableView];
     
-    // instantiates properties
     self.lat = [[NSNumber alloc] init];
     self.lng = [[NSNumber alloc] init];
     self.location = [[NSString alloc] init];
     
-    // instantiates search bar properties
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(-5.0, 0.0, 320.0, 44.0)];
     self.searchBar.delegate = self;
     self.searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -37,10 +35,8 @@ UISearchBarDelegate>
     [searchBarView addSubview:self.searchBar];
     self.navigationItem.titleView = searchBarView;
     
-    // adds component to view
-    [self goBack];
+    [self createBackButton];
     
-    // updates table view
     [self.tableView reloadData];
 }
 
@@ -51,11 +47,9 @@ UISearchBarDelegate>
 
 // congigures table view properties
 - (void)configureTableView {
-    CGFloat x = 0;
-    CGFloat y = 0;
     CGFloat width = self.view.frame.size.width;
     CGFloat height = self.view.frame.size.height;
-    CGRect tableViewFrame = CGRectMake(x, y, width, height);
+    CGRect tableViewFrame = CGRectMake(0, 0, width, height);
     
     self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
     [self.tableView registerClass:[LocationCell class] forCellReuseIdentifier:@"LocationCell"];
@@ -86,7 +80,8 @@ UISearchBarDelegate>
 }
 
 // populates searched data
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     LocationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell"
                                                          forIndexPath:indexPath];
     [cell updateWithLocation:self.results[indexPath.row]];
@@ -109,7 +104,10 @@ UISearchBarDelegate>
     NSLog(@"%@", self.location);
     NSLog(@"%@, %@", self.lat, self.lng);
     
-    [self.locationDelegate locationsPickerModalViewController:self didPickLocationWithLatitude:self.lat longitude:self.lng location:self.location];
+    [self.locationDelegate locationsPickerModalViewController:self
+                                  didPickLocationWithLatitude:self.lat
+                                                    longitude:self.lng
+                                                     location:self.location];
     
     [self dismissViewControllerAnimated:NO completion:nil];
     
@@ -118,7 +116,8 @@ UISearchBarDelegate>
 }
 
 // finds places in a certain range of a city during search
-- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range
+                                                   replacementText:(NSString *)text {
     NSString *newText = [searchBar.text stringByReplacingCharactersInRange:range withString:text];
     [self fetchLocationsWithQuery:newText nearCity:@"San Francisco"];
     return true;
@@ -151,17 +150,17 @@ UISearchBarDelegate>
 }
 
 // sets up back button properties
-- (UIBarButtonItem *)goBack {
+- (UIBarButtonItem *)createBackButton {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon"]
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
-                                                                  action:@selector(didTapBack)];
+                                                                  action:@selector(didTapBackButton)];
     self.navigationItem.leftBarButtonItem = backButton;
     return backButton;
 }
 
 // goes back to parent controller
-- (void)didTapBack {
+- (void)didTapBackButton {
     [self dismissViewControllerAnimated:true completion:nil];
 }
 

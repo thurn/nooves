@@ -137,13 +137,13 @@
 //    }
     
     TimelineViewController *feed = [[TimelineViewController alloc]init];
-    feed.tempPostsArray = self.filteredData;
+   // feed.tempPostsArray = self.filteredData;
     [self.navigationController pushViewController:feed animated:YES];
 }
 
 - (void)didTapAllPosts {
     TimelineViewController *timeline = [[TimelineViewController alloc]init];
-    timeline.tempPostsArray = self.tempPostsArrayCopy;
+   // timeline.tempPostsArray = self.tempPostsArrayCopy;
     [self.navigationController pushViewController:timeline animated:YES];
 }
 
