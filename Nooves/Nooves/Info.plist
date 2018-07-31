@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We need access to your location to show you relevent search results within your region. </string>
+	<string>Nooves needs access to your location to show you relevent search results within your region.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>We need access to your location to show you relevent search results within your region. </string>
+	<string>Nooves needs access to your location to show you relevent search results within your region.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>We need access to your location to show you relevent search results within your region. </string>
+	<string>Nooves needs access to your location to show you relevent search results within your region.</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
