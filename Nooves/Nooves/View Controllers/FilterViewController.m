@@ -13,7 +13,6 @@
 @property(strong, nonatomic) NSArray *categories;
 @property(strong, nonatomic) NSMutableArray *selectedCategories;
 @property(strong, nonatomic) NSMutableArray *filteredData;
-@property(strong, nonatomic) NSMutableArray *tempPostsArrayCopy;
 
 @end
 
@@ -28,22 +27,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.tempPostsArrayCopy = [[NSMutableArray alloc]init];
-    for (Post *post in self.tempPostsArray) {
-        [self.tempPostsArrayCopy addObject:post];
-    }
-    
     [self configureTableView];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    [self configureArray];
-    [self configureButton];
-    [self returnAllPosts];
+    [self configureCategoriesArray];
+    [self configureConfirmButton];
+    [self allPostsButton];
     
     [self.tableView registerClass:[FilterCell class] forCellReuseIdentifier:@"filterCellIdentifier"];
-    
-    self.tabBarController.tabBar.hidden = YES;
-    
     [self.tableView reloadData];
 }
 
@@ -51,12 +42,15 @@
     self.tabBarController.tabBar.hidden = NO;
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 - (UITableView *)configureTableView {
-    x = 0;
-    y = 0;
     CGFloat width = self.view.frame.size.width;
     CGFloat height = self.view.frame.size.height;
-    CGRect tableViewFrame = CGRectMake( x, y, width, height);
+    CGRect tableViewFrame = CGRectMake( 0, 0, width, height);
     
     self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
     self.tableView.scrollEnabled = YES;
@@ -67,22 +61,17 @@
     return self.tableView;
 }
 
-- (UIBarButtonItem *)returnAllPosts {
+- (UIBarButtonItem *)allPostsButton {
     allPosts = [[UIBarButtonItem alloc]init];
     allPosts.title = @"All Posts";
     self.navigationItem.rightBarButtonItem = allPosts;
-    
     allPosts.target = self;
     allPosts.action = @selector(didTapAllPosts);
     
     return allPosts;
 }
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-- (NSArray *)configureArray {
+- (NSArray *)configureCategoriesArray {
     self.categories= @[@"Outdoors", @"Shopping", @"Partying", @"Eating",@"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
     return self.categories;
 }
@@ -109,7 +98,7 @@
     }
 }
 
-- (void)configureButton {
+- (void)configureConfirmButton {
     self.confirmButton = [[UIButton alloc]initWithFrame:CGRectMake(200, 600, 30, 30)];
     [self.confirmButton setBackgroundColor:[UIColor blueColor]];
     [self.confirmButton setTitle:@"Confirm" forState:UIControlStateNormal];
@@ -126,18 +115,38 @@
             [self.selectedCategories addObject:cell.textLabel.text];
         }
     }
-
-//    for (Post *post in self.tempPostsArray) {
-//        for (NSString *activity in self.selectedCategories) {
-//            ActivityType tagType = [Post stringToActivityType:activity];
-//            if (post.activityType == tagType) {
-//                [self.filteredData addObject:post];
-//            }
-//        }
-//    }
+    
+    // Read data from the database and filter according to the categories
+    FIRDatabaseReference *reference = [[FIRDatabase database]reference];
+    FIRDatabaseHandle *databaseHandle = [[reference child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        NSDictionary *posts = snapshot.value;
+        
+        for(NSString *userID in posts) {
+            for(NSString *postID in posts[userID]) {
+                for (NSString *chosenActivity in self.selectedCategories) {
+                    Post *post = [[Post alloc]init];
+                    post.fireBaseID = postID;
+                    post.userID = userID;
+                    post.activityType = [posts[userID][postID][@"Activity Type"] doubleValue];
+                    post.activityTitle = posts[userID] [postID][@"Title"];
+                    post.activityDescription = posts[userID][postID][@"Description"];
+                    post.activityLat = posts[userID][postID][@"Latitude"];
+                    post.activityLng = posts[userID][postID][@"Longitude"];
+                    NSInteger date = [posts[userID][postID][@"Date"]integerValue];
+                    NSDate *convertedDate = [NSDate dateWithTimeIntervalSince1970:date];
+                    post.activityDateAndTime = convertedDate;
+                    NSString *activity = [Post activityTypeToString:post.activityType];
+                    if ([activity isEqualToString:chosenActivity]) {
+                        [self.filteredData addObject:post];
+                    }
+                }
+            }
+        }
+        NSLog(@"%@",self.filteredData);
+    }];
     
     TimelineViewController *feed = [[TimelineViewController alloc]init];
-   // feed.tempPostsArray = self.filteredData;
+    feed.firArray = self.filteredData;
     [self.navigationController pushViewController:feed animated:YES];
 }
 
