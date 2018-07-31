@@ -1,3 +1,5 @@
+#import <CoreLocation/CoreLocation.h>
+
 #import "LocationCell.h"
 #import "LocationPickerModalViewController.h"
 
@@ -7,14 +9,21 @@ static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ4
 @interface LocationPickerModalViewController () <UITableViewDelegate, UITableViewDataSource,
 UISearchBarDelegate>
 
+@property (nonatomic, readwrite) CLLocationManager *userLocation;
+
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) UISearchBar *searchBar;
-
 @property (nonatomic) NSArray *results;
+
+@property (nonatomic) UITextField *accuracy;
+@property (nonatomic) UITextField *userLng;
+@property (nonatomic) UITextField *userLat;
 
 @end
 
 @implementation LocationPickerModalViewController
+
+@synthesize userLocation;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,6 +31,12 @@ UISearchBarDelegate>
     self.navigationController.navigationBarHidden = NO;
     [self configureTableView];
     [self.view addSubview:self.tableView];
+    
+    self.userLocation = [[CLLocationManager alloc] init];
+    userLocation.delegate = self;
+    userLocation.desiredAccuracy = kCLLocationAccuracyBest;
+    userLocation.distanceFilter = kCLDistanceFilterNone;
+    [userLocation startUpdatingLocation];
     
     self.lat = [[NSNumber alloc] init];
     self.lng = [[NSNumber alloc] init];
@@ -162,6 +177,33 @@ UISearchBarDelegate>
 // goes back to parent controller
 - (void)didTapBackButton {
     [self dismissViewControllerAnimated:true completion:nil];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(nonnull CLLocation *)newLocation fromLocation:(nonnull CLLocation *)oldLocation {
+    NSString *userLat = [[NSString alloc] initWithFormat:@"%f", newLocation.coordinate.latitude];
+    NSString *userLng = [[NSString alloc] initWithFormat:@"%f", newLocation.coordinate.longitude];
+    NSString *acc = [[NSString alloc] initWithFormat:@"%f", newLocation.horizontalAccuracy];
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                    message:@"Error obtaining location"
+                                             preferredStyle:(UIAlertControllerStyleAlert)];
+    
+    // create an OK action
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+                                                         // handle response here.
+                                                     }];
+    [alert addAction:okAction];
+    
+    [self presentViewController:alert animated:YES completion:^{
+        // optional code for what happens after the alert controller has finished presenting
+    }];
+    
 }
 
 @end

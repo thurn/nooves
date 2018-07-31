@@ -28,6 +28,7 @@
         self.firArray = [Post readPostsFromFIRDict:postsDict];
         [tableView reloadData];
     }];
+    
     tableView = [self configureTableView];
     tableView.delegate = self;
     tableView.dataSource = self;
