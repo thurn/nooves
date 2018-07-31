@@ -23,7 +23,6 @@ CategoryPickerDelegate, DatePickerDelegate>
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // set up controller properties
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"New Event";
@@ -34,7 +33,6 @@ CategoryPickerDelegate, DatePickerDelegate>
         contentRect = CGRectUnion(contentRect, view.frame);
     }
     
-    // initiates properties
     self.locationLabel = [[UILabel alloc] init];
     self.activityLabel = [[UILabel alloc] init];
     self.dateLabel = [[UILabel alloc] init];
@@ -42,29 +40,25 @@ CategoryPickerDelegate, DatePickerDelegate>
     self.lng = [[NSNumber alloc] init];
     self.location = [[NSString alloc] init];
     
-    // sets up event title properties
     self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 1000, 150)];
     self.eventTitle.text = nil;
     self.eventTitle.placeholder = @"Event name";
     self.eventTitle.borderStyle = UITextBorderStyleRoundedRect;
     self.eventTitle.textColor = UIColor.grayColor;
     
-    // sets event description properties
     self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 150, 1000, 150)];
     self.eventDescription.delegate = self;
     self.eventDescription.text = @"Add a description";
     self.eventDescription.textColor = UIColor.grayColor;
 
-    // adds components to view
     [self.view addSubview:self.eventTitle];
     [self.view addSubview:self.eventDescription];
     [self.view addSubview:[self selectDate]];
     [self.view addSubview:[self selectCategory]];
     [self.view addSubview:[self selectLocation]];
     
-    // adds tab bar buttons to controller
     [self postButton];
-    [self goBack];
+    [self createBackButton];
     
     [self becomeFirstResponder];
 }
@@ -194,19 +188,19 @@ CategoryPickerDelegate, DatePickerDelegate>
 }
 
 // sets up back button properties
-- (UIBarButtonItem *)goBack {
+- (UIBarButtonItem *)createBackButton {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
                                    initWithImage:[UIImage imageNamed:@"back-icon"]
                                            style:UIBarButtonItemStylePlain
                                           target:self
-                                          action:@selector(didTapBack)];
+                                          action:@selector(didTapBackButton)];
     self.navigationItem.leftBarButtonItem = backButton;
 
   return backButton;
 }
 
 // jumps back to root view controller
-- (void)didTapBack {
+- (void)didTapBackButton {
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
