@@ -52,13 +52,16 @@
             [alert addAction:okAction];
         }
     }
-    
+
+    static dispatch_once_t openingApp;
+    dispatch_once(&openingApp, ^ {
     FIRDatabaseReference * ref =[[FIRDatabase database] reference];
     FIRDatabaseHandle *handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSDictionary *postsDict = snapshot.value;
         self.firArray = [Post readPostsFromFIRDict:postsDict];
         [tableView reloadData];
     }];
+    });
     
     tableView = [self configureTableView];
     tableView.delegate = self;
@@ -144,7 +147,6 @@
 
 - (void)didTapFilter {
     FilterViewController *filter = [[FilterViewController alloc]init];
-  //  filter.tempPostsArray = self.tempPostsArray;
     // TODO(Norette): fetch data from the database
     [self.navigationController pushViewController:filter animated:YES];
 }

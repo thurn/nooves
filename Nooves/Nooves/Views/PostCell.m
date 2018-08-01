@@ -65,7 +65,6 @@
         [formatter setDateFormat:@"MM-dd HH:mm"];
         NSString *dateString = [formatter stringFromDate:post.activityDateAndTime];
         self.dateField.text = dateString;
-        
     }
 }
 

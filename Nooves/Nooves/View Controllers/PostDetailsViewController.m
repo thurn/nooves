@@ -30,7 +30,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     FIRDatabaseReference *reference = [[FIRDatabase database]reference];
-    FIRDatabaseHandle *databaseHandle = [[[reference child:@"Users"]child:self.post.userID]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    /*FIRDatabaseHandle *databaseHandle = [[[reference child:@"Users"]child:self.post.userID]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSDictionary *usersDictionary = snapshot.value;
         if (![snapshot.value isEqual:[NSNull null]]) {
             self.user = [[User alloc] initFromDatabase:usersDictionary];
@@ -51,7 +51,7 @@
             FIRDatabaseReference *userRef = [[reference child:@"Users"]child:[FIRAuth auth].currentUser.uid];
             [userRef setValue:@{@"Age":@(0), @"Bio":@"nil", @"Name":[FIRAuth auth].currentUser.displayName,@"PhoneNumber":@(0), @"ProfilePicURL":@"nil"}];
         }
-    }];
+    }];*/
     self.profilePicImage = [[UIImageView alloc] init];
     self.profilePicImage.frame = CGRectMake(0, 0, self.view.frame.size.width, (self.view.frame.size.height*9/20));
     [self.view addSubview:self.profilePicImage];
