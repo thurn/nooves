@@ -1,6 +1,7 @@
 #import "LocationCell.h"
 #import "LocationPickerModalViewController.h"
 
+static NSString * const baseURLString = @"https://api.foursquare.com/v2/venues/search?";
 static NSString * const clientID = @"4FYRZKNIIFJQG25SUYJ55KINHUMVGWMYWFGQUFO5H4AQPQN2";
 static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ40WABD5VUP";
 
@@ -92,8 +93,7 @@ UISearchBarDelegate>
 }
 
 // sets cell height
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 50;
 }
 
@@ -122,19 +122,46 @@ UISearchBarDelegate>
 - (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range
                                                    replacementText:(NSString *)text {
     NSString *newText = [searchBar.text stringByReplacingCharactersInRange:range withString:text];
-    [self fetchLocationsWithQuery:newText nearCity:@"San Francisco"];
+    // [self fetchLocationsWithQuery:newText nearCity:@"San Francisco"];
+    [self fetchLocationsWithQuery:newText nearCityWithLatitude:[NSNumber numberWithDouble:51.509980] longitude:[NSNumber numberWithDouble:-0.133700]];
     return true;
 }
 
 // fetches places from search
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [self fetchLocationsWithQuery:searchBar.text nearCity:@"San Francisco"];
+    // [self fetchLocationsWithQuery:searchBar.text nearCity:@"San Francisco"];
+     [self fetchLocationsWithQuery:searchBar.text nearCityWithLatitude:[NSNumber numberWithDouble:51.509980] longitude:[NSNumber numberWithDouble:-0.133700]];
 }
 
 // completes api request and stores searched results in dictionary
 - (void)fetchLocationsWithQuery:(NSString *)query nearCity:(NSString *)city {
-    NSString *baseURLString = @"https://api.foursquare.com/v2/venues/search?";
     NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&v=20141020&near=%@,CA&query=%@", clientID, clientSecret, city, query];
+    queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+
+    NSURL *url = [NSURL URLWithString:[baseURLString stringByAppendingString:queryString]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (data) {
+            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSLog(@"response: %@", responseDictionary);
+            self.results = [responseDictionary valueForKeyPath:@"response.venues"];
+            [self.tableView reloadData];
+        }
+    }];
+    [task resume];
+}
+
+// TODO(Nikki): get search results using user lat and lng
+- (void)fetchLocationsWithQuery:(NSString *)query nearCityWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude {
+    // TODO(Nikki): append the latitude and longitude with a comma in between them
+    NSString *queryLat = [NSString stringWithFormat:@"%@,", latitude];
+    NSString *queryLng = [NSString stringWithFormat:@"%@", longitude];
+    NSMutableString * ll = [[NSMutableString alloc] initWithString:queryLat];
+    [ll appendString:queryLng];
+    
+    NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&v=20141020&ll=%@&query=%@", clientID, clientSecret, ll, query];
     queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
     NSURL *url = [NSURL URLWithString:[baseURLString stringByAppendingString:queryString]];
