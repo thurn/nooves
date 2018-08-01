@@ -21,7 +21,6 @@
     CGFloat x;
     CGFloat y;
     UIBarButtonItem *allPosts;
-    TimelineViewController *feed;
 }
 
 - (void)viewDidLoad {
@@ -119,7 +118,7 @@
     
     // Read data from the database and filter according to the categories
     FIRDatabaseReference *reference = [[FIRDatabase database]reference];
-    FIRDatabaseHandle *databaseHandle = [[reference child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    FIRDatabaseHandle databaseHandle = [[reference child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSDictionary *posts = snapshot.value;
         
         for(NSString *userID in posts) {
@@ -143,18 +142,16 @@
                 }
             }
         }
-        NSLog(@"%@",self.filteredData);
-        self->feed = [[TimelineViewController alloc]init];
-        self->feed.firArray = self.filteredData;
-        NSLog(@"Feed array :%@", self->feed.firArray);
+        TimelineViewController *timeline = [[TimelineViewController alloc]init];
+        timeline.firArray = self.filteredData;
+        [self.navigationController pushViewController:timeline animated:YES];
     }];
-    [self.navigationController pushViewController:feed animated:YES];
 }
 
 - (void)didTapAllPosts {
     TimelineViewController *timeline = [[TimelineViewController alloc]init];
     FIRDatabaseReference * ref =[[FIRDatabase database] reference];
-    FIRDatabaseHandle *handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    FIRDatabaseHandle handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSDictionary *postsDict = snapshot.value;
         timeline.firArray = [Post readPostsFromFIRDict:postsDict];
     [self.navigationController pushViewController:timeline animated:YES];
