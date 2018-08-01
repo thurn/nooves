@@ -21,6 +21,7 @@
     CGFloat x;
     CGFloat y;
     UIBarButtonItem *allPosts;
+    TimelineViewController *feed;
 }
 
 - (void)viewDidLoad {
@@ -143,17 +144,21 @@
             }
         }
         NSLog(@"%@",self.filteredData);
+        self->feed = [[TimelineViewController alloc]init];
+        self->feed.firArray = self.filteredData;
+        NSLog(@"Feed array :%@", self->feed.firArray);
     }];
-    
-    TimelineViewController *feed = [[TimelineViewController alloc]init];
-    feed.firArray = self.filteredData;
     [self.navigationController pushViewController:feed animated:YES];
 }
 
 - (void)didTapAllPosts {
     TimelineViewController *timeline = [[TimelineViewController alloc]init];
-   // timeline.tempPostsArray = self.tempPostsArrayCopy;
+    FIRDatabaseReference * ref =[[FIRDatabase database] reference];
+    FIRDatabaseHandle *handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        NSDictionary *postsDict = snapshot.value;
+        timeline.firArray = [Post readPostsFromFIRDict:postsDict];
     [self.navigationController pushViewController:timeline animated:YES];
+    }];
 }
 
 @end
