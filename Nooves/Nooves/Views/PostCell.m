@@ -27,6 +27,14 @@
         [self.dateField autoPinEdgeToSuperviewMargin:ALEdgeLeft];
         [self.dateField autoPinEdgeToSuperviewMargin:ALEdgeTop];
         
+        //set up the profile picture field
+        self.profilePicField = [[UIImageView alloc]init];
+        [self.profilePicField sizeToFit];
+        [self.contentView addSubview:self.profilePicField];
+        [self.profilePicField autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.dateField withOffset:10.0f];
+        [self.profilePicField autoPinEdgeToSuperviewMargin:ALEdgeLeft];
+        [self.profilePicField autoPinEdgeToSuperviewMargin:ALEdgeBottom];
+        
         //self up the event title field
         self.eventTitleField = [[UILabel alloc]init];
         [self.eventTitleField sizeToFit];
@@ -57,6 +65,7 @@
         [formatter setDateFormat:@"MM-dd HH:mm"];
         NSString *dateString = [formatter stringFromDate:post.activityDateAndTime];
         self.dateField.text = dateString;
+        
     }
 }
 

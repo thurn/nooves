@@ -21,6 +21,7 @@
     CGFloat x;
     CGFloat y;
     UIBarButtonItem *allPosts;
+    TimelineViewController *feed;
 }
 
 - (void)viewDidLoad {
@@ -143,10 +144,10 @@
             }
         }
         NSLog(@"%@",self.filteredData);
+        self->feed = [[TimelineViewController alloc]init];
+        self->feed.firArray = self.filteredData;
+        NSLog(@"Feed array :%@", self->feed.firArray);
     }];
-    
-    TimelineViewController *feed = [[TimelineViewController alloc]init];
-    feed.firArray = self.filteredData;
     [self.navigationController pushViewController:feed animated:YES];
 }
 
