@@ -31,14 +31,14 @@
     self.userLocation.desiredAccuracy = kCLLocationAccuracyBest;
     self.userLocation.distanceFilter = kCLDistanceFilterNone;
     
-    if([CLLocationManager locationServicesEnabled]){
+    if([CLLocationManager locationServicesEnabled]) {
         
         NSLog(@"Location Services Enabled");
         [self.userLocation startUpdatingLocation];
         [self.userLocation requestAlwaysAuthorization];
         [self.userLocation requestWhenInUseAuthorization];
         
-        if([CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied){
+        if([CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"App Permission Denied"
                                                                            message:@"To re-enable, please go to Settings and turn on Location Service for this app."
                                                                     preferredStyle:(UIAlertControllerStyleAlert)];

@@ -1,20 +1,24 @@
 #import "LocationCell.h"
 #import "LocationPickerModalViewController.h"
 
+#import <CoreLocation/CoreLocation.h>
+
 static NSString * const baseURLString = @"https://api.foursquare.com/v2/venues/search?";
 static NSString * const clientID = @"4FYRZKNIIFJQG25SUYJ55KINHUMVGWMYWFGQUFO5H4AQPQN2";
 static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ40WABD5VUP";
 
 @interface LocationPickerModalViewController () <UITableViewDelegate, UITableViewDataSource,
-UISearchBarDelegate>
+UISearchBarDelegate, CLLocationManagerDelegate>
+
+@property (nonatomic) CLLocationManager *userLocation;
 
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) UISearchBar *searchBar;
 @property (nonatomic) NSArray *results;
 
 @property (nonatomic) UITextField *accuracy;
-@property (nonatomic) UITextField *userLng;
-@property (nonatomic) UITextField *userLat;
+@property (nonatomic) NSNumber *userLng;
+@property (nonatomic) NSNumber *userLat;
 
 @end
 
@@ -26,6 +30,33 @@ UISearchBarDelegate>
     self.navigationController.navigationBarHidden = NO;
     [self configureTableView];
     [self.view addSubview:self.tableView];
+    
+    self.userLocation = [[CLLocationManager alloc] init];
+    self.userLocation.delegate = self;
+    self.userLocation.desiredAccuracy = kCLLocationAccuracyBest;
+    self.userLocation.distanceFilter = kCLDistanceFilterNone;
+    
+    if([CLLocationManager locationServicesEnabled]) {
+        
+        NSLog(@"Location Services Enabled");
+        [self.userLocation startUpdatingLocation];
+        [self.userLocation requestAlwaysAuthorization];
+        [self.userLocation requestWhenInUseAuthorization];
+        
+        if([CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"App Permission Denied"
+                                                                           message:@"To re-enable, please go to Settings and turn on Location Service for this app."
+                                                                    preferredStyle:(UIAlertControllerStyleAlert)];
+            
+            // create an OK action
+            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:^(UIAlertAction * _Nonnull action) {
+                                                                 // handle response here.
+                                                             }];
+            [alert addAction:okAction];
+        }
+    }
 
     self.lat = [[NSNumber alloc] init];
     self.lng = [[NSNumber alloc] init];
@@ -123,14 +154,14 @@ UISearchBarDelegate>
                                                    replacementText:(NSString *)text {
     NSString *newText = [searchBar.text stringByReplacingCharactersInRange:range withString:text];
     // [self fetchLocationsWithQuery:newText nearCity:@"San Francisco"];
-    [self fetchLocationsWithQuery:newText nearCityWithLatitude:[NSNumber numberWithDouble:51.509980] longitude:[NSNumber numberWithDouble:-0.133700]];
+    [self fetchLocationsWithQuery:newText nearCityWithLatitude:self.userLat longitude:self.userLng];
     return true;
 }
 
 // fetches places from search
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     // [self fetchLocationsWithQuery:searchBar.text nearCity:@"San Francisco"];
-     [self fetchLocationsWithQuery:searchBar.text nearCityWithLatitude:[NSNumber numberWithDouble:51.509980] longitude:[NSNumber numberWithDouble:-0.133700]];
+     [self fetchLocationsWithQuery:searchBar.text nearCityWithLatitude:self.userLat longitude:self.userLng];
 }
 
 // completes api request and stores searched results in dictionary
@@ -192,6 +223,32 @@ UISearchBarDelegate>
 // goes back to parent controller
 - (void)didTapBackButton {
     [self dismissViewControllerAnimated:true completion:nil];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    CLLocation *newLocation = locations.lastObject;
+    self.userLat = [[NSString alloc] initWithFormat:@"%f", newLocation.coordinate.latitude];
+    self.userLng = [[NSString alloc] initWithFormat:@"%f", newLocation.coordinate.longitude];
+    NSString *acc = [[NSString alloc] initWithFormat:@"%f", newLocation.horizontalAccuracy];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                   message:@"Error obtaining location. Please make sure to set location access and turn your location on."
+                                                            preferredStyle:(UIAlertControllerStyleAlert)];
+    
+    // create an OK action
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+                                                         // handle response here.
+                                                     }];
+    [alert addAction:okAction];
+    
+    [self presentViewController:alert animated:YES completion:^{
+    }];
+    
 }
 
 @end
