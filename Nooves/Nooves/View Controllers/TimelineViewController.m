@@ -30,7 +30,6 @@
     self.userLocation.desiredAccuracy = kCLLocationAccuracyBest;
     self.userLocation.distanceFilter = kCLDistanceFilterNone;
     
-    
     if([CLLocationManager locationServicesEnabled]){
         
         NSLog(@"Location Services Enabled");
@@ -152,11 +151,11 @@
     [self.navigationController pushViewController:profile animated:YES];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(nonnull CLLocation *)newLocation fromLocation:(nonnull CLLocation *)oldLocation {
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    CLLocation *newLocation = locations.lastObject;
     NSString *userLat = [[NSString alloc] initWithFormat:@"%f", newLocation.coordinate.latitude];
     NSString *userLng = [[NSString alloc] initWithFormat:@"%f", newLocation.coordinate.longitude];
     NSString *acc = [[NSString alloc] initWithFormat:@"%f", newLocation.horizontalAccuracy];
-    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
@@ -174,7 +173,6 @@
     [alert addAction:okAction];
     
     [self presentViewController:alert animated:YES completion:^{
-        // optional code for what happens after the alert controller has finished presenting
     }];
     
 }
