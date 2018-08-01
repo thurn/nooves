@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Post.h"
-#import "User.h"
 
 @interface PostDetailsViewController : UIViewController
-- (instancetype)initFromTimeline:(Post *)post;
+
 @end

@@ -6,17 +6,12 @@
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
 #import "TimelineViewController.h"
-<<<<<<< HEAD
-#import "PostDetailsViewController.h"
-@interface TimelineViewController ()
-=======
 #import <CoreLocation/CoreLocation.h>
 
 @interface TimelineViewController () <CLLocationManagerDelegate>
 
 @property (nonatomic) CLLocationManager *userLocation;
 
->>>>>>> 7a9c0a316f92902ffb06568f712ae366d911af9c
 @end
 
 @implementation TimelineViewController
@@ -119,9 +114,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Post *pickedPost = self.firArray[indexPath.row];
-    PostDetailsViewController *postDetail = [[PostDetailsViewController alloc] initFromTimeline:pickedPost];
-    [self.navigationController pushViewController:postDetail animated:YES];
+    // Change the selected background view of the cell
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
