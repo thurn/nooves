@@ -11,6 +11,7 @@
 		0A6C937D2107A68800097F37 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C937C2107A68800097F37 /* LoginViewController.m */; };
 		0A6C93802107A6A000097F37 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C937F2107A6A000097F37 /* SignUpViewController.m */; };
 		0A6C9384211110EE00097F37 /* PostDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C9383211110EE00097F37 /* PostDetailsViewController.m */; };
+		0AAC9D9F2111348300A3967E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AAC9D9E2111348300A3967E /* LaunchScreen.storyboard */; };
 		0AADDFE121015B3C00C173CB /* DatePickerModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AADDFE021015B3C00C173CB /* DatePickerModalViewController.m */; };
 		267B7E70BA2D0E758F0BFE59 /* libPods-NoovesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F11FDD6185EBC6FB54794B48 /* libPods-NoovesUITests.a */; };
 		327D408421093011002E8513 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327D408321093011002E8513 /* EditProfileViewController.m */; };
@@ -33,7 +34,6 @@
 		CED91F7A2101A2DC00E0E2F6 /* CategoryPickerModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F792101A2DC00E0E2F6 /* CategoryPickerModalViewController.m */; };
 		CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBC020F95554004BD3A0 /* AppDelegate.m */; };
 		CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBC820F95555004BD3A0 /* Assets.xcassets */; };
-		CEDDCBCC20F95555004BD3A0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */; };
 		CEDDCBCF20F95555004BD3A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBCE20F95555004BD3A0 /* main.m */; };
 		CEDDCBD920F95555004BD3A0 /* NoovesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBD820F95555004BD3A0 /* NoovesTests.m */; };
 		CEDDCBE420F95555004BD3A0 /* NoovesUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDDCBE320F95555004BD3A0 /* NoovesUITests.m */; };
@@ -64,6 +64,7 @@
 		0A6C93812107CE8C00097F37 /* Nooves.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nooves.entitlements; sourceTree = "<group>"; };
 		0A6C9382211110EE00097F37 /* PostDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostDetailsViewController.h; sourceTree = "<group>"; };
 		0A6C9383211110EE00097F37 /* PostDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostDetailsViewController.m; sourceTree = "<group>"; };
+		0AAC9D9E2111348300A3967E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0AADDFDF21015B3C00C173CB /* DatePickerModalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatePickerModalViewController.h; sourceTree = "<group>"; };
 		0AADDFE021015B3C00C173CB /* DatePickerModalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatePickerModalViewController.m; sourceTree = "<group>"; };
 		0D8B5D3B0AE946E5196167DD /* Pods-NoovesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesTests/Pods-NoovesTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -108,7 +109,6 @@
 		CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CEDDCBC020F95554004BD3A0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		CEDDCBC820F95555004BD3A0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CEDDCBCB20F95555004BD3A0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEDDCBCD20F95555004BD3A0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEDDCBCE20F95555004BD3A0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CEDDCBD420F95555004BD3A0 /* NoovesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoovesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -273,7 +273,7 @@
 				CEAC590B2111118700C08A74 /* LocationManager.h */,
 				CEAC590C2111118700C08A74 /* LocationManager.m */,
 				CEDDCBC820F95555004BD3A0 /* Assets.xcassets */,
-				CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */,
+				0AAC9D9E2111348300A3967E /* LaunchScreen.storyboard */,
 				CED91F76210132DC00E0E2F6 /* GoogleService-Info.plist */,
 				CEDDCBCD20F95555004BD3A0 /* Info.plist */,
 				CEDDCBCE20F95555004BD3A0 /* main.m */,
@@ -411,7 +411,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEDDCBCC20F95555004BD3A0 /* LaunchScreen.storyboard in Resources */,
+				0AAC9D9F2111348300A3967E /* LaunchScreen.storyboard in Resources */,
 				CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */,
 				CED91F77210132DC00E0E2F6 /* GoogleService-Info.plist in Resources */,
 			);
@@ -567,17 +567,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		CEDDCBCA20F95555004BD3A0 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEDDCBCB20F95555004BD3A0 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		CEDDCBE620F95555004BD3A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -696,7 +685,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nooves/Nooves.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N54432JF7W;
+				DEVELOPMENT_TEAM = N29GB8Y55L;
 				INFOPLIST_FILE = Nooves/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -715,7 +704,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nooves/Nooves.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N54432JF7W;
+				DEVELOPMENT_TEAM = N29GB8Y55L;
 				INFOPLIST_FILE = Nooves/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
