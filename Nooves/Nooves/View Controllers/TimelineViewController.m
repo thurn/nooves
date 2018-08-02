@@ -6,12 +6,9 @@
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
 #import "TimelineViewController.h"
-#import <CoreLocation/CoreLocation.h>
 #import "PostDetailsViewController.h"
 
-@interface TimelineViewController () <CLLocationManagerDelegate>
-
-@property (nonatomic) CLLocationManager *userLocation;
+@interface TimelineViewController ()
 
 @end
 
@@ -25,33 +22,6 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.userLocation = [[CLLocationManager alloc] init];
-    self.userLocation.delegate = self;
-    self.userLocation.desiredAccuracy = kCLLocationAccuracyBest;
-    self.userLocation.distanceFilter = kCLDistanceFilterNone;
-    
-    if([CLLocationManager locationServicesEnabled]) {
-        
-        NSLog(@"Location Services Enabled");
-        [self.userLocation startUpdatingLocation];
-        [self.userLocation requestAlwaysAuthorization];
-        [self.userLocation requestWhenInUseAuthorization];
-        
-        if([CLLocationManager authorizationStatus]==kCLAuthorizationStatusDenied) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"App Permission Denied"
-                                                                           message:@"To re-enable, please go to Settings and turn on Location Service for this app."
-                                                                    preferredStyle:(UIAlertControllerStyleAlert)];
-            
-            // create an OK action
-            UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
-                                                               style:UIAlertActionStyleDefault
-                                                             handler:^(UIAlertAction * _Nonnull action) {
-                                                                 // handle response here.
-                                                             }];
-            [alert addAction:okAction];
-        }
-    }
 
     static dispatch_once_t openingApp;
     dispatch_once(&openingApp, ^ {
@@ -154,32 +124,6 @@
 -(void)didTapProfile {
     ProfileViewController *profile = [[ProfileViewController alloc] init];
     [self.navigationController pushViewController:profile animated:YES];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
-    CLLocation *newLocation = locations.lastObject;
-    NSString *userLat = [[NSString alloc] initWithFormat:@"%f", newLocation.coordinate.latitude];
-    NSString *userLng = [[NSString alloc] initWithFormat:@"%f", newLocation.coordinate.longitude];
-    NSString *acc = [[NSString alloc] initWithFormat:@"%f", newLocation.horizontalAccuracy];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
-                                                                   message:@"Error obtaining location. Please make sure to set location access and turn your location on."
-                                                            preferredStyle:(UIAlertControllerStyleAlert)];
-    
-    // create an OK action
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
-                                                       style:UIAlertActionStyleDefault
-                                                     handler:^(UIAlertAction * _Nonnull action) {
-                                                         // handle response here.
-                                                     }];
-    [alert addAction:okAction];
-    
-    [self presentViewController:alert animated:YES completion:^{
-    }];
-    
 }
 
 @end
