@@ -1,7 +1,7 @@
 #import "Post.h"
 #import "PostCell.h"
 #import "PureLayout/PureLayout.h"
-
+#import <FIRDatabase.h>
 @implementation PostCell
 
     bool going = NO;
@@ -20,20 +20,41 @@
 - (void)configurePost: (Post *) post {
     self.post = post;
     if(self.post){
-        // set up the date field
+
+        
         self.dateField = [[UILabel alloc]init];
         [self.dateField sizeToFit];
         [self.contentView addSubview:self.dateField];
         [self.dateField autoPinEdgeToSuperviewMargin:ALEdgeLeft];
         [self.dateField autoPinEdgeToSuperviewMargin:ALEdgeTop];
         
-        //set up the profile picture field
-        self.profilePicField = [[UIImageView alloc]init];
-        [self.profilePicField sizeToFit];
+        self.profilePicField = [[UIImageView alloc] initWithFrame:CGRectMake(self.dateField.frame.origin.x, self.dateField.frame.size.height+22, 40, 40)];
+        self.profilePicField.image = [UIImage imageNamed:@"profile-blank"];
         [self.contentView addSubview:self.profilePicField];
-        [self.profilePicField autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.dateField withOffset:10.0f];
-        [self.profilePicField autoPinEdgeToSuperviewMargin:ALEdgeLeft];
-        [self.profilePicField autoPinEdgeToSuperviewMargin:ALEdgeBottom];
+        FIRDatabaseReference *ref = [[[[FIRDatabase database] reference] child:@"Users"] child:post.userID];
+        FIRDatabaseHandle *handle = [ref observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            NSDictionary *getPic = snapshot.value;
+            if(![snapshot.value isEqual:[NSNull null]]){
+                if(![getPic[@"ProfilePicURL"] isEqualToString:@"nil"]){
+                        NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:getPic[@"ProfilePicURL"]] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                        if(error){
+                            NSLog(@"%@", error);
+                            return;
+                        }
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            self.profilePicField.image = [UIImage imageWithData:data];
+                        });
+                    }];
+                    [task resume];
+                }
+            }
+        }];
+        self.profilePicField.frame = CGRectMake(self.dateField.frame.origin.x, self.dateField.frame.size.height+30, 40, 40);
+        //set up the profile picture field
+        [self.contentView addSubview:self.profilePicField];
+//        [self.profilePicField autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.dateField withOffset:10.0f];
+//        [self.profilePicField autoPinEdgeToSuperviewMargin:ALEdgeLeft];
+//        [self.profilePicField autoPinEdgeToSuperviewMargin:ALEdgeBottom];
         
         //self up the event title field
         self.eventTitleField = [[UILabel alloc]init];
