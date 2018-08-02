@@ -4,8 +4,8 @@
 
 static NSString * const baseURLString = @"http://api.eventful.com/json/events/search?";
 static NSString * const appKey = @"dFXh3rhZVVwbshg9";
-static NSString * const consumerKey = @"5db85641372af05aa023";
-static NSString * const consumerSecret = @"93767e5098b45988d73f";
+static NSString * const clientKey = @"5db85641372af05aa023";
+static NSString * const clientSecret = @"93767e5098b45988d73f";
 
 @interface EventsViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -78,7 +78,11 @@ static NSString * const consumerSecret = @"93767e5098b45988d73f";
 }
 
 - (void)fetchEvents {
-    NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&",consumerKey, consumerSecret];
+    NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&",clientKey, clientSecret];
+    queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    
+   // NSURL *url
+    
 }
 
 @end
