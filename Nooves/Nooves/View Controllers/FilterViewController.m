@@ -2,9 +2,9 @@
 #import "FilterCell.h"
 #import "FilterViewController.h"
 #import "PureLayout/PureLayout.h"
-#import "TimelineViewController.h"
 #import "Post.h"
 #import "PostCell.h"
+#import "TimelineViewController.h"
 
 @interface FilterViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -26,6 +26,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    UIView *superView = [[UIView alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width, self.view.frame.size.height)];
+    superView.backgroundColor = [UIColor clearColor];
+   // [superView addSubview:self.view];
+    [self.view addSubview:superView];
     
     [self configureTableView];
     self.tableView.delegate = self;
@@ -99,11 +103,13 @@
 }
 
 - (void)configureConfirmButton {
-    self.confirmButton = [[UIButton alloc]initWithFrame:CGRectMake(200, 600, 30, 30)];
+   self.confirmButton = [[UIButton alloc]initWithFrame:CGRectMake(200, 600, 30, 30)];
+   // self.confirmButton = [[UIButton alloc]init];
     [self.confirmButton setBackgroundColor:[UIColor blueColor]];
     [self.confirmButton setTitle:@"Confirm" forState:UIControlStateNormal];
     [self.confirmButton sizeToFit];
     [self.view addSubview:self.confirmButton];
+    //[self.view autoPinEdge:ALEdgeLeft toEdge:ALEdgeBottom ofView:self.tableView];
     [self.confirmButton addTarget:self action:@selector(didTapConfirm) forControlEvents:UIControlEventTouchUpInside];
 }
 

@@ -21,6 +21,7 @@
 		327FA7CE20FD2858009C55BA /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7CD20FD2858009C55BA /* Post.m */; };
 		327FA7D720FEAA63009C55BA /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7D620FEAA63009C55BA /* TimelineViewController.m */; };
 		32A55D0C211271C7005A91E1 /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A55D0B211271C7005A91E1 /* EventsViewController.m */; };
+		32A55D0F2113771B005A91E1 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A55D0E2113771B005A91E1 /* EventCell.m */; };
 		32C735D6210684F0002F8689 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C735D5210684F0002F8689 /* FilterViewController.m */; };
 		32C7361D210842E3002F8689 /* FilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C7361C210842E3002F8689 /* FilterCell.m */; };
 		843CEC35ED5431BAB141B183 /* libPods-Nooves.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 490196513151D701FAFA5567 /* libPods-Nooves.a */; };
@@ -83,6 +84,8 @@
 		327FA7D620FEAA63009C55BA /* TimelineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
 		32A55D0A211271C7005A91E1 /* EventsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventsViewController.h; sourceTree = "<group>"; };
 		32A55D0B211271C7005A91E1 /* EventsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventsViewController.m; sourceTree = "<group>"; };
+		32A55D0D2113771B005A91E1 /* EventCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
+		32A55D0E2113771B005A91E1 /* EventCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
 		32C735D4210684E7002F8689 /* FilterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		32C735D5210684F0002F8689 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		32C7361B210842E3002F8689 /* FilterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterCell.h; sourceTree = "<group>"; };
@@ -203,6 +206,8 @@
 				327FA7C420FD273E009C55BA /* PostCell.m */,
 				CE57769021068ADB00C7637C /* LocationCell.h */,
 				CE57769121068ADB00C7637C /* LocationCell.m */,
+				32A55D0D2113771B005A91E1 /* EventCell.h */,
+				32A55D0E2113771B005A91E1 /* EventCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -534,6 +539,7 @@
 				327FA7C520FD273E009C55BA /* PostCell.m in Sources */,
 				CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */,
 				CE57768B21064FDA00C7637C /* LocationPickerModalViewController.m in Sources */,
+				32A55D0F2113771B005A91E1 /* EventCell.m in Sources */,
 				CED91F6C2101305000E0E2F6 /* TabBarController.m in Sources */,
 				327FA7C220FD2014009C55BA /* ComposeViewController.m in Sources */,
 				327FA7D720FEAA63009C55BA /* TimelineViewController.m in Sources */,
