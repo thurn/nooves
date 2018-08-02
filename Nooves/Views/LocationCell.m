@@ -29,8 +29,8 @@
     return self;
 }
 
+// initialized cell properties
 - (void)initialize {
-    // initialize cell properties
     self.categoryImageView = [[UIImageView alloc] init];
     self.addressLabel = [[UILabel alloc] init];
     self.nameLabel = [[UILabel alloc] init];

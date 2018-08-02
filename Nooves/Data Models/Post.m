@@ -36,6 +36,7 @@
     }
 };
 
+// TODO(Nikki): add user location to this
 - (instancetype)initPostWithDetails:(NSDate *)eventDate
                           withTitle:(NSString *)postTitle
                     withDescription:(NSString *) postDescription
@@ -59,6 +60,7 @@
 - (void)initFromFirebase{
 }
 
+// TODO(Nikki): add user location to database
 + (void)postToFireBase:(Post *)post {
     int timestamp = [post.activityDateAndTime timeIntervalSince1970];
     NSNumber *dateAndTimeStamp = @(timestamp);
@@ -67,6 +69,8 @@
     FIRDatabaseReference *reffy = [[[ref child:@"Posts"] child:[FIRAuth auth].currentUser.uid] childByAutoId];
     [reffy setValue:@{@"Date":dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription, @"Latitude":post.activityLat, @"Longitude":post.activityLng}];
 }
+
+// TODO(Nikki): read user location from database
 + (NSArray *)readPostsFromFIRDict:(NSDictionary *)postsDict{
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     for(NSString *userKey in postsDict){

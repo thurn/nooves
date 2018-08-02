@@ -25,32 +25,17 @@
 
     // Configure the view for the selected state
 }
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    [self configureCell];
-    return self;
-}
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    [self configureCell];
-    return self;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    
-    [self configureCell];
-    return self;
-}
-
-- (void)configureCell {
+- (void)configureEvent: (Event *)event {
+    self.event = event;
     
     //initialize event cell properties
     self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 10,100, 20)];
     self.descriptionLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 50, 250, 100)];
+    [self.descriptionLabel setBackgroundColor:[UIColor blueColor]];
     self.venueLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 350, 50, 50)];
     self.venueAddressLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, 350, 50, 50)];
+    [self.venueAddressLabel setBackgroundColor:[UIColor redColor]];
     self.timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(200, 350, 50, 50)];
     
     self.titleLabel.text = @"Title";
@@ -59,11 +44,11 @@
     self.venueAddressLabel.text = @"Venue Address";
     self.timeLabel.text = @"Time";
     
-    [self addSubview:self.titleLabel];
-    [self addSubview:self.descriptionLabel];
-    [self addSubview:self.venueLabel];
-    [self addSubview:self.venueAddressLabel];
-    [self addSubview:self.timeLabel];
+    [self.contentView addSubview:self.titleLabel];
+    [self.contentView addSubview:self.descriptionLabel];
+    [self.contentView addSubview:self.venueLabel];
+    [self.contentView addSubview:self.venueAddressLabel];
+    [self.contentView addSubview:self.timeLabel];
 }
 
 @end
