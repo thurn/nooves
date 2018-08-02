@@ -1,7 +1,6 @@
 #import "DatePickerModalViewController.h"
 
 @interface DatePickerModalViewController()
-
 @end
 
 @implementation DatePickerModalViewController

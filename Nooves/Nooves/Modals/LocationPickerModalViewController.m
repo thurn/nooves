@@ -14,9 +14,7 @@ UISearchBarDelegate, CLLocationManagerDelegate>
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) UISearchBar *searchBar;
 @property (nonatomic) NSArray *results;
-
 @property (nonatomic) CLLocationManager *userLocation;
-
 @end
 
 @implementation LocationPickerModalViewController

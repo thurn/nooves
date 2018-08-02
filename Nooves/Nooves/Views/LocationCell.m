@@ -2,12 +2,10 @@
 #import "LocationCell.h"
 
 @interface LocationCell ()
-
 @property (nonatomic) UILabel *addressLabel;
 @property (nonatomic) UILabel *nameLabel;
 @property (nonatomic) UIImageView *categoryImageView;
 @property (nonatomic) NSDictionary *location;
-
 @end
 
 @implementation LocationCell
