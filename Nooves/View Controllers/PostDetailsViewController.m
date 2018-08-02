@@ -30,7 +30,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     FIRDatabaseReference *reference = [[FIRDatabase database] reference];
     FIRDataEventType type = inty;
-    FIRDatabaseHandle *databaseHandle = [[[reference child:@"Users"]child:self.post.userID] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    FIRDatabaseHandle *databaseHandle = [[[reference child:@"Users"]child:self.post.userID] observeEventType:type withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSDictionary *usersDictionary = snapshot.value;
         if (![snapshot.value isEqual:[NSNull null]]) {
             self.user = [[User alloc] initFromDatabase:usersDictionary];
