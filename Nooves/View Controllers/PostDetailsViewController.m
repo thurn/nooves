@@ -50,8 +50,21 @@
         }
     }];
     self.profilePicImage = [[UIImageView alloc] init];
+    self.profilePicImage.image = [UIImage imageNamed:@"profile-blank"];
     self.profilePicImage.frame = CGRectMake(0, 0, self.view.frame.size.width, (self.view.frame.size.height*9/20));
     [self.view addSubview:self.profilePicImage];
+    if(self.post){
+        self.activityTitleLabel = [[UILabel alloc] init];
+        self.activityTitleLabel.text = self.post.activityTitle;
+        [self.activityTitleLabel sizeToFit];
+        [self.activityTitleLabel.font fontWithSize:80];
+        self.activityTitleLabel.center = self.view.center;
+        [self.view addSubview:self.activityTitleLabel];
+        self.activityTypeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.view.frame.size.height/2+30, 10, 10)];
+        self.activityTypeLabel.text = [@"Activity Type: " stringByAppendingString:[Post activityTypeToString:self.post.activityType]];
+        [self.activityTypeLabel sizeToFit];
+        [self.view addSubview:self.activityTypeLabel];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
