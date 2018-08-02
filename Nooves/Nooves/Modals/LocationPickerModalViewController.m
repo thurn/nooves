@@ -123,6 +123,7 @@ UISearchBarDelegate, CLLocationManagerDelegate>
 - (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range
                                                    replacementText:(NSString *)text {
     NSString *newText = [searchBar.text stringByReplacingCharactersInRange:range withString:text];
+    [self checkLocationEnabled];
     self.userLat = Location.currentLocation.userLat;
     self.userLng = Location.currentLocation.userLng;
     [self fetchLocationsWithQuery:newText nearCityWithLatitude:self.userLat longitude:self.userLng];
@@ -131,6 +132,7 @@ UISearchBarDelegate, CLLocationManagerDelegate>
 
 // fetches places from search
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self checkLocationEnabled];
     self.userLat = Location.currentLocation.userLat;
     self.userLng = Location.currentLocation.userLng;
     [self fetchLocationsWithQuery:searchBar.text nearCityWithLatitude:self.userLat longitude:self.userLng];
@@ -174,6 +176,24 @@ UISearchBarDelegate, CLLocationManagerDelegate>
 // goes back to parent controller
 - (void)didTapBackButton {
     [self dismissViewControllerAnimated:true completion:nil];
+}
+
+- (void)checkLocationEnabled {
+    if (Location.currentLocation.enabled == NO) {
+        // present alert controller
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"App Permission Denied"
+                                                                       message:@"To re-enable, please go to Settings and turn on Location Service for this app."
+                                                                preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        // create an OK action
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+                                                             // handle response here.
+                                                         }];
+        [alert addAction:okAction];
+
+    }
 }
 
 @end
