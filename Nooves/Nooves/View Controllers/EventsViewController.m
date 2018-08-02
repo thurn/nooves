@@ -34,6 +34,8 @@ static NSString * const consumerSecret = @"93767e5098b45988d73f";
     tableView.delegate = self;
     
     [self configureTableView];
+    [tableView registerClass:[EventCell class] forCellReuseIdentifier:@"eventCellIdentifier"];
+    [tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,5 +91,8 @@ static NSString * const consumerSecret = @"93767e5098b45988d73f";
     [self.searchBar resignFirstResponder];
 }
 
+- (void)fetchEvents {
+    NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&",consumerKey, consumerSecret];
+}
 
 @end
