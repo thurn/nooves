@@ -1,4 +1,3 @@
-#import "Event.h"
 #import "EventCell.h"
 #import "EventsViewController.h"
 
@@ -26,7 +25,6 @@ static NSString * const consumerSecret = @"93767e5098b45988d73f";
     tableView.dataSource = self;
     tableView.delegate = self;
     
-    self.eventsArray = @[@"hello", @"just", @"testing", @"events"];
     [self configureTableView];
     [tableView registerClass:[EventCell class] forCellReuseIdentifier:@"eventCellIdentifier"];
     [tableView reloadData];
@@ -64,17 +62,12 @@ static NSString * const consumerSecret = @"93767e5098b45988d73f";
 #pragma mark - UITableViewDelegate methods
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     EventCell *cell = [tableView dequeueReusableCellWithIdentifier:@"eventCellIdentifier" forIndexPath:indexPath];
-    //cell.textLabel.text = self.eventsArray[indexPath.row];
-    NSLog( @"cellforRowAtIndexPath");
-    Event *event = self.eventsArray[indexPath.row];
-    [cell configureEvent:event];
-
+    cell.textLabel.text = self.eventsArray[indexPath.row];
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"number of rows in section");
-    return  30;
+    return  self.eventsArray.count;
 }
 
 #pragma mark - UISearchBarDelegate methods
