@@ -1,4 +1,4 @@
-#import <FirebaseDatabase/FirebaseDatabase.h>
+#import <FirebaseDatabase.h>
 #import <Foundation/Foundation.h>
 
 @interface Post : NSObject
