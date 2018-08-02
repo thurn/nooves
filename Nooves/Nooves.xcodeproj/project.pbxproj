@@ -22,6 +22,7 @@
 		327FA7D720FEAA63009C55BA /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7D620FEAA63009C55BA /* TimelineViewController.m */; };
 		32A55D0C211271C7005A91E1 /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A55D0B211271C7005A91E1 /* EventsViewController.m */; };
 		32A55D0F2113771B005A91E1 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A55D0E2113771B005A91E1 /* EventCell.m */; };
+		32A55D12211387C5005A91E1 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A55D11211387C5005A91E1 /* Event.m */; };
 		32C735D6210684F0002F8689 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C735D5210684F0002F8689 /* FilterViewController.m */; };
 		32C7361D210842E3002F8689 /* FilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C7361C210842E3002F8689 /* FilterCell.m */; };
 		843CEC35ED5431BAB141B183 /* libPods-Nooves.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 490196513151D701FAFA5567 /* libPods-Nooves.a */; };
@@ -86,6 +87,8 @@
 		32A55D0B211271C7005A91E1 /* EventsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventsViewController.m; sourceTree = "<group>"; };
 		32A55D0D2113771B005A91E1 /* EventCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
 		32A55D0E2113771B005A91E1 /* EventCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
+		32A55D10211387C5005A91E1 /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		32A55D11211387C5005A91E1 /* Event.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		32C735D4210684E7002F8689 /* FilterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		32C735D5210684F0002F8689 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		32C7361B210842E3002F8689 /* FilterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterCell.h; sourceTree = "<group>"; };
@@ -166,6 +169,8 @@
 				327D408621094087002E8513 /* User.m */,
 				CEAC59112112740300C08A74 /* Location.h */,
 				CEAC59122112740300C08A74 /* Location.m */,
+				32A55D10211387C5005A91E1 /* Event.h */,
+				32A55D11211387C5005A91E1 /* Event.m */,
 			);
 			path = "Data Models";
 			sourceTree = "<group>";
@@ -532,6 +537,7 @@
 				CED91F6F2101306800E0E2F6 /* ProfileViewController.m in Sources */,
 				32C735D6210684F0002F8689 /* FilterViewController.m in Sources */,
 				0A6C93802107A6A000097F37 /* SignUpViewController.m in Sources */,
+				32A55D12211387C5005A91E1 /* Event.m in Sources */,
 				327FA7CE20FD2858009C55BA /* Post.m in Sources */,
 				327D408421093011002E8513 /* EditProfileViewController.m in Sources */,
 				32A55D0C211271C7005A91E1 /* EventsViewController.m in Sources */,
