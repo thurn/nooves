@@ -1,18 +1,18 @@
 //
-//  SignInViewController.m
+//  EventsViewController.m
 //  Nooves
 //
-//  Created by Nikki Tran on 7/19/18.
+//  Created by Norette Ingabire on 8/2/18.
 //  Copyright © 2018 Nikki Tran. All rights reserved.
 //
 
-#import "SignInViewController.h"
+#import "EventsViewController.h"
 
-@interface SignInViewController ()
+@interface EventsViewController ()
 
 @end
 
-@implementation SignInViewController
+@implementation EventsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

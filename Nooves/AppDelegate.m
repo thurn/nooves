@@ -6,7 +6,7 @@
 #import "LoginViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FirebaseAuth.h>
-
+#import <Firebase/Firebase.h>
 @import Firebase;
 
 @interface AppDelegate ()
