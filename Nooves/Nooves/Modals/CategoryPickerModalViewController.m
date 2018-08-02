@@ -2,11 +2,9 @@
 #import "Post.h"
 
 @interface CategoryPickerModalViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
-
 @property (nonatomic) NSArray *categories;
 @property (nonatomic) UIPickerView *pickerView;
 @property (nonatomic) UILabel *categoryLabel;
-
 @end
 
 @implementation CategoryPickerModalViewController

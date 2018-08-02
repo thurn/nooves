@@ -117,7 +117,6 @@
 
 - (void)didTapFilter {
     FilterViewController *filter = [[FilterViewController alloc]init];
-    // TODO(Norette): fetch data from the database
     [self.navigationController pushViewController:filter animated:YES];
 }
 
