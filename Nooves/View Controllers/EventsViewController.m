@@ -1,3 +1,4 @@
+#import "ComposeViewController.h"
 #import "EventCell.h"
 #import "EventsViewController.h"
 
@@ -6,10 +7,9 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 static NSString * const consumerKey = @"5db85641372af05aa023";
 static NSString * const consumerSecret = @"93767e5098b45988d73f";
 
-@interface EventsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface EventsViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property(strong, nonatomic) NSArray *eventsArray;
-@property(strong, nonatomic) UISearchBar *searchBar;
 
 @end
 
@@ -26,6 +26,7 @@ static NSString * const consumerSecret = @"93767e5098b45988d73f";
     tableView.delegate = self;
     
     [self configureTableView];
+    [self confirmEventButton];
     [tableView registerClass:[EventCell class] forCellReuseIdentifier:@"eventCellIdentifier"];
     [tableView reloadData];
 }
@@ -47,16 +48,22 @@ static NSString * const consumerSecret = @"93767e5098b45988d73f";
     tableView.userInteractionEnabled = YES;
     [self.view addSubview:tableView];
     
-    // set up the search bar
-    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(-5.0, 0.0, 320.0, 44.0)];
-    self.searchBar.delegate = self;
-    self.searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    UIView *searchBarView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 310.0, 44.0)];
-    searchBarView.autoresizingMask = 0;
-    [searchBarView addSubview:self.searchBar];
-    self.navigationItem.titleView = searchBarView;
-    
     return tableView;
+}
+
+// sets up post button properties
+- (UIBarButtonItem *)confirmEventButton {
+    UIBarButtonItem *confirmButton = [[UIBarButtonItem alloc] initWithTitle:@"Confirm"
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(didTapConfirm)];
+    self.navigationItem.rightBarButtonItem = confirmButton;
+    return confirmButton;
+}
+
+- (void)didTapConfirm {
+    ComposeViewController *compose = [[ComposeViewController alloc]init];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - UITableViewDelegate methods
@@ -68,19 +75,6 @@ static NSString * const consumerSecret = @"93767e5098b45988d73f";
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return  self.eventsArray.count;
-}
-
-#pragma mark - UISearchBarDelegate methods
-// cancel button appears when user edits search bar
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    self.searchBar.showsCancelButton = YES;
-}
-
-// will delete search text when cancel button clicked
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    self.searchBar.showsCancelButton = NO;
-    self.searchBar.text = @"";
-    [self.searchBar resignFirstResponder];
 }
 
 - (void)fetchEvents {
