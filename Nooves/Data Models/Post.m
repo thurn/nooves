@@ -43,7 +43,8 @@
                            withType:(ActivityType ) activityType
                             withLat:(NSNumber *) lat
                             withLng:(NSNumber *) lng
-                             withID:(NSString *)postID{
+                             withID:(NSString *)postID
+                       withLocation:(NSString *)location {
     self = [super init];
     if (self){
         self.activityDateAndTime = eventDate;
@@ -54,6 +55,7 @@
         self.activityLng = lng;
         self.userID = FIRAuth.auth.currentUser.uid;
         self.fireBaseID = postID;
+        self.eventLocation = location;
     }
     return self;
 }
@@ -67,7 +69,7 @@
     NSNumber *activityType = @(post.activityType);
     FIRDatabaseReference *ref = [[FIRDatabase database] reference];
     FIRDatabaseReference *reffy = [[[ref child:@"Posts"] child:[FIRAuth auth].currentUser.uid] childByAutoId];
-    [reffy setValue:@{@"Date":dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription, @"Latitude":post.activityLat, @"Longitude":post.activityLng}];
+    [reffy setValue:@{@"Date":dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription, @"Latitude":post.activityLat, @"Longitude":post.activityLng, @"Location":post.eventLocation}];
 }
 
 // TODO(Nikki): read user location from database
@@ -82,6 +84,7 @@
             posty.userID = userKey;
             posty.activityLat = postsDict[userKey][IDKey][@"Latitude"];
             posty.activityLng = postsDict[userKey][IDKey][@"Longitude"];
+            posty.eventLocation = postsDict[userKey][IDKey][@"Location"];
             ActivityType type = [postsDict[userKey][IDKey][@"Activity Type"] integerValue];
             posty.activityType = type;
             NSInteger date = [postsDict[userKey][IDKey][@"Date"] integerValue];

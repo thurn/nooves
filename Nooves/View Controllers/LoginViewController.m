@@ -3,7 +3,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "TimelineViewController.h"
-@interface LoginViewController ()<FBSDKLoginButtonDelegate>
+@interface LoginViewController () <FBSDKLoginButtonDelegate>
 @property UITextField *phoneNumber;
 @property FIRUser *user;
 @end
