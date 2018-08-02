@@ -43,11 +43,6 @@ UISearchBarDelegate, CLLocationManagerDelegate>
     [self.tableView reloadData];
 }
 
-// hides tab bar
-- (void)viewWillAppear: (BOOL)animated {
-    self.hidesBottomBarWhenPushed = YES;
-}
-
 // congigures table view properties
 - (void)configureTableView {
     CGFloat width = self.view.frame.size.width;
@@ -176,14 +171,13 @@ UISearchBarDelegate, CLLocationManagerDelegate>
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
+// presents alert controller if location services not enabled
 - (void)checkLocationEnabled {
     if (Location.currentLocation.enabled == NO) {
-        // present alert controller
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"App Permission Denied"
                                                                        message:@"To re-enable, please go to Settings and turn on Location Service for this app."
                                                                 preferredStyle:(UIAlertControllerStyleAlert)];
         
-        // create an OK action
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
                                                            style:UIAlertActionStyleDefault
                                                          handler:^(UIAlertAction * _Nonnull action) {

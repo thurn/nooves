@@ -125,4 +125,6 @@
     [self.navigationController pushViewController:profile animated:YES];
 }
 
+// TODO(Nikki): retrieve posts only within a certain region (50 miles) of user
+
 @end

@@ -32,11 +32,6 @@
     [self createBackButton];
 }
 
-// hides tab bar
-- (void)viewWillAppear:(BOOL)animated {
-    self.hidesBottomBarWhenPushed = YES;
-}
-
 // opens category picker view
 - (UIButton *)selectCategory{
     UIButton *selectCategory = [UIButton buttonWithType:UIButtonTypeSystem];

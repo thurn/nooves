@@ -3,6 +3,7 @@
 
 @interface Post : NSObject
 
+// TODO: typedef should be outside of class
 typedef NS_ENUM(NSInteger, ActivityType){
     ActivityTypeOutdoors,
     ActivityTypeArts,

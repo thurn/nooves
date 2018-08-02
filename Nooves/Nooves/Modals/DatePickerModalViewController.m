@@ -23,11 +23,6 @@
     [self createBackButton];
 }
 
-// hides tab bar
-- (void)viewWillAppear: (BOOL)animated {
-    self.hidesBottomBarWhenPushed = YES;
-}
-
 // user confirmatin button when date is selected
 - (UIButton *)selectDate {
     UIButton *selectDate = [UIButton buttonWithType:UIButtonTypeSystem];
