@@ -1,5 +1,6 @@
 #import "AppDelegate.h"
 #import "ComposeViewController.h"
+#import "EventsViewController.h"
 #import "PureLayout/PureLayout.h"
 #import "TabBarController.h"
 #import "TimelineViewController.h"
@@ -57,6 +58,8 @@ CategoryPickerDelegate, DatePickerDelegate>
     
     [self postButton];
     [self createBackButton];
+    [self searchEventsButton];
+    [self enterLocationField];
     
     [self becomeFirstResponder];
 }
@@ -252,6 +255,31 @@ CategoryPickerDelegate, DatePickerDelegate>
                           didPickDate:(NSDate *)date {
     self.date = date;
     [self.navigationController popToViewController:self animated:YES];
+}
+
+- (UITextField *)enterLocationField {
+    UITextField *eventLocation = [[UITextField alloc]initWithFrame:CGRectMake(50, 570, 150, 20)];
+    eventLocation.placeholder = @"Enter location to search for local events...";
+    [eventLocation sizeToFit];
+    eventLocation.textColor = [UIColor grayColor];
+    [self.view addSubview:eventLocation];
+    return eventLocation;
+}
+
+// set up button to select local events
+-(UIButton *)searchEventsButton {
+    UIButton *eventsButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 600, 100, 100)];
+    [eventsButton setTitle:@"Enter" forState:UIControlStateNormal];
+    [eventsButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [eventsButton sizeToFit];
+    [self.view addSubview:eventsButton];
+    [eventsButton addTarget:self action:@selector(didTapEvents) forControlEvents:UIControlEventTouchUpInside];
+    return eventsButton;
+}
+
+- (void)didTapEvents {
+    EventsViewController *chooseEvent = [[EventsViewController alloc]init];
+    [self.navigationController pushViewController:chooseEvent animated:YES];
 }
 
 @end
