@@ -11,6 +11,7 @@
 		0A6C937D2107A68800097F37 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C937C2107A68800097F37 /* LoginViewController.m */; };
 		0A6C93802107A6A000097F37 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C937F2107A6A000097F37 /* SignUpViewController.m */; };
 		0A6C9384211110EE00097F37 /* PostDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A6C9383211110EE00097F37 /* PostDetailsViewController.m */; };
+		0AAC9D9F2111348300A3967E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AAC9D9E2111348300A3967E /* LaunchScreen.storyboard */; };
 		0AADDFE121015B3C00C173CB /* DatePickerModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AADDFE021015B3C00C173CB /* DatePickerModalViewController.m */; };
 		0AE18A122113A1DC00B8CA74 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE18A112113A1DC00B8CA74 /* Location.m */; };
 		0AE18A152113A1FF00B8CA74 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE18A132113A1FE00B8CA74 /* Event.m */; };
@@ -23,13 +24,17 @@
 		327FA7C520FD273E009C55BA /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7C420FD273E009C55BA /* PostCell.m */; };
 		327FA7CE20FD2858009C55BA /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7CD20FD2858009C55BA /* Post.m */; };
 		327FA7D720FEAA63009C55BA /* TimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7D620FEAA63009C55BA /* TimelineViewController.m */; };
+		32A55D0C211271C7005A91E1 /* EventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A55D0B211271C7005A91E1 /* EventsViewController.m */; };
+		32A55D0F2113771B005A91E1 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A55D0E2113771B005A91E1 /* EventCell.m */; };
+		32A55D12211387C5005A91E1 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 32A55D11211387C5005A91E1 /* Event.m */; };
 		32C735D6210684F0002F8689 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C735D5210684F0002F8689 /* FilterViewController.m */; };
 		32C7361D210842E3002F8689 /* FilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C7361C210842E3002F8689 /* FilterCell.m */; };
 		CE57768B21064FDA00C7637C /* LocationPickerModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57768A21064FDA00C7637C /* LocationPickerModalViewController.m */; };
 		CE57768F210654E400C7637C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE57768E210654E400C7637C /* CoreLocation.framework */; };
 		CE57769221068ADB00C7637C /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57769121068ADB00C7637C /* LocationCell.m */; };
 		CEAC590A211100A500C08A74 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEAC5909211100A500C08A74 /* MapKit.framework */; };
-		CEAC590D2111118700C08A74 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAC590C2111118700C08A74 /* LocationManager.m */; };
+		CEAC59132112740300C08A74 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAC59122112740300C08A74 /* Location.m */; };
+		CEAC59162113811300C08A74 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAC59152113811300C08A74 /* SettingsViewController.m */; };
 		CED91F6C2101305000E0E2F6 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F6A2101304F00E0E2F6 /* TabBarController.m */; };
 		CED91F6F2101306800E0E2F6 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F6D2101306800E0E2F6 /* ProfileViewController.m */; };
 		CED91F77210132DC00E0E2F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CED91F76210132DC00E0E2F6 /* GoogleService-Info.plist */; };
@@ -67,6 +72,7 @@
 		0A6C93812107CE8C00097F37 /* Nooves.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Nooves.entitlements; sourceTree = "<group>"; };
 		0A6C9382211110EE00097F37 /* PostDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostDetailsViewController.h; sourceTree = "<group>"; };
 		0A6C9383211110EE00097F37 /* PostDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostDetailsViewController.m; sourceTree = "<group>"; };
+		0AAC9D9E2111348300A3967E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0AADDFDF21015B3C00C173CB /* DatePickerModalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatePickerModalViewController.h; sourceTree = "<group>"; };
 		0AADDFE021015B3C00C173CB /* DatePickerModalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatePickerModalViewController.m; sourceTree = "<group>"; };
 		0AE18A102113A1D100B8CA74 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
@@ -91,6 +97,12 @@
 		327FA7CD20FD2858009C55BA /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		327FA7D520FEAA63009C55BA /* TimelineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TimelineViewController.h; sourceTree = "<group>"; };
 		327FA7D620FEAA63009C55BA /* TimelineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TimelineViewController.m; sourceTree = "<group>"; };
+		32A55D0A211271C7005A91E1 /* EventsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventsViewController.h; sourceTree = "<group>"; };
+		32A55D0B211271C7005A91E1 /* EventsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventsViewController.m; sourceTree = "<group>"; };
+		32A55D0D2113771B005A91E1 /* EventCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
+		32A55D0E2113771B005A91E1 /* EventCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
+		32A55D10211387C5005A91E1 /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
+		32A55D11211387C5005A91E1 /* Event.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		32C735D4210684E7002F8689 /* FilterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		32C735D5210684F0002F8689 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		32C7361B210842E3002F8689 /* FilterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterCell.h; sourceTree = "<group>"; };
@@ -106,8 +118,10 @@
 		CE57769021068ADB00C7637C /* LocationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationCell.h; sourceTree = "<group>"; };
 		CE57769121068ADB00C7637C /* LocationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationCell.m; sourceTree = "<group>"; };
 		CEAC5909211100A500C08A74 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		CEAC590B2111118700C08A74 /* LocationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
-		CEAC590C2111118700C08A74 /* LocationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		CEAC59112112740300C08A74 /* Location.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		CEAC59122112740300C08A74 /* Location.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		CEAC59142113811300C08A74 /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		CEAC59152113811300C08A74 /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		CED91F6A2101304F00E0E2F6 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		CED91F6B2101305000E0E2F6 /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
 		CED91F6D2101306800E0E2F6 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
@@ -172,6 +186,10 @@
 				0AE18A112113A1DC00B8CA74 /* Location.m */,
 				0AE18A142113A1FF00B8CA74 /* Event.h */,
 				0AE18A132113A1FE00B8CA74 /* Event.m */,
+				CEAC59112112740300C08A74 /* Location.h */,
+				CEAC59122112740300C08A74 /* Location.m */,
+				32A55D10211387C5005A91E1 /* Event.h */,
+				32A55D11211387C5005A91E1 /* Event.m */,
 			);
 			path = "Data Models";
 			sourceTree = "<group>";
@@ -199,6 +217,10 @@
 				0A6C937F2107A6A000097F37 /* SignUpViewController.m */,
 				327D408221093011002E8513 /* EditProfileViewController.h */,
 				327D408321093011002E8513 /* EditProfileViewController.m */,
+				32A55D0A211271C7005A91E1 /* EventsViewController.h */,
+				32A55D0B211271C7005A91E1 /* EventsViewController.m */,
+				CEAC59142113811300C08A74 /* SettingsViewController.h */,
+				CEAC59152113811300C08A74 /* SettingsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -214,6 +236,8 @@
 				CE57769121068ADB00C7637C /* LocationCell.m */,
 				0AE18A192113A24900B8CA74 /* EventCell.h */,
 				0AE18A1A2113A24900B8CA74 /* EventCell.m */,
+				32A55D0D2113771B005A91E1 /* EventCell.h */,
+				32A55D0E2113771B005A91E1 /* EventCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -288,9 +312,8 @@
 				327FA7D120FE56F7009C55BA /* View Controllers */,
 				CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */,
 				CEDDCBC020F95554004BD3A0 /* AppDelegate.m */,
-				CEAC590B2111118700C08A74 /* LocationManager.h */,
-				CEAC590C2111118700C08A74 /* LocationManager.m */,
 				CEDDCBC820F95555004BD3A0 /* Assets.xcassets */,
+				0AAC9D9E2111348300A3967E /* LaunchScreen.storyboard */,
 				CED91F76210132DC00E0E2F6 /* GoogleService-Info.plist */,
 				CEDDCBCD20F95555004BD3A0 /* Info.plist */,
 				CEDDCBCE20F95555004BD3A0 /* main.m */,
@@ -428,6 +451,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AAC9D9F2111348300A3967E /* LaunchScreen.storyboard in Resources */,
 				CEDDCBC920F95555004BD3A0 /* Assets.xcassets in Resources */,
 				CED91F77210132DC00E0E2F6 /* GoogleService-Info.plist in Resources */,
 			);
@@ -532,6 +556,7 @@
 				0AE18A152113A1FF00B8CA74 /* Event.m in Sources */,
 				CEDDCBCF20F95555004BD3A0 /* main.m in Sources */,
 				0AE18A122113A1DC00B8CA74 /* Location.m in Sources */,
+				CEAC59132112740300C08A74 /* Location.m in Sources */,
 				0AADDFE121015B3C00C173CB /* DatePickerModalViewController.m in Sources */,
 				CE57769221068ADB00C7637C /* LocationCell.m in Sources */,
 				327D408721094087002E8513 /* User.m in Sources */,
@@ -540,14 +565,18 @@
 				0AE18A182113A22200B8CA74 /* EventsViewController.m in Sources */,
 				32C735D6210684F0002F8689 /* FilterViewController.m in Sources */,
 				0A6C93802107A6A000097F37 /* SignUpViewController.m in Sources */,
+				32A55D12211387C5005A91E1 /* Event.m in Sources */,
 				327FA7CE20FD2858009C55BA /* Post.m in Sources */,
 				327D408421093011002E8513 /* EditProfileViewController.m in Sources */,
+				CEAC59162113811300C08A74 /* SettingsViewController.m in Sources */,
+				32A55D0C211271C7005A91E1 /* EventsViewController.m in Sources */,
 				CED91F7A2101A2DC00E0E2F6 /* CategoryPickerModalViewController.m in Sources */,
 				327FA7C520FD273E009C55BA /* PostCell.m in Sources */,
 				CEDDCBC120F95554004BD3A0 /* AppDelegate.m in Sources */,
 				0AE18A1B2113A24A00B8CA74 /* EventCell.m in Sources */,
 				CEAC590D2111118700C08A74 /* LocationManager.m in Sources */,
 				CE57768B21064FDA00C7637C /* LocationPickerModalViewController.m in Sources */,
+				32A55D0F2113771B005A91E1 /* EventCell.m in Sources */,
 				CED91F6C2101305000E0E2F6 /* TabBarController.m in Sources */,
 				327FA7C220FD2014009C55BA /* ComposeViewController.m in Sources */,
 				327FA7D720FEAA63009C55BA /* TimelineViewController.m in Sources */,
@@ -706,6 +735,7 @@
 				CODE_SIGN_ENTITLEMENTS = Nooves/Nooves.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N29GB8Y55L;
+				DEVELOPMENT_TEAM = VX452D4486;
 				INFOPLIST_FILE = Nooves/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -725,6 +755,7 @@
 				CODE_SIGN_ENTITLEMENTS = Nooves/Nooves.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N29GB8Y55L;
+				DEVELOPMENT_TEAM = VX452D4486;
 				INFOPLIST_FILE = Nooves/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
