@@ -12,6 +12,7 @@
 @property (strong, nonatomic) UILabel *dateField;
 @property (strong, nonatomic) UILabel *eventTitleField;
 @property (strong, nonatomic) UILabel *activityTypeField;
+@property (strong, nonatomic) UIImageView *profilePicField;
 
 
 -(void) configurePost: (Post *) post;

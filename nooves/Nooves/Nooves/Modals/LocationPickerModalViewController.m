@@ -1,20 +1,20 @@
 #import "LocationCell.h"
+#import "Location.h"
 #import "LocationPickerModalViewController.h"
 
+#import <CoreLocation/CoreLocation.h>
+
+static NSString * const baseURLString = @"https://api.foursquare.com/v2/venues/search?";
 static NSString * const clientID = @"4FYRZKNIIFJQG25SUYJ55KINHUMVGWMYWFGQUFO5H4AQPQN2";
 static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ40WABD5VUP";
 
 @interface LocationPickerModalViewController () <UITableViewDelegate, UITableViewDataSource,
-UISearchBarDelegate>
+UISearchBarDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) UISearchBar *searchBar;
 @property (nonatomic) NSArray *results;
-
-@property (nonatomic) UITextField *accuracy;
-@property (nonatomic) UITextField *userLng;
-@property (nonatomic) UITextField *userLat;
-
+@property (nonatomic) CLLocationManager *userLocation;
 @end
 
 @implementation LocationPickerModalViewController
@@ -92,8 +92,7 @@ UISearchBarDelegate>
 }
 
 // sets cell height
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 50;
 }
 
@@ -122,19 +121,29 @@ UISearchBarDelegate>
 - (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range
                                                    replacementText:(NSString *)text {
     NSString *newText = [searchBar.text stringByReplacingCharactersInRange:range withString:text];
-    [self fetchLocationsWithQuery:newText nearCity:@"San Francisco"];
+    [self checkLocationEnabled];
+    self.userLat = Location.currentLocation.userLat;
+    self.userLng = Location.currentLocation.userLng;
+    [self fetchLocationsWithQuery:newText nearCityWithLatitude:self.userLat longitude:self.userLng];
     return true;
 }
 
 // fetches places from search
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [self fetchLocationsWithQuery:searchBar.text nearCity:@"San Francisco"];
+    [self checkLocationEnabled];
+    self.userLat = Location.currentLocation.userLat;
+    self.userLng = Location.currentLocation.userLng;
+    [self fetchLocationsWithQuery:searchBar.text nearCityWithLatitude:self.userLat longitude:self.userLng];
 }
 
 // completes api request and stores searched results in dictionary
-- (void)fetchLocationsWithQuery:(NSString *)query nearCity:(NSString *)city {
-    NSString *baseURLString = @"https://api.foursquare.com/v2/venues/search?";
-    NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&v=20141020&near=%@,CA&query=%@", clientID, clientSecret, city, query];
+- (void)fetchLocationsWithQuery:(NSString *)query nearCityWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude {
+    NSString *queryLat = [NSString stringWithFormat:@"%@,", latitude];
+    NSString *queryLng = [NSString stringWithFormat:@"%@", longitude];
+    NSMutableString * ll = [[NSMutableString alloc] initWithString:queryLat];
+    [ll appendString:queryLng];
+    
+    NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&v=20141020&ll=%@&query=%@", clientID, clientSecret, ll, query];
     queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
     NSURL *url = [NSURL URLWithString:[baseURLString stringByAppendingString:queryString]];
@@ -165,6 +174,24 @@ UISearchBarDelegate>
 // goes back to parent controller
 - (void)didTapBackButton {
     [self dismissViewControllerAnimated:true completion:nil];
+}
+
+- (void)checkLocationEnabled {
+    if (Location.currentLocation.enabled == NO) {
+        // present alert controller
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"App Permission Denied"
+                                                                       message:@"To re-enable, please go to Settings and turn on Location Service for this app."
+                                                                preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        // create an OK action
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+                                                             // handle response here.
+                                                         }];
+        [alert addAction:okAction];
+
+    }
 }
 
 @end

@@ -11,8 +11,6 @@
 #import <FIRDatabase.h>
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
-#import "TimelineViewController.h"
-#import <CoreLocation/CoreLocation.h>
 @interface PostDetailsViewController ()
 @property (strong, nonatomic) Post *post;
 @property (strong, nonatomic) User *user;
@@ -28,9 +26,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSInteger inty = 4;
     self.view.backgroundColor = [UIColor whiteColor];
-    FIRDatabaseReference *reference = [[FIRDatabase database]reference];
-    FIRDatabaseHandle *databaseHandle = [[[reference child:@"Users"]child:self.post.userID]observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    FIRDatabaseReference *reference = [[FIRDatabase database] reference];
+    FIRDataEventType type = inty;
+    FIRDatabaseHandle *databaseHandle = [[[reference child:@"Users"]child:self.post.userID] observeEventType:type withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSDictionary *usersDictionary = snapshot.value;
         if (![snapshot.value isEqual:[NSNull null]]) {
             self.user = [[User alloc] initFromDatabase:usersDictionary];
@@ -48,8 +48,8 @@
             }
         }
         else {
-            FIRDatabaseReference *userRef = [[reference child:@"Users"]child:[FIRAuth auth].currentUser.uid];
-            [userRef setValue:@{@"Age":@(0), @"Bio":@"nil", @"Name":[FIRAuth auth].currentUser.displayName,@"PhoneNumber":@(0), @"ProfilePicURL":@"nil"}];
+            FIRDatabaseReference *userRef = [[reference child:@"Users"]child:self.post.userID];
+            [userRef setValue:@{@"Age":@(0), @"Bio":@"nil", @"Name":@"Unnamed User",@"PhoneNumber":@(0), @"ProfilePicURL":@"nil"}];
         }
     }];
     self.profilePicImage = [[UIImageView alloc] init];

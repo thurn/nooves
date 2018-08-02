@@ -15,7 +15,6 @@ CategoryPickerDelegate, DatePickerDelegate>
 @property (nonatomic) UILabel *locationLabel;
 @property (nonatomic) UILabel *activityLabel;
 @property (nonatomic) UILabel *dateLabel;
-
 @end
 
 @implementation ComposeViewController

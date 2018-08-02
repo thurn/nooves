@@ -1,5 +1,6 @@
 #import "AppDelegate.h"
 #import "ComposeViewController.h"
+#import "EventsViewController.h"
 #import "TimelineViewController.h"
 #import "TabBarController.h"
 #import "ProfileViewController.h"
@@ -37,18 +38,22 @@
     // the leaf controllers
     ProfileViewController* profileViewController = [[ProfileViewController alloc] init];
     LoginViewController *loginController = [[LoginViewController alloc] init];
+    EventsViewController *eventsController = [[EventsViewController alloc]init];
     
     UINavigationController *timelineNavCont = [[UINavigationController alloc] initWithRootViewController:loginController];
     UINavigationController *profileNavCont = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+    UINavigationController *eventsNavCont = [[UINavigationController alloc]initWithRootViewController:eventsController];
     
     TabBarController *tabBarController = [[TabBarController alloc] init];
-    tabBarController.viewControllers = @[timelineNavCont, profileNavCont];
+    tabBarController.viewControllers = @[timelineNavCont, profileNavCont, eventsNavCont];
     
     UIImage *feedImage = [UIImage imageNamed:@"feed_tab"];
     UIImage *profileImage = [UIImage imageNamed:@"profile_tab"];
+    UIImage *eventsImage = [UIImage imageNamed:@"event_tab"];
     
     loginController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Home" image:feedImage tag:0];
     profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Profile" image:profileImage tag:1];
+    eventsController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Events" image:eventsImage tag:2];
     
     self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];

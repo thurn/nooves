@@ -2,9 +2,9 @@
 #import "FilterCell.h"
 #import "FilterViewController.h"
 #import "PureLayout/PureLayout.h"
-#import "TimelineViewController.h"
 #import "Post.h"
 #import "PostCell.h"
+#import "TimelineViewController.h"
 
 @interface FilterViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -26,6 +26,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    UIView *superView = [[UIView alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width, self.view.frame.size.height)];
+    superView.backgroundColor = [UIColor clearColor];
+   // [superView addSubview:self.view];
+    [self.view addSubview:superView];
     
     [self configureTableView];
     self.tableView.delegate = self;
@@ -99,11 +103,13 @@
 }
 
 - (void)configureConfirmButton {
-    self.confirmButton = [[UIButton alloc]initWithFrame:CGRectMake(200, 600, 30, 30)];
+   self.confirmButton = [[UIButton alloc]initWithFrame:CGRectMake(200, 600, 30, 30)];
+   // self.confirmButton = [[UIButton alloc]init];
     [self.confirmButton setBackgroundColor:[UIColor blueColor]];
     [self.confirmButton setTitle:@"Confirm" forState:UIControlStateNormal];
     [self.confirmButton sizeToFit];
     [self.view addSubview:self.confirmButton];
+    //[self.view autoPinEdge:ALEdgeLeft toEdge:ALEdgeBottom ofView:self.tableView];
     [self.confirmButton addTarget:self action:@selector(didTapConfirm) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -118,7 +124,7 @@
     
     // Read data from the database and filter according to the categories
     FIRDatabaseReference *reference = [[FIRDatabase database]reference];
-    FIRDatabaseHandle *databaseHandle = [[reference child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+    FIRDatabaseHandle databaseHandle = [[reference child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSDictionary *posts = snapshot.value;
         
         for(NSString *userID in posts) {
@@ -142,18 +148,20 @@
                 }
             }
         }
-        NSLog(@"%@",self.filteredData);
+        TimelineViewController *timeline = [[TimelineViewController alloc]init];
+        timeline.firArray = self.filteredData;
+        [self.navigationController pushViewController:timeline animated:YES];
     }];
-    
-    TimelineViewController *feed = [[TimelineViewController alloc]init];
-    feed.firArray = self.filteredData;
-    [self.navigationController pushViewController:feed animated:YES];
 }
 
 - (void)didTapAllPosts {
     TimelineViewController *timeline = [[TimelineViewController alloc]init];
-   // timeline.tempPostsArray = self.tempPostsArrayCopy;
+    FIRDatabaseReference * ref =[[FIRDatabase database] reference];
+    FIRDatabaseHandle handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        NSDictionary *postsDict = snapshot.value;
+        timeline.firArray = [Post readPostsFromFIRDict:postsDict];
     [self.navigationController pushViewController:timeline animated:YES];
+    }];
 }
 
 @end

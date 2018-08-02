@@ -1,7 +1,6 @@
 #import "TabBarController.h"
 
 @interface TabBarController ()
-
 @end
 
 @implementation TabBarController
