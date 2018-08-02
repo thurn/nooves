@@ -6,7 +6,13 @@
 //  Copyright © 2018 Nikki Tran. All rights reserved.
 //
 
+#import "EventCell.h"
 #import "EventsViewController.h"
+
+static NSString * const baseURLString = @"http://api.eventful.com/json/events/search?";
+static NSString * const appKey = @"dFXh3rhZVVwbshg9";
+static NSString * const consumerKey = @"5db85641372af05aa023";
+static NSString * const consumerSecret = @"93767e5098b45988d73f";
 
 @interface EventsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
@@ -61,7 +67,8 @@
 
 #pragma mark - UITableViewDelegate methods
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc]init];
+    EventCell *cell = [tableView dequeueReusableCellWithIdentifier:@"eventCellIdentifier" forIndexPath:indexPath];
+    cell.textLabel.text = self.eventsArray[indexPath.row];
     return cell;
 }
 
@@ -69,6 +76,18 @@
     return  self.eventsArray.count;
 }
 
+#pragma mark - UISearchBarDelegate methods
+// cancel button appears when user edits search bar
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = YES;
+}
+
+// will delete search text when cancel button clicked
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = NO;
+    self.searchBar.text = @"";
+    [self.searchBar resignFirstResponder];
+}
 
 
 @end
