@@ -100,9 +100,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PostCell *cell =[tableView dequeueReusableCellWithIdentifier:@"postCellIdentifier" forIndexPath:indexPath];
-//    Post *newPost =self.firArray[indexPath.row];
     Location *location = [[Location alloc] init];
-//     TODO(Nikki): return posts with event locations within 50 miles from user's location
     FIRDatabaseReference *reference = [[FIRDatabase database]reference];
     FIRDatabaseHandle databaseHandle = [[reference child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSDictionary *posts = snapshot.value;
@@ -135,18 +133,14 @@
         }
         _firArray = self.filteredData;
     }];
-//    if (self.firArray.count >= indexPath.row) {
         Post *newPost = self.firArray[indexPath.row];
         [cell configurePost:newPost];
-//    }
     
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(self.firArray){
-        // TODO(Nikki): return count of posts that are within 50 miles from user's location
-        
         Location *location = [[Location alloc] init];
         FIRDatabaseReference *reference = [[FIRDatabase database]reference];
         FIRDatabaseHandle databaseHandle = [[reference child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
