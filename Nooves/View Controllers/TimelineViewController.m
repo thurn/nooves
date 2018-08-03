@@ -24,23 +24,22 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    
     static dispatch_once_t openingApp;
     dispatch_once(&openingApp, ^ {
     FIRDatabaseReference * ref =[[FIRDatabase database] reference];
         [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             if ([snapshot.value isEqual:[NSNull null]]) {
-                [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid]setValue:@{@"Age":@(0), @"Bio":@"nil", @"Name":[FIRAuth auth].currentUser.displayName,@"PhoneNumber":@(0), @"ProfilePicURL":@"nil",@"EventsGoing":@[@"a"]}];
+                [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] setValue:@{@"Age":@(0), @"Bio":@"nil", @"Name":[FIRAuth auth].currentUser.displayName,@"PhoneNumber":@(0), @"ProfilePicURL":@"nil",@"EventsGoing":@[@"a"]}];
             }
         }];
     FIRDatabaseHandle *handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSDictionary *postsDict = snapshot.value;
-        self.firArray = [Post readPostsFromFIRDict:postsDict];
-        [tableView reloadData];
+
+    self.firArray = [Post readPostsFromFIRDict:postsDict];
+    [tableView reloadData];
     }];
     });
-    
+
     self.filteredData = [[NSMutableArray alloc]init];
 
     tableView = [self configureTableView];
@@ -81,14 +80,14 @@
 }
 
 - (UIBarButtonItem *)filterResults {
-    
+
     UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] init];
     filterButton.title = @"Filter";
     [filterButton setImage:[UIImage imageNamed:@"filter-icon.png"]];
     self.navigationItem.leftBarButtonItem = filterButton;
     filterButton.target = self;
     filterButton.action = @selector(didTapFilter);
-    
+
     return filterButton;
 }
 
@@ -125,8 +124,6 @@
                     NSInteger date = [posts[userID][postID][@"Date"]integerValue];
                     NSDate *convertedDate = [NSDate dateWithTimeIntervalSince1970:date];
                     post.activityDateAndTime = convertedDate;
-                NSNumber *lat = Location.currentLocation.userLat;
-                NSNumber *lng = Location.currentLocation.userLng;
                 double distance =
                 [location calculateDistanceWithUserLat:Location.currentLocation.userLat
                                                userLng:Location.currentLocation.userLng
@@ -141,7 +138,7 @@
     }];
         Post *newPost = self.firArray[indexPath.row];
         [cell configurePost:newPost];
-    
+
     return cell;
 }
 
@@ -149,7 +146,7 @@
     if(self.firArray){
         Location *location = [[Location alloc] init];
         FIRDatabaseReference *reference = [[FIRDatabase database]reference];
-        FIRDatabaseHandle databaseHandle = [[reference child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+       FIRDatabaseHandle databaseHandle = [[reference child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             NSDictionary *posts = snapshot.value;
 
             for(NSString *userID in posts) {

@@ -288,13 +288,20 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 
 - (void)didTapEvents {
     EventsViewController *chooseEvent = [[EventsViewController alloc]init];
-    [self.navigationController pushViewController:chooseEvent animated:YES];
+    chooseEvent.eventsDelegate = self;
+    UINavigationController *navCont = [[UINavigationController alloc]
+                                       initWithRootViewController:chooseEvent];
+    //[self.navigationController presentViewController:navCont animated:YES];
+    [self.navigationController presentViewController:navCont animated:YES completion:nil];
 }
 
-- (void)eventsViewController:(EventsViewController *)controller didSelectEventWithTitle:(NSString *)title withDescription:(NSString *)description withVenue:(NSString *)venue {
+- (void)eventsViewController:(EventsViewController *)controller didSelectEventWithTitle:(NSString *)title
+             withDescription:(NSString *)description
+                   withVenue:(NSString *)venue {
     self.eventTitle.text = title;
     self.eventDescription.text = description;
     self.location = venue;
+    [self.navigationController popToViewController:self animated:YES];
 }
 
 @end

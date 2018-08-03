@@ -23,10 +23,9 @@ static NSString * const clientSecret = @"93767e5098b45988d73f";
     // Do any additional setup after loading the view.
     
     self.navigationItem.title = @"Local Events";
-    
     [self configureTableView];
-    [self confirmEventButton];
     
+    // set up the search bar
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(-5.0, 0.0, 320.0, 44.0)];
     self.searchBar.delegate = self;
     self.searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -56,7 +55,7 @@ static NSString * const clientSecret = @"93767e5098b45988d73f";
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSLog( @"fetching events from the search bar");
-    [self fetchEventsWithQuery:@"london"];
+    [self fetchEventsWithQuery:searchBar.text];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -84,25 +83,10 @@ static NSString * const clientSecret = @"93767e5098b45988d73f";
     return tableView;
 }
 
-// sets up post button properties
-- (UIBarButtonItem *)confirmEventButton {
-    UIBarButtonItem *confirmButton = [[UIBarButtonItem alloc] initWithTitle:@"Confirm"
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(didTapConfirm)];
-    self.navigationItem.rightBarButtonItem = confirmButton;
-    return confirmButton;
-}
-
-- (void)didTapConfirm {
-    ComposeViewController *compose = [[ComposeViewController alloc]init];
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
 #pragma mark - UITableViewDelegate methods
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EventCell *cell = [tableView dequeueReusableCellWithIdentifier:@"eventCellIdentifier" forIndexPath:indexPath];
-    if(self.results.count >indexPath.row) {
+    if(self.results.count > indexPath.row) {
         [cell updateWithEvent:self.results[indexPath.row]];
         return cell;
     }
@@ -119,7 +103,7 @@ static NSString * const clientSecret = @"93767e5098b45988d73f";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *events = self.results[indexPath.row];
     NSString *title = events[@"title"];
-    NSString *description = events[@"description"];
+    NSString *description = @"Description";
     NSString *venue = events[@"venue_name"];
     [self.eventsDelegate eventsViewController:self didSelectEventWithTitle:title withDescription:description withVenue:venue];
     
