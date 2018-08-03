@@ -26,7 +26,6 @@ CategoryPickerDelegate, DatePickerDelegate>
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"New Event";
-    self.tabBarController.tabBar.hidden = YES;
 
     CGRect contentRect = CGRectZero;
     for (UIView *view in self.view.subviews) {
@@ -225,7 +224,8 @@ CategoryPickerDelegate, DatePickerDelegate>
                                          withType:self.activityType
                                           withLat:self.lat
                                           withLng:self.lng
-                                           withID:nil];
+                                           withID:nil
+                                     withLocation:self.location];
     [Post postToFireBase:self.post];
     TimelineViewController *timeline = [[TimelineViewController alloc]init];
     [self.navigationController pushViewController:timeline animated:YES];

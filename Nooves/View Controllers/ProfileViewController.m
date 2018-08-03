@@ -2,6 +2,7 @@
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
 #import "User.h"
+#import "SettingsViewController.h"
 
 @interface ProfileViewController () <editProfileDelegate>
 
@@ -11,6 +12,7 @@
 @property(strong, nonatomic) UILabel *ageLabel;
 @property(strong, nonatomic) UILabel *contactNumberLabel;
 @property(strong, nonatomic) UIButton *editProfile;
+@property(strong, nonatomic) UIButton *settingsButton;
 @property(strong, nonatomic) User *user;
 
 @end
@@ -95,6 +97,13 @@
     [self.editProfile sizeToFit];
     [self.editProfile addTarget:self action:@selector(didTapEditProfile) forControlEvents:UIControlEventTouchUpInside];
     
+    // set up settings button
+    self.settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(150, 400, 30, 30)];
+    [self.settingsButton setTitle:@"Settings" forState:UIControlStateNormal];
+    [self.settingsButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.settingsButton sizeToFit];
+    [self.settingsButton addTarget:self action:@selector(didTapSettings) forControlEvents:UIControlEventTouchUpInside];
+    
     // add all subviews to the view
     [self.view addSubview:self.profilePicture];
     [self.view addSubview:self.nameLabel];
@@ -102,11 +111,17 @@
     [self.view addSubview:self.contactNumberLabel];
     [self.view addSubview:self.bioLabel];
     [self.view addSubview:self.editProfile];
+    [self.view addSubview:self.settingsButton];
 }
 
 - (void)didTapEditProfile {
-    EditProfileViewController *newProfile = [[EditProfileViewController alloc]init];
+    EditProfileViewController *newProfile = [[EditProfileViewController alloc] init];
     [self.navigationController pushViewController:newProfile animated:YES];
+}
+
+- (void)didTapSettings {
+    SettingsViewController *settings = [[SettingsViewController alloc] init];
+    [self.navigationController pushViewController:settings animated:YES];
 }
 
 - (void)didUpdateProfile {
