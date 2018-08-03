@@ -55,7 +55,7 @@
         self.activityLng = lng;
         self.userID = FIRAuth.auth.currentUser.uid;
         self.fireBaseID = postID;
-        self.usersGoing = @[self.userID];
+        self.usersGoing = @[[FIRAuth auth].currentUser.uid];
         self.eventLocation = location;
     }
     return self;
