@@ -3,8 +3,9 @@
 
 @interface EventCell : UITableViewCell
 
-@property(strong, nonatomic) Event *event;
+//@property(strong, nonatomic) Event *event;
 
-- (void)configureEvent: (Event *)event;
+- (void)updateWithEvent:(NSDictionary *)dictionary;
+
 
 @end

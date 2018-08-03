@@ -10,7 +10,7 @@
 #import "LocationPickerModalViewController.h"
 
 @interface ComposeViewController () <UITextViewDelegate, LocationPickerDelegate,
-CategoryPickerDelegate, DatePickerDelegate>
+CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 
 @property (nonatomic) UIPickerView *pickerView;
 @property (nonatomic) UILabel *locationLabel;
@@ -262,14 +262,14 @@ CategoryPickerDelegate, DatePickerDelegate>
     eventLocation.placeholder = @"Enter location to search for local events...";
     [eventLocation sizeToFit];
     eventLocation.textColor = [UIColor grayColor];
-    [self.view addSubview:eventLocation];
+  //  [self.view addSubview:eventLocation];
     return eventLocation;
 }
 
 // set up button to select local events
 -(UIButton *)searchEventsButton {
     UIButton *eventsButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 600, 100, 100)];
-    [eventsButton setTitle:@"Enter" forState:UIControlStateNormal];
+    [eventsButton setTitle:@"Search for local events" forState:UIControlStateNormal];
     [eventsButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [eventsButton sizeToFit];
     [self.view addSubview:eventsButton];
@@ -280,6 +280,12 @@ CategoryPickerDelegate, DatePickerDelegate>
 - (void)didTapEvents {
     EventsViewController *chooseEvent = [[EventsViewController alloc]init];
     [self.navigationController pushViewController:chooseEvent animated:YES];
+}
+
+- (void)eventsViewController:(EventsViewController *)controller didSelectEventWithTitle:(NSString *)title withDescription:(NSString *)description withVenue:(NSString *)venue {
+    self.eventTitle.text = title;
+    self.eventDescription.text = description;
+    self.location = venue;
 }
 
 @end

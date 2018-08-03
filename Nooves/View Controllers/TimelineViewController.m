@@ -23,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    
     static dispatch_once_t openingApp;
     dispatch_once(&openingApp, ^ {
     FIRDatabaseReference * ref =[[FIRDatabase database] reference];
