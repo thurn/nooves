@@ -69,9 +69,7 @@
 
 - (void)updateWithEvent:(NSDictionary *)dictionary {
     self.titleLabel.text = dictionary[@"title"];
-   self.descriptionLabel.text = @"Description";
-    NSString *descript = dictionary[@"description"];
-    //NSLog(@"description: %@", descript);
+   self.descriptionLabel.text = dictionary[@"description"];
     self.venueLabel.text = dictionary[@"venue_name"];
     NSDate *date = dictionary[@"start_time"];
     NSDateFormatter *formatter = [NSDateFormatter new];
