@@ -129,11 +129,13 @@ UISearchBarDelegate, CLLocationManagerDelegate>
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     self.userLat = Location.currentLocation.userLat;
     self.userLng = Location.currentLocation.userLng;
-    [self fetchLocationsWithQuery:searchBar.text nearCityWithLatitude:self.userLat longitude:self.userLng];
+    [self fetchLocationsWithQuery:searchBar.text nearCityWithLatitude:self.userLat
+                        longitude:self.userLng];
 }
 
 // completes api request and stores searched results in dictionary
-- (void)fetchLocationsWithQuery:(NSString *)query nearCityWithLatitude:(NSNumber *)latitude longitude:(NSNumber *)longitude {
+- (void)fetchLocationsWithQuery:(NSString *)query nearCityWithLatitude:(NSNumber *)latitude
+                                                             longitude:(NSNumber *)longitude {
     NSString *queryLat = [NSString stringWithFormat:@"%@,", latitude];
     NSString *queryLng = [NSString stringWithFormat:@"%@", longitude];
     NSMutableString * ll = [[NSMutableString alloc] initWithString:queryLat];

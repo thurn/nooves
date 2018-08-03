@@ -3,6 +3,7 @@
 #import "FilterViewController.h"
 #import <FIRDatabase.h>
 #import "PostCell.h"
+#import "Post.h"
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
 #import "TimelineViewController.h"
@@ -97,6 +98,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PostCell *cell =[tableView dequeueReusableCellWithIdentifier:@"postCellIdentifier" forIndexPath:indexPath];
     Post *newPost =self.firArray[indexPath.row];
+    // TODO(Nikki): return posts with event locations within 50 miles from user's location
     [cell configurePost:newPost];
     
     return cell;

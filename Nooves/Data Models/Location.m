@@ -29,4 +29,17 @@
     NSLog(@"Error getting user location");
 }
 
+// calculates the distance between the user's location and an event's location
+- (double)calculateDistanceWithUserLat:(NSNumber *)userLat userLng:(NSNumber *)userLng
+                            eventLat:(NSNumber *)eventLat
+                            eventLng:(NSNumber *)eventLng {
+    CLLocation *userLocation = [[CLLocation alloc] initWithLatitude:userLat.doubleValue longitude:userLng.doubleValue];
+    CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:eventLat.doubleValue longitude:eventLng.doubleValue];
+    
+    // distance is in meters
+    CLLocationDistance distance = [userLocation distanceFromLocation:eventLocation];
+    
+    return distance;
+}
+
 @end
