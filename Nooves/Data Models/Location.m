@@ -11,7 +11,7 @@
     location.userLocation.distanceFilter = kCLDistanceFilterNone;
     
     if([CLLocationManager locationServicesEnabled]) {
-        NSLog(@"Location services enabled");
+//        NSLog(@"Location services enabled");
         [location.userLocation requestAlwaysAuthorization];
         [location.userLocation requestWhenInUseAuthorization];
         [location.userLocation startUpdatingLocation];
@@ -36,7 +36,6 @@
     CLLocation *userLocation = [[CLLocation alloc] initWithLatitude:userLat.doubleValue longitude:userLng.doubleValue];
     CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:eventLat.doubleValue longitude:eventLng.doubleValue];
     
-    // distance is in meters
     CLLocationDistance distance = [userLocation distanceFromLocation:eventLocation];
     
     return distance;
