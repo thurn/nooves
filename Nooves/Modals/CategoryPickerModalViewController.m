@@ -61,7 +61,6 @@
 // returns the array count to determine rows in picker view
 - (NSInteger)pickerView:(UIPickerView *)pickerView
 numberOfRowsInComponent:(NSInteger)component {
-    
     return ActivityTypeOther+1;
 }
 

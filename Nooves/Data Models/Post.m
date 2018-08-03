@@ -3,6 +3,7 @@
 #import <FirebaseAuth.h>
 #import "Post.h"
 #import "LoginViewController.h"
+
 @implementation Post
 
 + (NSString *)activityTypeToString:(ActivityType) activityType{
@@ -36,7 +37,6 @@
     }
 };
 
-// TODO(Nikki): add user location to this
 - (instancetype)initPostWithDetails:(NSDate *)eventDate
                           withTitle:(NSString *)postTitle
                     withDescription:(NSString *) postDescription
@@ -60,10 +60,10 @@
     }
     return self;
 }
-- (void)initFromFirebase{
+
+- (void)initFromFirebase {
 }
 
-// TODO(Nikki): add user location to database
 + (void)postToFireBase:(Post *)post {
     int timestamp = [post.activityDateAndTime timeIntervalSince1970];
     NSNumber *dateAndTimeStamp = @(timestamp);
@@ -73,8 +73,7 @@
     [reffy setValue:@{@"Date":dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription, @"Latitude":post.activityLat, @"Longitude":post.activityLng, @"UsersGoing":post.usersGoing, @"Location":post.eventLocation}];
 }
 
-// TODO(Nikki): read user location from database
-+ (NSArray *)readPostsFromFIRDict:(NSDictionary *)postsDict{
++ (NSArray *)readPostsFromFIRDict:(NSDictionary *)postsDict {
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     for(NSString *userKey in postsDict){
         for(NSString *IDKey in postsDict[userKey]){
