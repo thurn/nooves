@@ -53,33 +53,6 @@
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
-// returns the picker view column size
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 1;
-}
-
-// returns the array count to determine rows in picker view
-- (NSInteger)pickerView:(UIPickerView *)pickerView
-numberOfRowsInComponent:(NSInteger)component {
-    return ActivityTypeOther+1;
-}
-
-// returns the array element at each row
-- (NSString *)pickerView:(UIPickerView *)pickerView
-             titleForRow:(NSInteger)row
-            forComponent:(NSInteger)component {
-    
-    return [Post activityTypeToString:row];
-}
-
-// assigns the selected category from picker view to label and activity type
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
-                                               inComponent:(NSInteger)component {
-
-    self.categoryLabel.text = [Post activityTypeToString:row];
-    self.activityType = row;
-}
-
 // back button
 - (UIBarButtonItem *)createBackButton {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
@@ -94,6 +67,37 @@ numberOfRowsInComponent:(NSInteger)component {
 // goes back to parent contoller
 - (void)didTapBackButton {
     [self dismissViewControllerAnimated:true completion:nil];
+}
+
+#pragma mark - UIPickerViewDelegate
+
+// assigns the selected category from picker view to label and activity type
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
+       inComponent:(NSInteger)component {
+    
+    self.categoryLabel.text = [Post activityTypeToString:row];
+    self.activityType = row;
+}
+
+// returns the array element at each row
+- (NSString *)pickerView:(UIPickerView *)pickerView
+             titleForRow:(NSInteger)row
+            forComponent:(NSInteger)component {
+    
+    return [Post activityTypeToString:row];
+}
+
+#pragma mark - UIPickerViewDataSource
+
+// returns the picker view column size
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+// returns the array count to determine rows in picker view
+- (NSInteger)pickerView:(UIPickerView *)pickerView
+numberOfRowsInComponent:(NSInteger)component {
+    return ActivityTypeOther+1;
 }
 
 @end

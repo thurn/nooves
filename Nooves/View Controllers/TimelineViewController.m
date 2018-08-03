@@ -8,9 +8,10 @@
 #import "PureLayout/PureLayout.h"
 #import "TimelineViewController.h"
 #import "PostDetailsViewController.h"
+#import "Location.h"
 
 @interface TimelineViewController ()
-
+@property (nonatomic) NSMutableArray *filteredData;
 @end
 
 @implementation TimelineViewController
@@ -33,6 +34,8 @@
         [tableView reloadData];
     }];
     });
+    
+    self.filteredData = [[NSMutableArray alloc]init];
 
     tableView = [self configureTableView];
     tableView.delegate = self;
@@ -97,15 +100,84 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PostCell *cell =[tableView dequeueReusableCellWithIdentifier:@"postCellIdentifier" forIndexPath:indexPath];
-    Post *newPost =self.firArray[indexPath.row];
-    // TODO(Nikki): return posts with event locations within 50 miles from user's location
-    [cell configurePost:newPost];
+//    Post *newPost =self.firArray[indexPath.row];
+    Location *location = [[Location alloc] init];
+//     TODO(Nikki): return posts with event locations within 50 miles from user's location
+    FIRDatabaseReference *reference = [[FIRDatabase database]reference];
+    FIRDatabaseHandle databaseHandle = [[reference child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        NSDictionary *posts = snapshot.value;
+
+        for(NSString *userID in posts) {
+            for(NSString *postID in posts[userID]) {
+                    Post *post = [[Post alloc]init];
+                    post.fireBaseID = postID;
+                    post.userID = userID;
+                    post.activityType = [posts[userID][postID][@"Activity Type"] doubleValue];
+                    post.activityTitle = posts[userID] [postID][@"Title"];
+                    post.activityDescription = posts[userID][postID][@"Description"];
+                    post.activityLat = posts[userID][postID][@"Latitude"];
+                    post.activityLng = posts[userID][postID][@"Longitude"];
+                    post.eventLocation = posts[userID][postID][@"Location"];
+                    NSInteger date = [posts[userID][postID][@"Date"]integerValue];
+                    NSDate *convertedDate = [NSDate dateWithTimeIntervalSince1970:date];
+                    post.activityDateAndTime = convertedDate;
+                NSNumber *lat = Location.currentLocation.userLat;
+                NSNumber *lng = Location.currentLocation.userLng;
+                double distance =
+                [location calculateDistanceWithUserLat:Location.currentLocation.userLat
+                                               userLng:Location.currentLocation.userLng
+                                              eventLat:post.activityLat
+                                              eventLng:post.activityLng];
+                    if (distance <= 80467.2) {
+                        [self.filteredData addObject:post];
+                    }
+            }
+        }
+        _firArray = self.filteredData;
+    }];
+//    if (self.firArray.count >= indexPath.row) {
+        Post *newPost = self.firArray[indexPath.row];
+        [cell configurePost:newPost];
+//    }
     
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(self.firArray){
+        // TODO(Nikki): return count of posts that are within 50 miles from user's location
+        
+        Location *location = [[Location alloc] init];
+        FIRDatabaseReference *reference = [[FIRDatabase database]reference];
+        FIRDatabaseHandle databaseHandle = [[reference child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            NSDictionary *posts = snapshot.value;
+
+            for(NSString *userID in posts) {
+                for(NSString *postID in posts[userID]) {
+                    Post *post = [[Post alloc]init];
+                    post.fireBaseID = postID;
+                    post.userID = userID;
+                    post.activityType = [posts[userID][postID][@"Activity Type"] doubleValue];
+                    post.activityTitle = posts[userID] [postID][@"Title"];
+                    post.activityDescription = posts[userID][postID][@"Description"];
+                    post.activityLat = posts[userID][postID][@"Latitude"];
+                    post.activityLng = posts[userID][postID][@"Longitude"];
+                    post.eventLocation = posts[userID][postID][@"Location"];
+                    NSInteger date = [posts[userID][postID][@"Date"]integerValue];
+                    NSDate *convertedDate = [NSDate dateWithTimeIntervalSince1970:date];
+                    post.activityDateAndTime = convertedDate;
+                    double distance =
+                    [location calculateDistanceWithUserLat:Location.currentLocation.userLat
+                                                   userLng:Location.currentLocation.userLng
+                                                  eventLat:post.activityLat
+                                                  eventLng:post.activityLng];
+                    if (distance <= 80467.2) {
+                        [self.filteredData addObject:post];
+                    }
+                }
+            }
+            _firArray = self.filteredData;
+        }];
         return self.firArray.count;
     }
     return 30;
@@ -126,7 +198,5 @@
     ProfileViewController *profile = [[ProfileViewController alloc] init];
     [self.navigationController pushViewController:profile animated:YES];
 }
-
-// TODO(Nikki): retrieve posts only within a certain region (50 miles) of user
 
 @end

@@ -9,12 +9,11 @@ static NSString * const clientID = @"4FYRZKNIIFJQG25SUYJ55KINHUMVGWMYWFGQUFO5H4A
 static NSString * const clientSecret = @"KYCXK12AGVWYVSH5QVEEI2CTCX1PSGRUMBZBLZ40WABD5VUP";
 
 @interface LocationPickerModalViewController () <UITableViewDelegate, UITableViewDataSource,
-UISearchBarDelegate, CLLocationManagerDelegate>
+UISearchBarDelegate>
 
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) UISearchBar *searchBar;
 @property (nonatomic) NSArray *results;
-@property (nonatomic) CLLocationManager *userLocation;
 @end
 
 @implementation LocationPickerModalViewController
@@ -63,79 +62,9 @@ UISearchBarDelegate, CLLocationManagerDelegate>
     return self.tableView;
 }
 
-// cancel button appears when user edits search bar
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    self.searchBar.showsCancelButton = YES;
-}
-
-// will delete search text when cancel button clicked
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    self.searchBar.showsCancelButton = NO;
-    self.searchBar.text = @"";
-    [self.searchBar resignFirstResponder];
-}
-
-// returns number of results from search
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.results.count;
-}
-
-// populates searched data
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    LocationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell"
-                                                         forIndexPath:indexPath];
-    [cell updateWithLocation:self.results[indexPath.row]];
-    return cell;
-}
-
-// sets cell height
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
-}
-
-// saves location properties to compose view when cell selected
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // This is the selected venue
-    NSDictionary *venue = self.results[indexPath.row];
-    self.lat = [venue valueForKeyPath:@"location.lat"];
-    self.lng = [venue valueForKeyPath:@"location.lng"];
-    self.location = [venue valueForKeyPath:@"name"];
-    NSLog(@"%@", self.location);
-    NSLog(@"%@, %@", self.lat, self.lng);
-    
-    [self.locationDelegate locationsPickerModalViewController:self
-                                  didPickLocationWithLatitude:self.lat
-                                                    longitude:self.lng
-                                                     location:self.location];
-    
-    [self dismissViewControllerAnimated:NO completion:nil];
-    
-    // changes the selected background view of the cell
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-// finds places in a certain range of a city during search
-- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range
-                                                   replacementText:(NSString *)text {
-    NSString *newText = [searchBar.text stringByReplacingCharactersInRange:range withString:text];
-    self.userLat = Location.currentLocation.userLat;
-    self.userLng = Location.currentLocation.userLng;
-    [self fetchLocationsWithQuery:newText nearCityWithLatitude:self.userLat longitude:self.userLng];
-    return true;
-}
-
-// fetches places from search
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    self.userLat = Location.currentLocation.userLat;
-    self.userLng = Location.currentLocation.userLng;
-    [self fetchLocationsWithQuery:searchBar.text nearCityWithLatitude:self.userLat
-                        longitude:self.userLng];
-}
-
 // completes api request and stores searched results in dictionary
 - (void)fetchLocationsWithQuery:(NSString *)query nearCityWithLatitude:(NSNumber *)latitude
-                                                             longitude:(NSNumber *)longitude {
+                      longitude:(NSNumber *)longitude {
     NSString *queryLat = [NSString stringWithFormat:@"%@,", latitude];
     NSString *queryLng = [NSString stringWithFormat:@"%@", longitude];
     NSMutableString * ll = [[NSMutableString alloc] initWithString:queryLat];
@@ -172,6 +101,83 @@ UISearchBarDelegate, CLLocationManagerDelegate>
 // goes back to parent controller
 - (void)didTapBackButton {
     [self dismissViewControllerAnimated:true completion:nil];
+}
+
+#pragma mark - UISearchBarDelegate
+
+// cancel button appears when user edits search bar
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = YES;
+}
+
+// will delete search text when cancel button clicked
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = NO;
+    self.searchBar.text = @"";
+    [self.searchBar resignFirstResponder];
+}
+
+// finds places in a certain range of a city during search
+- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range
+  replacementText:(NSString *)text {
+    NSString *newText = [searchBar.text stringByReplacingCharactersInRange:range withString:text];
+    self.userLat = Location.currentLocation.userLat;
+    self.userLng = Location.currentLocation.userLng;
+    [self fetchLocationsWithQuery:newText nearCityWithLatitude:self.userLat longitude:self.userLng];
+    return true;
+}
+
+// fetches places from search
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    self.userLat = Location.currentLocation.userLat;
+    self.userLng = Location.currentLocation.userLng;
+    [self fetchLocationsWithQuery:searchBar.text nearCityWithLatitude:self.userLat
+                        longitude:self.userLng];
+}
+
+#pragma mark - UITableViewDataSource
+
+// returns number of results from search
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.results.count;
+}
+
+// sets cell height
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 50;
+}
+
+#pragma mark - UITableViewDelegate
+
+// populates searched data
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    LocationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LocationCell"
+                                                         forIndexPath:indexPath];
+    [cell updateWithLocation:self.results[indexPath.row]];
+    return cell;
+}
+
+
+// saves location properties to compose view when cell selected
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // This is the selected venue
+    NSDictionary *venue = self.results[indexPath.row];
+    self.lat = [venue valueForKeyPath:@"location.lat"];
+    self.lng = [venue valueForKeyPath:@"location.lng"];
+    self.location = [venue valueForKeyPath:@"name"];
+    NSLog(@"%@", self.location);
+    NSLog(@"%@, %@", self.lat, self.lng);
+    
+    [self.locationDelegate locationsPickerModalViewController:self
+                                  didPickLocationWithLatitude:self.lat
+                                                    longitude:self.lng
+                                                     location:self.location];
+    
+    [self dismissViewControllerAnimated:NO completion:nil];
+    
+    // changes the selected background view of the cell
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 // TODO(Nikki): present alert controller if location services not enabled

@@ -10,5 +10,8 @@
 @property (nonatomic) CLLocationDistance *distance;
 
 + (instancetype)currentLocation;
+- (double)calculateDistanceWithUserLat:(NSNumber *)userLat userLng:(NSNumber *)userLng
+                              eventLat:(NSNumber *)eventLat
+                              eventLng:(NSNumber *)eventLng;
 
 @end
