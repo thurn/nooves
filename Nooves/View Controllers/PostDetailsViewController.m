@@ -64,6 +64,14 @@
         self.activityTypeLabel.text = [@"Activity Type: " stringByAppendingString:[Post activityTypeToString:self.post.activityType]];
         [self.activityTypeLabel sizeToFit];
         [self.view addSubview:self.activityTypeLabel];
+        self.activityDateAndTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.view.frame.size.height/2+60, 10, 10)];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+        [formatter setDateFormat:@"MM/dd HH:mm"];
+        NSString *dateString = [formatter stringFromDate:self.post.activityDateAndTime];
+        self.activityDateAndTimeLabel.text = [@"Date and Time: " stringByAppendingString:dateString];
+        [self.activityDateAndTimeLabel sizeToFit];
+        [self.view addSubview:self.activityDateAndTimeLabel];
+
     }
 }
 
