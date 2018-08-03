@@ -40,17 +40,17 @@ UISearchBarDelegate, CLLocationManagerDelegate>
     
     [self createBackButton];
     
+    [self.tableView registerClass:[LocationCell class] forCellReuseIdentifier:@"LocationCell"];
     [self.tableView reloadData];
 }
 
 // congigures table view properties
-- (void)configureTableView {
+- (UITableView *)configureTableView {
     CGFloat width = self.view.frame.size.width;
     CGFloat height = self.view.frame.size.height;
     CGRect tableViewFrame = CGRectMake(0, 0, width, height);
     
     self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
-    [self.tableView registerClass:[LocationCell class] forCellReuseIdentifier:@"LocationCell"];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -58,6 +58,9 @@ UISearchBarDelegate, CLLocationManagerDelegate>
     self.tableView.scrollEnabled = YES;
     self.tableView.showsVerticalScrollIndicator = YES;
     self.tableView.userInteractionEnabled = YES;
+    [self.view addSubview:self.tableView];
+    
+    return self.tableView;
 }
 
 // cancel button appears when user edits search bar

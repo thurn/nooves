@@ -18,9 +18,10 @@
     self.pickerView.delegate = self;
     self.pickerView.dataSource = self;
     self.pickerView.showsSelectionIndicator = YES;
+    self.pickerView.frame = CGRectMake(0, 0, self.view.frame.size.width, 200);
     
     self.categoryLabel = [[UILabel alloc] init];
-    self.categoryLabel.frame = CGRectMake(10, 500, 100, 100);
+    self.categoryLabel.frame = CGRectMake(10, 700, 100, 100);
     
     UIButton *selectedCategory = [self selectCategory];
     selectedCategory.frame = CGRectMake(10.0, 250.0, 20, 30);
