@@ -4,7 +4,7 @@
 #import "PureLayout/PureLayout.h"
 #import "TabBarController.h"
 #import "TimelineViewController.h"
-
+#import <FirebaseAuth.h>
 #import "CategoryPickerModalViewController.h"
 #import "DatePickerModalViewController.h"
 #import "LocationPickerModalViewController.h"
@@ -227,7 +227,16 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
                                            withID:nil
                                      withLocation:self.location];
     [Post postToFireBase:self.post];
-    TimelineViewController *timeline = [[TimelineViewController alloc]init];
+        FIRDatabaseReference *reference = [[FIRDatabase database] reference];
+        FIRDatabaseHandle *databaseHandle = [[[reference child:@"Users"]child:self.post.userID] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            if (![snapshot.value isEqual:[NSNull null]]) {
+            }
+            else {
+                FIRDatabaseReference *userRef = [[reference child:@"Users"]child:self.post.userID];
+                [userRef setValue:@{@"Age":@(0), @"Bio":@"nil", @"Name":[FIRAuth auth].currentUser.displayName,@"PhoneNumber":@(0), @"ProfilePicURL":@"nil",@"EventsGoing":@[@"a"]}];
+            }
+        }];
+    TimelineViewController *timeline = [[TimelineViewController alloc] init];
     [self.navigationController pushViewController:timeline animated:YES];
     NSLog(@"User posted successfully");
 }

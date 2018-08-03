@@ -3,6 +3,7 @@
 #import <FirebaseAuth.h>
 #import "Post.h"
 #import "LoginViewController.h"
+
 @implementation Post
 
 + (NSString *)activityTypeToString:(ActivityType) activityType{
@@ -36,7 +37,6 @@
     }
 };
 
-// TODO(Nikki): add user location to this
 - (instancetype)initPostWithDetails:(NSDate *)eventDate
                           withTitle:(NSString *)postTitle
                     withDescription:(NSString *) postDescription
@@ -60,10 +60,10 @@
     }
     return self;
 }
-- (void)initFromFirebase{
+
+- (void)initFromFirebase {
 }
 
-// TODO(Nikki): add user location to database
 + (void)postToFireBase:(Post *)post {
     int timestamp = [post.activityDateAndTime timeIntervalSince1970];
     NSNumber *dateAndTimeStamp = @(timestamp);
@@ -73,13 +73,25 @@
     [reffy setValue:@{@"Date":dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription, @"Latitude":post.activityLat, @"Longitude":post.activityLng, @"UsersGoing":post.usersGoing, @"Location":post.eventLocation}];
 }
 
-// TODO(Nikki): read user location from database
-+ (NSArray *)readPostsFromFIRDict:(NSDictionary *)postsDict{
++ (NSArray *)readPostsFromFIRDict:(NSDictionary *)postsDict {
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     for(NSString *userKey in postsDict){
         for(NSString *IDKey in postsDict[userKey]){
             Post *posty = [[Post alloc]init];
             posty.fireBaseID = IDKey;
+            FIRDatabaseReference *myRef = [[[[FIRDatabase database] reference] child:@"Users"] child:userKey];
+            [myRef observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                NSDictionary *dict = snapshot.value;
+                if (![dict isEqual:[NSNull null]]) {
+                    NSArray *myArray = dict[@"EventsGoing"];
+                    if (![myArray containsObject:posty.fireBaseID]) {
+                        NSMutableArray *goingArrray = [NSMutableArray arrayWithArray:myArray];
+                        [goingArrray addObject:posty.fireBaseID];
+                        myArray = [NSArray arrayWithArray:goingArrray];
+                        [myRef updateChildValues:@{@"EventsGoing":myArray}];
+                    }
+                }
+            }];
             posty.activityTitle = postsDict[userKey][IDKey][@"Title"];
             posty.activityDescription = postsDict[userKey][IDKey][@"Description"];
             posty.userID = userKey;

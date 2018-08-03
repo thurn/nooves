@@ -11,7 +11,7 @@
     location.userLocation.distanceFilter = kCLDistanceFilterNone;
     
     if([CLLocationManager locationServicesEnabled]) {
-        NSLog(@"Location services enabled");
+//        NSLog(@"Location services enabled");
         [location.userLocation requestAlwaysAuthorization];
         [location.userLocation requestWhenInUseAuthorization];
         [location.userLocation startUpdatingLocation];
@@ -27,6 +27,18 @@
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     NSLog(@"Error getting user location");
+}
+
+// calculates the distance between the user's location and an event's location
+- (double)calculateDistanceWithUserLat:(NSNumber *)userLat userLng:(NSNumber *)userLng
+                            eventLat:(NSNumber *)eventLat
+                            eventLng:(NSNumber *)eventLng {
+    CLLocation *userLocation = [[CLLocation alloc] initWithLatitude:userLat.doubleValue longitude:userLng.doubleValue];
+    CLLocation *eventLocation = [[CLLocation alloc] initWithLatitude:eventLat.doubleValue longitude:eventLng.doubleValue];
+    
+    CLLocationDistance distance = [userLocation distanceFromLocation:eventLocation];
+    
+    return distance;
 }
 
 @end

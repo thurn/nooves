@@ -15,7 +15,7 @@
 + (void)saveUserProfile:(User *)user {
     FIRDatabaseReference *ref = [[FIRDatabase database] reference];
     FIRDatabaseReference *reference = [[ref child:@"Users"]child:[FIRAuth auth].currentUser.uid];
-    [reference setValue:@{@"Name":user.name,@"Age":user.age, @"Bio":user.biography, @"PhoneNumber":user.phoneNumber, @"ProfilePicURL":user.profilePicURL}];
+    [reference updateChildValues:@{@"Name":user.name,@"Age":user.age, @"Bio":user.biography, @"PhoneNumber":user.phoneNumber, @"ProfilePicURL":user.profilePicURL}];
 }
 
 - (instancetype)initFromDatabase:(NSDictionary *)usersDict {
@@ -26,6 +26,7 @@
     self.name = usersDict[@"Name"];
     self.phoneNumber = usersDict[@"PhoneNumber"];
     self.profilePicURL = usersDict[@"ProfilePicURL"];
+    self.eventsGoing = usersDict[@"EventsGoing"];
     return self;
 }
 
