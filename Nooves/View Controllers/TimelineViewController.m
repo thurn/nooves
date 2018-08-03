@@ -25,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+
     static dispatch_once_t openingApp;
     dispatch_once(&openingApp, ^ {
     FIRDatabaseReference * ref =[[FIRDatabase database] reference];
@@ -39,7 +40,7 @@
         [tableView reloadData];
     }];
     });
-    
+
     self.filteredData = [[NSMutableArray alloc]init];
 
     tableView = [self configureTableView];
@@ -80,14 +81,14 @@
 }
 
 - (UIBarButtonItem *)filterResults {
-    
+
     UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] init];
     filterButton.title = @"Filter";
     [filterButton setImage:[UIImage imageNamed:@"filter-icon.png"]];
     self.navigationItem.leftBarButtonItem = filterButton;
     filterButton.target = self;
     filterButton.action = @selector(didTapFilter);
-    
+
     return filterButton;
 }
 
@@ -138,7 +139,7 @@
     }];
         Post *newPost = self.firArray[indexPath.row];
         [cell configurePost:newPost];
-    
+
     return cell;
 }
 
