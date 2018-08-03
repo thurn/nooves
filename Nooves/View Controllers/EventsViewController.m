@@ -27,6 +27,7 @@ static NSString * const clientSecret = @"93767e5098b45988d73f";
     
     [self configureTableView];
     [self confirmEventButton];
+    //[self fetchEvents];
     [tableView registerClass:[EventCell class] forCellReuseIdentifier:@"eventCellIdentifier"];
     [tableView reloadData];
 }
@@ -74,15 +75,28 @@ static NSString * const clientSecret = @"93767e5098b45988d73f";
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return  self.eventsArray.count;
+    if (self.eventsArray) {
+        return  self.eventsArray.count;
+    }
+    return 30;
 }
 
 - (void)fetchEvents {
-    NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&",clientKey, clientSecret];
+    NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@",clientKey, clientSecret];
     queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
-   // NSURL *url
+    NSURL *url = [NSURL URLWithString:[baseURLString stringByAppendingString:queryString]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
+        if (data) {
+            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSLog(@"response:%@", responseDictionary);
+            [tableView reloadData];
+        }
+    }];
+    [task resume];
 }
 
 @end
