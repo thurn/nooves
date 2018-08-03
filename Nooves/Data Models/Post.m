@@ -80,6 +80,19 @@
         for(NSString *IDKey in postsDict[userKey]){
             Post *posty = [[Post alloc]init];
             posty.fireBaseID = IDKey;
+            FIRDatabaseReference *myRef = [[[[FIRDatabase database] reference] child:@"Users"] child:userKey];
+            [myRef observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                NSDictionary *dict = snapshot.value;
+                if (![dict isEqual:[NSNull null]]) {
+                    NSArray *myArray = dict[@"EventsGoing"];
+                    if (![myArray containsObject:posty.fireBaseID]) {
+                        NSMutableArray *goingArrray = [NSMutableArray arrayWithArray:myArray];
+                        [goingArrray addObject:posty.fireBaseID];
+                        myArray = [NSArray arrayWithArray:goingArrray];
+                        [myRef updateChildValues:@{@"EventsGoing":myArray}];
+                    }
+                }
+            }];
             posty.activityTitle = postsDict[userKey][IDKey][@"Title"];
             posty.activityDescription = postsDict[userKey][IDKey][@"Description"];
             posty.userID = userKey;

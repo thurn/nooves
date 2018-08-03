@@ -19,6 +19,9 @@
 @property (strong, nonatomic) UILabel *activityDescriptionLabel;
 @property (strong, nonatomic) UILabel *activityDateAndTimeLabel;
 @property (strong, nonatomic) UILabel *activityTypeLabel;
+@property (strong, nonatomic) UILabel *activtyLocationLabel;
+@property (nonatomic) BOOL going;
+@property (strong, nonatomic) UIButton *goingButton;
 @end
 
 @implementation PostDetailsViewController
@@ -46,9 +49,16 @@
         }
         else {
             FIRDatabaseReference *userRef = [[reference child:@"Users"]child:self.post.userID];
-            [userRef setValue:@{@"Age":@(0), @"Bio":@"nil", @"Name":@"Unnamed User",@"PhoneNumber":@(0), @"ProfilePicURL":@"nil"}];
+            [userRef setValue:@{@"Age":@(0), @"Bio":@"nil", @"Name":@"Unnamed User",@"PhoneNumber":@(0), @"ProfilePicURL":@"nil",@"EventsGoing":@[@"a"]}];
         }
     }];
+    self.going = NO;
+    for (NSString *uid in self.post.usersGoing){
+        if ([[FIRAuth auth].currentUser.uid isEqualToString:uid]){
+            self.going = YES;
+            break;
+        }
+    }
     self.profilePicImage = [[UIImageView alloc] init];
     self.profilePicImage.image = [UIImage imageNamed:@"profile-blank"];
     self.profilePicImage.frame = CGRectMake(0, 0, self.view.frame.size.width, (self.view.frame.size.height*9/20));
@@ -71,7 +81,36 @@
         self.activityDateAndTimeLabel.text = [@"Date and Time: " stringByAppendingString:dateString];
         [self.activityDateAndTimeLabel sizeToFit];
         [self.view addSubview:self.activityDateAndTimeLabel];
-
+        self.activtyLocationLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.view.frame.size.height/2+90, 10, 10)];
+        self.activtyLocationLabel.text = [@"Location: " stringByAppendingString:self.post.eventLocation];
+        [self.activtyLocationLabel sizeToFit];
+        [self.view addSubview:self.activtyLocationLabel];
+        self.activityDescriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.view.frame.size.height/2+120, 10, 10)];
+        self.activityDescriptionLabel.text = [@"Description: " stringByAppendingString:self.post.activityDescription];
+        [self.activityDescriptionLabel sizeToFit];
+        [self.view addSubview:self.activityDescriptionLabel];
+        self.goingButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.frame.size.height/2+150, 20, 20)];
+        [self.goingButton setTitle:@"Going" forState:UIControlStateNormal];
+        if(self.going){
+            [self.goingButton setTitle:@"Not Going" forState:UIControlStateNormal];
+        }
+        self.goingButton.backgroundColor = [UIColor greenColor];
+        [self.goingButton setCenter:CGPointMake(self.view.center.x, self.view.frame.size.height/2+150)];
+        [self.goingButton sizeToFit];
+        [self.goingButton addTarget:self action:@selector(didTapGoing) forControlEvents:UIControlEventTouchDown];
+        [self.view addSubview:self.goingButton];
+        
+    }
+}
+- (void)didTapGoing{
+    if(!self.going){
+        self.going = YES;
+        NSMutableArray *imGoing = [NSMutableArray arrayWithArray:self.post.usersGoing];
+        [imGoing addObject:[FIRAuth auth].currentUser.uid];
+        self.post.usersGoing = [NSArray arrayWithArray:imGoing];
+        FIRDatabaseReference *ref = [[FIRDatabase database] reference];
+        [[[[ref child:@"Posts"] child:self.post.userID] child:self.post.fireBaseID] setValue:self.post.usersGoing forKey:@"UsersGoing"];
+        self.going=YES;
     }
 }
 
