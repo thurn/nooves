@@ -56,7 +56,7 @@ static NSString * const clientSecret = @"93767e5098b45988d73f";
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSLog( @"fetching events from the search bar");
-    [self fetchEventsWithQuery:@"london"];
+    [self fetchEventsWithQuery:@"california"];
 }
 
 - (void)didReceiveMemoryWarning {
