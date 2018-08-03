@@ -30,7 +30,7 @@
     FIRDatabaseReference * ref =[[FIRDatabase database] reference];
         [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             if ([snapshot.value isEqual:[NSNull null]]) {
-                [ref setValue:@{@"Age":@(0), @"Bio":@"nil", @"Name":[FIRAuth auth].currentUser.displayName,@"PhoneNumber":@(0), @"ProfilePicURL":@"nil",@"EventsGoing":@[@"a"]}];
+                [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] setValue:@{@"Age":@(0), @"Bio":@"nil", @"Name":[FIRAuth auth].currentUser.displayName,@"PhoneNumber":@(0), @"ProfilePicURL":@"nil",@"EventsGoing":@[@"a"]}];
             }
         }];
     FIRDatabaseHandle *handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
@@ -124,8 +124,6 @@
                     NSInteger date = [posts[userID][postID][@"Date"]integerValue];
                     NSDate *convertedDate = [NSDate dateWithTimeIntervalSince1970:date];
                     post.activityDateAndTime = convertedDate;
-                NSNumber *lat = Location.currentLocation.userLat;
-                NSNumber *lng = Location.currentLocation.userLng;
                 double distance =
                 [location calculateDistanceWithUserLat:Location.currentLocation.userLat
                                                userLng:Location.currentLocation.userLng
