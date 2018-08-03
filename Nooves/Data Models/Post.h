@@ -28,6 +28,7 @@ typedef NS_ENUM(NSInteger, ActivityType){
 @property (strong, nonatomic) NSNumber *activityLng;
 @property (strong, nonatomic) NSString *fireBaseID;
 @property (strong, nonatomic) NSString *userID;
+@property (strong, nonatomic) NSArray *usersGoing;
 
 + (NSString *)activityTypeToString:(ActivityType) activityType;
 - (instancetype)initPostWithDetails:(NSDate *)eventDate

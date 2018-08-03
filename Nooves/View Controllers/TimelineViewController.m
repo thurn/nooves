@@ -32,18 +32,18 @@
         [tableView reloadData];
     }];
     });
-    
+
     tableView = [self configureTableView];
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.rowHeight = UITableViewAutomaticDimension;
     tableView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:tableView];
-    
+
     self.navigationItem.title = @"Home";
     [self writeNewPost];
     [self filterResults];
-    
+
     [tableView registerClass:[PostCell class] forCellReuseIdentifier:@"postCellIdentifier"];
 }
 
