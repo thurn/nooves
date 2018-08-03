@@ -21,15 +21,15 @@ static NSString * const clientSecret = @"93767e5098b45988d73f";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self.view setBackgroundColor:[UIColor whiteColor]];
-    tableView.dataSource = self;
-    tableView.delegate = self;
+    self.navigationItem.title = @"Local Events";
     
     [self configureTableView];
     [self confirmEventButton];
-    //[self fetchEvents];
-    [tableView registerClass:[EventCell class] forCellReuseIdentifier:@"eventCellIdentifier"];
+    [self fetchEventsWithQuery:@"london"];
+   
     [tableView reloadData];
+    
+     [tableView registerClass:[EventCell class] forCellReuseIdentifier:@"eventCellIdentifier"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,6 +48,11 @@ static NSString * const clientSecret = @"93767e5098b45988d73f";
     tableView.showsVerticalScrollIndicator = YES;
     tableView.userInteractionEnabled = YES;
     [self.view addSubview:tableView];
+    
+    tableView.backgroundColor = [UIColor whiteColor];
+    tableView.dataSource = self;
+    tableView.delegate = self;
+    tableView.rowHeight = UITableViewAutomaticDimension;
     
     return tableView;
 }
@@ -68,9 +73,11 @@ static NSString * const clientSecret = @"93767e5098b45988d73f";
 }
 
 #pragma mark - UITableViewDelegate methods
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EventCell *cell = [tableView dequeueReusableCellWithIdentifier:@"eventCellIdentifier" forIndexPath:indexPath];
-    cell.textLabel.text = self.eventsArray[indexPath.row];
+   // cell.textLabel.text = self.eventsArray[indexPath.row];
+    Event *event = self.eventsArray[indexPath.row];
+    [cell configureEvent:event];
     return cell;
 }
 
@@ -81,8 +88,8 @@ static NSString * const clientSecret = @"93767e5098b45988d73f";
     return 30;
 }
 
-- (void)fetchEvents {
-    NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@",clientKey, clientSecret];
+- (void)fetchEventsWithQuery:(NSString *)query {
+    NSString *queryString = [NSString stringWithFormat:@"app_key=%@&location=%@",appKey,query];
     queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
     NSURL *url = [NSURL URLWithString:[baseURLString stringByAppendingString:queryString]];

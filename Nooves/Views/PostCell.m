@@ -50,11 +50,6 @@
             }
         }];
         self.profilePicField.frame = CGRectMake(self.dateField.frame.origin.x, self.dateField.frame.size.height+30, 40, 40);
-        //set up the profile picture field
-        [self.contentView addSubview:self.profilePicField];
-//        [self.profilePicField autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.dateField withOffset:10.0f];
-//        [self.profilePicField autoPinEdgeToSuperviewMargin:ALEdgeLeft];
-//        [self.profilePicField autoPinEdgeToSuperviewMargin:ALEdgeBottom];
         
         //self up the event title field
         self.eventTitleField = [[UILabel alloc]init];
