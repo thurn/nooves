@@ -7,9 +7,10 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 static NSString * const clientKey = @"5db85641372af05aa023";
 static NSString * const clientSecret = @"93767e5098b45988d73f";
 
-@interface EventsViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface EventsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 @property(strong, nonatomic) NSArray *eventsArray;
+@property(strong, nonatomic) UISearchBar *searchBar;
 
 @end
 
@@ -25,11 +26,37 @@ static NSString * const clientSecret = @"93767e5098b45988d73f";
     
     [self configureTableView];
     [self confirmEventButton];
-    [self fetchEventsWithQuery:@"london"];
-   
+    
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(-5.0, 0.0, 320.0, 44.0)];
+    self.searchBar.delegate = self;
+    self.searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    UIView *searchBarView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 310.0, 44.0)];
+    self.searchBar.placeholder = @"Enter your location...";
+    searchBarView.autoresizingMask = 0;
+    [searchBarView addSubview:self.searchBar];
+    self.navigationItem.titleView = searchBarView;
+    
     [tableView reloadData];
     
      [tableView registerClass:[EventCell class] forCellReuseIdentifier:@"eventCellIdentifier"];
+}
+
+// cancel button appears when user edits search bar
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = YES;
+}
+
+// will delete search text when cancel button clicked
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = NO;
+    self.searchBar.text = @"";
+    self.searchBar.placeholder = @"Enter your location...";
+    [self.searchBar resignFirstResponder];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    NSLog( @"fetching events from the search bar");
+    [self fetchEventsWithQuery:@"london"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,9 +102,10 @@ static NSString * const clientSecret = @"93767e5098b45988d73f";
 #pragma mark - UITableViewDelegate methods
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EventCell *cell = [tableView dequeueReusableCellWithIdentifier:@"eventCellIdentifier" forIndexPath:indexPath];
-   // cell.textLabel.text = self.eventsArray[indexPath.row];
-    Event *event = self.eventsArray[indexPath.row];
-    [cell configureEvent:event];
+    if(self.results.count >indexPath.row) {
+        [cell updateWithEvent:self.results[indexPath.row]];
+        return cell;
+    }
     return cell;
 }
 
@@ -86,6 +114,17 @@ static NSString * const clientSecret = @"93767e5098b45988d73f";
         return  self.eventsArray.count;
     }
     return 30;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *events = self.results[indexPath.row];
+    NSString *title = events[@"title"];
+    NSString *description = events[@"description"];
+    NSString *venue = events[@"venue_name"];
+    [self.eventsDelegate eventsViewController:self didSelectEventWithTitle:title withDescription:description withVenue:venue];
+    
+    [self dismissViewControllerAnimated:NO completion:nil];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)fetchEventsWithQuery:(NSString *)query {
@@ -100,6 +139,7 @@ static NSString * const clientSecret = @"93767e5098b45988d73f";
         if (data) {
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             NSLog(@"response:%@", responseDictionary);
+            self.results = [responseDictionary valueForKeyPath:@"events.event"];
             [tableView reloadData];
         }
     }];
