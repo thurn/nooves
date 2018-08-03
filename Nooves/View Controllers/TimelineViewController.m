@@ -24,7 +24,6 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     
     static dispatch_once_t openingApp;
     dispatch_once(&openingApp, ^ {
@@ -36,8 +35,9 @@
         }];
     FIRDatabaseHandle *handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSDictionary *postsDict = snapshot.value;
-        self.firArray = [Post readPostsFromFIRDict:postsDict];
-        [tableView reloadData];
+        
+    self.firArray = [Post readPostsFromFIRDict:postsDict];
+    [tableView reloadData];
     }];
     });
     
@@ -149,7 +149,7 @@
     if(self.firArray){
         Location *location = [[Location alloc] init];
         FIRDatabaseReference *reference = [[FIRDatabase database]reference];
-        FIRDatabaseHandle databaseHandle = [[reference child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+       FIRDatabaseHandle databaseHandle = [[reference child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             NSDictionary *posts = snapshot.value;
 
             for(NSString *userID in posts) {
