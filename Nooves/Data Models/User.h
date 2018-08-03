@@ -13,7 +13,7 @@
 @property(strong, nonatomic) UIImage *profilePic;
 @property(strong, nonatomic) NSString *profilePicURL;
 @property(strong, nonatomic) NSString *userID;
-
+@property(strong, nonatomic) NSArray *eventsGoing;
 
 - (void)addToProfileWithInfo: (NSString *)userName
                      withBio: (NSString *)bio
