@@ -93,6 +93,7 @@
         [self.goingButton setTitle:@"Going" forState:UIControlStateNormal];
         if(self.going){
             [self.goingButton setTitle:@"Not Going" forState:UIControlStateNormal];
+            self.goingButton.backgroundColor = [UIColor blueColor];
         }
         self.goingButton.backgroundColor = [UIColor greenColor];
         [self.goingButton setCenter:CGPointMake(self.view.center.x, self.view.frame.size.height/2+150)];
@@ -103,15 +104,43 @@
     }
 }
 - (void)didTapGoing{
+    FIRDatabaseReference *ref = [[FIRDatabase database] reference];
     if(!self.going){
         self.going = YES;
         NSMutableArray *imGoing = [NSMutableArray arrayWithArray:self.post.usersGoing];
         [imGoing addObject:[FIRAuth auth].currentUser.uid];
         self.post.usersGoing = [NSArray arrayWithArray:imGoing];
-        FIRDatabaseReference *ref = [[FIRDatabase database] reference];
-        [[[[ref child:@"Posts"] child:self.post.userID] child:self.post.fireBaseID] setValue:self.post.usersGoing forKey:@"UsersGoing"];
-        
+        [[[[ref child:@"Posts"] child:self.post.userID] child:self.post.fireBaseID] updateChildValues:@{@"UsersGoing":self.post.usersGoing}];
+        [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            NSDictionary *myDict = snapshot.value;
+            NSArray *amIGoing = myDict[@"EventsGoing"];
+            NSMutableArray *youAre = [NSMutableArray arrayWithArray:amIGoing];
+            [youAre addObject:self.post.fireBaseID];
+            NSArray *finishedEvent = [NSArray arrayWithArray:youAre];
+            [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] updateChildValues:@{@"EventsGoing":finishedEvent}];
+        }];
         self.going=YES;
+        self.goingButton.backgroundColor = [UIColor blueColor];
+        [self.goingButton setTitle:@"Not Going" forState:UIControlStateNormal];
+        [self.goingButton sizeToFit];
+    }
+    else {
+        NSMutableArray *imGoing = [NSMutableArray arrayWithArray:self.post.usersGoing];
+        [imGoing removeObject:[FIRAuth auth].currentUser.uid];
+        self.post.usersGoing = [NSArray arrayWithArray:imGoing];
+        [[[ref child:@"Posts"] child:self.post.fireBaseID] updateChildValues:@{@"UsersGoing":self.post.usersGoing}];
+        [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            NSDictionary *myDict = snapshot.value;
+            NSArray *myEvents = myDict[@"EventsGoing"];
+            NSMutableArray *imOut = [NSMutableArray arrayWithArray:myEvents];
+            [imOut removeObject:self.post.fireBaseID];
+            NSArray *imDone = [NSArray arrayWithArray:imOut];
+            [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] updateChildValues:@{@"EventsGoing":imDone}];
+        }];
+        self.going = NO;
+        [self.goingButton setTitle:@"Going" forState:UIControlStateNormal];
+        self.goingButton.backgroundColor = [UIColor greenColor];
+        [self.goingButton sizeToFit];
     }
 }
 
