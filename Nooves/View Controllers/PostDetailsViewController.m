@@ -110,6 +110,7 @@
         self.post.usersGoing = [NSArray arrayWithArray:imGoing];
         FIRDatabaseReference *ref = [[FIRDatabase database] reference];
         [[[[ref child:@"Posts"] child:self.post.userID] child:self.post.fireBaseID] setValue:self.post.usersGoing forKey:@"UsersGoing"];
+        
         self.going=YES;
     }
 }
