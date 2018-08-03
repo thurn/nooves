@@ -77,7 +77,7 @@
     NSDateFormatter *formatter = [NSDateFormatter new];
     formatter.dateFormat = @"MM-dd HH:mm";
     NSString *dateDetails = [formatter stringFromDate:date];
-    NSLog(@"Datedetails:%@", dateDetails);
+   // NSLog(@"Datedetails:%@", dateDetails);
     self.timeLabel.text = @"Time";
     //self.timeLabel.text = dateDetails;
 }
