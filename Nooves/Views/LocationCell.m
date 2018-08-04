@@ -41,9 +41,6 @@
     frame.size.width = 30;
     [self.categoryImageView setFrame:frame];
     self.categoryImageView.frame = CGRectMake(7, 7, 30, 30);
-//    [self.contentView addSubview:self.categoryImageView];
-//    [self.nameLabel autoPinEdgeToSuperviewMargin:ALEdgeTop];
-//    [self.nameLabel autoPinEdgeToSuperviewMargin:ALEdgeLeft];
     
     self.nameLabel.frame = CGRectMake(20, 55, 20, 20);
     self.nameLabel.text = @"name";
@@ -57,31 +54,13 @@
     self.addressLabel.text = @"address";
     [self.addressLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:12]];
     [self.contentView addSubview:self.addressLabel];
-    [self.addressLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.addressLabel withOffset:5.0f];
+    [self.nameLabel autoPinEdgeToSuperviewMargin:ALEdgeTop];
+    [self.nameLabel autoPinEdgeToSuperviewMargin:ALEdgeRight];
     [self.addressLabel sizeToFit];
     
     [self addSubview:self.categoryImageView];
     [self addSubview:self.addressLabel];
     [self addSubview:self.nameLabel];
-    
-    //    self.titleLabel = [[UILabel alloc]init];
-    //    [self.contentView addSubview:self.titleLabel];
-    //    [self.titleLabel autoPinEdgeToSuperviewMargin:ALEdgeTop];
-    //    [self.titleLabel autoPinEdgeToSuperviewMargin:ALEdgeLeft];
-    //
-    //    self.descriptionLabel = [[UILabel alloc]init];
-    //    [self.contentView addSubview:self.descriptionLabel];
-    //    [self.descriptionLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.titleLabel withOffset:5.0f];
-    //
-    //    self.venueLabel = [[UILabel alloc]init];
-    //    [self.contentView addSubview:self.venueLabel];
-    //    [self.venueLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.descriptionLabel withOffset:10.0f];
-    //    [self.venueLabel autoPinEdgeToSuperviewMargin:ALEdgeBottom];
-    //
-    //    self.timeLabel = [[UILabel alloc]init];
-    //    [self.contentView addSubview:self.timeLabel];
-    //    [self.timeLabel autoPinEdgeToSuperviewMargin:ALEdgeBottom];
-    //    [self.timeLabel autoPinEdgeToSuperviewMargin:ALEdgeRight];
 }
 
 - (void)updateWithLocation:(NSDictionary *)location {
