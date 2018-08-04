@@ -187,8 +187,9 @@
 }
 
 - (void)didTapFilter {
-    FilterViewController *filter = [[FilterViewController alloc]init];
-    [self.navigationController pushViewController:filter animated:YES];
+    FilterViewController *filterController = [[FilterViewController alloc]initWithArray:self.firArray];
+    filterController.filterDelegate = self;
+    [self.navigationController pushViewController:filterController animated:YES];
 }
 
 -(void)didTapProfile {
@@ -196,4 +197,9 @@
     [self.navigationController pushViewController:profile animated:YES];
 }
 
+- (void) filteredArray:(NSArray *)array {
+    self.firArray = array;
+    [self.navigationController popToViewController:self animated:YES];
+    [tableView reloadData];
+}
 @end

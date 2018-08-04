@@ -13,6 +13,7 @@
 @property(strong, nonatomic) NSArray *categories;
 @property(strong, nonatomic) NSMutableArray *selectedCategories;
 @property(strong, nonatomic) NSMutableArray *filteredData;
+@property(strong, nonatomic) NSArray *postsArray;
 
 @end
 
@@ -123,35 +124,16 @@
     }
     
     // Read data from the database and filter according to the categories
-    FIRDatabaseReference *reference = [[FIRDatabase database]reference];
-    FIRDatabaseHandle databaseHandle = [[reference child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        NSDictionary *posts = snapshot.value;
-        
-        for(NSString *userID in posts) {
-            for(NSString *postID in posts[userID]) {
-                for (NSString *chosenActivity in self.selectedCategories) {
-                    Post *post = [[Post alloc]init];
-                    post.fireBaseID = postID;
-                    post.userID = userID;
-                    post.activityType = [posts[userID][postID][@"Activity Type"] doubleValue];
-                    post.activityTitle = posts[userID] [postID][@"Title"];
-                    post.activityDescription = posts[userID][postID][@"Description"];
-                    post.activityLat = posts[userID][postID][@"Latitude"];
-                    post.activityLng = posts[userID][postID][@"Longitude"];
-                    NSInteger date = [posts[userID][postID][@"Date"]integerValue];
-                    NSDate *convertedDate = [NSDate dateWithTimeIntervalSince1970:date];
-                    post.activityDateAndTime = convertedDate;
-                    NSString *activity = [Post activityTypeToString:post.activityType];
-                    if ([activity isEqualToString:chosenActivity]) {
-                        [self.filteredData addObject:post];
-                    }
-                }
+    for (NSString *chosenActivity in self.selectedCategories) {
+        for (Post *post in self.postsArray) {
+             NSString *activity = [Post activityTypeToString:post.activityType];
+            if ([activity isEqualToString:chosenActivity]) {
+                [self.filteredData addObject:post];
             }
         }
-        TimelineViewController *timeline = [[TimelineViewController alloc]init];
-        timeline.firArray = self.filteredData;
-        [self.navigationController pushViewController:timeline animated:YES];
-    }];
+    }
+    [self.filterDelegate filteredArray:self.filteredData];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 - (void)didTapAllPosts {
@@ -163,5 +145,12 @@
     [self.navigationController pushViewController:timeline animated:YES];
     }];
 }
+
+- (instancetype)initWithArray:(NSArray *)array {
+    self = [super init];
+    self.postsArray = array;
+    return self;
+}
+
 
 @end
