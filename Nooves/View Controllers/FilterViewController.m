@@ -136,7 +136,7 @@
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
-- (void)didTapAllPosts {
+/*- (void)didTapAllPosts {
     TimelineViewController *timeline = [[TimelineViewController alloc]init];
     FIRDatabaseReference * ref =[[FIRDatabase database] reference];
     FIRDatabaseHandle handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
@@ -144,7 +144,7 @@
         timeline.firArray = [Post readPostsFromFIRDict:postsDict];
     [self.navigationController pushViewController:timeline animated:YES];
     }];
-}
+}*/
 
 - (instancetype)initWithArray:(NSArray *)array {
     self = [super init];

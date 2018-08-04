@@ -1,9 +1,8 @@
-#import "AppDelegate.h"
+
 #import "ComposeViewController.h"
 #import "FilterViewController.h"
 #import <FIRDatabase.h>
 #import "PostCell.h"
-#import "Post.h"
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
 #import "TimelineViewController.h"
@@ -11,7 +10,8 @@
 #import "Location.h"
 
 @interface TimelineViewController ()
-@property (nonatomic) NSMutableArray *filteredData;
+@property (strong, nonatomic) NSMutableArray *filteredData;
+@property (nonatomic) BOOL filtered;
 @end
 
 @implementation TimelineViewController
@@ -21,9 +21,13 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    if (self.filtered) {
+        [tableView reloadData];
+    }
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.filtered = NO;
     static dispatch_once_t openingApp;
     dispatch_once(&openingApp, ^ {
     FIRDatabaseReference * ref =[[FIRDatabase database] reference];
@@ -34,23 +38,9 @@
         }];
     FIRDatabaseHandle *handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSDictionary *postsDict = snapshot.value;
-
-    self.firArray = [Post readPostsFromFIRDict:postsDict];
-    Location *location = [[Location alloc] init];
-    if (self.firArray) {
-        self.filteredData = [[NSMutableArray alloc]init];
-        for (Post *post in self.firArray) {
-        double distance =
-            [location calculateDistanceWithUserLat:Location.currentLocation.userLat
-                                               userLng:Location.currentLocation.userLng
-                                              eventLat:post.activityLat
-                                              eventLng:post.activityLng];
-            if (distance <= 80467.2) {
-                [self.filteredData addObject:post];
-            }
-        }
-        self.firArray = [NSArray arrayWithArray:self.filteredData];
-    }
+        self.firArray = [Post readPostsFromFIRDict:postsDict];
+        self.firArray = [self filterLocation];
+        sleep(1);
     [tableView reloadData];
     }];
     });
@@ -110,7 +100,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Post *pickedPost = self.firArray[indexPath.row];
+    Post *pickedPost = self.filteredData[indexPath.row];
     PostDetailsViewController *postDetail = [[PostDetailsViewController alloc] initFromTimeline:pickedPost];
     [self.navigationController pushViewController:postDetail animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -118,21 +108,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PostCell *cell =[tableView dequeueReusableCellWithIdentifier:@"postCellIdentifier" forIndexPath:indexPath];
-
     Post *newPost = self.filteredData[indexPath.row];
     [cell configurePost:newPost];
-
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(self.filteredData) {
+    if(self.filteredData){
         return self.filteredData.count;
     }
-    if(self.firArray){
-        return self.firArray.count;
-    }
-    return 30;
+    return 1;
 }
 
 - (void)didTapCompose {
@@ -152,9 +137,26 @@
     [self.navigationController pushViewController:profile animated:YES];
 }
 
-- (void) filteredArray:(NSArray *)array {
-    self.firArray = array;
+- (void)filteredArray:(NSArray *)array {;
+    self.filteredData = [NSMutableArray arrayWithArray:array];
+    self.filtered = YES;
     [self.navigationController popToViewController:self animated:YES];
-    [tableView reloadData];
+
+}
+
+- (NSArray *)filterLocation {
+    Location *location = [[Location alloc] init];
+    self.filteredData = [[NSMutableArray alloc]init];
+    for (Post *post in self.firArray) {
+        double distance =
+        [location calculateDistanceWithUserLat:Location.currentLocation.userLat
+                                           userLng:Location.currentLocation.userLng
+                                          eventLat:post.activityLat
+                                          eventLng:post.activityLng];
+        if (distance <= 80467.2) {
+            [self.filteredData addObject:post];
+        }
+    }
+    return self.filteredData;
 }
 @end
