@@ -12,10 +12,10 @@
 @interface TimelineViewController ()
 @property (strong, nonatomic) NSMutableArray *filteredData;
 @property (nonatomic) BOOL filtered;
+@property (nonatomic) UIRefreshControl *refreshControl;
 @end
 
-@implementation TimelineViewController
-{
+@implementation TimelineViewController {
     UITableView *tableView;
 }
 
@@ -27,23 +27,8 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.filtered = NO;
-    static dispatch_once_t openingApp;
-    dispatch_once(&openingApp, ^ {
-    FIRDatabaseReference * ref =[[FIRDatabase database] reference];
-        [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-            if ([snapshot.value isEqual:[NSNull null]]) {
-                [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] setValue:@{@"Age":@(0), @"Bio":@"nil", @"Name":[FIRAuth auth].currentUser.displayName,@"PhoneNumber":@(0), @"ProfilePicURL":@"nil",@"EventsGoing":@[@"a"]}];
-            }
-        }];
-    FIRDatabaseHandle *handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-        NSDictionary *postsDict = snapshot.value;
-        self.firArray = [Post readPostsFromFIRDict:postsDict];
-        self.firArray = [self filterLocation];
-        sleep(1);
-    [tableView reloadData];
-    }];
-    });
 
     tableView = [self configureTableView];
     tableView.delegate = self;
@@ -57,6 +42,13 @@
     [self filterResults];
 
     [tableView registerClass:[PostCell class] forCellReuseIdentifier:@"postCellIdentifier"];
+    [self fetchPosts];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    
+    //  bind action to refresh control
+    [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
+    [tableView insertSubview:self.refreshControl atIndex:0];
 }
 
 - (UITableView *)configureTableView {
@@ -158,5 +150,25 @@
         }
     }
     return self.filteredData;
+}
+
+- (void)fetchPosts {
+    static dispatch_once_t openingApp;
+    dispatch_once(&openingApp, ^ {
+        FIRDatabaseReference * ref =[[FIRDatabase database] reference];
+        [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            if ([snapshot.value isEqual:[NSNull null]]) {
+                [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] setValue:@{@"Age":@(0), @"Bio":@"nil", @"Name":[FIRAuth auth].currentUser.displayName,@"PhoneNumber":@(0), @"ProfilePicURL":@"nil",@"EventsGoing":@[@"a"]}];
+            }
+        }];
+        FIRDatabaseHandle *handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            NSDictionary *postsDict = snapshot.value;
+            self.firArray = [Post readPostsFromFIRDict:postsDict];
+            self.firArray = [self filterLocation];
+            sleep(1);
+            [self.refreshControl endRefreshing];
+            [tableView reloadData];
+        }];
+    });
 }
 @end
