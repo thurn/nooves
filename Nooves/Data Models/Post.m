@@ -75,8 +75,8 @@
 
 + (NSArray *)readPostsFromFIRDict:(NSDictionary *)postsDict {
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
-    for(NSString *userKey in postsDict){
-        for(NSString *IDKey in postsDict[userKey]){
+    for(NSString *userKey in postsDict) {
+        for(NSString *IDKey in postsDict[userKey]) {
             Post *posty = [[Post alloc]init];
             posty.fireBaseID = IDKey;
             FIRDatabaseReference *myRef = [[[[FIRDatabase database] reference] child:@"Users"] child:userKey];
@@ -100,15 +100,14 @@
             posty.eventLocation = postsDict[userKey][IDKey][@"Location"];
             ActivityType type = [postsDict[userKey][IDKey][@"Activity Type"] integerValue];
             posty.activityType = type;
-            posty.usersGoing = postsDict[userKey][IDKey][@"UsersGoing"];
+            posty.usersGoing = [postsDict[userKey][IDKey][@"UsersGoing"] copy];
             NSInteger date = [postsDict[userKey][IDKey][@"Date"] integerValue];
             NSDate *daty = [NSDate dateWithTimeIntervalSince1970:date];
             posty.activityDateAndTime = daty;
             [tempArray addObject:posty];
         }
     }
-    NSArray *postsArray = [NSArray arrayWithArray:tempArray];
-    return postsArray;
+    return tempArray;
 }
 
 @end

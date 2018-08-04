@@ -28,7 +28,8 @@ typedef NS_ENUM(NSInteger, ActivityType){
 @property (strong, nonatomic) NSNumber *activityLng;
 @property (strong, nonatomic) NSString *fireBaseID;
 @property (strong, nonatomic) NSString *userID;
-@property (strong, nonatomic) NSArray *usersGoing;
+@property (strong, nonatomic) NSString *firstUserGoing;
+@property (nonatomic, copy) NSArray *usersGoing;
 @property (strong, nonatomic) NSString *eventLocation;
 
 + (NSString *)activityTypeToString:(ActivityType)activityType;

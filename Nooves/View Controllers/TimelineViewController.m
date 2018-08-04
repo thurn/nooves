@@ -121,6 +121,7 @@
                     post.activityLat = posts[userID][postID][@"Latitude"];
                     post.activityLng = posts[userID][postID][@"Longitude"];
                     post.eventLocation = posts[userID][postID][@"Location"];
+                    post.usersGoing = posts[userID][postID][@"UsersGoing"];
                     NSInteger date = [posts[userID][postID][@"Date"]integerValue];
                     NSDate *convertedDate = [NSDate dateWithTimeIntervalSince1970:date];
                     post.activityDateAndTime = convertedDate;
@@ -173,7 +174,7 @@
                     }
                 }
             }
-            _firArray = self.filteredData;
+            self.firArray = self.filteredData;
         }];
         return self.firArray.count;
     }
