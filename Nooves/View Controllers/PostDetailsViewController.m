@@ -82,7 +82,7 @@
         [self.activityDateAndTimeLabel sizeToFit];
         [self.view addSubview:self.activityDateAndTimeLabel];
         self.activtyLocationLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.view.frame.size.height/2+90, 10, 10)];
-        self.activtyLocationLabel.text = [@"Location: " stringByAppendingString:self.post.eventLocation];
+        self.activtyLocationLabel.text = [@"Location: " stringByAppendingString:self.post.activityLocation];
         [self.activtyLocationLabel sizeToFit];
         [self.view addSubview:self.activtyLocationLabel];
         self.activityDescriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.view.frame.size.height/2+120, 10, 10)];

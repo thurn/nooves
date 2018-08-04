@@ -56,7 +56,7 @@
         self.userID = FIRAuth.auth.currentUser.uid;
         self.fireBaseID = postID;
         self.usersGoing = @[[FIRAuth auth].currentUser.uid];
-        self.eventLocation = location;
+        self.activityLocation = location;
     }
     return self;
 }
@@ -70,7 +70,7 @@
     NSNumber *activityType = @(post.activityType);
     FIRDatabaseReference *ref = [[FIRDatabase database] reference];
     FIRDatabaseReference *reffy = [[[ref child:@"Posts"] child:[FIRAuth auth].currentUser.uid] childByAutoId];
-    [reffy setValue:@{@"Date":dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription, @"Latitude":post.activityLat, @"Longitude":post.activityLng, @"UsersGoing":post.usersGoing, @"Location":post.eventLocation}];
+    [reffy setValue:@{@"Date":dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription, @"Latitude":post.activityLat, @"Longitude":post.activityLng, @"UsersGoing":post.usersGoing, @"Location":post.activityLocation}];
 }
 
 + (NSArray *)readPostsFromFIRDict:(NSDictionary *)postsDict {
@@ -97,7 +97,7 @@
             posty.userID = userKey;
             posty.activityLat = postsDict[userKey][IDKey][@"Latitude"];
             posty.activityLng = postsDict[userKey][IDKey][@"Longitude"];
-            posty.eventLocation = postsDict[userKey][IDKey][@"Location"];
+            posty.activityLocation = postsDict[userKey][IDKey][@"Location"];
             ActivityType type = [postsDict[userKey][IDKey][@"Activity Type"] integerValue];
             posty.activityType = type;
             posty.usersGoing = postsDict[userKey][IDKey][@"UsersGoing"];

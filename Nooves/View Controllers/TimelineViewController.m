@@ -120,7 +120,7 @@
                     post.activityDescription = posts[userID][postID][@"Description"];
                     post.activityLat = posts[userID][postID][@"Latitude"];
                     post.activityLng = posts[userID][postID][@"Longitude"];
-                    post.eventLocation = posts[userID][postID][@"Location"];
+                    post.activityLocation = posts[userID][postID][@"Location"];
                     NSInteger date = [posts[userID][postID][@"Date"]integerValue];
                     NSDate *convertedDate = [NSDate dateWithTimeIntervalSince1970:date];
                     post.activityDateAndTime = convertedDate;
@@ -144,37 +144,6 @@
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(self.firArray){
-        Location *location = [[Location alloc] init];
-        FIRDatabaseReference *reference = [[FIRDatabase database]reference];
-       FIRDatabaseHandle databaseHandle = [[reference child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-            NSDictionary *posts = snapshot.value;
-
-            for(NSString *userID in posts) {
-                for(NSString *postID in posts[userID]) {
-                    Post *post = [[Post alloc]init];
-                    post.fireBaseID = postID;
-                    post.userID = userID;
-                    post.activityType = [posts[userID][postID][@"Activity Type"] doubleValue];
-                    post.activityTitle = posts[userID] [postID][@"Title"];
-                    post.activityDescription = posts[userID][postID][@"Description"];
-                    post.activityLat = posts[userID][postID][@"Latitude"];
-                    post.activityLng = posts[userID][postID][@"Longitude"];
-                    post.eventLocation = posts[userID][postID][@"Location"];
-                    NSInteger date = [posts[userID][postID][@"Date"]integerValue];
-                    NSDate *convertedDate = [NSDate dateWithTimeIntervalSince1970:date];
-                    post.activityDateAndTime = convertedDate;
-                    double distance =
-                    [location calculateDistanceWithUserLat:Location.currentLocation.userLat
-                                                   userLng:Location.currentLocation.userLng
-                                                  eventLat:post.activityLat
-                                                  eventLng:post.activityLng];
-                    if (distance <= 80467.2) {
-                        [self.filteredData addObject:post];
-                    }
-                }
-            }
-            _firArray = self.filteredData;
-        }];
         return self.firArray.count;
     }
     return 30;
