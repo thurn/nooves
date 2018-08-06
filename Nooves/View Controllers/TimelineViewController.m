@@ -159,8 +159,6 @@
 }
 
 - (void)fetchPosts {
-    static dispatch_once_t openingApp;
-    dispatch_once(&openingApp, ^ {
         FIRDatabaseReference * ref =[[FIRDatabase database] reference];
         [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             if ([snapshot.value isEqual:[NSNull null]]) {
@@ -175,6 +173,5 @@
             [self.refreshControl endRefreshing];
             [tableView reloadData];
         }];
-    });
 }
 @end
