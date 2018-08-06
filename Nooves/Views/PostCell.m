@@ -1,11 +1,10 @@
-#import "Post.h"
+
 #import "PostCell.h"
 #import "PureLayout/PureLayout.h"
 #import <FIRDatabase.h>
+#import "Post.h"
+#import "UserViewController.h"
 @implementation PostCell
-
-    bool going = NO;
-    bool interested = NO;
 
 - (void) awakeFromNib {
     [super awakeFromNib];
@@ -54,7 +53,9 @@
             }
         }];
         self.profilePicField.frame = CGRectMake(self.dateField.frame.origin.x, self.dateField.frame.size.height+30, 40, 40);
-        
+        self.profilePicField.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tapPic = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapProfile)];
+        [self.profilePicField addGestureRecognizer:tapPic];
         //self up the event title field
         if(!self.eventTitleField){
             self.eventTitleField = [[UILabel alloc]init];
@@ -100,87 +101,18 @@
         self.profilePicField.image = nil;
     }
 }
-
-- (void)didTapGoing {
-    //  change button color and number/list of people going
-    
-    if (!interested) {
-        if (going) {
-            // remove the user from the list of those going
-            [self.goingButton setBackgroundColor:[UIColor blackColor]];
-            going = NO;
-        }
-        
-        else {
-            // add the user to the list of those going
-            UIColor *selectedGoing = [UIColor greenColor];
-            [self.goingButton setBackgroundColor:selectedGoing];
-            going = YES;
-        }
-    }
-    
-    else {
-        interested = NO;
-        [self.interestedButton setBackgroundColor:[UIColor blackColor]];
-        if (going) {
-            // remove the user from the list of those going
-            [self.goingButton setBackgroundColor:[UIColor blackColor]];
-            going = NO;
-        }
-        
-        else {
-            // add the user to the list of those going
-            UIColor *selectedGoing = [UIColor greenColor];
-            [self.goingButton setBackgroundColor:selectedGoing];
-            going = YES;
-        }
-    }
-}
-
-- (void)didTapInterested {
-    if (!going) {
-        if (interested) {
-            // DECREMENT THE NUMBER OF THOSE INTERESTED - REMOVE USER FROM THE LIST
-            [self.interestedButton setBackgroundColor:[UIColor blackColor]];
-            interested = NO;
-        }
-        else {
-            // ADD THE USER TO THE LIST OF THOSE INTERESTED
-            UIColor *selectedInterested = [UIColor greenColor];
-            [self.interestedButton setBackgroundColor:selectedInterested];
-            interested = YES;
-        }
-    }
-    
-    else {
-        going = NO;
-        [self.goingButton setBackgroundColor:[UIColor blackColor]];
-        if (interested) {
-            // DECREMENT THE NUMBER OF THOSE INTERESTED - REMOVE USER FROM THE LIST
-            [self.interestedButton setBackgroundColor:[UIColor blackColor]];
-            interested = NO;
-        }
-        else {
-            // ADD THE USER TO THE LIST OF THOSE INTERESTED
-            UIColor *selectedInterested = [UIColor greenColor];
-            [self.interestedButton setBackgroundColor:selectedInterested];
-            interested = YES;
-        }
-    }
-}
-
-- (UIButton *)goToProfile {
-    self.profileButton = [[UIButton alloc] initWithFrame:CGRectMake(300, 140, 100, 10)];
-    [self.profileButton setImage:[UIImage imageNamed:@"profile_tab.png"] forState:UIControlStateNormal];
-    [self.profileButton sizeToFit];
-    [self.contentView addSubview:self.profileButton];
-    
-    [self.profileButton addTarget:self action:@selector(didTapProfile) forControlEvents:UIControlEventTouchUpInside];
-    return self.profileButton;
-}
-
+//- (UIButton *)goToProfile {
+//    self.profileButton = [[UIButton alloc] initWithFrame:CGRectMake(300, 140, 100, 10)];
+//    [self.profileButton setImage:[UIImage imageNamed:@"profile_tab.png"] forState:UIControlStateNormal];
+//    [self.profileButton sizeToFit];
+//    [self.contentView addSubview:self.profileButton];
+//
+//    [self.profileButton addTarget:self action:@selector(didTapProfile) forControlEvents:UIControlEventTouchUpInside];
+//    return self.profileButton;
+//}
+//
 -(void)didTapProfile {
-    NSLog(@"did tap on profile");
+    [self.postDelegate didTapProfilePic:self.post.userID];
 }
 
 @end
