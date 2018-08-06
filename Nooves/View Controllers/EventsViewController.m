@@ -54,7 +54,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSLog( @"fetching events from the search bar");
-    [self fetchEventsWithQuery:searchBar.text];
+      [self fetchEventsWithQuery:searchBar.text];
 }
 
 - (void)didReceiveMemoryWarning {
