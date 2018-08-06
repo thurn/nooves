@@ -25,6 +25,11 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+//    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+//    hud.mode = MBProgressHUDModeAnnularDeterminate;
+//    [self.view addSubview:hud];
+
+    
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"New Event";

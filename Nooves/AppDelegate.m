@@ -34,6 +34,9 @@
     // Override point for customization after application launch.
     [FIRApp configure];
     
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
     // the leaf controllers
     ProfileViewController* profileViewController = [[ProfileViewController alloc] init];
     LoginViewController *loginController = [[LoginViewController alloc] init];
@@ -41,7 +44,6 @@
     UINavigationController *timelineNavCont = [[UINavigationController alloc] initWithRootViewController:loginController];
     UINavigationController *profileNavCont = [[UINavigationController alloc] initWithRootViewController:profileViewController];
 
-    
     TabBarController *tabBarController = [[TabBarController alloc] init];
     tabBarController.viewControllers = @[timelineNavCont, profileNavCont];
     
