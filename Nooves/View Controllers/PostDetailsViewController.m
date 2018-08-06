@@ -34,6 +34,16 @@
         NSDictionary *usersDictionary = snapshot.value;
         if (![snapshot.value isEqual:[NSNull null]]) {
             self.user = [[User alloc] initFromDatabase:usersDictionary];
+            self.phoneNumberLabel = [[UILabel alloc] init];
+            NSString *phoneNumber = [self.user.phoneNumber stringValue];
+            self.phoneNumberLabel.text = [@"You can contact the host at " stringByAppendingString:phoneNumber];
+            self.phoneNumberLabel.frame = CGRectMake(self.view.center.x, self.view.frame.size.height/2+200, 10, 10);
+            [self.phoneNumberLabel sizeToFit];
+            [self.view addSubview:self.phoneNumberLabel];
+            [self.phoneNumberLabel setCenter:CGPointMake(self.view.center.x, self.view.frame.size.height - 100)];
+            if (!self.going){
+                self.phoneNumberLabel.hidden = YES;
+            }
             if (![self.user.profilePicURL isEqualToString:@"nil"]){
                 NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:self.user.profilePicURL] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
                     if(error){
@@ -59,6 +69,21 @@
             break;
         }
     }
+    self.goingButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.frame.size.height/2+150, 20, 20)];
+    if (!self.going) {
+        [self.goingButton setTitle:@"Going" forState:UIControlStateNormal];
+        self.goingButton.selected = NO;
+        self.goingButton.backgroundColor = [UIColor greenColor];
+    }
+    else {
+        self.goingButton.selected = YES;
+        self.goingButton.backgroundColor = [UIColor blueColor];
+        [self.goingButton setTitle:@"Not Going" forState:UIControlStateSelected];
+    }
+    [self.goingButton setCenter:CGPointMake(self.view.center.x, self.view.frame.size.height/2+150)];
+    [self.goingButton sizeToFit];
+    [self.goingButton addTarget:self action:@selector(didTapGoing) forControlEvents:UIControlEventTouchDown];
+    [self.view addSubview:self.goingButton];
     self.profilePicImage = [[UIImageView alloc] init];
     self.profilePicImage.image = [UIImage imageNamed:@"profile-blank"];
     self.profilePicImage.frame = CGRectMake(0, 0, self.view.frame.size.width, (self.view.frame.size.height*9/20));
@@ -89,24 +114,11 @@
         self.activityDescriptionLabel.text = [@"Description: " stringByAppendingString:self.post.activityDescription];
         [self.activityDescriptionLabel sizeToFit];
         [self.view addSubview:self.activityDescriptionLabel];
-        self.goingButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.frame.size.height/2+150, 20, 20)];
-        [self.goingButton setTitle:@"Going" forState:UIControlStateNormal];
-        if(self.going){
-            [self.goingButton setTitle:@"Not Going" forState:UIControlStateNormal];
-            self.goingButton.backgroundColor = [UIColor blueColor];
-        }
-        self.goingButton.backgroundColor = [UIColor greenColor];
-        [self.goingButton setCenter:CGPointMake(self.view.center.x, self.view.frame.size.height/2+150)];
-        [self.goingButton sizeToFit];
-        [self.goingButton addTarget:self action:@selector(didTapGoing) forControlEvents:UIControlEventTouchDown];
-        [self.view addSubview:self.goingButton];
-        
     }
 }
 - (void)didTapGoing{
     FIRDatabaseReference *ref = [[FIRDatabase database] reference];
     if(!self.going){
-        self.going = YES;
         NSMutableArray *imGoing = [NSMutableArray arrayWithArray:self.post.usersGoing];
         [imGoing addObject:[FIRAuth auth].currentUser.uid];
         self.post.usersGoing = [NSArray arrayWithArray:imGoing];
@@ -121,14 +133,16 @@
         }];
         self.going=YES;
         self.goingButton.backgroundColor = [UIColor blueColor];
-        [self.goingButton setTitle:@"Not Going" forState:UIControlStateNormal];
+        [self.goingButton setTitle:@"Not Going" forState:UIControlStateSelected];
+        self.goingButton.selected = YES;
         [self.goingButton sizeToFit];
+        self.phoneNumberLabel.hidden = NO;
     }
     else {
         NSMutableArray *imGoing = [NSMutableArray arrayWithArray:self.post.usersGoing];
         [imGoing removeObject:[FIRAuth auth].currentUser.uid];
         self.post.usersGoing = [NSArray arrayWithArray:imGoing];
-        [[[ref child:@"Posts"] child:self.post.fireBaseID] updateChildValues:@{@"UsersGoing":self.post.usersGoing}];
+        [[[[ref child:@"Posts"] child:self.post.userID] child:self.post.fireBaseID] updateChildValues:@{@"UsersGoing":self.post.usersGoing}];
         [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             NSDictionary *myDict = snapshot.value;
             NSArray *myEvents = myDict[@"EventsGoing"];
@@ -139,8 +153,10 @@
         }];
         self.going = NO;
         [self.goingButton setTitle:@"Going" forState:UIControlStateNormal];
+        self.goingButton.selected = NO;
         self.goingButton.backgroundColor = [UIColor greenColor];
         [self.goingButton sizeToFit];
+        self.phoneNumberLabel.hidden = YES;
     }
 }
 
