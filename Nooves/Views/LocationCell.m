@@ -24,13 +24,14 @@
     return self;
 }
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+- (instancetype)initWithStyle:(UITableViewCellStyle)style
+              reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     [self initialize];
     return self;
 }
 
-// initialized cell properties
+// initialize cell properties
 - (void)initialize {
     self.categoryImageView = [[UIImageView alloc] init];
     self.addressLabel = [[UILabel alloc] init];

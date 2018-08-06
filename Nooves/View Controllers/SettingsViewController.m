@@ -4,7 +4,7 @@
 #import <FirebaseAuth.h>
 #import "LoginViewController.h"
 
-@interface SettingsViewController () <FBSDKLoginButtonDelegate>
+@interface SettingsViewController () <FBSDKLoginButtonDelegate, UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) UIButton *logout;
 @end
 
@@ -51,6 +51,14 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    return nil;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 10;
 }
 
 @end

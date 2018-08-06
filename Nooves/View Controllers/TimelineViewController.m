@@ -125,7 +125,6 @@
 - (void)didTapFilter {
     FilterViewController *filterController = [[FilterViewController alloc]initWithArray:self.firArray];
     filterController.filterDelegate = self;
-    //[self.navigationController pushViewController:filterController animated:YES];
     UINavigationController *filterNavCont = [[UINavigationController alloc] initWithRootViewController:filterController];
     [self.navigationController presentViewController:filterNavCont animated:YES completion:nil];
 }
@@ -159,8 +158,6 @@
 }
 
 - (void)fetchPosts {
-    static dispatch_once_t openingApp;
-    dispatch_once(&openingApp, ^ {
         FIRDatabaseReference * ref =[[FIRDatabase database] reference];
         [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             if ([snapshot.value isEqual:[NSNull null]]) {
@@ -171,10 +168,8 @@
             NSDictionary *postsDict = snapshot.value;
             self.firArray = [Post readPostsFromFIRDict:postsDict];
             self.firArray = [self filterLocation];
-            sleep(1);
             [self.refreshControl endRefreshing];
             [tableView reloadData];
         }];
-    });
 }
 @end

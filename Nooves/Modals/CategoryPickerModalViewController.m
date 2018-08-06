@@ -23,13 +23,8 @@
     self.categoryLabel = [[UILabel alloc] init];
     self.categoryLabel.frame = CGRectMake(10, 700, 100, 100);
     
-//    UIButton *selectedCategory = [self selectCategory];
-//    selectedCategory.frame = CGRectMake(10.0, 250.0, 20, 30);
-//    [selectedCategory sizeToFit];
-    
     [self.view addSubview:self.pickerView];
     [self.view addSubview:self.categoryLabel];
-    //[self.view addSubview:selectedCategory];
     [self createBackButton];
     [self createConfirmButton];
 }
