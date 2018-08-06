@@ -2,7 +2,6 @@
 
 #import "AppDelegate.h"
 #import "PureLayout/PureLayout.h"
-#import "TabBarController.h"
 #import "TimelineViewController.h"
 
 #import "CategoryPickerModalViewController.h"
@@ -67,10 +66,6 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     [self searchEventsButton];
 
     [self becomeFirstResponder];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    self.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
