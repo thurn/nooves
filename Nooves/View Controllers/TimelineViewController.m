@@ -1,13 +1,17 @@
+#import "TimelineViewController.h"
 
 #import "ComposeViewController.h"
 #import "FilterViewController.h"
-#import <FIRDatabase.h>
 #import "ProfileViewController.h"
-#import "PureLayout/PureLayout.h"
-#import "TimelineViewController.h"
 #import "PostDetailsViewController.h"
-#import "Location.h"
 #import "UserViewController.h"
+
+#import "Location.h"
+
+#import "PureLayout/PureLayout.h"
+
+#import <FIRDatabase.h>
+
 @interface TimelineViewController ()
 @property (strong, nonatomic) NSMutableArray *filteredData;
 @property (nonatomic) BOOL filtered;
@@ -18,7 +22,7 @@
     UITableView *tableView;
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     if (self.filtered) {
         [tableView reloadData];
@@ -30,39 +34,63 @@
     self.filtered = NO;
 
     tableView = [self configureTableView];
+    self.navigationItem.title = @"Home";
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.rowHeight = UITableViewAutomaticDimension;
     tableView.backgroundColor = [UIColor whiteColor];
+    [tableView registerClass:[PostCell class] forCellReuseIdentifier:@"postCellIdentifier"];
     [self.view addSubview:tableView];
-
-    self.navigationItem.title = @"Home";
+    
     [self writeNewPost];
     [self filterResults];
-
-    [tableView registerClass:[PostCell class] forCellReuseIdentifier:@"postCellIdentifier"];
     [self fetchPosts];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
-    
-    //  bind action to refresh control
-    // TODO(Nikki): add timer to check if there's no posts to fetch then stop the refresh
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [tableView insertSubview:self.refreshControl atIndex:0];
 }
 
-- (UITableView *)configureTableView {
-    CGFloat width = self.view.frame.size.width;
-    CGFloat height = self.view.frame.size.height;
-    CGRect tableViewFrame = CGRectMake(0, 0, width, height);
-
-    tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
-    tableView.scrollEnabled = YES;
-    tableView.showsVerticalScrollIndicator = YES;
-    tableView.userInteractionEnabled = YES;
-
-    return tableView;
+- (void)filteredArray:(NSArray *)array {
+    self.filteredData = [NSMutableArray arrayWithArray:array];
+    self.filtered = YES;
+    [self.navigationController popToViewController:self animated:YES];
+    
 }
+
+- (NSArray *)filterLocation {
+    Location *location = [[Location alloc] init];
+    self.filteredData = [[NSMutableArray alloc]init];
+    for (Post *post in self.firArray) {
+        double distance =
+        [location calculateDistanceWithUserLat:Location.currentLocation.userLat
+                                       userLng:Location.currentLocation.userLng
+                                      eventLat:post.activityLat
+                                      eventLng:post.activityLng];
+        if (distance <= 80467.2) {
+            [self.filteredData addObject:post];
+        }
+    }
+    return self.filteredData;
+}
+
+- (void)fetchPosts {
+    FIRDatabaseReference * ref =[[FIRDatabase database] reference];
+    [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        if ([snapshot.value isEqual:[NSNull null]]) {
+            [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] setValue:@{@"Age":@(0), @"Bio":@"nil", @"Name":[FIRAuth auth].currentUser.displayName,@"PhoneNumber":@(0), @"ProfilePicURL":@"nil",@"EventsGoing":@[@"a"]}];
+        }
+    }];
+    FIRDatabaseHandle *handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        NSDictionary *postsDict = snapshot.value;
+        self.firArray = [Post readPostsFromFIRDict:postsDict];
+        self.firArray = [self filterLocation];
+        [self.refreshControl endRefreshing];
+        [tableView reloadData];
+    }];
+}
+
+#pragma mark - buttons and actions
 
 - (UIBarButtonItem *)writeNewPost {
     UIBarButtonItem *composeButton = [[UIBarButtonItem alloc] init];
@@ -74,10 +102,12 @@
     return composeButton;
 }
 
-- (void)didTapProfilePic:(NSString *)userID{
-    UserViewController *newUser = [[UserViewController alloc] initWithUserID:userID];
-    [self.navigationController pushViewController:newUser animated:YES];
+- (void)didTapCompose {
+    ComposeViewController *composeViewCont = [[ComposeViewController alloc] init];
+    UINavigationController *composeNavCont = [[UINavigationController alloc] initWithRootViewController:composeViewCont];
+    [self.navigationController presentViewController:composeNavCont animated:YES completion:nil];
 }
+
 - (UIBarButtonItem *)filterResults {
 
     UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] init];
@@ -89,9 +119,35 @@
     return filterButton;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)didTapFilter {
+    FilterViewController *filterController = [[FilterViewController alloc]initWithArray:self.firArray];
+    filterController.filterDelegate = self;
+    UINavigationController *filterNavCont = [[UINavigationController alloc] initWithRootViewController:filterController];
+    [self.navigationController presentViewController:filterNavCont animated:YES completion:nil];
+}
+
+-(void)didTapProfile {
+    ProfileViewController *profile = [[ProfileViewController alloc] init];
+    [self.navigationController pushViewController:profile animated:YES];
+}
+
+- (void)didTapProfilePic:(NSString *)userID {
+    UserViewController *newUser = [[UserViewController alloc] initWithUserID:userID];
+    [self.navigationController pushViewController:newUser animated:YES];
+}
+
+#pragma mark - UITableViewDelegate
+- (UITableView *)configureTableView {
+    CGFloat width = self.view.frame.size.width;
+    CGFloat height = self.view.frame.size.height;
+    CGRect tableViewFrame = CGRectMake(0, 0, width, height);
+    
+    tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
+    tableView.scrollEnabled = YES;
+    tableView.showsVerticalScrollIndicator = YES;
+    tableView.userInteractionEnabled = YES;
+    
+    return tableView;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -109,6 +165,7 @@
     return cell;
 }
 
+#pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(self.filteredData){
         return self.filteredData.count;
@@ -174,4 +231,5 @@
             [tableView reloadData];
         }];
 }
+
 @end

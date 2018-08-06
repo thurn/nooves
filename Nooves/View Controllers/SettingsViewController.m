@@ -1,10 +1,11 @@
-#import "SettingsViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FirebaseAuth.h>
-#import "LoginViewController.h"
 
-@interface SettingsViewController () <FBSDKLoginButtonDelegate>
+#import "LoginViewController.h"
+#import "SettingsViewController.h"
+
+@interface SettingsViewController () <FBSDKLoginButtonDelegate, UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) UIButton *logout;
 @end
 
@@ -15,7 +16,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
     loginButton.delegate = self;
-    // Optional: Place the button in the center of your view.
     loginButton.readPermissions = @[@"public_profile", @"email"];
     loginButton.center = self.view.center;
     [self.view addSubview:loginButton];
@@ -51,6 +51,14 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    return nil;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 10;
 }
 
 @end

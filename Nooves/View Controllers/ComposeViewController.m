@@ -1,13 +1,15 @@
-#import "AppDelegate.h"
 #import "ComposeViewController.h"
-#import "EventsViewController.h"
+
+#import "AppDelegate.h"
 #import "PureLayout/PureLayout.h"
-#import "TabBarController.h"
 #import "TimelineViewController.h"
-#import <FirebaseAuth.h>
+
 #import "CategoryPickerModalViewController.h"
 #import "DatePickerModalViewController.h"
 #import "LocationPickerModalViewController.h"
+#import "EventsViewController.h"
+
+#import <FirebaseAuth.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 
 @interface ComposeViewController () <UITextViewDelegate, LocationPickerDelegate,
@@ -64,10 +66,6 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     [self searchEventsButton];
 
     [self becomeFirstResponder];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    self.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -127,7 +125,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 // sets up select date button properties
 - (UIButton *)selectDate {
     UIButton *selectDate = [UIButton buttonWithType:UIButtonTypeSystem];
-    UIImage *calendarIcon = [UIImage imageNamed:@"calendar"];
+    UIImage *calendarIcon = [UIImage imageNamed:@"clock"];
     [selectDate setImage:calendarIcon forState:UIControlStateNormal];
     [selectDate addTarget:self
                    action:@selector(didSelectDate)
@@ -149,7 +147,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 // sets up select location properties
 - (UIButton *)selectLocation {
     UIButton *selectLocation = [UIButton buttonWithType:UIButtonTypeSystem];
-    UIImage *locationIcon = [UIImage imageNamed:@"location-marker"];
+    UIImage *locationIcon = [UIImage imageNamed:@"location"];
     [selectLocation setImage:locationIcon forState:UIControlStateNormal];
     [selectLocation addTarget:self
                        action:@selector(didSelectLocation)
@@ -171,7 +169,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 // sets up selection category button properties
 - (UIButton *)selectCategory {
     UIButton *selectCategory = [UIButton buttonWithType:UIButtonTypeSystem];
-    UIImage *tagIcon = [UIImage imageNamed:@"tags"];
+    UIImage *tagIcon = [UIImage imageNamed:@"tag"];
     [selectCategory setImage:tagIcon forState:UIControlStateNormal];
     [selectCategory addTarget:self
                        action:@selector(didSelectCategory)
@@ -280,8 +278,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 // set up button to select local events
 -(UIButton *)searchEventsButton {
     UIButton *eventsButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 550, 100, 100)];
-    [eventsButton setTitle:@"Search for local events" forState:UIControlStateNormal];
-    [eventsButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [eventsButton setImage:[UIImage imageNamed:@"calendar"] forState:UIControlStateNormal];
     [eventsButton sizeToFit];
     [self.view addSubview:eventsButton];
     [eventsButton addTarget:self action:@selector(didTapEvents) forControlEvents:UIControlEventTouchUpInside];
@@ -293,7 +290,6 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     chooseEvent.eventsDelegate = self;
     UINavigationController *navCont = [[UINavigationController alloc]
                                        initWithRootViewController:chooseEvent];
-    //[self.navigationController presentViewController:navCont animated:YES];
     [self.navigationController presentViewController:navCont animated:YES completion:nil];
 }
 

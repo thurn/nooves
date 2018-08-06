@@ -101,8 +101,7 @@
     
     // set up settings button
     self.settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(150, 400, 30, 30)];
-    [self.settingsButton setTitle:@"Settings" forState:UIControlStateNormal];
-    [self.settingsButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.settingsButton setImage:[UIImage imageNamed:@"settings"] forState:UIControlStateNormal];
     [self.settingsButton sizeToFit];
     [self.settingsButton addTarget:self action:@selector(didTapSettings) forControlEvents:UIControlEventTouchUpInside];
     
