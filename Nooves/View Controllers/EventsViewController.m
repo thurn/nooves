@@ -103,7 +103,7 @@ static NSString * const clientSecret = @"93767e5098b45988d73f";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *events = self.results[indexPath.row];
     NSString *title = events[@"title"];
-    NSString *description = @"Description";
+    NSString *description = events[@"description"];
     NSString *venue = events[@"venue_name"];
     [self.eventsDelegate eventsViewController:self didSelectEventWithTitle:title withDescription:description withVenue:venue];
     

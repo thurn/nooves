@@ -22,7 +22,6 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
@@ -70,23 +69,22 @@
 - (void)updateWithEvent:(NSDictionary *)dictionary {
     self.titleLabel.text = dictionary[@"title"];
     NSString *descriptionText = dictionary[@"description"];
-    if ([descriptionText isEqualToString:@""]) {
-        NSLog(@"the length is null");
+    NSLog(@"The description text is: %@", descriptionText);
+   if ([descriptionText length] == 0) {
+       NSLog(@"the length is null");
+       self.descriptionLabel.text = @"No description available for this event";
     }
-    
     else {
         NSLog(@"the length is not null");
-         self.descriptionLabel.text = @"Description";
-    }
-   
-    //self.descriptionLabel.text = dictionary[@"description"];
+        self.descriptionLabel.text = descriptionText;
+   }
     self.venueLabel.text = dictionary[@"venue_name"];
     NSDate *date = dictionary[@"start_time"];
+    NSLog(@"Original date: %@", date);
     NSDateFormatter *formatter = [NSDateFormatter new];
-    formatter.dateFormat = @"MM-dd HH:mm";
-    NSString *dateDetails = [formatter stringFromDate:date];
-   // NSLog(@"Datedetails:%@", dateDetails);
+    [formatter setDateFormat:@"MM-dd HH:mm"];
+    NSString *dateString = [formatter stringFromDate:date];
+    NSLog(@"Datedetails:%@", dateString);
     self.timeLabel.text = @"Time";
-    //self.timeLabel.text = dateDetails;
 }
 @end
