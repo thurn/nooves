@@ -17,6 +17,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 @property (nonatomic) UILabel *locationLabel;
 @property (nonatomic) UILabel *activityLabel;
 @property (nonatomic) UILabel *dateLabel;
+@property (nonatomic) BOOL uploading;
 @end
 
 @implementation ComposeViewController
@@ -27,6 +28,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"New Event";
+    self.uploading = NO;
 
     CGRect contentRect = CGRectZero;
     for (UIView *view in self.view.subviews) {
@@ -220,16 +222,18 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 // TODO(Nikki): add progress HUD when user posts
 - (void)didTapPost {
     // post to timeline
-    self.post = [[Post alloc] initPostWithDetails:self.date
-                                        withTitle:self.eventTitle.text
-                                  withDescription:self.eventDescription.text
-                                         withType:self.activityType
-                                          withLat:self.lat
-                                          withLng:self.lng
-                                           withID:nil
-                                     withLocation:self.location];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [Post postToFireBase:self.post];
+    if (self.post == nil && !self.uploading) {
+        self.post = [[Post alloc] initPostWithDetails:self.date
+                                            withTitle:self.eventTitle.text
+                                      withDescription:self.eventDescription.text
+                                             withType:self.activityType
+                                              withLat:self.lat
+                                              withLng:self.lng
+                                               withID:nil
+                                         withLocation:self.location];
+        self.uploading = YES;
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [Post postToFireBase:self.post];
         FIRDatabaseReference *reference = [[FIRDatabase database] reference];
         FIRDatabaseHandle *databaseHandle = [[[reference child:@"Users"]child:self.post.userID] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
             if (![snapshot.value isEqual:[NSNull null]]) {
@@ -239,10 +243,14 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
                 [userRef setValue:@{@"Age":@(0), @"Bio":@"nil", @"Name":[FIRAuth auth].currentUser.displayName,@"PhoneNumber":@(0), @"ProfilePicURL":@"nil",@"EventsGoing":@[@"a"]}];
             }
         }];
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    TimelineViewController *timeline = [[TimelineViewController alloc] init];
-    [self.navigationController pushViewController:timeline animated:YES];
-    NSLog(@"User posted successfully");
+        self.uploading = NO;
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        TimelineViewController *timeline = [[TimelineViewController alloc] init];
+        [self.navigationController pushViewController:timeline animated:YES];
+        NSLog(@"User posted successfully");
+    } else {
+        NSLog(@"Nothing to post");
+    }
 }
 
 // stores data from location picker
