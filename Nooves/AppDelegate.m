@@ -36,6 +36,8 @@
     
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    [[UINavigationBar appearance] setTranslucent:NO];
     
     // the leaf controllers
     ProfileViewController* profileViewController = [[ProfileViewController alloc] init];
