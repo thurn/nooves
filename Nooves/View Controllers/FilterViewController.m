@@ -1,6 +1,7 @@
 #import "ComposeViewController.h"
 #import "FilterCell.h"
 #import "FilterViewController.h"
+#import <FIRAuth.h>
 #import "PureLayout/PureLayout.h"
 #import "Post.h"
 #import "PostCell.h"
@@ -144,13 +145,13 @@
 }
 
 - (void)didTapAllPosts {
-    TimelineViewController *timeline = [[TimelineViewController alloc]init];
     FIRDatabaseReference * ref =[[FIRDatabase database] reference];
     FIRDatabaseHandle handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSDictionary *postsDict = snapshot.value;
-        timeline.firArray = [Post readPostsFromFIRDict:postsDict];
-        [self.navigationController presentViewController:timeline animated:YES completion:nil];
+        NSArray *allPostsArray= [Post readPostsFromFIRDict:postsDict];
+        [self.filterDelegate filteredArray:allPostsArray];
     }];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 // set up the back button

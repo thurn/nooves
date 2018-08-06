@@ -89,7 +89,6 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
                                    target:self
                                    action:@selector(didTapBackButton)];
     self.navigationItem.leftBarButtonItem = backButton;
-    
     return backButton;
 }
 
@@ -136,7 +135,6 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
         if (data) {
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-          //  NSLog(@"response:%@", responseDictionary);
             self.results = [responseDictionary valueForKeyPath:@"events.event"];
             [tableView reloadData];
         }
