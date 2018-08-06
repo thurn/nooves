@@ -47,6 +47,7 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     
     //  bind action to refresh control
+    // TODO(Nikki): add timer to check if there's no posts to fetch then stop the refresh
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [tableView insertSubview:self.refreshControl atIndex:0];
 }

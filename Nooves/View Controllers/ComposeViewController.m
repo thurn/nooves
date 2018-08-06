@@ -8,6 +8,7 @@
 #import "CategoryPickerModalViewController.h"
 #import "DatePickerModalViewController.h"
 #import "LocationPickerModalViewController.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface ComposeViewController () <UITextViewDelegate, LocationPickerDelegate,
 CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
@@ -216,6 +217,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 }
 
 // passes post data to post array and jumps back to timeline view
+// TODO(Nikki): add progress HUD when user posts
 - (void)didTapPost {
     // post to timeline
     self.post = [[Post alloc] initPostWithDetails:self.date
@@ -226,6 +228,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
                                           withLng:self.lng
                                            withID:nil
                                      withLocation:self.location];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [Post postToFireBase:self.post];
         FIRDatabaseReference *reference = [[FIRDatabase database] reference];
         FIRDatabaseHandle *databaseHandle = [[[reference child:@"Users"]child:self.post.userID] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
@@ -236,6 +239,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
                 [userRef setValue:@{@"Age":@(0), @"Bio":@"nil", @"Name":[FIRAuth auth].currentUser.displayName,@"PhoneNumber":@(0), @"ProfilePicURL":@"nil",@"EventsGoing":@[@"a"]}];
             }
         }];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     TimelineViewController *timeline = [[TimelineViewController alloc] init];
     [self.navigationController pushViewController:timeline animated:YES];
     NSLog(@"User posted successfully");

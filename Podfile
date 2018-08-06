@@ -14,6 +14,7 @@ target 'Nooves' do
   pod 'Firebase/Auth'
   pod 'FBSDKLoginKit'
   pod 'Firebase/Storage'
+  pod 'MBProgressHUD'
 
   target 'NoovesTests' do
     inherit! :search_paths
