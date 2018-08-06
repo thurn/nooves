@@ -2,13 +2,12 @@
 #import "ComposeViewController.h"
 #import "FilterViewController.h"
 #import <FIRDatabase.h>
-#import "PostCell.h"
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
 #import "TimelineViewController.h"
 #import "PostDetailsViewController.h"
 #import "Location.h"
-
+#import "UserViewController.h"
 @interface TimelineViewController ()
 @property (strong, nonatomic) NSMutableArray *filteredData;
 @property (nonatomic) BOOL filtered;
@@ -75,6 +74,10 @@
     return composeButton;
 }
 
+- (void)didTapProfilePic:(NSString *)userID{
+    UserViewController *newUser = [[UserViewController alloc] initWithUserID:userID];
+    [self.navigationController pushViewController:newUser animated:YES];
+}
 - (UIBarButtonItem *)filterResults {
 
     UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] init];
@@ -100,6 +103,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PostCell *cell =[tableView dequeueReusableCellWithIdentifier:@"postCellIdentifier" forIndexPath:indexPath];
+    cell.postDelegate = self;
     Post *newPost = self.filteredData[indexPath.row];
     [cell configurePost:newPost];
     return cell;
@@ -129,7 +133,7 @@
     [self.navigationController pushViewController:profile animated:YES];
 }
 
-- (void)filteredArray:(NSArray *)array {;
+- (void)filteredArray:(NSArray *)array {
     self.filteredData = [NSMutableArray arrayWithArray:array];
     self.filtered = YES;
     [self.navigationController popToViewController:self animated:YES];
