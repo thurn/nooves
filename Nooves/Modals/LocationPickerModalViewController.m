@@ -123,7 +123,10 @@ UISearchBarDelegate>
     NSString *newText = [searchBar.text stringByReplacingCharactersInRange:range withString:text];
     self.userLat = Location.currentLocation.userLat;
     self.userLng = Location.currentLocation.userLng;
-    [self fetchLocationsWithQuery:newText nearCityWithLatitude:self.userLat longitude:self.userLng];
+    
+    if (newText.length > 2) {
+        [self fetchLocationsWithQuery:newText nearCityWithLatitude:self.userLat longitude:self.userLng];
+    }
     return true;
 }
 
@@ -131,8 +134,10 @@ UISearchBarDelegate>
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     self.userLat = Location.currentLocation.userLat;
     self.userLng = Location.currentLocation.userLng;
-    [self fetchLocationsWithQuery:searchBar.text nearCityWithLatitude:self.userLat
-                        longitude:self.userLng];
+    if (searchBar.text.length > 2) {
+        [self fetchLocationsWithQuery:searchBar.text nearCityWithLatitude:self.userLat
+                            longitude:self.userLng];
+    }
 }
 
 #pragma mark - UITableViewDataSource
