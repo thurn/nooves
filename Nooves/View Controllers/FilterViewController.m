@@ -77,7 +77,7 @@
 }
 
 - (NSArray *)configureCategoriesArray {
-    self.categories= @[@"Outdoors", @"Shopping", @"Partying", @"Eating",@"Arts", @"Sports", @"Networking", @"Fitness", @"Games", @"Concert", @"Cinema", @"Festival", @"Other"];
+    self.categories= @[@"Arts", @"Cinema", @"Concert", @"Eating", @"Festival", @"Fitness", @"Games", @"Networking", @"Outdoors", @"Partying", @"Shopping", @"Sports",  @"Other"];
     return self.categories;
 }
 
@@ -136,15 +136,15 @@
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
-/*- (void)didTapAllPosts {
+- (void)didTapAllPosts {
     TimelineViewController *timeline = [[TimelineViewController alloc]init];
     FIRDatabaseReference * ref =[[FIRDatabase database] reference];
     FIRDatabaseHandle handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSDictionary *postsDict = snapshot.value;
         timeline.firArray = [Post readPostsFromFIRDict:postsDict];
-    [self.navigationController pushViewController:timeline animated:YES];
+        [self.navigationController presentViewController:timeline animated:YES completion:nil];
     }];
-}*/
+}
 
 - (instancetype)initWithArray:(NSArray *)array {
     self = [super init];

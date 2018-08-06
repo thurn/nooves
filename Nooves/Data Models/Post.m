@@ -92,6 +92,7 @@
                     }
                 }
             }];
+            
             posty.activityTitle = postsDict[userKey][IDKey][@"Title"];
             posty.activityDescription = postsDict[userKey][IDKey][@"Description"];
             posty.userID = userKey;

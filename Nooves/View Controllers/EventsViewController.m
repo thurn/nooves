@@ -4,8 +4,6 @@
 
 static NSString * const baseURLString = @"http://api.eventful.com/json/events/search?";
 static NSString * const appKey = @"dFXh3rhZVVwbshg9";
-static NSString * const clientKey = @"5db85641372af05aa023";
-static NSString * const clientSecret = @"93767e5098b45988d73f";
 
 @interface EventsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 

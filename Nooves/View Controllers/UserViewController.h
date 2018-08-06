@@ -10,4 +10,5 @@
 
 @interface UserViewController : UIViewController
 
+- (instancetype)initWithUserID:(NSString *)userID;
 @end
