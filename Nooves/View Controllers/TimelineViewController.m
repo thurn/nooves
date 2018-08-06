@@ -121,7 +121,9 @@
 - (void)didTapFilter {
     FilterViewController *filterController = [[FilterViewController alloc]initWithArray:self.firArray];
     filterController.filterDelegate = self;
-    [self.navigationController pushViewController:filterController animated:YES];
+    //[self.navigationController pushViewController:filterController animated:YES];
+    UINavigationController *filterNavCont = [[UINavigationController alloc] initWithRootViewController:filterController];
+    [self.navigationController presentViewController:filterNavCont animated:YES completion:nil];
 }
 
 -(void)didTapProfile {

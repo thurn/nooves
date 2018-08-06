@@ -1,5 +1,4 @@
 #import <UIKit/UIKit.h>
-#import "Event.h"
 
 @interface EventCell : UITableViewCell
 
