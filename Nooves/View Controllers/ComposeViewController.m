@@ -67,8 +67,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     [self postButton];
     [self createBackButton];
     [self searchEventsButton];
-    [self enterLocationField];
-    
+
     [self becomeFirstResponder];
 }
 
@@ -283,18 +282,9 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     [self.navigationController popToViewController:self animated:YES];
 }
 
-- (UITextField *)enterLocationField {
-    UITextField *eventLocation = [[UITextField alloc]initWithFrame:CGRectMake(50, 570, 150, 20)];
-    eventLocation.placeholder = @"Enter location to search for local events...";
-    [eventLocation sizeToFit];
-    eventLocation.textColor = [UIColor grayColor];
-  //  [self.view addSubview:eventLocation];
-    return eventLocation;
-}
-
 // set up button to select local events
 -(UIButton *)searchEventsButton {
-    UIButton *eventsButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 600, 100, 100)];
+    UIButton *eventsButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 550, 100, 100)];
     [eventsButton setTitle:@"Search for local events" forState:UIControlStateNormal];
     [eventsButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [eventsButton sizeToFit];

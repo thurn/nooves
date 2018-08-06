@@ -47,6 +47,7 @@
     
     //initialize event cell properties
     self.titleLabel = [[UILabel alloc]init];
+    [self.titleLabel setFont:[UIFont fontWithName:@"Arial-Boldmt" size:16]];
     [self.contentView addSubview:self.titleLabel];
     [self.titleLabel autoPinEdgeToSuperviewMargin:ALEdgeTop];
     [self.titleLabel autoPinEdgeToSuperviewMargin:ALEdgeLeft];
@@ -71,11 +72,9 @@
     NSString *descriptionText = dictionary[@"description"];
     NSLog(@"The description text is: %@", descriptionText);
    if ([descriptionText length] == 0) {
-       NSLog(@"the length is null");
        self.descriptionLabel.text = @"No description available for this event";
     }
     else {
-        NSLog(@"the length is not null");
         self.descriptionLabel.text = descriptionText;
    }
     self.venueLabel.text = dictionary[@"venue_name"];
