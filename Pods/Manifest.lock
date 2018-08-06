@@ -61,6 +61,7 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.4)
   - GTMSessionFetcher/Core (1.1.15)
   - leveldb-library (1.20)
+  - MBProgressHUD (1.1.0)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -75,6 +76,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - MBProgressHUD
   - PureLayout
 
 SPEC REPOS:
@@ -93,6 +95,7 @@ SPEC REPOS:
     - GoogleToolboxForMac
     - GTMSessionFetcher
     - leveldb-library
+    - MBProgressHUD
     - nanopb
     - PureLayout
 
@@ -111,9 +114,10 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GTMSessionFetcher: 5fa5b80fd20e439ef5f545fb2cb3ca6c6714caa2
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
 
-PODFILE CHECKSUM: 95404a6b86dbf4508fab0fac841b80ab48646ce5
+PODFILE CHECKSUM: 22c3b72289a4c17d6a8da8538cc720a9169b761f
 
 COCOAPODS: 1.5.3

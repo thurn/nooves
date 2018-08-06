@@ -30,6 +30,8 @@
         [self.dateField autoPinEdgeToSuperviewMargin:ALEdgeTop];
         if(!self.profilePicField){
             self.profilePicField = [[UIImageView alloc] initWithFrame:CGRectMake(self.dateField.frame.origin.x, self.dateField.frame.size.height+22, 40, 40)];
+            self.profilePicField.layer.cornerRadius = self.profilePicField.frame.size.width / 2;
+            self.profilePicField.clipsToBounds = YES;
         }
         self.profilePicField.image = [UIImage imageNamed:@"profile-blank"];
         [self.contentView addSubview:self.profilePicField];

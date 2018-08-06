@@ -47,6 +47,7 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     
     //  bind action to refresh control
+    // TODO(Nikki): add timer to check if there's no posts to fetch then stop the refresh
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [tableView insertSubview:self.refreshControl atIndex:0];
 }
@@ -66,7 +67,7 @@
 
 - (UIBarButtonItem *)writeNewPost {
     UIBarButtonItem *composeButton = [[UIBarButtonItem alloc] init];
-    composeButton.title = @"New Post";
+    [composeButton setImage:[UIImage imageNamed:@"compose"]];
     self.navigationItem.rightBarButtonItem = composeButton;
     composeButton.target = self;
     composeButton.action = @selector(didTapCompose);
@@ -77,8 +78,7 @@
 - (UIBarButtonItem *)filterResults {
 
     UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] init];
-    filterButton.title = @"Filter";
-    [filterButton setImage:[UIImage imageNamed:@"filter-icon.png"]];
+    [filterButton setImage:[UIImage imageNamed:@"slider"]];
     self.navigationItem.leftBarButtonItem = filterButton;
     filterButton.target = self;
     filterButton.action = @selector(didTapFilter);

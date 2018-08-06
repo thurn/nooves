@@ -66,7 +66,9 @@
     }
     
     // set up the profile picture field
-    self.profilePicture = [[UIImageView alloc]initWithFrame:CGRectMake(10, 80, 100, 100)];
+    self.profilePicture = [[UIImageView alloc]initWithFrame:CGRectMake(10, 80, 30, 30)];
+    self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width / 2;
+    self.profilePicture.clipsToBounds = YES;
     [self.profilePicture setImage:[UIImage imageNamed:@"profile-blank"]];
     [self.profilePicture sizeToFit];
     
