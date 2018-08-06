@@ -36,8 +36,8 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self configureCategoriesArray];
-    [self configureConfirmButton];
     [self allPostsButton];
+    [self createBackButton];
     
     [self.tableView registerClass:[FilterCell class] forCellReuseIdentifier:@"filterCellIdentifier"];
     [self.tableView reloadData];
@@ -103,15 +103,22 @@
     }
 }
 
-- (void)configureConfirmButton {
-   self.confirmButton = [[UIButton alloc]initWithFrame:CGRectMake(200, 600, 30, 30)];
-   // self.confirmButton = [[UIButton alloc]init];
-    [self.confirmButton setBackgroundColor:[UIColor blueColor]];
-    [self.confirmButton setTitle:@"Confirm" forState:UIControlStateNormal];
-    [self.confirmButton sizeToFit];
-    [self.view addSubview:self.confirmButton];
-    //[self.view autoPinEdge:ALEdgeLeft toEdge:ALEdgeBottom ofView:self.tableView];
-    [self.confirmButton addTarget:self action:@selector(didTapConfirm) forControlEvents:UIControlEventTouchUpInside];
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
+    view.backgroundColor = [UIColor whiteColor];
+    
+    UIButton *confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    confirmButton.frame = CGRectMake(100, 0, 130, 30);
+    [confirmButton setTitle:@"Confirm" forState:UIControlStateNormal];
+    [confirmButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [confirmButton addTarget:self action:@selector(didTapConfirm) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:confirmButton];
+    
+    return view;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 100.0f;
 }
 
 - (void)didTapConfirm {
@@ -144,6 +151,22 @@
         timeline.firArray = [Post readPostsFromFIRDict:postsDict];
         [self.navigationController presentViewController:timeline animated:YES completion:nil];
     }];
+}
+
+// set up the back button
+- (UIBarButtonItem *)createBackButton {
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                   initWithImage:[UIImage imageNamed:@"back-icon"]
+                                   style:UIBarButtonItemStylePlain
+                                   target:self
+                                   action:@selector(didTapBackButton)];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
+    return backButton;
+}
+
+- (void)didTapBackButton {
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 - (instancetype)initWithArray:(NSArray *)array {
