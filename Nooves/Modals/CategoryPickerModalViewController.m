@@ -23,34 +23,15 @@
     self.categoryLabel = [[UILabel alloc] init];
     self.categoryLabel.frame = CGRectMake(10, 700, 100, 100);
     
-    UIButton *selectedCategory = [self selectCategory];
-    selectedCategory.frame = CGRectMake(10.0, 250.0, 20, 30);
-    [selectedCategory sizeToFit];
+//    UIButton *selectedCategory = [self selectCategory];
+//    selectedCategory.frame = CGRectMake(10.0, 250.0, 20, 30);
+//    [selectedCategory sizeToFit];
     
     [self.view addSubview:self.pickerView];
     [self.view addSubview:self.categoryLabel];
-    [self.view addSubview:selectedCategory];
+    //[self.view addSubview:selectedCategory];
     [self createBackButton];
-}
-
-// opens category picker view
-- (UIButton *)selectCategory{
-    UIButton *selectCategory = [UIButton buttonWithType:UIButtonTypeSystem];
-    [selectCategory setTitle:@"Select category" forState:UIControlStateNormal];
-    [selectCategory addTarget:self
-                       action:@selector(didTapSelectCategory)
-             forControlEvents:UIControlEventTouchUpInside];
-    [selectCategory sizeToFit];
-    return selectCategory;
-}
-
-// passes post data and jumps back to composer view controller
-- (void)didTapSelectCategory{
-    
-    [self.categoryDelegate categoryPickerModalViewController:self
-                                         didPickActivityType:(ActivityType *)self.activityType];
-    
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self createConfirmButton];
 }
 
 // back button
@@ -67,6 +48,21 @@
 // goes back to parent contoller
 - (void)didTapBackButton {
     [self dismissViewControllerAnimated:true completion:nil];
+}
+
+// confirm button
+- (UIBarButtonItem *)createConfirmButton {
+    UIBarButtonItem *confirmButton = [[UIBarButtonItem alloc]
+                                       initWithTitle:@"Confirm" style:UIBarButtonItemStylePlain target:self action:@selector(didTapConfirmButton)];
+    self.navigationItem.rightBarButtonItem = confirmButton;
+    return confirmButton;
+}
+
+// passes post data and jumps back to composer view controller
+- (void)didTapConfirmButton {
+    [self.categoryDelegate categoryPickerModalViewController:self
+                                         didPickActivityType:(ActivityType *)self.activityType];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 #pragma mark - UIPickerViewDelegate

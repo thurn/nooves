@@ -14,30 +14,9 @@
     self.datepicker.timeZone = [NSTimeZone localTimeZone];
     self.datepicker.backgroundColor = [UIColor whiteColor];
     
-    UIButton *selectedDate = [self selectDate];
-    selectedDate.frame = CGRectMake(10.0, 300.0, 20, 30);
-    [selectedDate sizeToFit];
-    
-    [self.view addSubview:selectedDate];
     [self.view addSubview:self.datepicker];
     [self createBackButton];
-}
-
-// user confirmatin button when date is selected
-- (UIButton *)selectDate {
-    UIButton *selectDate = [UIButton buttonWithType:UIButtonTypeSystem];
-    [selectDate setTitle:@"Select Date" forState:UIControlStateNormal];
-    [selectDate addTarget:self
-                   action:@selector(didSelectDate)
-         forControlEvents:UIControlEventTouchUpInside];
-    [selectDate sizeToFit];
-    return selectDate;
-}
-
-// sends data to parent controller
-- (void)didSelectDate {
-    [self.dateDelegate datePickerModalViewController:self didPickDate:self.datepicker.date];
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self createConfirmButton];
 }
 
 // back button
@@ -54,6 +33,20 @@
 // goes back to parent controller
 - (void)didTapBackButton {
     [self dismissViewControllerAnimated:true completion:nil];
+}
+
+// confirm button
+- (UIBarButtonItem *)createConfirmButton {
+    UIBarButtonItem *confirmButton = [[UIBarButtonItem alloc]
+                                      initWithTitle:@"Confirm" style:UIBarButtonItemStylePlain target:self action:@selector(didTapConfirmButton)];
+    self.navigationItem.rightBarButtonItem = confirmButton;
+    return confirmButton;
+}
+
+// passes post data and jumps back to composer view controller
+- (void)didTapConfirmButton {
+    [self.dateDelegate datePickerModalViewController:self didPickDate:self.datepicker.date];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 @end
