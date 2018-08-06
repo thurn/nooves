@@ -22,6 +22,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     
     self.navigationItem.title = @"Local Events";
     [self configureTableView];
+    [self createBackButton];
     
     // set up the search bar
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(-5.0, 0.0, 320.0, 44.0)];
@@ -61,7 +62,6 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     // Dispose of any resources that can be recreated.
 }
 
-
 - (UITableView *)configureTableView {
     CGFloat width = self.view.frame.size.width;
     CGFloat height = self.view.frame.size.height;
@@ -79,6 +79,22 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     tableView.rowHeight = UITableViewAutomaticDimension;
     
     return tableView;
+}
+
+// set up the back button
+- (UIBarButtonItem *)createBackButton {
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                   initWithImage:[UIImage imageNamed:@"back-icon"]
+                                   style:UIBarButtonItemStylePlain
+                                   target:self
+                                   action:@selector(didTapBackButton)];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
+    return backButton;
+}
+
+- (void)didTapBackButton {
+     [self dismissViewControllerAnimated:true completion:nil];
 }
 
 #pragma mark - UITableViewDelegate methods

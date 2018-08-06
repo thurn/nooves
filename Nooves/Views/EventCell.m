@@ -81,9 +81,10 @@
     NSDate *date = dictionary[@"start_time"];
     NSLog(@"Original date: %@", date);
     NSDateFormatter *formatter = [NSDateFormatter new];
-    [formatter setDateFormat:@"MM-dd HH:mm"];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *dateString = [formatter stringFromDate:date];
     NSLog(@"Datedetails:%@", dateString);
     self.timeLabel.text = @"Time";
 }
+
 @end
