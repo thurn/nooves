@@ -7,25 +7,61 @@
 //
 
 #import "UserViewController.h"
-#import "User.h"
 #import <FIRAuth.h>
 #import <FIRDatabase.h>
 #import "UIImageView+Cache.h"
-@interface UserViewController ()
+#import "PostCell.h"
+#import "User.h"
+#import "PostDetailsViewController.h"
+@interface UserViewController () <UITableViewDelegate, UITableViewDataSource, PostCellDelegate>
 
 @property (strong, nonatomic) User *user;
 @property (strong, nonatomic) UIImageView *profilePicture;
 @property (strong, nonatomic) UILabel *nameAndAgeLabel;
+@property (strong, nonatomic) UITableView *tableview;
+@property (strong, nonatomic) UILabel *bioLabel;
+@property (strong, nonatomic) NSArray *eventsGoing;
 @end
 
 @implementation UserViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height*.65, self.view.frame.size.width, self.view.frame.size.height*.35)];
+    self.tableview.delegate = self;
+    self.tableview.dataSource = self;
+    self.tableview.rowHeight = UITableViewAutomaticDimension;
+    self.tableview.backgroundColor = [UIColor whiteColor];
+    [self.tableview registerClass:[PostCell class] forCellReuseIdentifier:@"postCellIdentifier"];
+    [self.view addSubview:self.tableview];
+    [self fetchGoing];
+    [self.tableview reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)didTapProfilePic:(NSString *)userID{
+    UserViewController *newUser = [[UserViewController alloc] initWithUserID:userID];
+    [self.navigationController pushViewController:newUser animated:YES];
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Post *pickedPost = self.eventsGoing[indexPath.row];
+    PostDetailsViewController *postDetail = [[PostDetailsViewController alloc] initFromTimeline:pickedPost];
+    [self.navigationController pushViewController:postDetail animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return self.eventsGoing.count;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    PostCell *cell =[tableView dequeueReusableCellWithIdentifier:@"postCellIdentifier" forIndexPath:indexPath];
+    cell.postDelegate = self;
+    Post *newPost = self.eventsGoing[indexPath.row];
+    [cell configurePost:newPost];
+    return cell;
 }
 
 - (instancetype)initWithUserID:(NSString *)userID {
@@ -35,7 +71,7 @@
         NSDictionary *usersDictionary = snapshot.value;
         if (![snapshot.value isEqual:[NSNull null]]) {
             self.user = [[User alloc] initFromDatabase:usersDictionary];
-            if (![self.user.profilePicURL isEqualToString:@"ni CGl"]){
+            if (![self.user.profilePicURL isEqualToString:@"nil"]){
                 self.profilePicture = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height*9/20)];
                 [self.view addSubview:self.profilePicture];
                 [self.profilePicture loadURLandCache:self.user.profilePicURL];
@@ -64,6 +100,43 @@
     [self.nameAndAgeLabel sizeToFit];
     [self.nameAndAgeLabel setCenter:CGPointMake(self.view.center.x, self.view.frame.size.height/2)];
     [self.view addSubview:self.nameAndAgeLabel];
+    self.bioLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.view.frame.size.height*.6, 10, 10)];
+    self.bioLabel.text = self.user.biography;
+    [self.bioLabel sizeToFit];
+    [self.bioLabel setCenter:CGPointMake(self.view.center.x, self.view.frame.size.height*.57)];
+    [self.view addSubview:self.bioLabel];
+}
+
+- (void)fetchGoing {
+    NSMutableArray *myArray = [[NSMutableArray alloc] init];
+    FIRDatabaseReference *ref = [[FIRDatabase database] reference];
+    [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+        NSDictionary *postsDict = snapshot.value;
+        if (![snapshot.value isEqual:[NSNull null]]){
+            for (NSString* userKey in postsDict) {
+                for (NSString *IDKey in postsDict[userKey]) {
+                    if ([self.user.eventsGoing containsObject:IDKey]) {
+                        Post *posty = [[Post alloc] init];
+                        posty.userID = userKey;
+                        posty.activityTitle = postsDict[userKey][IDKey][@"Title"];
+                        posty.activityDescription = postsDict[userKey][IDKey][@"Description"];
+                        posty.userID = userKey;
+                        posty.activityLat = postsDict[userKey][IDKey][@"Latitude"];
+                        posty.activityLng = postsDict[userKey][IDKey][@"Longitude"];
+                        posty.activityLocation = postsDict[userKey][IDKey][@"Location"];
+                        ActivityType type = [postsDict[userKey][IDKey][@"Activity Type"] integerValue];
+                        posty.activityType = type;
+                        posty.usersGoing = [postsDict[userKey][IDKey][@"UsersGoing"] copy];
+                        NSInteger date = [postsDict[userKey][IDKey][@"Date"] integerValue];
+                        NSDate *daty = [NSDate dateWithTimeIntervalSince1970:date];
+                        posty.activityDateAndTime = daty;
+                        [myArray addObject:posty];
+                    }
+                }
+            }
+            self.eventsGoing = myArray;
+        }
+    }];
 }
 /*
 #pragma mark - Navigation
@@ -76,3 +149,5 @@
 */
 
 @end
+
+
