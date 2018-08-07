@@ -9,7 +9,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    self.datepicker = [[UIDatePicker alloc]init];
+    self.datepicker = [[UIDatePicker alloc] init];
     self.datepicker.frame = CGRectMake(0, 0, self.view.frame.size.width, 250);
     self.datepicker.timeZone = [NSTimeZone localTimeZone];
     self.datepicker.backgroundColor = [UIColor whiteColor];

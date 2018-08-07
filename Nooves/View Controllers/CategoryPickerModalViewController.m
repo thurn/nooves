@@ -4,7 +4,7 @@
 @interface CategoryPickerModalViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 @property (nonatomic) NSArray *categories;
 @property (nonatomic) UIPickerView *pickerView;
-@property (nonatomic) UILabel *categoryLabel;
+@property (nonatomic) NSInteger *selection;
 @end
 
 @implementation CategoryPickerModalViewController
@@ -20,11 +20,7 @@
     self.pickerView.showsSelectionIndicator = YES;
     self.pickerView.frame = CGRectMake(0, 0, self.view.frame.size.width, 200);
     
-    self.categoryLabel = [[UILabel alloc] init];
-    self.categoryLabel.frame = CGRectMake(10, 700, 100, 100);
-    
     [self.view addSubview:self.pickerView];
-    [self.view addSubview:self.categoryLabel];
     [self createBackButton];
     [self createConfirmButton];
 }
@@ -55,19 +51,18 @@
 
 // passes post data and jumps back to composer view controller
 - (void)didTapConfirmButton {
+    //self.activityType = self.selection;
     [self.categoryDelegate categoryPickerModalViewController:self
-                                         didPickActivityType:(ActivityType *)self.activityType];
+                                         didPickActivityType:(ActivityType *)self.selection];
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 #pragma mark - UIPickerViewDelegate
 
-// assigns the selected category from picker view to label and activity type
+// assigns the selected category from picker view to activity type
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
        inComponent:(NSInteger)component {
-    
-    self.categoryLabel.text = [Post activityTypeToString:row];
-    self.activityType = row;
+    self.selection = row;
 }
 
 // returns the array element at each row

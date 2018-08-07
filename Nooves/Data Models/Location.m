@@ -4,8 +4,15 @@
 @implementation Location
 
 + (instancetype)currentLocation {
-    Location *location = [[Location alloc] init];
-    location.userLocation = [[CLLocationManager alloc] init];
+    
+    static dispatch_once_t once;
+    static Location *location;
+    
+    dispatch_once(&once, ^{
+        location = [[Location alloc] init];
+        location.userLocation = [[CLLocationManager alloc] init];
+        });
+
     location.userLocation.delegate = location;
     location.userLocation.desiredAccuracy = kCLLocationAccuracyBest;
     location.userLocation.distanceFilter = kCLDistanceFilterNone;

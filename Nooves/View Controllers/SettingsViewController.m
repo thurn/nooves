@@ -7,6 +7,7 @@
 
 @interface SettingsViewController () <FBSDKLoginButtonDelegate, UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) UIButton *logout;
+@property (nonatomic) UITableView *tableView;
 @end
 
 @implementation SettingsViewController 
@@ -14,12 +15,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    [self configureTableView];
+    [self.view addSubview:self.tableView];
+    
     FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
     loginButton.delegate = self;
     loginButton.readPermissions = @[@"public_profile", @"email"];
     loginButton.center = self.view.center;
     [self.view addSubview:loginButton];
     
+}
+
+- (void)configureTableView {
+    self.tableView = [[UITableView alloc] init];
 }
 
 - (void)loginButton:(FBSDKLoginButton *)loginButton

@@ -41,6 +41,8 @@
     
     self.descriptionLabel = [[UILabel alloc]init];
      [self.contentView addSubview:self.descriptionLabel];
+    [self.descriptionLabel setNumberOfLines:0];
+    [self.descriptionLabel sizeToFit];
     [self.descriptionLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.titleLabel withOffset:5.0f];
     
     self.venueLabel = [[UILabel alloc]init];
@@ -57,12 +59,15 @@
 - (void)updateWithEvent:(NSDictionary *)dictionary {
     self.titleLabel.text = dictionary[@"title"];
     NSString *descriptionText = dictionary[@"description"];
-    if ([descriptionText length] == 0) {
-       self.descriptionLabel.text = @"No description available for this event";
-    }
-    else {
+    
+    if([descriptionText isKindOfClass:[NSString class]]) {
         self.descriptionLabel.text = descriptionText;
-   }
+    }
+    
+    else {
+        self.descriptionLabel.text = @"No description available for this event";
+        NSLog(@"descriptionText is not of type NSString");
+    }
     
     NSString *location = @"Venue: ";
     self.venueLabel.text = [location stringByAppendingString:dictionary[@"venue_name"]];
