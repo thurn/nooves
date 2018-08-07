@@ -709,7 +709,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nooves/Nooves.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VX452D4486;
+				DEVELOPMENT_TEAM = N54432JF7W;
 				INFOPLIST_FILE = Nooves/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -728,7 +728,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Nooves/Nooves.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VX452D4486;
+				DEVELOPMENT_TEAM = N54432JF7W;
 				INFOPLIST_FILE = Nooves/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
