@@ -44,6 +44,7 @@ UISearchBarDelegate>
     self.navigationItem.titleView = searchBarView;
     
     [self createBackButton];
+    [self checkLocationEnabled];
     
     [self.tableView registerClass:[LocationCell class] forCellReuseIdentifier:@"LocationCell"];
     [self.tableView reloadData];
@@ -198,6 +199,26 @@ UISearchBarDelegate>
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-// TODO(Nikki): present alert controller if location services not enabled
+// presents alert controller if location services not enabled
+- (void)checkLocationEnabled {
+    if(![CLLocationManager locationServicesEnabled]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error retrieving data"
+                                                                       message:@"Please enable your location services."
+                                                                preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        // create an OK action
+        UIAlertAction *okAlert = [UIAlertAction actionWithTitle:@"Ok"
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * _Nonnull action) {
+                                                                  // handle response here.
+                                                              }];
+        // add the OK action to the alert controller
+        [alert addAction:okAlert];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            // optional code for what happens after the alert controller has finished presenting
+        }];
+    }
+}
 
 @end
