@@ -62,7 +62,7 @@
     
 }
 
-- (NSArray *)filterLocation {
+- (void)filterLocation {
     Location *location = [[Location alloc] init];
     self.filteredData = [[NSMutableArray alloc]init];
     for (Post *post in self.firArray) {
@@ -75,7 +75,6 @@
             [self.filteredData addObject:post];
         }
     }
-    return self.filteredData;
 }
 
 - (void)fetchPosts {
@@ -89,7 +88,7 @@
         NSDictionary *postsDict = snapshot.value;
         if (![postsDict isEqual:[NSNull null]]) {
             self.firArray = [Post readPostsFromFIRDict:postsDict];
-            self.firArray = [self filterLocation];
+            [self filterLocation];
             [self.refreshControl endRefreshing];
             [tableView reloadData];
         }

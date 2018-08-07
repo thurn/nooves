@@ -3,7 +3,7 @@
 #import "PureLayout/PureLayout.h"
 #import "User.h"
 #import "SettingsViewController.h"
-
+#import "UIImageView+Cache.h"
 @interface ProfileViewController () <editProfileDelegate>
 
 @property(strong, nonatomic) UIImageView *profilePicture;
@@ -30,16 +30,7 @@
             self.user = [[User alloc] initFromDatabase:usersDictionary];
             [self didUpdateProfile];
             if (![self.user.profilePicURL isEqualToString:@"nil"]){
-                NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:self.user.profilePicURL] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                    if(error){
-                        NSLog(@"%@", error);
-                        return;
-                    }
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        self.profilePicture.image = [UIImage imageWithData:data];
-                    });
-                }];
-                [task resume];
+                [self.profilePicture loadURLandCache:self.user.profilePicURL];
             }
         }
         else {

@@ -10,6 +10,7 @@
 #import <FIRDatabase.h>
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
+#import "UIImageView+Cache.h"
 @interface PostDetailsViewController ()
 @property (strong, nonatomic) Post *post;
 @property (strong, nonatomic) User *user;
@@ -45,16 +46,7 @@
                 self.phoneNumberLabel.hidden = YES;
             }
             if (![self.user.profilePicURL isEqualToString:@"nil"]){
-                NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:self.user.profilePicURL] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                    if(error){
-                        NSLog(@"%@", error);
-                        return;
-                    }
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        self.profilePicImage.image = [UIImage imageWithData:data];
-                    });
-                }];
-                [task resume];
+                [self.profilePicImage loadURLandCache:self.user.profilePicURL];
             }
         }
         else {

@@ -10,23 +10,22 @@
 #import "User.h"
 #import <FIRAuth.h>
 #import <FIRDatabase.h>
-
+#import "UIImageView+Cache.h"
 @interface UserViewController ()
 
 @property (strong, nonatomic) User *user;
 @property (strong, nonatomic) UIImageView *profilePicture;
+@property (strong, nonatomic) UILabel *nameAndAgeLabel;
 @end
 
 @implementation UserViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (instancetype)initWithUserID:(NSString *)userID {
@@ -36,17 +35,17 @@
         NSDictionary *usersDictionary = snapshot.value;
         if (![snapshot.value isEqual:[NSNull null]]) {
             self.user = [[User alloc] initFromDatabase:usersDictionary];
-            if (![self.user.profilePicURL isEqualToString:@"nil"]){
-                NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:self.user.profilePicURL] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                    if(error){
-                        NSLog(@"%@", error);
-                        return;
-                    }
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        self.profilePicture.image = [UIImage imageWithData:data];
-                    });
-                }];
-                [task resume];
+            if (![self.user.profilePicURL isEqualToString:@"ni CGl"]){
+                self.profilePicture = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height*9/20)];
+                [self.view addSubview:self.profilePicture];
+                [self.profilePicture loadURLandCache:self.user.profilePicURL];
+                [self setUI];
+            }
+            else {
+                self.profilePicture = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height*9/20)];
+                self.profilePicture.image = [UIImage imageNamed:@"profile-blank"];
+                [self.view addSubview:self.profilePicture];
+                [self setUI];
             }
         }
         else {
@@ -54,7 +53,17 @@
             [userRef setValue:@{@"Age":@(0), @"Bio":@"nil", @"Name":[FIRAuth auth].currentUser.displayName,@"PhoneNumber":@(0), @"ProfilePicURL":@"nil",@"EventsGoing":@[@"a"]}];
         }
     }];
+    [self.navigationItem setTitle:self.user.name];
     return self;
+}
+- (void)setUI {
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.nameAndAgeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.view.frame.size.height*11/20, 10, 10)];
+    NSString *nameAndAge = [[self.user.name stringByAppendingString:@", "] stringByAppendingString:[self.user.age stringValue]];
+    self.nameAndAgeLabel.text = nameAndAge;
+    [self.nameAndAgeLabel sizeToFit];
+    [self.nameAndAgeLabel setCenter:CGPointMake(self.view.center.x, self.view.frame.size.height/2)];
+    [self.view addSubview:self.nameAndAgeLabel];
 }
 /*
 #pragma mark - Navigation

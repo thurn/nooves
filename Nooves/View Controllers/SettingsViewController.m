@@ -16,19 +16,11 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self configureTableView];
-    [self.view addSubview:self.tableView];
-    
     FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
     loginButton.delegate = self;
     loginButton.readPermissions = @[@"public_profile", @"email"];
     loginButton.center = self.view.center;
     [self.view addSubview:loginButton];
-    
-}
-
-- (void)configureTableView {
-    self.tableView = [[UITableView alloc] init];
 }
 
 - (void)loginButton:(FBSDKLoginButton *)loginButton
@@ -50,7 +42,6 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
     } else {
         NSLog(@"%@", error.localizedDescription);
     }
-    
 }
 
 - (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {
@@ -62,7 +53,8 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
     // Dispose of any resources that can be recreated.
 }
 
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView
+                 cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     return nil;
 }
 
