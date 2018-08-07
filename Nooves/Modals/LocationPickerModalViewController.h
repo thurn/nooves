@@ -18,10 +18,4 @@
 
 @property (weak, nonatomic) id<LocationPickerDelegate> locationDelegate;
 
-@property (nonatomic) NSNumber *lat;
-@property (nonatomic) NSNumber *lng;
-@property (nonatomic) NSString *location;
-@property (nonatomic) NSNumber *userLng;
-@property (nonatomic) NSNumber *userLat;
-
 @end

@@ -11,7 +11,6 @@
     location.userLocation.distanceFilter = kCLDistanceFilterNone;
     
     if([CLLocationManager locationServicesEnabled]) {
-//        NSLog(@"Location services enabled");
         [location.userLocation requestAlwaysAuthorization];
         [location.userLocation requestWhenInUseAuthorization];
         [location.userLocation startUpdatingLocation];

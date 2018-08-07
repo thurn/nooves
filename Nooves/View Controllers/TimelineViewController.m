@@ -83,10 +83,12 @@
     }];
     FIRDatabaseHandle *handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
         NSDictionary *postsDict = snapshot.value;
-        self.firArray = [Post readPostsFromFIRDict:postsDict];
-        self.firArray = [self filterLocation];
-        [self.refreshControl endRefreshing];
-        [tableView reloadData];
+        if (![postsDict isEqual:[NSNull null]]) {
+            self.firArray = [Post readPostsFromFIRDict:postsDict];
+            self.firArray = [self filterLocation];
+            [self.refreshControl endRefreshing];
+            [tableView reloadData];
+        }
     }];
 }
 
