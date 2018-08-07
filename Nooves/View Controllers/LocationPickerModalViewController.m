@@ -164,9 +164,11 @@ UISearchBarDelegate>
             // TODO(Nikki): pass in city to be user's manually inputted set location
             [self fetchLocationsWithQuery:newText nearCity:@"New York City"];
         }
-        [self fetchLocationsWithQuery:newText
-                 nearCityWithLatitude:self.userLat
-                            longitude:self.userLng];
+        else {
+            [self fetchLocationsWithQuery:newText
+                     nearCityWithLatitude:self.userLat
+                                longitude:self.userLng];
+        }
     }
     return true;
 }
@@ -176,8 +178,15 @@ UISearchBarDelegate>
     self.userLat = Location.currentLocation.userLat;
     self.userLng = Location.currentLocation.userLng;
     if (searchBar.text.length > 2) {
-        [self fetchLocationsWithQuery:searchBar.text nearCityWithLatitude:self.userLat
-                            longitude:self.userLng];
+        if (self.userLat == 0 && self.userLng == 0) {
+            // TODO(Nikki): pass in city to be user's manually inputted set location
+            [self fetchLocationsWithQuery:searchBar.text nearCity:@"New York City"];
+        }
+        else {
+            [self fetchLocationsWithQuery:searchBar.text
+                     nearCityWithLatitude:self.userLat
+                                longitude:self.userLng];
+        }
     }
 }
 
