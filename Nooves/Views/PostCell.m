@@ -39,16 +39,6 @@
             NSDictionary *getPic = snapshot.value;
             if(![snapshot.value isEqual:[NSNull null]]){
                 if(![getPic[@"ProfilePicURL"] isEqualToString:@"nil"]){
-//                        NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:getPic[@"ProfilePicURL"]] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-//                        if(error){
-//                            NSLog(@"%@", error);
-//                            return;
-//                        }
-//                        dispatch_async(dispatch_get_main_queue(), ^{
-//                            self.profilePicField.image = [UIImage imageWithData:data];
-//                        });
-//                    }];
-//                    [task resume];
                     [self.profilePicField loadURLandCache:getPic[@"ProfilePicURL"]];
                 }
             }

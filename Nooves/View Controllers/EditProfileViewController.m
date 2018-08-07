@@ -2,6 +2,7 @@
 #import "ProfileViewController.h"
 #import <FIRStorage.h>
 #import "User.h"
+#import "UIImageView+Cache.h"
 
 @interface EditProfileViewController () <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -29,16 +30,7 @@
             self.userName.text = self.user.name;
             self.userPhoneNumber.text = [self.user.phoneNumber stringValue];
             if (![self.user.profilePicURL isEqualToString:@"nil"]){
-                NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:self.user.profilePicURL] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                    if(error){
-                        NSLog(@"%@", error);
-                        return;
-                    }
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        self.profilePic.image = [UIImage imageWithData:data];
-                    });
-                }];
-                [task resume];
+                [self.profilePic loadURLandCache:self.user.profilePicURL];
             }
         }
         else {
