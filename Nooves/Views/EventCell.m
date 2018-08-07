@@ -1,5 +1,4 @@
 #import "EventCell.h"
-#import "EventsViewController.h"
 #import "PureLayout/PureLayout.h"
 
 @interface EventCell ()
@@ -71,7 +70,7 @@
     NSDate *date = dictionary[@"start_time"];
     NSLog(@"Original date: %@", date);
     NSDateFormatter *formatter = [NSDateFormatter new];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    formatter.dateFormat = @"MM-dd HH:mm";
     NSString *dateString = [formatter stringFromDate:date];
     NSLog(@"Datedetails:%@", dateString);
     self.timeLabel.text = dateString;
