@@ -106,6 +106,10 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     [self.view addSubview:self.activityLabel];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+}
+
 // changes text color when user edits text view
 - (void)textViewDidBeginEditing:(UITextView *)eventDescription {
     if (eventDescription.textColor == UIColor.grayColor) {
@@ -216,9 +220,9 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 }
 
 // passes post data to post array and jumps back to timeline view
-// TODO(Nikki): add progress HUD when user posts
 - (void)didTapPost {
     // post to timeline
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     if (self.post == nil && !self.uploading) {
         self.post = [[Post alloc] initPostWithDetails:self.date
                                             withTitle:self.eventTitle.text
@@ -229,7 +233,6 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
                                                withID:nil
                                          withLocation:self.location];
         self.uploading = YES;
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [Post postToFireBase:self.post];
         FIRDatabaseReference *reference = [[FIRDatabase database] reference];
         FIRDatabaseHandle *databaseHandle = [[[reference child:@"Users"]child:self.post.userID] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {

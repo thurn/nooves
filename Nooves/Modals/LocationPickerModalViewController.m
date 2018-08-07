@@ -14,8 +14,8 @@ UISearchBarDelegate>
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) UISearchBar *searchBar;
 @property (nonatomic) NSArray *results;
-@property (nonatomic) NSNumber *lat;
-@property (nonatomic) NSNumber *lng;
+@property (nonatomic) NSNumber *eventlat;
+@property (nonatomic) NSNumber *eventLng;
 @property (nonatomic) NSString *location;
 @property (nonatomic) NSNumber *userLng;
 @property (nonatomic) NSNumber *userLat;
@@ -31,8 +31,8 @@ UISearchBarDelegate>
     [self configureTableView];
     [self.view addSubview:self.tableView];
 
-    self.lat = [[NSNumber alloc] init];
-    self.lng = [[NSNumber alloc] init];
+    self.eventlat = [[NSNumber alloc] init];
+    self.eventLng = [[NSNumber alloc] init];
     self.location = [[NSString alloc] init];
     
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(-5.0, 0.0, 320.0, 44.0)];
@@ -177,20 +177,19 @@ UISearchBarDelegate>
     return cell;
 }
 
-
 // saves location properties to compose view when cell selected
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // This is the selected venue
     NSDictionary *venue = self.results[indexPath.row];
-    self.lat = [venue valueForKeyPath:@"location.lat"];
-    self.lng = [venue valueForKeyPath:@"location.lng"];
+    self.eventlat = [venue valueForKeyPath:@"location.lat"];
+    self.eventLng = [venue valueForKeyPath:@"location.lng"];
     self.location = [venue valueForKeyPath:@"name"];
     NSLog(@"%@", self.location);
-    NSLog(@"%@, %@", self.lat, self.lng);
+    NSLog(@"%@, %@", self.eventlat, self.eventLng);
     
     [self.locationDelegate locationsPickerModalViewController:self
-                                  didPickLocationWithLatitude:self.lat
-                                                    longitude:self.lng
+                                  didPickLocationWithLatitude:self.eventlat
+                                                    longitude:self.eventLng
                                                      location:self.location];
     
     [self dismissViewControllerAnimated:NO completion:nil];
