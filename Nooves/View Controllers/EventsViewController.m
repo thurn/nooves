@@ -114,10 +114,10 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    EventDetailsViewController *eventDetails = [[EventDetailsViewController alloc]init];
+   /* EventDetailsViewController *eventDetails = [[EventDetailsViewController alloc]init];
     NSDictionary *selectedEvent = self.results[indexPath.row];
     [self.navigationController pushViewController:eventDetails animated:YES];
-    eventDetails.event = selectedEvent;
+    eventDetails.event = selectedEvent;*/
     
     NSDictionary *events = self.results[indexPath.row];
     NSString *title = events[@"title"];
@@ -125,7 +125,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     NSString *venue = events[@"venue_name"];
    
     [self.eventsDelegate eventsViewController:self didSelectEventWithTitle:title withDescription:description withVenue:venue];
-   // [self dismissViewControllerAnimated:NO completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
