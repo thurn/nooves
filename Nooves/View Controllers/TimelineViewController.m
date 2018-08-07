@@ -173,63 +173,6 @@
     return 1;
 }
 
-- (void)didTapCompose {
-    ComposeViewController *composeViewCont = [[ComposeViewController alloc] init];
-    UINavigationController *composeNavCont = [[UINavigationController alloc] initWithRootViewController:composeViewCont];
-    [self.navigationController presentViewController:composeNavCont animated:YES completion:nil];
-}
 
-- (void)didTapFilter {
-    FilterViewController *filterController = [[FilterViewController alloc]initWithArray:self.firArray];
-    filterController.filterDelegate = self;
-    //[self.navigationController pushViewController:filterController animated:YES];
-    UINavigationController *filterNavCont = [[UINavigationController alloc] initWithRootViewController:filterController];
-    [self.navigationController presentViewController:filterNavCont animated:YES completion:nil];
-}
-
--(void)didTapProfile {
-    ProfileViewController *profile = [[ProfileViewController alloc] init];
-    [self.navigationController pushViewController:profile animated:YES];
-}
-
-- (void)filteredArray:(NSArray *)array {
-    self.filteredData = [NSMutableArray arrayWithArray:array];
-    self.filtered = YES;
-    [self.navigationController popToViewController:self animated:YES];
-
-}
-
-- (NSArray *)filterLocation {
-    Location *location = [[Location alloc] init];
-    self.filteredData = [[NSMutableArray alloc]init];
-    for (Post *post in self.firArray) {
-        double distance =
-        [location calculateDistanceWithUserLat:Location.currentLocation.userLat
-                                           userLng:Location.currentLocation.userLng
-                                          eventLat:post.activityLat
-                                          eventLng:post.activityLng];
-        if (distance <= 80467.2) {
-            [self.filteredData addObject:post];
-        }
-    }
-    return self.filteredData;
-}
-
-- (void)fetchPosts {
-        FIRDatabaseReference * ref =[[FIRDatabase database] reference];
-        [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-            if ([snapshot.value isEqual:[NSNull null]]) {
-                [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] setValue:@{@"Age":@(0), @"Bio":@"nil", @"Name":[FIRAuth auth].currentUser.displayName,@"PhoneNumber":@(0), @"ProfilePicURL":@"nil",@"EventsGoing":@[@"a"]}];
-            }
-        }];
-        FIRDatabaseHandle *handle = [[ref child:@"Posts"] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-            NSDictionary *postsDict = snapshot.value;
-            self.firArray = [Post readPostsFromFIRDict:postsDict];
-            self.firArray = [self filterLocation];
-            sleep(1);
-            [self.refreshControl endRefreshing];
-            [tableView reloadData];
-        }];
-}
 
 @end
