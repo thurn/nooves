@@ -14,6 +14,12 @@ UISearchBarDelegate>
 @property (nonatomic) UITableView *tableView;
 @property (nonatomic) UISearchBar *searchBar;
 @property (nonatomic) NSArray *results;
+@property (nonatomic) NSNumber *lat;
+@property (nonatomic) NSNumber *lng;
+@property (nonatomic) NSString *location;
+@property (nonatomic) NSNumber *userLng;
+@property (nonatomic) NSNumber *userLat;
+
 @end
 
 @implementation LocationPickerModalViewController
