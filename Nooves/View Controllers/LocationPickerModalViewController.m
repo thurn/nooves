@@ -103,6 +103,26 @@ UISearchBarDelegate>
     [task resume];
 }
 
+- (void)fetchLocationsWithQuery:(NSString *)query nearCity:(NSString *)city {
+    NSString *baseURLString = @"https://api.foursquare.com/v2/venues/search?";
+    NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&v=20141020&near=%@,NY&query=%@", clientID, clientSecret, city, query];
+    queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    
+    NSURL *url = [NSURL URLWithString:[baseURLString stringByAppendingString:queryString]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (data) {
+            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSLog(@"response: %@", responseDictionary);
+            self.results = [responseDictionary valueForKeyPath:@"response.venues"];
+            [self.tableView reloadData];
+        }
+    }];
+    [task resume];
+}
+
 // sets up back button properties
 - (UIBarButtonItem *)createBackButton {
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon"]
@@ -140,7 +160,13 @@ UISearchBarDelegate>
     self.userLng = Location.currentLocation.userLng;
     
     if (newText.length > 2) {
-        [self fetchLocationsWithQuery:newText nearCityWithLatitude:self.userLat longitude:self.userLng];
+        if (self.userLat == 0 && self.userLng == 0) {
+            // TODO(Nikki): pass in city to be user's manually inputted set location
+            [self fetchLocationsWithQuery:newText nearCity:@"New York City"];
+        }
+        [self fetchLocationsWithQuery:newText
+                 nearCityWithLatitude:self.userLat
+                            longitude:self.userLng];
     }
     return true;
 }
