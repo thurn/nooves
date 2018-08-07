@@ -62,11 +62,11 @@
     
     if([descriptionText isKindOfClass:[NSString class]]) {
         self.descriptionLabel.text = descriptionText;
+        [self.descriptionLabel setNumberOfLines:0];
     }
     
     else {
         self.descriptionLabel.text = @"No description available for this event";
-        NSLog(@"descriptionText is not of type NSString");
     }
     
     NSString *location = @"Venue: ";

@@ -1,16 +1,11 @@
-//
-//  EventDetailsViewController.m
-//  Nooves
-//
-//  Created by Norette Ingabire on 8/7/18.
-//  Copyright © 2018 Nikki Tran. All rights reserved.
-//
-
 #import "EventDetailsViewController.h"
 #import <PureLayout.h>
 
 @interface EventDetailsViewController ()
 
+@property(strong, nonatomic) UILabel *titleField;
+@property(strong, nonatomic) UILabel *descriptionField;
+@property(strong, nonatomic) UILabel *venueField;
 @end
 
 @implementation EventDetailsViewController
@@ -24,27 +19,35 @@
 }
 
 - (void)configureEventDetails {
-    UILabel *titleField = [[UILabel alloc]initWithFrame:CGRectMake(50, 0, 500, 50)];
-    titleField.text = self.event[@"title"];
-    [titleField setFont:[UIFont fontWithName:@"Arial-Boldmt" size:20]];
-    [titleField sizeToFit];
-    [self.view addSubview:titleField];
+    self.titleField = [[UILabel alloc]initWithFrame:CGRectMake(50, 0, 500, 50)];
+    self.titleField.text = self.event[@"title"];
+    [self.titleField setFont:[UIFont fontWithName:@"Arial-Boldmt" size:20]];
+    [self.titleField sizeToFit];
+    [self.view addSubview:self.titleField];
     
-    UILabel *descriptionField = [[UILabel alloc]initWithFrame:CGRectMake(10, 30, 400, 300)];
-    [descriptionField setNumberOfLines:0];
+    self.descriptionField = [[UILabel alloc]initWithFrame:CGRectMake(10, 30, 400, 300)];
+    [self.descriptionField setNumberOfLines:0];
     //[descriptionField autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:titleField withOffset:30.0f];
-    descriptionField.text = self.event[@"description"];
-    [descriptionField sizeToFit];
-    [self.view addSubview:descriptionField];
+    NSString *descriptionText = self.event[@"description"];
+    if([descriptionText isKindOfClass:[NSString class]]) {
+        self.descriptionField.text = descriptionText;
+    }
     
-    UILabel *venueField = [[UILabel alloc]initWithFrame:CGRectMake(50, 500, 200, 50)];
+    else {
+        self.descriptionField.text = @"No description available for this event";
+    }
+    
+    [self.descriptionField sizeToFit];
+    [self.view addSubview:self.descriptionField];
+    
+   self.venueField = [[UILabel alloc]initWithFrame:CGRectMake(50, 500, 200, 50)];
    // [venueField autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:descriptionField withOffset:80.0f];
-    venueField.text = self.event[@"venue_name"];
-    [venueField sizeToFit];
-    [self.view addSubview:venueField];
+    self.venueField.text = self.event[@"venue_name"];
+    [self.venueField sizeToFit];
+    [self.view addSubview:self.venueField];
     
     UIBarButtonItem *confirmButton = [[UIBarButtonItem alloc]init];
-    [confirmButton setTitle:@"Confirm"];
+    [confirmButton setTitle:@"Post event"];
     self.navigationItem.rightBarButtonItem = confirmButton;
     confirmButton.target = self;
     confirmButton.action = @selector(didTapConfirm);
@@ -52,6 +55,9 @@
 
 - (void)didTapConfirm {
     NSLog(@"Confirmed cell");
+   // [self.locEventsDelegate eventDetailsViewController:self didSelectEventWithTitle:self.titleField.text withDescription:self.descriptionField.text withVenue:self.venueField.text];
+    [self dismissViewControllerAnimated:NO completion:nil];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 @end

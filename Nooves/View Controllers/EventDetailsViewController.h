@@ -1,15 +1,20 @@
-//
-//  EventDetailsViewController.h
-//  Nooves
-//
-//  Created by Norette Ingabire on 8/7/18.
-//  Copyright © 2018 Nikki Tran. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
+
+@class EventDetailsViewController;
+
+/*@protocol LocalEventsDelegate
+
+- (void)eventDetailsViewController:(EventDetailsViewController *)controller
+     didSelectEventWithTitle:(NSString *)title
+             withDescription:(NSString *)description
+                   withVenue:(NSString *)venue;
+
+@end*/
+
 
 @interface EventDetailsViewController : UIViewController
 
 @property(strong, nonatomic) NSDictionary *event;
+//@property(weak, nonatomic) id<LocalEventsDelegate> locEventsDelegate;
 
 @end

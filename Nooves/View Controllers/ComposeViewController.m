@@ -8,6 +8,7 @@
 #import "DatePickerModalViewController.h"
 #import "LocationPickerModalViewController.h"
 #import "EventsViewController.h"
+#import "EventDetailsViewController.h"
 
 #import <FirebaseAuth.h>
 #import <MBProgressHUD/MBProgressHUD.h>
@@ -138,7 +139,9 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 
 - (void)didTapEvents {
     EventsViewController *chooseEvent = [[EventsViewController alloc]init];
-    chooseEvent.eventsDelegate = self;
+    //chooseEvent.eventsDelegate = self;
+    //EventsViewController *searchEvents = [[EventsViewController alloc]init];
+    chooseEvent.eventsDelegate= self;
     UINavigationController *navCont = [[UINavigationController alloc]
                                        initWithRootViewController:chooseEvent];
     [self.navigationController presentViewController:navCont animated:YES completion:nil];
@@ -292,12 +295,18 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     [self.navigationController popToViewController:self animated:YES];
 }
 
-#pragma mark - Events View Delegate method
+#pragma mark - EventsViewDelegate
 - (void)eventsViewController:(EventsViewController *)controller didSelectEventWithTitle:(NSString *)title
              withDescription:(NSString *)description
                    withVenue:(NSString *)venue {
     self.eventTitle.text = title;
-    self.eventDescription.text = description;
+    if([description isKindOfClass:[NSString class]]) {
+        self.eventDescription.text = description;
+    }
+    
+    else {
+        self.eventDescription.text = @"";
+    }
     self.location = venue;
     [self.navigationController popToViewController:self animated:YES];
 }
@@ -318,5 +327,13 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
         eventDescription.textColor = UIColor.grayColor;
     }
 }
+
+/*- (void)eventDetailsViewController:(EventDetailsViewController *)controller didSelectEventWithTitle:(NSString *)title withDescription:(NSString *)description withVenue:(NSString *)venue {
+    self.eventTitle.text = title;
+    self.eventDescription.text = description;
+    self.location = venue;
+    [self.navigationController popToViewController:self animated:YES];
+}*/
+
 
 @end
