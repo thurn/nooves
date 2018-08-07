@@ -3,7 +3,7 @@
 #import "PureLayout/PureLayout.h"
 #import <FIRDatabase.h>
 #import "Post.h"
-#import "UserViewController.h"
+#import "UIImageView+Cache.h"
 @implementation PostCell
 
 - (void) awakeFromNib {
@@ -39,16 +39,17 @@
             NSDictionary *getPic = snapshot.value;
             if(![snapshot.value isEqual:[NSNull null]]){
                 if(![getPic[@"ProfilePicURL"] isEqualToString:@"nil"]){
-                        NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:getPic[@"ProfilePicURL"]] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-                        if(error){
-                            NSLog(@"%@", error);
-                            return;
-                        }
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            self.profilePicField.image = [UIImage imageWithData:data];
-                        });
-                    }];
-                    [task resume];
+//                        NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:getPic[@"ProfilePicURL"]] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//                        if(error){
+//                            NSLog(@"%@", error);
+//                            return;
+//                        }
+//                        dispatch_async(dispatch_get_main_queue(), ^{
+//                            self.profilePicField.image = [UIImage imageWithData:data];
+//                        });
+//                    }];
+//                    [task resume];
+                    [self.profilePicField loadURLandCache:getPic[@"ProfilePicURL"]];
                 }
             }
         }];
@@ -101,16 +102,7 @@
         self.profilePicField.image = nil;
     }
 }
-//- (UIButton *)goToProfile {
-//    self.profileButton = [[UIButton alloc] initWithFrame:CGRectMake(300, 140, 100, 10)];
-//    [self.profileButton setImage:[UIImage imageNamed:@"profile_tab.png"] forState:UIControlStateNormal];
-//    [self.profileButton sizeToFit];
-//    [self.contentView addSubview:self.profileButton];
-//
-//    [self.profileButton addTarget:self action:@selector(didTapProfile) forControlEvents:UIControlEventTouchUpInside];
-//    return self.profileButton;
-//}
-//
+
 -(void)didTapProfile {
     [self.postDelegate didTapProfilePic:self.post.userID];
 }
