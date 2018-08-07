@@ -10,6 +10,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 
 @property(strong, nonatomic) NSArray *eventsArray;
 @property(strong, nonatomic) UISearchBar *searchBar;
+@property(strong, nonatomic) NSArray *results;
 
 @end
 
@@ -76,8 +77,12 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     tableView.backgroundColor = [UIColor whiteColor];
     tableView.dataSource = self;
     tableView.delegate = self;
-    tableView.rowHeight = 100;
+    tableView.rowHeight = UITableViewAutomaticDimension;
+    tableView.estimatedRowHeight = 80;
+    [tableView setNeedsLayout];
+    tableView.contentInset = UIEdgeInsetsMake(20.0, 0.0, 0.0, 0.0);
     
+    [tableView reloadData];
     return tableView;
 }
 

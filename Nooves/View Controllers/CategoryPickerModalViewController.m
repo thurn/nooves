@@ -4,7 +4,6 @@
 @interface CategoryPickerModalViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 @property (nonatomic) NSArray *categories;
 @property (nonatomic) UIPickerView *pickerView;
-@property (nonatomic) NSInteger *selection;
 @end
 
 @implementation CategoryPickerModalViewController
@@ -51,9 +50,8 @@
 
 // passes post data and jumps back to composer view controller
 - (void)didTapConfirmButton {
-    //self.activityType = self.selection;
     [self.categoryDelegate categoryPickerModalViewController:self
-                                         didPickActivityType:(ActivityType *)self.selection];
+                                         didPickActivityType:(ActivityType *)self.activityType];
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
@@ -62,7 +60,7 @@
 // assigns the selected category from picker view to activity type
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
        inComponent:(NSInteger)component {
-    self.selection = row;
+    self.activityType = row;
 }
 
 // returns the array element at each row

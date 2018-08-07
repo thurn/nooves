@@ -262,8 +262,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
         }];
         self.uploading = NO;
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        TimelineViewController *timeline = [[TimelineViewController alloc] init];
-        [self.navigationController pushViewController:timeline animated:YES];
+        [self dismissViewControllerAnimated:NO completion:nil];
         NSLog(@"User posted successfully");
     } else {
         NSLog(@"Nothing to post");
