@@ -1,5 +1,6 @@
 #import "ComposeViewController.h"
 #import "EventCell.h"
+#import "EventDetailsViewController.h"
 #import "EventsViewController.h"
 
 static NSString * const baseURLString = @"http://api.eventful.com/json/events/search?";
@@ -52,7 +53,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    NSLog( @"fetching events from the search bar");
+    NSLog( @"fetching events for :%@", searchBar.text);
       [self fetchEventsWithQuery:searchBar.text];
 }
 
@@ -75,7 +76,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     tableView.backgroundColor = [UIColor whiteColor];
     tableView.dataSource = self;
     tableView.delegate = self;
-    tableView.rowHeight = UITableViewAutomaticDimension;
+    tableView.rowHeight = 100;
     
     return tableView;
 }
@@ -113,11 +114,10 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIBarButtonItem *confirmButton = [[UIBarButtonItem alloc]init];
-    [confirmButton setTitle:@"Confirm"];
-    self.navigationItem.rightBarButtonItem = confirmButton;
-    confirmButton.target = self;
-    confirmButton.action = @selector(didTapConfirm);
+    EventDetailsViewController *eventDetails = [[EventDetailsViewController alloc]init];
+    NSDictionary *selectedEvent = self.results[indexPath.row];
+    [self.navigationController pushViewController:eventDetails animated:YES];
+    eventDetails.event = selectedEvent;
     
     NSDictionary *events = self.results[indexPath.row];
     NSString *title = events[@"title"];
@@ -125,12 +125,12 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     NSString *venue = events[@"venue_name"];
    
     [self.eventsDelegate eventsViewController:self didSelectEventWithTitle:title withDescription:description withVenue:venue];
-    [self dismissViewControllerAnimated:NO completion:nil];
+   // [self dismissViewControllerAnimated:NO completion:nil];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)fetchEventsWithQuery:(NSString *)query {
-    NSString *queryString = [NSString stringWithFormat:@"app_key=%@&location=%@",appKey,query];
+    NSString *queryString = [NSString stringWithFormat:@"app_key=%@&page_size=100&location=%@",appKey,query];
     queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
     NSURL *url = [NSURL URLWithString:[baseURLString stringByAppendingString:queryString]];
@@ -147,9 +147,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     [task resume];
 }
 
-- (void)didTapConfirm {
-    NSLog(@"Confirmed cell");
-}
+
 
 @end
 
