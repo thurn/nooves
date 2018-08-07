@@ -103,6 +103,7 @@ UISearchBarDelegate>
     [task resume];
 }
 
+// completes api request and stores search results in dictionary
 - (void)fetchLocationsWithQuery:(NSString *)query nearCity:(NSString *)city {
     NSString *baseURLString = @"https://api.foursquare.com/v2/venues/search?";
     NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&v=20141020&near=%@,NY&query=%@", clientID, clientSecret, city, query];
@@ -161,10 +162,10 @@ UISearchBarDelegate>
     
     if (newText.length > 2) {
         if (self.userLat == 0 && self.userLng == 0) {
+            NSLog(@"Cannot retrieve user location");
             // TODO(Nikki): pass in city to be user's manually inputted set location
             [self fetchLocationsWithQuery:newText nearCity:@"New York City"];
-        }
-        else {
+        } else {
             [self fetchLocationsWithQuery:newText
                      nearCityWithLatitude:self.userLat
                                 longitude:self.userLng];
@@ -179,10 +180,10 @@ UISearchBarDelegate>
     self.userLng = Location.currentLocation.userLng;
     if (searchBar.text.length > 2) {
         if (self.userLat == 0 && self.userLng == 0) {
+            NSLog(@"Cannot retrieve user location");
             // TODO(Nikki): pass in city to be user's manually inputted set location
             [self fetchLocationsWithQuery:searchBar.text nearCity:@"New York City"];
-        }
-        else {
+        } else {
             [self fetchLocationsWithQuery:searchBar.text
                      nearCityWithLatitude:self.userLat
                                 longitude:self.userLng];
