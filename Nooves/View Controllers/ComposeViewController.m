@@ -113,13 +113,13 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 - (void)viewDidAppear:(BOOL)animated {
     self.locationTextField.text = self.location;
     
-    NSString *activity = [Post activityTypeToString:self.activityType];
-    self.categoryTextField.text = activity;
-    
     NSDateFormatter *formatter = [NSDateFormatter new];
     formatter.dateFormat = @"MM-dd HH:mm";
     NSString *dateDetails = [formatter stringFromDate:self.date];
     self.timeTextField.text = dateDetails;
+    
+    NSString *activity = [Post activityTypeToString:self.activityType];
+    self.categoryTextField.text = activity;
     
     self.eventDescription.textColor = UIColor.grayColor;
 }
