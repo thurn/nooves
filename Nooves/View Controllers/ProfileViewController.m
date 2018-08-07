@@ -29,6 +29,12 @@
         if (![snapshot.value isEqual:[NSNull null]]) {
             self.user = [[User alloc] initFromDatabase:usersDictionary];
             [self didUpdateProfile];
+            
+            if ([self.user.biography isEqualToString:@"nil"]) {
+                self.bioLabel.text = @"No biography available";
+                [self.bioLabel sizeToFit];
+            }
+            
             if (![self.user.profilePicURL isEqualToString:@"nil"]){
                 [self.profilePicture loadURLandCache:self.user.profilePicURL];
             }
