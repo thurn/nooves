@@ -8,6 +8,7 @@
 @property (nonatomic) NSNumber *eventLat;
 @property (nonatomic) NSNumber *eventLng;
 @property (nonatomic) CLLocationDistance *distance;
+@property (nonatomic) BOOL locationEnabled;
 
 + (instancetype)currentLocation;
 - (double)calculateDistanceWithUserLat:(NSNumber *)userLat userLng:(NSNumber *)userLng

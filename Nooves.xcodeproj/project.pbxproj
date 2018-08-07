@@ -195,6 +195,12 @@
 		327FA7D120FE56F7009C55BA /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0AADDFDF21015B3C00C173CB /* DatePickerModalViewController.h */,
+				0AADDFE021015B3C00C173CB /* DatePickerModalViewController.m */,
+				CED91F782101A2DC00E0E2F6 /* CategoryPickerModalViewController.h */,
+				CED91F792101A2DC00E0E2F6 /* CategoryPickerModalViewController.m */,
+				CE57768921064FDA00C7637C /* LocationPickerModalViewController.h */,
+				CE57768A21064FDA00C7637C /* LocationPickerModalViewController.m */,
 				0A84EF832118D9D00019699D /* UserViewController.h */,
 				0A84EF842118D9D00019699D /* UserViewController.m */,
 				0A6C9382211110EE00097F37 /* PostDetailsViewController.h */,
@@ -252,19 +258,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		CE062CAC210A4E330045273E /* Modals */ = {
-			isa = PBXGroup;
-			children = (
-				0AADDFDF21015B3C00C173CB /* DatePickerModalViewController.h */,
-				0AADDFE021015B3C00C173CB /* DatePickerModalViewController.m */,
-				CED91F782101A2DC00E0E2F6 /* CategoryPickerModalViewController.h */,
-				CED91F792101A2DC00E0E2F6 /* CategoryPickerModalViewController.m */,
-				CE57768921064FDA00C7637C /* LocationPickerModalViewController.h */,
-				CE57768A21064FDA00C7637C /* LocationPickerModalViewController.m */,
-			);
-			path = Modals;
-			sourceTree = "<group>";
-		};
 		CEDDCBB320F95554004BD3A0 = {
 			isa = PBXGroup;
 			children = (
@@ -292,7 +285,6 @@
 			children = (
 				0A6C93812107CE8C00097F37 /* Nooves.entitlements */,
 				0A9C2ADB20FEA9D60044A972 /* Data Models */,
-				CE062CAC210A4E330045273E /* Modals */,
 				327FA7D220FE5736009C55BA /* Views */,
 				327FA7D120FE56F7009C55BA /* View Controllers */,
 				CEDDCBBF20F95554004BD3A0 /* AppDelegate.h */,

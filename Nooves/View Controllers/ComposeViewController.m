@@ -16,9 +16,11 @@
 CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 
 @property (nonatomic) UIPickerView *pickerView;
-@property (nonatomic) UILabel *locationLabel;
-@property (nonatomic) UILabel *activityLabel;
-@property (nonatomic) UILabel *dateLabel;
+@property (nonatomic) UITextField *eventTitle;
+@property (nonatomic) UITextField *timeTextField;
+@property (nonatomic) UITextField *locationTextField;
+@property (nonatomic) UITextField *categoryTextField;
+@property (nonatomic) UITextView *eventDescription;
 @property (nonatomic) BOOL uploading;
 @end
 
@@ -37,29 +39,68 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
         contentRect = CGRectUnion(contentRect, view.frame);
     }
     
-    self.locationLabel = [[UILabel alloc] init];
-    self.activityLabel = [[UILabel alloc] init];
-    self.dateLabel = [[UILabel alloc] init];
     self.lat = [[NSNumber alloc] init];
     self.lng = [[NSNumber alloc] init];
     self.location = [[NSString alloc] init];
     
-    self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 1000, 150)];
+    self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(36, 5, 335, 30)];
     self.eventTitle.text = nil;
     self.eventTitle.placeholder = @"Event name";
-    self.eventTitle.borderStyle = UITextBorderStyleRoundedRect;
+    self.eventTitle.borderStyle = UITextBorderStyleNone;
     self.eventTitle.textColor = UIColor.grayColor;
     
-    self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 150, 1000, 150)];
+    UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(0, 37, self.view.bounds.size.width, 1)];
+    line1.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:line1];
+    
+    // time text view
+    self.timeTextField = [[UITextField alloc] initWithFrame:CGRectMake(36, 40, 335, 30)];
+    self.timeTextField.text = nil;
+    self.timeTextField.placeholder = @"Time";
+    self.timeTextField.borderStyle = UITextBorderStyleNone;
+    self.timeTextField.textColor = UIColor.grayColor;
+    
+    UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(0, 70, self.view.bounds.size.width, 1)];
+    line2.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:line2];
+    
+    // location text view
+    self.locationTextField = [[UITextField alloc] initWithFrame:CGRectMake(36, 75, 335, 30)];
+    self.locationTextField.text = nil;
+    self.locationTextField.placeholder = @"Location";
+    self.locationTextField.borderStyle = UITextBorderStyleNone;
+    self.locationTextField.textColor = UIColor.grayColor;
+    
+    UIView *line3 = [[UIView alloc] initWithFrame:CGRectMake(0, 105, self.view.bounds.size.width, 1)];
+    line3.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:line3];
+    
+    // category text view
+    self.categoryTextField = [[UITextField alloc] initWithFrame:CGRectMake(36, 107, 335, 30)];
+    self.categoryTextField.text = nil;
+    self.categoryTextField.placeholder = @"Category";
+    self.categoryTextField.borderStyle = UITextBorderStyleNone;
+    self.categoryTextField.textColor = UIColor.grayColor;
+    
+    UIView *line4 = [[UIView alloc] initWithFrame:CGRectMake(0, 138, self.view.bounds.size.width, 1)];
+    line4.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:line4];
+    
+    // event text view
+    self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 142, 1000, 150)];
     self.eventDescription.delegate = self;
     self.eventDescription.text = @"Add a description";
     self.eventDescription.textColor = UIColor.grayColor;
 
     [self.view addSubview:self.eventTitle];
+    [self.view addSubview:self.timeTextField];
+    [self.view addSubview:self.locationTextField];
+    [self.view addSubview:self.categoryTextField];
     [self.view addSubview:self.eventDescription];
     [self.view addSubview:[self selectDate]];
     [self.view addSubview:[self selectCategory]];
     [self.view addSubview:[self selectLocation]];
+    [self.view addSubview:[self searchEventsButton]];
     
     [self postButton];
     [self createBackButton];
@@ -69,68 +110,48 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    // sets location display properties
-    NSString *locationColon = @"Location: ";
-    self.locationLabel.frame = CGRectMake(10, 440, 100, 100);
-    if(self.location) {
-        self.locationLabel.text = [locationColon stringByAppendingString:self.location];
-    } else {
-        self.locationLabel.text = locationColon;
-    }
-    [self.locationLabel sizeToFit];
+    self.locationTextField.text = self.location;
     
-    // sets activity display label properties
-    NSString *activityColon = @"Category: ";
-    self.activityLabel.frame = CGRectMake(10, 420, 150, 150);
     NSString *activity = [Post activityTypeToString:self.activityType];
-    self.activityLabel.text = [activityColon stringByAppendingString:activity];
-    [self.activityLabel sizeToFit];
+    self.categoryTextField.text = activity;
     
-    // sets date display label properties
-    NSString *dateColon = @"Date: ";
-    self.dateLabel.frame = CGRectMake(10, 500, 100, 100);
     NSDateFormatter *formatter = [NSDateFormatter new];
     formatter.dateFormat = @"MM-dd HH:mm";
     NSString *dateDetails = [formatter stringFromDate:self.date];
-    self.eventDescription.textColor = UIColor.grayColor;
-    if(self.date) {
-        self.dateLabel.text = [dateColon stringByAppendingString:dateDetails];
-    } else {
-        self.dateLabel.text = dateColon;
-    }
-    [self.dateLabel sizeToFit];
+    self.timeTextField.text = dateDetails;
     
-    // adds labels to view
-    [self.view addSubview:self.dateLabel];
-    [self.view addSubview:self.locationLabel];
-    [self.view addSubview:self.activityLabel];
+    self.eventDescription.textColor = UIColor.grayColor;
 }
 
-// changes text color when user edits text view
-- (void)textViewDidBeginEditing:(UITextView *)eventDescription {
-    if (eventDescription.textColor == UIColor.grayColor) {
-        eventDescription.text = nil;
-        eventDescription.textColor = UIColor.blackColor;
-    }
+#pragma mark - buttons and respective actions
+// set up button to select local events
+-(UIButton *)searchEventsButton {
+    UIButton *eventsButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    eventsButton.frame = CGRectMake(5, 8, 100, 100);
+    [eventsButton setImage:[UIImage imageNamed:@"calendar"] forState:UIControlStateNormal];
+    [eventsButton addTarget:self
+                     action:@selector(didTapEvents)
+           forControlEvents:UIControlEventTouchUpInside];
+    [eventsButton sizeToFit];
+    return eventsButton;
 }
 
-// changes text color when user stops editing text view
-- (void)textViewDidEndEditing:(UITextView *)eventDescription {
-    if (eventDescription.text == nil) {
-        eventDescription.text = @"Add description";
-        eventDescription.textColor = UIColor.grayColor;
-    }
+- (void)didTapEvents {
+    EventsViewController *chooseEvent = [[EventsViewController alloc]init];
+    chooseEvent.eventsDelegate = self;
+    UINavigationController *navCont = [[UINavigationController alloc]
+                                       initWithRootViewController:chooseEvent];
+    [self.navigationController presentViewController:navCont animated:YES completion:nil];
 }
 
 // sets up select date button properties
 - (UIButton *)selectDate {
     UIButton *selectDate = [UIButton buttonWithType:UIButtonTypeSystem];
-    UIImage *calendarIcon = [UIImage imageNamed:@"clock"];
-    [selectDate setImage:calendarIcon forState:UIControlStateNormal];
+    selectDate.frame = CGRectMake(5, 42, 100, 100);
+    [selectDate setImage:[UIImage imageNamed:@"clock"] forState:UIControlStateNormal];
     [selectDate addTarget:self
                    action:@selector(didSelectDate)
          forControlEvents:UIControlEventTouchUpInside];
-    selectDate.center = CGPointMake(0, 300);
     [selectDate sizeToFit];
     return selectDate;
 }
@@ -147,12 +168,11 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 // sets up select location properties
 - (UIButton *)selectLocation {
     UIButton *selectLocation = [UIButton buttonWithType:UIButtonTypeSystem];
-    UIImage *locationIcon = [UIImage imageNamed:@"location"];
-    [selectLocation setImage:locationIcon forState:UIControlStateNormal];
+    selectLocation.frame = CGRectMake(5, 76, 100, 100);
+    [selectLocation setImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
     [selectLocation addTarget:self
                        action:@selector(didSelectLocation)
              forControlEvents:UIControlEventTouchUpInside];
-    selectLocation.center = CGPointMake(20, 300);
     [selectLocation sizeToFit];
     return selectLocation;
 }
@@ -169,12 +189,11 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 // sets up selection category button properties
 - (UIButton *)selectCategory {
     UIButton *selectCategory = [UIButton buttonWithType:UIButtonTypeSystem];
-    UIImage *tagIcon = [UIImage imageNamed:@"tag"];
-    [selectCategory setImage:tagIcon forState:UIControlStateNormal];
+    selectCategory.frame = CGRectMake(7, 110, 100, 100);
+    [selectCategory setImage:[UIImage imageNamed:@"tag"] forState:UIControlStateNormal];
     [selectCategory addTarget:self
                        action:@selector(didSelectCategory)
              forControlEvents:UIControlEventTouchUpInside];
-    selectCategory.center = CGPointMake(50, 300);
     [selectCategory sizeToFit];
     return selectCategory;
 }
@@ -216,9 +235,8 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 }
 
 // passes post data to post array and jumps back to timeline view
-// TODO(Nikki): add progress HUD when user posts
 - (void)didTapPost {
-    // post to timeline
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     if (self.post == nil && !self.uploading) {
         self.post = [[Post alloc] initPostWithDetails:self.date
                                             withTitle:self.eventTitle.text
@@ -229,7 +247,6 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
                                                withID:nil
                                          withLocation:self.location];
         self.uploading = YES;
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [Post postToFireBase:self.post];
         FIRDatabaseReference *reference = [[FIRDatabase database] reference];
         FIRDatabaseHandle *databaseHandle = [[[reference child:@"Users"]child:self.post.userID] observeEventType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
@@ -250,7 +267,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     }
 }
 
-// stores data from location picker
+#pragma mark - Location Picker Delegate method
 - (void)locationsPickerModalViewController:(LocationPickerModalViewController *)controller
                didPickLocationWithLatitude:(NSNumber *)latitude
                                  longitude:(NSNumber *)longitude
@@ -261,38 +278,21 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     [self.navigationController popToViewController:self animated:YES];
 }
 
-// stores data from category picker
+#pragma mark - Category Picker Delegate method
 - (void)categoryPickerModalViewController:(CategoryPickerModalViewController *)controller
                       didPickActivityType:(ActivityType *)activity {
     self.activityType = activity;
     [self.navigationController popToViewController:self animated:YES];
 }
 
-// stores data from date picker
+#pragma mark - Date Picker Delegate Method
 - (void)datePickerModalViewController:(DatePickerModalViewController *)dateController
                           didPickDate:(NSDate *)date {
     self.date = date;
     [self.navigationController popToViewController:self animated:YES];
 }
 
-// set up button to select local events
--(UIButton *)searchEventsButton {
-    UIButton *eventsButton = [[UIButton alloc] initWithFrame:CGRectMake(50, 550, 100, 100)];
-    [eventsButton setImage:[UIImage imageNamed:@"calendar"] forState:UIControlStateNormal];
-    [eventsButton sizeToFit];
-    [self.view addSubview:eventsButton];
-    [eventsButton addTarget:self action:@selector(didTapEvents) forControlEvents:UIControlEventTouchUpInside];
-    return eventsButton;
-}
-
-- (void)didTapEvents {
-    EventsViewController *chooseEvent = [[EventsViewController alloc]init];
-    chooseEvent.eventsDelegate = self;
-    UINavigationController *navCont = [[UINavigationController alloc]
-                                       initWithRootViewController:chooseEvent];
-    [self.navigationController presentViewController:navCont animated:YES completion:nil];
-}
-
+#pragma mark - Events View Delegate method
 - (void)eventsViewController:(EventsViewController *)controller didSelectEventWithTitle:(NSString *)title
              withDescription:(NSString *)description
                    withVenue:(NSString *)venue {
@@ -300,6 +300,23 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     self.eventDescription.text = description;
     self.location = venue;
     [self.navigationController popToViewController:self animated:YES];
+}
+
+#pragma mark - Text View Delegate methods
+// changes text color when user edits text view
+- (void)textViewDidBeginEditing:(UITextView *)eventDescription {
+    if (eventDescription.textColor == UIColor.grayColor) {
+        eventDescription.text = nil;
+        eventDescription.textColor = UIColor.blackColor;
+    }
+}
+
+// changes text color when user stops editing text view
+- (void)textViewDidEndEditing:(UITextView *)eventDescription {
+    if (eventDescription.text == nil) {
+        eventDescription.text = @"Add description";
+        eventDescription.textColor = UIColor.grayColor;
+    }
 }
 
 @end

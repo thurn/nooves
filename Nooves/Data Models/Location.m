@@ -13,7 +13,6 @@
     if([CLLocationManager locationServicesEnabled]) {
         [location.userLocation requestAlwaysAuthorization];
         [location.userLocation requestWhenInUseAuthorization];
-        [location.userLocation startUpdatingLocation];
         
         CLLocation *newLocation = [location.userLocation location];
         location.userLat = [[NSNumber alloc] initWithFloat:newLocation.coordinate.latitude];
