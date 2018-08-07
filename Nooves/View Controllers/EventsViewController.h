@@ -14,7 +14,7 @@
 @interface EventsViewController : UIViewController
 
 @property (weak, nonatomic) id<EventsSearchDelegate> eventsDelegate;
-@property(strong, nonatomic) NSArray *results;
+
 
 - (void)fetchEventsWithQuery:(NSString *)query;
 @end
