@@ -1,5 +1,3 @@
-#import <AFNetworking.h>
-//#import "Event.h"
 #import "EventCell.h"
 #import "EventsViewController.h"
 #import "PureLayout/PureLayout.h"
@@ -14,16 +12,6 @@
 @end
 
 @implementation EventCell
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    // Configure the view for the selected state
-}
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
@@ -70,21 +58,23 @@
 - (void)updateWithEvent:(NSDictionary *)dictionary {
     self.titleLabel.text = dictionary[@"title"];
     NSString *descriptionText = dictionary[@"description"];
-    NSLog(@"The description text is: %@", descriptionText);
-   if ([descriptionText length] == 0) {
+    if ([descriptionText length] == 0) {
        self.descriptionLabel.text = @"No description available for this event";
     }
     else {
         self.descriptionLabel.text = descriptionText;
    }
-    self.venueLabel.text = dictionary[@"venue_name"];
+    
+    NSString *location = @"Venue: ";
+    self.venueLabel.text = [location stringByAppendingString:dictionary[@"venue_name"]];
+    
     NSDate *date = dictionary[@"start_time"];
     NSLog(@"Original date: %@", date);
     NSDateFormatter *formatter = [NSDateFormatter new];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *dateString = [formatter stringFromDate:date];
     NSLog(@"Datedetails:%@", dateString);
-    self.timeLabel.text = @"Time";
+    self.timeLabel.text = dateString;
 }
 
 @end

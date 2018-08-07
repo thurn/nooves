@@ -35,8 +35,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     self.navigationItem.titleView = searchBarView;
     
     [tableView reloadData];
-    
-     [tableView registerClass:[EventCell class] forCellReuseIdentifier:@"eventCellIdentifier"];
+    [tableView registerClass:[EventCell class] forCellReuseIdentifier:@"eventCellIdentifier"];
 }
 
 // cancel button appears when user edits search bar
@@ -114,12 +113,18 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIBarButtonItem *confirmButton = [[UIBarButtonItem alloc]init];
+    [confirmButton setTitle:@"Confirm"];
+    self.navigationItem.rightBarButtonItem = confirmButton;
+    confirmButton.target = self;
+    confirmButton.action = @selector(didTapConfirm);
+    
     NSDictionary *events = self.results[indexPath.row];
     NSString *title = events[@"title"];
     NSString *description = events[@"description"];
     NSString *venue = events[@"venue_name"];
+   
     [self.eventsDelegate eventsViewController:self didSelectEventWithTitle:title withDescription:description withVenue:venue];
-    
     [self dismissViewControllerAnimated:NO completion:nil];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -136,10 +141,14 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
         if (data) {
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             self.results = [responseDictionary valueForKeyPath:@"events.event"];
-            [tableView reloadData];
+            [self->tableView reloadData];
         }
     }];
     [task resume];
+}
+
+- (void)didTapConfirm {
+    NSLog(@"Confirmed cell");
 }
 
 @end
