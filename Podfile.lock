@@ -61,6 +61,7 @@ PODS:
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
   - GTMSessionFetcher/Core (1.1.15)
+  - HVTableView (0.2.1)
   - leveldb-library (1.20)
   - MBProgressHUD (1.1.0)
   - nanopb (0.3.8):
@@ -69,6 +70,9 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - PureLayout (3.0.2)
+  - SDWebImage (4.4.1):
+    - SDWebImage/Core (= 4.4.1)
+  - SDWebImage/Core (4.4.1)
 
 DEPENDENCIES:
   - AFNetworking
@@ -77,9 +81,12 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+
   - FSCalendar
+  - HVTableView
   - MBProgressHUD
   - PureLayout
+  - SDWebImage
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -97,10 +104,12 @@ SPEC REPOS:
     - FSCalendar
     - GoogleToolboxForMac
     - GTMSessionFetcher
+    - HVTableView
     - leveldb-library
     - MBProgressHUD
     - nanopb
     - PureLayout
+    - SDWebImage
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
@@ -117,11 +126,14 @@ SPEC CHECKSUMS:
   FSCalendar: a04b09f16f811bc92e82f3cf852a15225233b9d5
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GTMSessionFetcher: 5fa5b80fd20e439ef5f545fb2cb3ca6c6714caa2
+  HVTableView: 87bcd048e8c1f3262ff55aca2cdc348c9b04a4ce
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
+  SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
 
 PODFILE CHECKSUM: 6e8bc00938cceaf8ae5d90fc5b41e32a2f080050
+PODFILE CHECKSUM: 60d18fa917a40e357ea70b3f273165c8df856435
 
 COCOAPODS: 1.5.3

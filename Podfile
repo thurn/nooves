@@ -16,6 +16,8 @@ target 'Nooves' do
   pod 'Firebase/Storage'
   pod 'MBProgressHUD'
   pod 'FSCalendar'
+  pod 'SDWebImage'
+  pod 'HVTableView'
 
   target 'NoovesTests' do
     inherit! :search_paths

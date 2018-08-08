@@ -1,4 +1,5 @@
 #import "ComposeViewController.h"
+#import <CoreLocation/CoreLocation.h>
 #import "EventCell.h"
 #import "EventDetailsViewController.h"
 #import "EventsViewController.h"
@@ -6,16 +7,21 @@
 static NSString * const baseURLString = @"http://api.eventful.com/json/events/search?";
 static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 
-@interface EventsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface EventsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate,CLLocationManagerDelegate>
 
 @property(strong, nonatomic) NSArray *eventsArray;
 @property(strong, nonatomic) UISearchBar *searchBar;
 @property(strong, nonatomic) NSArray *results;
+@property(strong, nonatomic) NSString *userCity;
+@property(strong, nonatomic) NSString *userState;
 
 @end
 
 @implementation EventsViewController {
     UITableView *tableView;
+    CLLocationManager *locationManager;
+    CLLocation *currentLocation;
+    NSString *address;
 }
 
 - (void)viewDidLoad {
@@ -31,13 +37,29 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     self.searchBar.delegate = self;
     self.searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     UIView *searchBarView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 310.0, 44.0)];
-    self.searchBar.placeholder = @"Enter your location...";
+    self.searchBar.placeholder = @"Enter search keyword...";
     searchBarView.autoresizingMask = 0;
     [searchBarView addSubview:self.searchBar];
     self.navigationItem.titleView = searchBarView;
     
     [tableView reloadData];
     [tableView registerClass:[EventCell class] forCellReuseIdentifier:@"eventCellIdentifier"];
+    
+    // get user's location from settings
+    self.userCity = [NSUserDefaults.standardUserDefaults objectForKey:@"city"];
+    self.userState = [NSUserDefaults.standardUserDefaults objectForKey:@"state"];
+    
+    if (![self.userCity isKindOfClass:[NSString class]] || ![self.userState isKindOfClass:[NSString class]]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error getting current location" message:@"Please set your current location in Settings" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        UIAlertAction *dismissAlert = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        
+        [alert addAction:dismissAlert];
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }
 }
 
 // cancel button appears when user edits search bar
@@ -108,7 +130,11 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
         [cell updateWithEvent:self.results[indexPath.row]];
         return cell;
     }
-    return cell;
+    else {
+        NSLog(@"No events found matching that keyword");
+        return cell;
+    }
+   
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -135,23 +161,43 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 }
 
 - (void)fetchEventsWithQuery:(NSString *)query {
-    NSString *queryString = [NSString stringWithFormat:@"app_key=%@&page_size=100&location=%@",appKey,query];
-    queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
-    NSURL *url = [NSURL URLWithString:[baseURLString stringByAppendingString:queryString]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
-        if (data) {
-            NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-            self.results = [responseDictionary valueForKeyPath:@"events.event"];
-            [self->tableView reloadData];
-        }
-    }];
-    [task resume];
+    if ([self.userCity isKindOfClass:[NSString class]] && [self.userState isKindOfClass:[NSString class]]) {
+        NSString *cityAndSpace = [self.userCity stringByAppendingString:@" "];
+        NSString *loc = [cityAndSpace stringByAppendingString:self.userState];
+        
+        
+        NSString *queryString = [NSString stringWithFormat:@"app_key=%@&page_size=100&location=%@&keywords=%@",appKey,loc,query];
+        queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        
+        NSURL *url = [NSURL URLWithString:[baseURLString stringByAppendingString:queryString]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+        NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
+            if (data) {
+                NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                self.results = [responseDictionary valueForKeyPath:@"events.event"];
+                [self->tableView reloadData];
+            }
+        }];
+        [task resume];
+    }
+   
+    else {
+        NSLog( @"the user city and state are null");
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error getting current location" message:@"Please set your current location in Settings" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        UIAlertAction *okAlert = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }];
+        
+        [alert addAction:okAlert];
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }
 }
-
 
 
 @end
