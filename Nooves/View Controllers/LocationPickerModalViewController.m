@@ -165,7 +165,7 @@ UISearchBarDelegate>
     self.userLng = Location.currentLocation.userLng;
     
     if (newText.length > 2) {
-        if (self.userLat == 0 && self.userLng == 0) {
+        if ((self.userLat == 0 && self.userLng == 0) || [NSUserDefaults.standardUserDefaults boolForKey:@"switch"]) {
             NSLog(@"Cannot retrieve user location");
             self.city = [NSUserDefaults.standardUserDefaults objectForKey:@"city"];
             self.state = [NSUserDefaults.standardUserDefaults objectForKey:@"state"];
@@ -185,7 +185,7 @@ UISearchBarDelegate>
     self.userLat = Location.currentLocation.userLat;
     self.userLng = Location.currentLocation.userLng;
     if (searchBar.text.length > 2) {
-        if (self.userLat == 0 && self.userLng == 0) {
+        if ((self.userLat == 0 && self.userLng == 0) || [NSUserDefaults.standardUserDefaults boolForKey:@"switch"]) {
             NSLog(@"Cannot retrieve user location");
             self.city = [NSUserDefaults.standardUserDefaults objectForKey:@"city"];
             self.state = [NSUserDefaults.standardUserDefaults objectForKey:@"state"];

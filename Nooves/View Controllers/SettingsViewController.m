@@ -44,8 +44,6 @@
     self.stateTextField.borderStyle = UITextBorderStyleNone;
     self.stateTextField.textColor = UIColor.grayColor;
     [self.stateTextField setHidden:YES];
-    [self.view addSubview:self.cityTextField];
-    [self.view addSubview:self.stateTextField];
     
     self.confirmButton = [UIButton buttonWithType:UIButtonTypeSystem];
     self.confirmButton.frame = CGRectMake(7, 110, 100, 100);
@@ -55,27 +53,43 @@
             forControlEvents:UIControlEventTouchUpInside];
     self.confirmButton.hidden = YES;
     [self.confirmButton sizeToFit];
-    [self.view addSubview:self.confirmButton];
-    
     
     CGRect myFrame = CGRectMake(170.0f, 0.0f, 250.0f, 25.0f);
     self.locationSwitch = [[UISwitch alloc] initWithFrame:myFrame];
     [self.locationSwitch setOn:NO];
-    //self.locationSwitch.on = [NSUserDefaults.standardUserDefaults setBool:YES boolForKey:@"location"];
-//    if (self.city == nil && self.state == nil) {
-//        [self.locationSwitch setOn:YES];
-//    }
+    self.locationSwitch.on = [NSUserDefaults.standardUserDefaults boolForKey:@"switch"];
     [self.locationSwitch addTarget:self
                             action:@selector(switchToggled)
                   forControlEvents:UIControlEventValueChanged];
+    if ([self.locationSwitch isOn]) {
+        self.confirmButton.hidden = NO;
+        [self.stateTextField setHidden:NO];
+        [self.cityTextField setHidden:NO];
+    }
+    
+    [self.view addSubview:self.cityTextField];
+    [self.view addSubview:self.stateTextField];
+    [self.view addSubview:self.confirmButton];
     [self.view addSubview:self.locationSwitch];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    if (self.cityTextField.text == nil) {
+        self.cityTextField.text = @"Enter city";
+    } else {
+        self.cityTextField.text = [NSUserDefaults.standardUserDefaults objectForKey:@"city"];
+    }
+    
+    if (self.stateTextField.text == nil) {
+        self.stateTextField.text = @"Enter state ex: CA";
+    } else {
+        self.stateTextField.text = [NSUserDefaults.standardUserDefaults objectForKey:@"state"];
+    }
 }
 
 - (void)switchToggled {
-    if ([_locationSwitch isOn]) {
+    [NSUserDefaults.standardUserDefaults setBool:self.locationSwitch.on forKey:@"switch"];
+    if ([self.locationSwitch isOn]) {
         NSLog(@"Switch activated");
         [self.stateTextField setHidden:NO];
         [self.cityTextField setHidden:NO];
@@ -123,19 +137,6 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
     return 10;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    if (textField.textColor == UIColor.grayColor) {
-        textField.text = nil;
-        textField.textColor = UIColor.blackColor;
-    }
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    if (textField.text == nil) {
-        textField.textColor = UIColor.grayColor;
-    }
-}
-
 - (UIButton *)createConfirmButton{
     UIButton *confirmButton = [UIButton buttonWithType:UIButtonTypeSystem];
     confirmButton.frame = CGRectMake(7, 110, 100, 100);
@@ -152,6 +153,21 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
     self.state = self.stateTextField.text;
     [NSUserDefaults.standardUserDefaults setObject:self.city forKey:@"city"];
     [NSUserDefaults.standardUserDefaults setObject:self.state forKey:@"state"];
+}
+
+#pragma mark - Text Field methods
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField.textColor == UIColor.grayColor) {
+        textField.text = nil;
+        textField.textColor = UIColor.blackColor;
+    }
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (textField.text == nil) {
+        textField.textColor = UIColor.grayColor;
+    }
 }
 
 @end
