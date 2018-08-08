@@ -36,7 +36,6 @@
     [self.tableview registerClass:[PostCell class] forCellReuseIdentifier:@"postCellIdentifier"];
     [self.view addSubview:self.tableview];
     [self fetchGoing];
-    [self.tableview reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,7 +53,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.eventsGoing.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -139,6 +139,7 @@
                 }
             }
             self.eventsGoing = myArray;
+            [self.tableview reloadData];
         }
     }];
 }
