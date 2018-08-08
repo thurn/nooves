@@ -1,6 +1,7 @@
 #import "LocationCell.h"
 #import "Location.h"
 #import "LocationPickerModalViewController.h"
+#import "SettingsViewController.h"
 
 #import <CoreLocation/CoreLocation.h>
 
@@ -19,6 +20,8 @@ UISearchBarDelegate>
 @property (nonatomic) NSString *location;
 @property (nonatomic) NSNumber *userLng;
 @property (nonatomic) NSNumber *userLat;
+@property (nonatomic) NSString *city;
+@property (nonatomic) NSString *state;
 
 @end
 
@@ -104,9 +107,10 @@ UISearchBarDelegate>
 }
 
 // completes api request and stores search results in dictionary
-- (void)fetchLocationsWithQuery:(NSString *)query nearCity:(NSString *)city {
+- (void)fetchLocationsWithQuery:(NSString *)query nearCity:(NSString *)city state:(NSString *)state {
+    NSString *input = [NSString stringWithFormat:@"%@, %@", city, state];
     NSString *baseURLString = @"https://api.foursquare.com/v2/venues/search?";
-    NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&v=20141020&near=%@,NY&query=%@", clientID, clientSecret, city, query];
+    NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&v=20141020&near=%@&query=%@", clientID, clientSecret, input, query];
     queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
     NSURL *url = [NSURL URLWithString:[baseURLString stringByAppendingString:queryString]];
@@ -163,8 +167,10 @@ UISearchBarDelegate>
     if (newText.length > 2) {
         if (self.userLat == 0 && self.userLng == 0) {
             NSLog(@"Cannot retrieve user location");
-            // TODO(Nikki): pass in city to be user's manually inputted set location
-            [self fetchLocationsWithQuery:newText nearCity:@"New York City"];
+            self.city = [NSUserDefaults.standardUserDefaults objectForKey:@"city"];
+            self.state = [NSUserDefaults.standardUserDefaults objectForKey:@"state"];
+            
+            [self fetchLocationsWithQuery:newText nearCity:self.city state:self.state];
         } else {
             [self fetchLocationsWithQuery:newText
                      nearCityWithLatitude:self.userLat
@@ -181,8 +187,9 @@ UISearchBarDelegate>
     if (searchBar.text.length > 2) {
         if (self.userLat == 0 && self.userLng == 0) {
             NSLog(@"Cannot retrieve user location");
-            // TODO(Nikki): pass in city to be user's manually inputted set location
-            [self fetchLocationsWithQuery:searchBar.text nearCity:@"New York City"];
+            self.city = [NSUserDefaults.standardUserDefaults objectForKey:@"city"];
+            self.state = [NSUserDefaults.standardUserDefaults objectForKey:@"state"];
+            [self fetchLocationsWithQuery:searchBar.text nearCity:self.city state:self.state];
         } else {
             [self fetchLocationsWithQuery:searchBar.text
                      nearCityWithLatitude:self.userLat

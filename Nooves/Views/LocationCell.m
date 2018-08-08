@@ -43,7 +43,7 @@
     [self.categoryImageView setFrame:frame];
     self.categoryImageView.frame = CGRectMake(7, 7, 30, 30);
     
-    self.nameLabel.frame = CGRectMake(20, 55, 20, 20);
+    self.nameLabel.center = CGPointMake(20, 55);
     self.nameLabel.text = @"name";
     [self.nameLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12]];
     [self.contentView addSubview:self.nameLabel];
@@ -51,17 +51,17 @@
     [self.nameLabel autoPinEdgeToSuperviewMargin:ALEdgeLeft];
     [self.nameLabel sizeToFit];
     
-    self.addressLabel.frame = CGRectMake(7, 30, 20, 20);
+    self.addressLabel.center = CGPointMake(7, 70);
     self.addressLabel.text = @"address";
     [self.addressLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:12]];
     [self.contentView addSubview:self.addressLabel];
-    [self.nameLabel autoPinEdgeToSuperviewMargin:ALEdgeTop];
-    [self.nameLabel autoPinEdgeToSuperviewMargin:ALEdgeRight];
+    //[self.nameLabel autoPinEdgeToSuperviewMargin:ALEdgeTop];
+    //[self.nameLabel autoPinEdgeToSuperviewMargin:ALEdgeRight];
     [self.addressLabel sizeToFit];
     
     [self addSubview:self.categoryImageView];
-    [self addSubview:self.addressLabel];
     [self addSubview:self.nameLabel];
+    [self addSubview:self.addressLabel];
 }
 
 - (void)updateWithLocation:(NSDictionary *)location {
