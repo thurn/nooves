@@ -4,6 +4,7 @@
 #import <FIRDatabase.h>
 #import "Post.h"
 #import "UIImageView+Cache.h"
+#import <SDWebImageManager.h>
 @implementation PostCell
 
 - (void) awakeFromNib {
