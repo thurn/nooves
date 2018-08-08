@@ -56,6 +56,7 @@ PODS:
   - FirebaseStorage (3.0.0):
     - FirebaseCore (~> 5.0)
     - GTMSessionFetcher/Core (~> 1.1)
+  - FSCalendar (2.7.9)
   - GoogleToolboxForMac/Defines (2.1.4)
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
@@ -76,6 +77,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - FSCalendar
   - MBProgressHUD
   - PureLayout
 
@@ -92,6 +94,7 @@ SPEC REPOS:
     - FirebaseDatabase
     - FirebaseInstanceID
     - FirebaseStorage
+    - FSCalendar
     - GoogleToolboxForMac
     - GTMSessionFetcher
     - leveldb-library
@@ -111,6 +114,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 482bad9c2abd422bb2321194fb8c937e67426a89
   FirebaseInstanceID: f3f0657372592ecdfdfe2cac604a5a75758376a6
   FirebaseStorage: 7ca4bb7b58a25fa647b04f524033fc7cb7eb272b
+  FSCalendar: a04b09f16f811bc92e82f3cf852a15225233b9d5
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GTMSessionFetcher: 5fa5b80fd20e439ef5f545fb2cb3ca6c6714caa2
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
@@ -118,6 +122,6 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
 
-PODFILE CHECKSUM: 22c3b72289a4c17d6a8da8538cc720a9169b761f
+PODFILE CHECKSUM: 6e8bc00938cceaf8ae5d90fc5b41e32a2f080050
 
 COCOAPODS: 1.5.3

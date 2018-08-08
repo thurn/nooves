@@ -16,6 +16,6 @@
 
 @property (nonatomic, weak) id<DatePickerDelegate> dateDelegate;
 
-@property (nonatomic) UIDatePicker *datepicker;
+@property (nonatomic) NSDate *selectedDate;
 
 @end

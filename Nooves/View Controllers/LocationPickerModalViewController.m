@@ -72,7 +72,7 @@ UISearchBarDelegate>
     return self.tableView;
 }
 
-// completes api request and stores searched results in dictionary
+// completes api request and stores searched results in dictionary based on user location
 - (void)fetchLocationsWithQuery:(NSString *)query nearCityWithLatitude:(NSNumber *)latitude
                       longitude:(NSNumber *)longitude {
     NSString *queryLat = [NSString stringWithFormat:@"%@,", latitude];
@@ -106,7 +106,7 @@ UISearchBarDelegate>
     [task resume];
 }
 
-// completes api request and stores search results in dictionary
+// completes api request and stores search results in dictionary based on inputted city and state
 - (void)fetchLocationsWithQuery:(NSString *)query nearCity:(NSString *)city state:(NSString *)state {
     NSString *input = [NSString stringWithFormat:@"%@, %@", city, state];
     NSString *baseURLString = @"https://api.foursquare.com/v2/venues/search?";
