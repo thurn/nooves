@@ -34,6 +34,10 @@
     self.gregorian = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+}
+
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)monthPosition {
     
     NSDateComponents *components = [self.gregorian components:NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];

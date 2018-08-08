@@ -81,11 +81,8 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
-<<<<<<< HEAD
   - FSCalendar
-=======
   - HVTableView
->>>>>>> 93991b1812fb35b7bf5d41933245c6d2d292acdf
   - MBProgressHUD
   - PureLayout
   - SDWebImage
@@ -135,10 +132,6 @@ SPEC CHECKSUMS:
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
 
-<<<<<<< HEAD
-PODFILE CHECKSUM: 6e8bc00938cceaf8ae5d90fc5b41e32a2f080050
-=======
-PODFILE CHECKSUM: 60d18fa917a40e357ea70b3f273165c8df856435
->>>>>>> 93991b1812fb35b7bf5d41933245c6d2d292acdf
+PODFILE CHECKSUM: 7fca4634d7211a0778d0da5e953e1ad88b64960b
 
 COCOAPODS: 1.5.3
