@@ -1,4 +1,5 @@
 #import "ComposeViewController.h"
+#import <CoreLocation/CoreLocation.h>
 #import "EventCell.h"
 #import "EventDetailsViewController.h"
 #import "EventsViewController.h"
@@ -6,16 +7,21 @@
 static NSString * const baseURLString = @"http://api.eventful.com/json/events/search?";
 static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 
-@interface EventsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface EventsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate,CLLocationManagerDelegate>
 
 @property(strong, nonatomic) NSArray *eventsArray;
 @property(strong, nonatomic) UISearchBar *searchBar;
 @property(strong, nonatomic) NSArray *results;
+@property(strong, nonatomic) NSString *userCity;
+@property(strong, nonatomic) NSString *userState;
 
 @end
 
 @implementation EventsViewController {
     UITableView *tableView;
+    CLLocationManager *locationManager;
+    CLLocation *currentLocation;
+    NSString *address;
 }
 
 - (void)viewDidLoad {
@@ -31,7 +37,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     self.searchBar.delegate = self;
     self.searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     UIView *searchBarView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 310.0, 44.0)];
-    self.searchBar.placeholder = @"Enter your location...";
+    self.searchBar.placeholder = @"Enter search keyword...";
     searchBarView.autoresizingMask = 0;
     [searchBarView addSubview:self.searchBar];
     self.navigationItem.titleView = searchBarView;
@@ -135,7 +141,14 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 }
 
 - (void)fetchEventsWithQuery:(NSString *)query {
-    NSString *queryString = [NSString stringWithFormat:@"app_key=%@&page_size=100&location=%@",appKey,query];
+    
+    // get user's location from settings
+    self.userCity = [NSUserDefaults.standardUserDefaults objectForKey:@"city"];
+    NSString *cityAndSpace = [self.userCity stringByAppendingString:@" "];
+    self.userState = [NSUserDefaults.standardUserDefaults objectForKey:@"state"];
+    NSString *loc = [cityAndSpace stringByAppendingString:self.userState];
+    
+    NSString *queryString = [NSString stringWithFormat:@"app_key=%@&page_size=100&location=%@&keywords=%@",appKey,loc,query];
     queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     
     NSURL *url = [NSURL URLWithString:[baseURLString stringByAppendingString:queryString]];
@@ -151,8 +164,6 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     }];
     [task resume];
 }
-
-
 
 @end
 
