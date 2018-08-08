@@ -11,6 +11,7 @@
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
 #import "UIImageView+Cache.h"
+#import "UserViewController.h"
 @interface PostDetailsViewController ()
 @property (strong, nonatomic) Post *post;
 @property (strong, nonatomic) User *user;
@@ -106,8 +107,16 @@
         self.activityDescriptionLabel.text = [@"Description: " stringByAppendingString:self.post.activityDescription];
         [self.activityDescriptionLabel sizeToFit];
         [self.view addSubview:self.activityDescriptionLabel];
+        self.profilePicImage.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tappedPic = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapProfilePicc)];
+        [self.profilePicImage addGestureRecognizer:tappedPic];
     }
 }
+- (void)didTapProfilePicc {
+    UserViewController *newUser = [[UserViewController alloc] initWithUserID:self.post.userID];
+    [self.navigationController pushViewController:newUser animated:YES];
+}
+
 - (void)didTapGoing{
     FIRDatabaseReference *ref = [[FIRDatabase database] reference];
     if(!self.going){

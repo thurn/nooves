@@ -27,6 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    sleep(1);
     self.tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height*.65, self.view.frame.size.width, self.view.frame.size.height*.35)];
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
@@ -35,7 +36,6 @@
     [self.tableview registerClass:[PostCell class] forCellReuseIdentifier:@"postCellIdentifier"];
     [self.view addSubview:self.tableview];
     [self fetchGoing];
-    [self.tableview reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,7 +53,8 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.eventsGoing.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -76,12 +77,14 @@
                 [self.view addSubview:self.profilePicture];
                 [self.profilePicture loadURLandCache:self.user.profilePicURL];
                 [self setUI];
+                NSLog(@"UI SEet");
             }
             else {
                 self.profilePicture = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height*9/20)];
                 self.profilePicture.image = [UIImage imageNamed:@"profile-blank"];
                 [self.view addSubview:self.profilePicture];
                 [self setUI];
+                NSLog(@"UI Set");
             }
         }
         else {
@@ -90,6 +93,7 @@
         }
     }];
     [self.navigationItem setTitle:self.user.name];
+    NSLog(@"Image set");
     return self;
 }
 - (void)setUI {
@@ -135,6 +139,7 @@
                 }
             }
             self.eventsGoing = myArray;
+            [self.tableview reloadData];
         }
     }];
 }
