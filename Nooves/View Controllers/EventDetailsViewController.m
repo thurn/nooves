@@ -1,7 +1,8 @@
+#import <CoreLocation/CoreLocation.h>
 #import "EventDetailsViewController.h"
 #import <PureLayout.h>
 
-@interface EventDetailsViewController ()
+@interface EventDetailsViewController () <CLLocationManagerDelegate>
 
 @property(strong, nonatomic) UILabel *titleField;
 @property(strong, nonatomic) UILabel *descriptionField;
@@ -16,6 +17,8 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self configureEventDetails];
+    
+    //configure user's location settings
 }
 
 - (void)configureEventDetails {
@@ -59,5 +62,7 @@
     [self dismissViewControllerAnimated:NO completion:nil];
     [self dismissViewControllerAnimated:NO completion:nil];
 }
+
+
 
 @end
