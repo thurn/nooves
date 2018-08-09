@@ -196,7 +196,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (selectedCellIndexPath != nil && [selectedCellIndexPath compare:indexPath] == NSOrderedSame) {
         return tableView.rowHeight *2;
-    }git
+    }
     return tableView.rowHeight;
 }
 

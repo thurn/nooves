@@ -145,7 +145,8 @@
 - (UITableView *)configureTableView {
     CGFloat width = self.view.frame.size.width;
     CGFloat height = self.view.frame.size.height;
-    CGRect tableViewFrame = CGRectMake(0, 0, width, height);
+    UITabBarController *tab = [UITabBarController new];
+    CGRect tableViewFrame = CGRectMake(0, 0, width, height-tab.tabBar.frame.size.height-20);
     
     tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
     tableView.scrollEnabled = YES;

@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UIImageView (Cache)
-@property (strong, nonatomic) NSCache *myCache;
 - (void) loadURLandCache:(NSString *)string;
 @end

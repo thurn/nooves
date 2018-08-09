@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     sleep(1);
-    self.tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height*.65, self.view.frame.size.width, self.view.frame.size.height*.35)];
+    self.tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height*.6, self.view.frame.size.width, self.view.frame.size.height*.4-[UITabBar new].frame.size.height-65)];
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
     self.tableview.rowHeight = UITableViewAutomaticDimension;

@@ -3,6 +3,7 @@
 #import "LocationPickerModalViewController.h"
 #import "SettingsViewController.h"
 
+#import <ChameleonFramework/Chameleon.h>
 #import <CoreLocation/CoreLocation.h>
 
 static NSString * const baseURLString = @"https://api.foursquare.com/v2/venues/search?";
@@ -29,7 +30,7 @@ UISearchBarDelegate>
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor flatWhiteColor];
     self.navigationController.navigationBarHidden = NO;
     [self configureTableView];
     [self.view addSubview:self.tableView];
@@ -44,6 +45,7 @@ UISearchBarDelegate>
     UIView *searchBarView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 310.0, 44.0)];
     searchBarView.autoresizingMask = 0;
     [searchBarView addSubview:self.searchBar];
+    self.searchBar.barTintColor = [UIColor flatWhiteColor];
     self.navigationItem.titleView = searchBarView;
     
     [self createBackButton];
@@ -63,7 +65,7 @@ UISearchBarDelegate>
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.backgroundColor = [UIColor flatWhiteColor];
     self.tableView.scrollEnabled = YES;
     self.tableView.showsVerticalScrollIndicator = YES;
     self.tableView.userInteractionEnabled = YES;
@@ -72,7 +74,7 @@ UISearchBarDelegate>
     return self.tableView;
 }
 
-// completes api request and stores searched results in dictionary
+// completes api request and stores searched results in dictionary based on user location
 - (void)fetchLocationsWithQuery:(NSString *)query nearCityWithLatitude:(NSNumber *)latitude
                       longitude:(NSNumber *)longitude {
     NSString *queryLat = [NSString stringWithFormat:@"%@,", latitude];
@@ -106,7 +108,7 @@ UISearchBarDelegate>
     [task resume];
 }
 
-// completes api request and stores search results in dictionary
+// completes api request and stores search results in dictionary based on inputted city and state
 - (void)fetchLocationsWithQuery:(NSString *)query nearCity:(NSString *)city state:(NSString *)state {
     NSString *input = [NSString stringWithFormat:@"%@, %@", city, state];
     NSString *baseURLString = @"https://api.foursquare.com/v2/venues/search?";
@@ -207,7 +209,7 @@ UISearchBarDelegate>
 
 // sets cell height
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
+    return 60;
 }
 
 #pragma mark - UITableViewDelegate
@@ -240,6 +242,39 @@ UISearchBarDelegate>
     
     // changes the selected background view of the cell
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIView *roundedView = [cell.contentView viewWithTag:100];
+    if (roundedView == nil) {
+        // Add some padding to the view in order to see the shadow
+        NSInteger spacingBothHorizontal = 2;
+        CGRect customizedFrame = CGRectMake(spacingBothHorizontal/2, 10, CGRectGetWidth(cell.contentView.frame) - spacingBothHorizontal, CGRectGetHeight(cell.contentView.frame) - 20);
+        roundedView = [[UIView alloc] initWithFrame:customizedFrame];
+        
+        // Layer customizations
+        roundedView.layer.cornerRadius = 10.0f;
+        roundedView.backgroundColor = [UIColor whiteColor];
+        roundedView.layer.shadowOffset = CGSizeMake(-1, -1);
+        roundedView.layer.shadowOpacity = 2.0;
+        roundedView.layer.shadowColor = [UIColor flatGrayColor].CGColor;
+        roundedView.tag = 100;
+        
+        if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+            [cell setSeparatorInset:UIEdgeInsetsZero];
+        }
+        if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+            [cell setPreservesSuperviewLayoutMargins:NO];
+        }
+        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+            [cell setLayoutMargins:UIEdgeInsetsZero];
+        }
+        
+        // Add it to view
+        [cell.contentView addSubview:roundedView];
+        [cell.contentView sendSubviewToBack:roundedView];
+        cell.contentView.backgroundColor = [UIColor flatWhiteColor];
+    }
 }
 
 // presents alert controller if location services not enabled

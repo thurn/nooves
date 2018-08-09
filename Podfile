@@ -15,8 +15,10 @@ target 'Nooves' do
   pod 'FBSDKLoginKit'
   pod 'Firebase/Storage'
   pod 'MBProgressHUD'
+  pod 'FSCalendar'
   pod 'SDWebImage'
   pod 'HVTableView'
+  pod 'ChameleonFramework'
 
   target 'NoovesTests' do
     inherit! :search_paths
