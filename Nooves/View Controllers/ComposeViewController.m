@@ -114,12 +114,9 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     self.locationTextField.text = self.location;
     
     NSDateFormatter *formatter = [NSDateFormatter new];
-    formatter.dateFormat = @"MM-dd HH:mm";
+    formatter.dateFormat = @"MMM-dd HH:mm";
     NSString *dateDetails = [formatter stringFromDate:self.date];
     self.timeTextField.text = dateDetails;
-    
-    NSString *activity = [Post activityTypeToString:self.activityType];
-    self.categoryTextField.text = activity;
     
     self.eventDescription.textColor = UIColor.grayColor;
 }
@@ -284,6 +281,8 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 - (void)categoryPickerModalViewController:(CategoryPickerModalViewController *)controller
                       didPickActivityType:(ActivityType *)activity {
     self.activityType = activity;
+    NSString *activityHa = [Post activityTypeToString:self.activityType];
+    self.categoryTextField.text = activityHa;
     [self.navigationController popToViewController:self animated:YES];
 }
 

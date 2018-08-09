@@ -6,6 +6,7 @@
 @property (nonatomic, weak) FSCalendar *calendar;
 @property (nonatomic) NSCalendar *gregorian;
 @property (nonatomic) UIDatePicker *datepicker;
+@property (nonatomic) UIDatePickerMode *datePickerMode;
 @end
 
 @implementation DatePickerModalViewController
@@ -44,7 +45,12 @@
     NSInteger month = [components month];
     NSInteger day = [components day];
     
-    self.selectedDate = [self.gregorian dateByAddingComponents:components toDate:self.datepicker.date options:0];
+    NSDateFormatter *output = [[NSDateFormatter alloc] init];
+    [output setDateFormat:@"hh:mm a"];
+    NSString *string = [output stringFromDate:self.datepicker.date];
+    NSDate *dateFromString = [output dateFromString:string];
+    
+    self.selectedDate = [self.gregorian dateByAddingComponents:components toDate:dateFromString options:0];
     
     NSDateFormatter *formatter = [NSDateFormatter new];
     formatter.dateFormat = @"MMM dd hh:mm a";
