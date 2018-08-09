@@ -29,6 +29,7 @@
 		32C7361D210842E3002F8689 /* FilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C7361C210842E3002F8689 /* FilterCell.m */; };
 		88EA4F91B256FABCEF59A44B /* libPods-Nooves.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3869EF44C092142CDCF38AB /* libPods-Nooves.a */; };
 		A8118283CBE20906A3BDB372 /* libPods-NoovesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A55F4BBA41E7A6F4F43E772D /* libPods-NoovesUITests.a */; };
+		CE19181F211CB7E6006EAF03 /* LocationSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19181E211CB7E6006EAF03 /* LocationSettingsViewController.m */; };
 		CE57768B21064FDA00C7637C /* LocationPickerModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57768A21064FDA00C7637C /* LocationPickerModalViewController.m */; };
 		CE57768F210654E400C7637C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE57768E210654E400C7637C /* CoreLocation.framework */; };
 		CE57769221068ADB00C7637C /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57769121068ADB00C7637C /* LocationCell.m */; };
@@ -108,6 +109,8 @@
 		8918DA3D7116BD7E859B7BCD /* libPods-NoovesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NoovesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A55F4BBA41E7A6F4F43E772D /* libPods-NoovesUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NoovesUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6A43E079A9B5B80CB927193 /* Pods-Nooves.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nooves.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nooves/Pods-Nooves.release.xcconfig"; sourceTree = "<group>"; };
+		CE19181D211CB7E6006EAF03 /* LocationSettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationSettingsViewController.h; sourceTree = "<group>"; };
+		CE19181E211CB7E6006EAF03 /* LocationSettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationSettingsViewController.m; sourceTree = "<group>"; };
 		CE57768921064FDA00C7637C /* LocationPickerModalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationPickerModalViewController.h; sourceTree = "<group>"; };
 		CE57768A21064FDA00C7637C /* LocationPickerModalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationPickerModalViewController.m; sourceTree = "<group>"; };
 		CE57768E210654E400C7637C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -217,6 +220,8 @@
 				32B6A8A62113B36400C9C67D /* EventsViewController.m */,
 				320881032119A0700046F5B3 /* EventDetailsViewController.h */,
 				320881042119A0700046F5B3 /* EventDetailsViewController.m */,
+				CE19181D211CB7E6006EAF03 /* LocationSettingsViewController.h */,
+				CE19181E211CB7E6006EAF03 /* LocationSettingsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -539,6 +544,7 @@
 				0AE18A122113A1DC00B8CA74 /* Location.m in Sources */,
 				0AADDFE121015B3C00C173CB /* DatePickerModalViewController.m in Sources */,
 				CE57769221068ADB00C7637C /* LocationCell.m in Sources */,
+				CE19181F211CB7E6006EAF03 /* LocationSettingsViewController.m in Sources */,
 				327D408721094087002E8513 /* User.m in Sources */,
 				0A6C9384211110EE00097F37 /* PostDetailsViewController.m in Sources */,
 				CED91F6F2101306800E0E2F6 /* ProfileViewController.m in Sources */,
