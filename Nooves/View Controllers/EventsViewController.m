@@ -1,24 +1,25 @@
 #import "ComposeViewController.h"
+#import <CoreLocation/CoreLocation.h>
 #import "EventCell.h"
 #import "EventsViewController.h"
 
 static NSString * const baseURLString = @"http://api.eventful.com/json/events/search?";
 static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 
-@interface EventsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface EventsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate>
 
 @property(strong, nonatomic) NSArray *eventsArray;
 @property(strong, nonatomic) UISearchBar *searchBar;
 @property(strong, nonatomic) NSArray *results;
-@property(strong, nonatomic) NSString *userCity;
-@property(strong, nonatomic) NSString *userState;
+@property(strong, nonatomic) NSString *userLocation;
+@property(strong, nonatomic) CLLocationManager *locationManager;
+
 @end
 
 @implementation EventsViewController
 
 {
     UITableView *tableView;
-    NSString *address;
     NSIndexPath *selectedCellIndexPath;
 }
 
@@ -42,25 +43,35 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     
     [tableView reloadData];
     [tableView registerClass:[EventCell class] forCellReuseIdentifier:@"eventCellIdentifier"];
-    [tableView registerClass:[EventCell class] forCellReuseIdentifier:@"compressedEventCellIdentifier"];
     
-    // get user's location from settings
-    self.userCity = [NSUserDefaults.standardUserDefaults objectForKey:@"city"];
-    self.userState = [NSUserDefaults.standardUserDefaults objectForKey:@"state"];
-    
-    if (![self.userCity isKindOfClass:[NSString class]] || ![self.userState isKindOfClass:[NSString class]]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error getting current location" message:@"Please set your current location in Settings" preferredStyle:(UIAlertControllerStyleAlert)];
-        
-        UIAlertAction *dismissAlert = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        }];
-        
-        [alert addAction:dismissAlert];
-        [self presentViewController:alert animated:YES completion:^{
-            
-        }];
-    }
+    // Get user's current location
+    self.locationManager = [[CLLocationManager alloc]init];
+    self.locationManager.delegate = self;
+    [self.locationManager startUpdatingLocation];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    CLGeocoder *geocoder = [[CLGeocoder alloc]init];
+    [self.locationManager requestWhenInUseAuthorization];
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [self.locationManager requestWhenInUseAuthorization];
+    }
+    CLLocationCoordinate2D coordinate;
+    coordinate.latitude = self.locationManager.location.coordinate.latitude;
+    coordinate.longitude = self.locationManager.location.coordinate.longitude;
+    
+    CLLocation *loc = [[CLLocation alloc]initWithLatitude:coordinate.latitude longitude:coordinate.longitude];
+    [geocoder reverseGeocodeLocation:loc completionHandler:^(NSArray *placemarks, NSError *error) {
+        CLPlacemark *placemark = [placemarks objectAtIndex:0];
+        NSString *userCity = placemark.locality;
+        NSString *userState = placemark.administrativeArea;
+        NSString *cityAndSpace = [userCity stringByAppendingString:@" "];
+        self.userLocation= [cityAndSpace stringByAppendingString:userState];
+        NSLog(@"User location :%@", self.userLocation);
+        [self.locationManager stopUpdatingLocation];
+        
+    }];
+}
 // cancel button appears when user edits search bar
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     self.searchBar.showsCancelButton = YES;
@@ -75,7 +86,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    NSLog( @"fetching events for :%@", searchBar.text);
+    NSLog( @"fetching events for :%@ about :%@",self.userLocation, searchBar.text);
       [self fetchEventsWithQuery:searchBar.text];
 }
 
@@ -124,8 +135,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 
 #pragma mark - UITableViewDelegate methods
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-       EventCell *cell = [tableView dequeueReusableCellWithIdentifier:@"compressedEventCellIdentifier"];
-    cell = [tableView dequeueReusableCellWithIdentifier:@"eventCellIdentifier" forIndexPath:indexPath];
+    EventCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"eventCellIdentifier" forIndexPath:indexPath];
     if(self.results.count > indexPath.row) {
         [cell updateWithEvent:self.results[indexPath.row]];
         return cell;
@@ -156,12 +166,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 }
 
 - (void)fetchEventsWithQuery:(NSString *)query {
-    if ([self.userCity isKindOfClass:[NSString class]] && [self.userState isKindOfClass:[NSString class]]) {
-        NSString *cityAndSpace = [self.userCity stringByAppendingString:@" "];
-        NSString *loc = [cityAndSpace stringByAppendingString:self.userState];
-        
-        
-        NSString *queryString = [NSString stringWithFormat:@"app_key=%@&page_size=100&location=%@&keywords=%@",appKey,loc,query];
+        NSString *queryString = [NSString stringWithFormat:@"app_key=%@&page_size=100&location=%@&keywords=%@",appKey,self.userLocation,query];
         queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         
         NSURL *url = [NSURL URLWithString:[baseURLString stringByAppendingString:queryString]];
@@ -176,20 +181,6 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
             }
         }];
         [task resume];
-    }
-   
-    else {
-        NSLog( @"the user city and state are null");
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error getting current location" message:@"Please set your current location in Settings" preferredStyle:(UIAlertControllerStyleAlert)];
-        
-        UIAlertAction *okAlert = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        }];
-        
-        [alert addAction:okAlert];
-        [self presentViewController:alert animated:YES completion:^{
-            
-        }];
-    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -202,5 +193,6 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
+
 @end
 
