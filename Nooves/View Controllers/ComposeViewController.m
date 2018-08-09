@@ -1,17 +1,17 @@
 #import "ComposeViewController.h"
-
 #import "AppDelegate.h"
 #import "PureLayout/PureLayout.h"
 #import "TimelineViewController.h"
-
 #import "CategoryPickerModalViewController.h"
 #import "DatePickerModalViewController.h"
 #import "LocationPickerModalViewController.h"
 #import "EventsViewController.h"
 #import "EventDetailsViewController.h"
-
+#import "TimelineViewController.h"
 #import <FirebaseAuth.h>
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "ProfileViewController.h"
+#import "TabBarController.h"
 
 @interface ComposeViewController () <UITextViewDelegate, LocationPickerDelegate,
 CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
@@ -262,7 +262,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
         }];
         self.uploading = NO;
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [self dismissViewControllerAnimated:NO completion:nil];
+        [self pushToTabBar];
         NSLog(@"User posted successfully");
     } else {
         NSLog(@"Nothing to post");
@@ -327,12 +327,27 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     }
 }
 
-/*- (void)eventDetailsViewController:(EventDetailsViewController *)controller didSelectEventWithTitle:(NSString *)title withDescription:(NSString *)description withVenue:(NSString *)venue {
-    self.eventTitle.text = title;
-    self.eventDescription.text = description;
-    self.location = venue;
-    [self.navigationController popToViewController:self animated:YES];
-}*/
+- (void)pushToTabBar {
+    ProfileViewController* profileViewController = [[ProfileViewController alloc] init];
+    TimelineViewController *loginController = [[TimelineViewController alloc] init];
+    
+    TabBarController *tabBarController = [[TabBarController alloc] init];
+    UINavigationController *tabBarNavCont = [[UINavigationController alloc] initWithRootViewController:tabBarController];
+    
+    UINavigationController *timelineNavCont = [[UINavigationController alloc] initWithRootViewController:loginController];
+    UINavigationController *profileNavCont = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+    
+    tabBarController.viewControllers = @[timelineNavCont, profileNavCont];
+    
+    UIImage *feedImage = [UIImage imageNamed:@"home"];
+    UIImage *profileImage = [UIImage imageNamed:@"profile"];
+    
+    loginController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Home" image:feedImage tag:0];
+    profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Profile" image:profileImage tag:1];
+    [self.navigationController presentViewController:tabBarNavCont animated:NO completion:^{
+        nil;
+    }];
+}
 
 
 @end

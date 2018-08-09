@@ -11,12 +11,8 @@
 #import <SDWebImageDownloader.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 @implementation UIImageView (Cache)
-- (void)setMyCache:(NSCache *)myCache{
-}
-- (NSCache *)myCache{
-    return [[NSCache alloc] init];
-}
-- (void) loadURLandCache:(NSString *)string{
+
+- (void) loadURLandCache:(NSString *)string {
     [self sd_setImageWithURL:[NSURL URLWithString:string] placeholderImage:[UIImage imageNamed:@"profile-blank"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         if (error) {
             NSLog(@"%@", error);
