@@ -26,7 +26,7 @@
     int iterator = 0;
     for (int i = 0; i < 9; i++) {
         float xpos = 345;
-        float ypos = 7 + iterator;
+        float ypos = 5 + iterator;
         UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"chevron-right", i]];
         
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(xpos, ypos, 24, 24)];
@@ -77,6 +77,8 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
 - (UIButton *)createInviteFriendsButton {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     button.frame = CGRectMake(5, 10, 100, 100);
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor blackColor]];
     [button setImage:[UIImage imageNamed:@"invite-friends"] forState:UIControlStateNormal];
     [button setTitle:@"Invite friends" forState:UIControlStateNormal];
     [button sizeToFit];
@@ -86,6 +88,8 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
 - (UIButton *)createAccountButton {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     button.frame = CGRectMake(5, 40, 100, 100);
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor blackColor]];
     [button setImage:[UIImage imageNamed:@"account"] forState:UIControlStateNormal];
     [button setTitle:@"Account" forState:UIControlStateNormal];
     [button sizeToFit];
@@ -95,6 +99,8 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
 - (UIButton *)createNotificationsButton {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     button.frame = CGRectMake(5, 70, 100, 100);
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor blackColor]];
     [button setImage:[UIImage imageNamed:@"notifications"] forState:UIControlStateNormal];
     [button setTitle:@"Notifications" forState:UIControlStateNormal];
     [button sizeToFit];
@@ -104,6 +110,8 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
 - (UIButton *)createHelpCenterButton {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     button.frame = CGRectMake(5, 100, 100, 100);
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor blackColor]];
     [button setImage:[UIImage imageNamed:@"help"] forState:UIControlStateNormal];
     [button setTitle:@"Help Center" forState:UIControlStateNormal];
     [button sizeToFit];
@@ -113,6 +121,8 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
 - (UIButton *)createReportButton {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     button.frame = CGRectMake(5, 130, 100, 100);
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor blackColor]];
     [button setImage:[UIImage imageNamed:@"report"] forState:UIControlStateNormal];
     [button setTitle:@"Report a problem" forState:UIControlStateNormal];
     [button sizeToFit];
@@ -122,6 +132,8 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
 - (UIButton *)createPrivacyButton {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     button.frame = CGRectMake(5, 160, 100, 100);
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor blackColor]];
     [button setImage:[UIImage imageNamed:@"privacy"] forState:UIControlStateNormal];
     [button setTitle:@"Privacy policy" forState:UIControlStateNormal];
     [button sizeToFit];
@@ -131,6 +143,8 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
 - (UIButton *)createAboutButton {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     button.frame = CGRectMake(5, 190, 100, 100);
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor blackColor]];
     [button setImage:[UIImage imageNamed:@"info"] forState:UIControlStateNormal];
     [button setTitle:@"About" forState:UIControlStateNormal];
     [button sizeToFit];
@@ -140,6 +154,8 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
 - (UIButton *)createLocationButton {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     button.frame = CGRectMake(5, 220, 100, 100);
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor blackColor]];
     [button setImage:[UIImage imageNamed:@"location-settings"] forState:UIControlStateNormal];
     [button setTitle:@"Location" forState:UIControlStateNormal];
     [button addTarget:self

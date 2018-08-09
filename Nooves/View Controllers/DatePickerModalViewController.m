@@ -1,5 +1,7 @@
 #import "DatePickerModalViewController.h"
+
 #import "FSCalendar.h"
+#import "Chameleon.h"
 
 @interface DatePickerModalViewController() <FSCalendarDelegate, FSCalendarDataSource>
 @property (nonatomic, weak) FSCalendar *calendar;
@@ -16,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor flatWhiteColor];
     self.selectedDate = [[NSDate alloc] init];
     self.gregorian = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     
@@ -24,7 +26,7 @@
     self.datepicker.frame = CGRectMake(0, 300, self.view.frame.size.width, 200);
     self.datepicker.timeZone = [NSTimeZone localTimeZone];
     self.datepicker.calendar = self.gregorian;
-    self.datepicker.backgroundColor = [UIColor whiteColor];
+    self.datepicker.backgroundColor = [UIColor flatWhiteColor];
     self.datepicker.datePickerMode = UIDatePickerModeTime;
     
     
@@ -32,7 +34,10 @@
     calendar.dataSource = self;
     calendar.delegate = self;
     self.calendar = calendar;
-    self.calendar.appearance.todayColor = [UIColor yellowColor];
+    self.calendar.appearance.todayColor = [UIColor flatSkyBlueColor];
+    self.calendar.appearance.selectionColor = [UIColor flatPinkColor];
+    self.calendar.appearance.headerTitleColor = [UIColor flatSkyBlueColor];
+    self.calendar.appearance.weekdayTextColor = [UIColor flatSkyBlueColor];
     
     [self.view addSubview:calendar];
     [self.view addSubview:self.datepicker];

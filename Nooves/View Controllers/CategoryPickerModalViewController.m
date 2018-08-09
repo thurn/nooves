@@ -1,5 +1,6 @@
 #import "CategoryPickerModalViewController.h"
 #import "Post.h"
+#import "Chameleon.h"
 
 @interface CategoryPickerModalViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UIScrollViewDelegate>
 @property (nonatomic) NSArray *categories;
@@ -12,7 +13,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor flatWhiteColor];
     self.navigationController.navigationBarHidden = NO;
     
     self.imagesArray = [[NSMutableArray alloc] init];

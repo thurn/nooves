@@ -3,6 +3,7 @@
 #import "LocationPickerModalViewController.h"
 #import "SettingsViewController.h"
 
+#import "Chameleon.h"
 #import <CoreLocation/CoreLocation.h>
 
 static NSString * const baseURLString = @"https://api.foursquare.com/v2/venues/search?";
@@ -29,7 +30,7 @@ UISearchBarDelegate>
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor flatWhiteColor];
     self.navigationController.navigationBarHidden = NO;
     [self configureTableView];
     [self.view addSubview:self.tableView];
