@@ -1,6 +1,6 @@
 #import "CategoryPickerModalViewController.h"
 #import "Post.h"
-#import "Chameleon.h"
+#import <ChameleonFramework/Chameleon.h>
 
 @interface CategoryPickerModalViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UIScrollViewDelegate>
 @property (nonatomic) NSArray *categories;

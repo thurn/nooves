@@ -33,6 +33,7 @@
 
 // initialize cell properties
 - (void)initialize {
+    
     self.categoryImageView = [[UIImageView alloc] init];
     self.addressLabel = [[UILabel alloc] init];
     self.nameLabel = [[UILabel alloc] init];
@@ -47,21 +48,19 @@
     self.nameLabel.text = @"name";
     [self.nameLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12]];
     [self.contentView addSubview:self.nameLabel];
-//    [self.nameLabel autoPinEdgeToSuperviewMargin:ALEdgeTop];
-//    [self.nameLabel autoPinEdgeToSuperviewMargin:ALEdgeLeft];
+    [self.nameLabel autoPinEdgeToSuperviewMargin:ALEdgeTop];
+    [self.nameLabel autoPinEdgeToSuperviewMargin:ALEdgeRight];
     [self.nameLabel sizeToFit];
     
     self.addressLabel.center = CGPointMake(7, 70);
     self.addressLabel.text = @"address";
     [self.addressLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:12]];
     [self.contentView addSubview:self.addressLabel];
-    [self.nameLabel autoPinEdgeToSuperviewMargin:ALEdgeTop];
-    [self.nameLabel autoPinEdgeToSuperviewMargin:ALEdgeRight];
     [self.addressLabel sizeToFit];
     
     [self addSubview:self.categoryImageView];
-//    [self addSubview:self.nameLabel];
-//    [self addSubview:self.addressLabel];
+    [self addSubview:self.nameLabel];
+    [self addSubview:self.addressLabel];
 }
 
 - (void)updateWithLocation:(NSDictionary *)location {

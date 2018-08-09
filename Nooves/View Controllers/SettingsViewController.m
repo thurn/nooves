@@ -6,6 +6,7 @@
 #import "SettingsViewController.h"
 #import "LocationSettingsViewController.h"
 #import "PureLayout/PureLayout.h"
+#import <ChameleonFramework/Chameleon.h>
 
 @interface SettingsViewController () <FBSDKLoginButtonDelegate>
 @property (nonatomic) UIButton *logout;
@@ -15,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor flatWhiteColor];
     
     FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
     loginButton.delegate = self;
@@ -25,11 +26,11 @@
     
     int iterator = 0;
     for (int i = 0; i < 9; i++) {
-        float xpos = 345;
-        float ypos = 5 + iterator;
+        float xpos = 355;
+        float ypos = 10 + iterator;
         UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"chevron-right", i]];
         
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(xpos, ypos, 24, 24)];
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(xpos, ypos, 15, 15)];
         [imageView setImage:image];
         [self.view addSubview:imageView];
         iterator += 27;

@@ -1,7 +1,7 @@
 #import "DatePickerModalViewController.h"
 
 #import "FSCalendar.h"
-#import "Chameleon.h"
+#import <ChameleonFramework/Chameleon.h>
 
 @interface DatePickerModalViewController() <FSCalendarDelegate, FSCalendarDataSource>
 @property (nonatomic, weak) FSCalendar *calendar;
@@ -34,10 +34,10 @@
     calendar.dataSource = self;
     calendar.delegate = self;
     self.calendar = calendar;
-    self.calendar.appearance.todayColor = [UIColor flatSkyBlueColor];
-    self.calendar.appearance.selectionColor = [UIColor flatPinkColor];
-    self.calendar.appearance.headerTitleColor = [UIColor flatSkyBlueColor];
-    self.calendar.appearance.weekdayTextColor = [UIColor flatSkyBlueColor];
+    self.calendar.appearance.todayColor = [UIColor flatPinkColor];
+    self.calendar.appearance.selectionColor = [UIColor flatSkyBlueColor];
+    self.calendar.appearance.headerTitleColor = [UIColor flatPinkColor];
+    self.calendar.appearance.weekdayTextColor = [UIColor flatPinkColor];
     
     [self.view addSubview:calendar];
     [self.view addSubview:self.datepicker];

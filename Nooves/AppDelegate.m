@@ -4,8 +4,8 @@
 #import "TabBarController.h"
 #import "ProfileViewController.h"
 #import "LoginViewController.h"
-#import "Chameleon.h"
 
+#import <ChameleonFramework/Chameleon.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FirebaseAuth.h>
 #import <Firebase/Firebase.h>
@@ -56,6 +56,7 @@
     tabBarController.viewControllers = @[timelineNavCont, profileNavCont];
     
     [[UITabBar appearance] setTintColor:[UIColor flatSkyBlueColor]];
+    [[UITabBar appearance] setTranslucent:YES];
     
     UIImage *feedImage = [UIImage imageNamed:@"home"];
     UIImage *profileImage = [UIImage imageNamed:@"profile"];

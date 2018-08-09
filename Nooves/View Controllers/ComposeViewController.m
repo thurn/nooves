@@ -9,7 +9,7 @@
 #import "LocationPickerModalViewController.h"
 #import "EventsViewController.h"
 
-#import "Chameleon.h"
+#import <ChameleonFramework/Chameleon.h>
 #import <FirebaseAuth.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "PureLayout/PureLayout.h"
