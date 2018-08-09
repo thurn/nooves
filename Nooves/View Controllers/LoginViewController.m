@@ -3,6 +3,9 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "TimelineViewController.h"
+#import "ProfileViewController.h"
+#import "AppDelegate.h"
+#import "TabBarController.h"
 @interface LoginViewController () <FBSDKLoginButtonDelegate>
 @property UITextField *phoneNumber;
 @property FIRUser *user;
@@ -12,18 +15,16 @@
 
 - (void)viewDidLoad {
     self.user = [FIRAuth auth].currentUser;
-    if(self.user!=nil){
-        [self.navigationController pushViewController:[TimelineViewController new] animated:YES];
-    }
     [super viewDidLoad];
+
     self.view.backgroundColor = [UIColor whiteColor];
     FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
     loginButton.delegate = self;
     // Optional: Place the button in the center of your view.
     loginButton.readPermissions = @[@"public_profile", @"email"];
     loginButton.center = self.view.center;
-    [self.view addSubview:loginButton];
     
+    [self.view addSubview:loginButton];
 }
 
 - (void)loginButton:(FBSDKLoginButton *)loginButton
@@ -43,7 +44,23 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
                                                      if (authResult == nil) { return; }
                                                      FIRUser *user = authResult.user;
                                                      self.user = user;
-                                                     [self.navigationController pushViewController:[TimelineViewController new] animated:YES];
+                                                     ProfileViewController* profileViewController = [[ProfileViewController alloc] init];
+                                                     TimelineViewController *loginController = [[TimelineViewController alloc] init];
+                                                     
+                                                     TabBarController *tabBarController = [[TabBarController alloc] init];
+                                                    UINavigationController *tabBarNavCont = [[UINavigationController alloc] initWithRootViewController:tabBarController];
+                                                     
+                                                     UINavigationController *timelineNavCont = [[UINavigationController alloc] initWithRootViewController:loginController];
+                                                     UINavigationController *profileNavCont = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+
+                                                     tabBarController.viewControllers = @[timelineNavCont, profileNavCont];
+     
+                                                     UIImage *feedImage = [UIImage imageNamed:@"home"];
+                                                     UIImage *profileImage = [UIImage imageNamed:@"profile"];
+                                                     
+                                                     loginController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Home" image:feedImage tag:0];
+                                                     profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Profile" image:profileImage tag:1];
+                                                     [self.navigationController presentViewController:[LoginViewController new] animated:NO completion:nil];
                                                  }];
     } else {
         NSLog(@"%@", error.localizedDescription);

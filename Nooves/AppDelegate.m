@@ -46,7 +46,7 @@
     
     // the leaf controllers
     ProfileViewController* profileViewController = [[ProfileViewController alloc] init];
-    LoginViewController *loginController = [[LoginViewController alloc] init];
+    TimelineViewController *loginController = [[TimelineViewController alloc] init];
     
     UINavigationController *timelineNavCont = [[UINavigationController alloc] initWithRootViewController:loginController];
     UINavigationController *profileNavCont = [[UINavigationController alloc] initWithRootViewController:profileViewController];
@@ -59,8 +59,15 @@
     
     loginController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Home" image:feedImage tag:0];
     profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Profile" image:profileImage tag:1];
+    LoginViewController *login = [[LoginViewController alloc] init];
+    UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:login];
     
-    self.window.rootViewController = tabBarController;
+    if (![FIRAuth auth].currentUser) {
+        self.window.rootViewController = loginNav;
+    }
+    else {
+        self.window.rootViewController = tabBarController;
+    }
     [self.window makeKeyAndVisible];
     
     [[FBSDKApplicationDelegate sharedInstance] application:application
