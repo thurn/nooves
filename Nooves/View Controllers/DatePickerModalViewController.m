@@ -43,6 +43,7 @@
     NSDateComponents *components = [self.gregorian components:NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
     NSInteger month = [components month];
     NSInteger day = [components day];
+    
     self.selectedDate = [self.gregorian dateByAddingComponents:components toDate:self.datepicker.date options:0];
     
     NSDateFormatter *formatter = [NSDateFormatter new];
