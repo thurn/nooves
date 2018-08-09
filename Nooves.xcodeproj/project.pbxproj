@@ -17,7 +17,6 @@
 		0AADDFE121015B3C00C173CB /* DatePickerModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AADDFE021015B3C00C173CB /* DatePickerModalViewController.m */; };
 		0AE18A122113A1DC00B8CA74 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE18A112113A1DC00B8CA74 /* Location.m */; };
 		0AE18A1B2113A24A00B8CA74 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE18A1A2113A24900B8CA74 /* EventCell.m */; };
-		320881052119A0700046F5B3 /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 320881042119A0700046F5B3 /* EventDetailsViewController.m */; };
 		3208810B211B9B970046F5B3 /* EventsWithDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3208810A211B9B970046F5B3 /* EventsWithDetailsViewController.m */; };
 		327D408421093011002E8513 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327D408321093011002E8513 /* EditProfileViewController.m */; };
 		327D408721094087002E8513 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 327D408621094087002E8513 /* User.m */; };
@@ -86,8 +85,6 @@
 		0AE18A1A2113A24900B8CA74 /* EventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
 		151FEBEB5D48C4C1FB5355D4 /* Pods-NoovesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesUITests/Pods-NoovesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		21560C204078FBB0C1FBFE36 /* Pods-NoovesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesTests/Pods-NoovesTests.debug.xcconfig"; sourceTree = "<group>"; };
-		320881032119A0700046F5B3 /* EventDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventDetailsViewController.h; sourceTree = "<group>"; };
-		320881042119A0700046F5B3 /* EventDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventDetailsViewController.m; sourceTree = "<group>"; };
 		32088109211B9B970046F5B3 /* EventsWithDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventsWithDetailsViewController.h; sourceTree = "<group>"; };
 		3208810A211B9B970046F5B3 /* EventsWithDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventsWithDetailsViewController.m; sourceTree = "<group>"; };
 		327D408221093011002E8513 /* EditProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
@@ -221,8 +218,6 @@
 				CEAC59152113811300C08A74 /* SettingsViewController.m */,
 				32B6A8A52113B36400C9C67D /* EventsViewController.h */,
 				32B6A8A62113B36400C9C67D /* EventsViewController.m */,
-				320881032119A0700046F5B3 /* EventDetailsViewController.h */,
-				320881042119A0700046F5B3 /* EventDetailsViewController.m */,
 				32088109211B9B970046F5B3 /* EventsWithDetailsViewController.h */,
 				3208810A211B9B970046F5B3 /* EventsWithDetailsViewController.m */,
 				CE19181D211CB7E6006EAF03 /* LocationSettingsViewController.h */,
@@ -568,7 +563,6 @@
 				CE57768B21064FDA00C7637C /* LocationPickerModalViewController.m in Sources */,
 				CED91F6C2101305000E0E2F6 /* TabBarController.m in Sources */,
 				327FA7C220FD2014009C55BA /* ComposeViewController.m in Sources */,
-				320881052119A0700046F5B3 /* EventDetailsViewController.m in Sources */,
 				327FA7D720FEAA63009C55BA /* TimelineViewController.m in Sources */,
 				0A732C6A211A219400F79D16 /* UIImageView+Cache.m in Sources */,
 				0A6C937D2107A68800097F37 /* LoginViewController.m in Sources */,
