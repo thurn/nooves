@@ -8,7 +8,7 @@
 #import "DatePickerModalViewController.h"
 #import "LocationPickerModalViewController.h"
 #import "EventsViewController.h"
-#import "EventDetailsViewController.h"
+#import "EventsWithDetailsViewController.h"
 
 #import <FirebaseAuth.h>
 #import <MBProgressHUD/MBProgressHUD.h>
@@ -139,8 +139,6 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 
 - (void)didTapEvents {
     EventsViewController *chooseEvent = [[EventsViewController alloc]init];
-    //chooseEvent.eventsDelegate = self;
-    //EventsViewController *searchEvents = [[EventsViewController alloc]init];
     chooseEvent.eventsDelegate= self;
     UINavigationController *navCont = [[UINavigationController alloc]
                                        initWithRootViewController:chooseEvent];

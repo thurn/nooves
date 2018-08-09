@@ -1,33 +1,28 @@
-#import "ComposeViewController.h"
+#import "EventsWithDetailsViewController.h"
 #import "EventCell.h"
-#import "EventDetailsViewController.h"
-#import "EventsViewController.h"
+#import <HVTableView/HVTableView.h>
 
 static NSString * const baseURLString = @"http://api.eventful.com/json/events/search?";
 static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 
-@interface EventsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface EventsWithDetailsViewController () <HVTableViewDataSource, HVTableViewDelegate, EventCellDelegate, UISearchBarDelegate>
 
+@property(strong, nonatomic) HVTableView *tableView;
 @property(strong, nonatomic) NSArray *eventsArray;
 @property(strong, nonatomic) UISearchBar *searchBar;
 @property(strong, nonatomic) NSArray *results;
 @property(strong, nonatomic) NSString *userCity;
 @property(strong, nonatomic) NSString *userState;
+@property BOOL isExpanded;
+
 @end
 
-@implementation EventsViewController
-
-{
-    UITableView *tableView;
-    NSString *address;
-    NSIndexPath *selectedCellIndexPath;
-}
+@implementation EventsWithDetailsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.navigationItem.title = @"Local Events";
     [self configureTableView];
     [self createBackButton];
     
@@ -41,9 +36,8 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     [searchBarView addSubview:self.searchBar];
     self.navigationItem.titleView = searchBarView;
     
-    [tableView reloadData];
-    [tableView registerClass:[EventCell class] forCellReuseIdentifier:@"eventCellIdentifier"];
-    [tableView registerClass:[EventCell class] forCellReuseIdentifier:@"compressedEventCellIdentifier"];
+    [self.tableView registerClass:[EventCell class] forCellReuseIdentifier:@"eventCellIdentifier"];
+    [self.tableView reloadData];
     
     // get user's location from settings
     self.userCity = [NSUserDefaults.standardUserDefaults objectForKey:@"city"];
@@ -62,6 +56,27 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     }
 }
 
+- (HVTableView *)configureTableView {
+    CGFloat width = self.view.frame.size.width;
+    CGFloat height = self.view.frame.size.height;
+    CGRect tableViewFrame = CGRectMake( 0, 0, width, height);
+    
+    self.tableView = [[HVTableView alloc]initWithFrame:tableViewFrame];
+    self.tableView.scrollEnabled = YES;
+    self.tableView.showsVerticalScrollIndicator = YES;
+    self.tableView.userInteractionEnabled = YES;
+    [self.view addSubview:self.tableView];
+    
+    self.tableView.backgroundColor = [UIColor whiteColor];
+    self.tableView.HVTableViewDataSource = self;
+    self.tableView.HVTableViewDelegate = self;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+
+    
+    [self.tableView reloadData];
+    return self.tableView;
+}
+
 // cancel button appears when user edits search bar
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     self.searchBar.showsCancelButton = YES;
@@ -77,35 +92,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     NSLog( @"fetching events for :%@", searchBar.text);
-      [self fetchEventsWithQuery:searchBar.text];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (UITableView *)configureTableView {
-    CGFloat width = self.view.frame.size.width;
-    CGFloat height = self.view.frame.size.height;
-    CGRect tableViewFrame = CGRectMake( 0, 0, width, height);
-    
-    tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
-    tableView.scrollEnabled = YES;
-    tableView.showsVerticalScrollIndicator = YES;
-    tableView.userInteractionEnabled = YES;
-    [self.view addSubview:tableView];
-    
-    tableView.backgroundColor = [UIColor whiteColor];
-    tableView.dataSource = self;
-    tableView.delegate = self;
-    tableView.rowHeight = UITableViewAutomaticDimension;
-    tableView.estimatedRowHeight = 80;
-    [tableView setNeedsLayout];
-    tableView.contentInset = UIEdgeInsetsMake(20.0, 0.0, 0.0, 0.0);
-    
-    [tableView reloadData];
-    return tableView;
+    [self fetchEventsWithQuery:searchBar.text];
 }
 
 // set up the back button
@@ -120,43 +107,11 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 }
 
 - (void)didTapBackButton {
-     [self dismissViewControllerAnimated:true completion:nil];
-}
-
-#pragma mark - UITableViewDelegate methods
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-       EventCell *cell = [tableView dequeueReusableCellWithIdentifier:@"compressedEventCellIdentifier"];
-    cell = [tableView dequeueReusableCellWithIdentifier:@"eventCellIdentifier" forIndexPath:indexPath];
-    if(self.results.count > indexPath.row) {
-        [cell updateWithEvent:self.results[indexPath.row]];
-        return cell;
-    }
-    else {
-        return cell;
-    }
-}
-
-- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.eventsArray) {
-        return  self.eventsArray.count;
-    }
-    return 30;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSDictionary *events = self.results[indexPath.row];
-    NSString *title = events[@"title"];
-    NSString *description = events[@"description"];
-    NSString *venue = events[@"venue_name"];
-   
-    [self.eventsDelegate eventsViewController:self didSelectEventWithTitle:title withDescription:description withVenue:venue];
-    [self dismissViewControllerAnimated:NO completion:nil];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 - (void)fetchEventsWithQuery:(NSString *)query {
+    
     if ([self.userCity isKindOfClass:[NSString class]] && [self.userState isKindOfClass:[NSString class]]) {
         NSString *cityAndSpace = [self.userCity stringByAppendingString:@" "];
         NSString *loc = [cityAndSpace stringByAppendingString:self.userState];
@@ -173,12 +128,14 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
             if (data) {
                 NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
                 self.results = [responseDictionary valueForKeyPath:@"events.event"];
-                [self->tableView reloadData];
+                [self.tableView reloadData];
             }
+        NSLog(@"results dictionary :%@", self.results);
         }];
         [task resume];
+
     }
-   
+    
     else {
         NSLog( @"the user city and state are null");
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error getting current location" message:@"Please set your current location in Settings" preferredStyle:(UIAlertControllerStyleAlert)];
@@ -193,15 +150,79 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (selectedCellIndexPath != nil && [selectedCellIndexPath compare:indexPath] == NSOrderedSame) {
-        return tableView.rowHeight *2;
-    }git
-    return tableView.rowHeight;
+#pragma mark - HVTableViewDataSource
+- (void)tableView:(UITableView *)tableView expandCell:(EventCell *)cell withIndexPath:(NSIndexPath *)indexPath {
+    cell.confirmButton.alpha = 0;
+    
+    [UIView animateWithDuration:.5 animations:^{
+        cell.descriptionLabel.text = self.results[indexPath.row][@"description"];
+        cell.confirmButton.alpha = 1;
+        cell.arrow.transform = CGAffineTransformMakeRotation(0);
+    }];
+}
+
+- (void)tableView:(UITableView *)tableView collapseCell:(EventCell *)cell withIndexPath:(NSIndexPath *)indexPath {
+    cell.confirmButton.alpha = 0;
+    cell.arrow.transform = CGAffineTransformMakeRotation(0);
+    cell.descriptionLabel.text = @"Click for description";
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        cell.arrow.transform = CGAffineTransformMakeRotation(-M_PI+0.00);
+    }];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
-@end
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.eventsArray) {
+        return  self.eventsArray.count;
+    }
+    return 30;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isExpanded {
+    EventCell *cell = [tableView dequeueReusableCellWithIdentifier:@"eventCellIdentifier" forIndexPath:indexPath];
+    cell.delegate = self;
+    [cell initialize];
+    
+    cell.backgroundColor = [UIColor whiteColor];
+    cell.titleLabel.text = self.results[indexPath.row][@"title"];
+    cell.venueLabel.text = self.results[indexPath.row][@"venue_name"];
+    
+    if (!isExpanded) {
+        cell.descriptionLabel.text = @"Click for description";
+        cell.arrow.transform = CGAffineTransformMakeRotation(M_PI);
+    }
+    
+    else {
+        NSString *descriptionText = self.results[indexPath.row][@"description"];
+        
+        if([descriptionText isKindOfClass:[NSString class]]) {
+            cell.descriptionLabel.text = descriptionText;
+            [cell.descriptionLabel setNumberOfLines:0];
+        }
+        
+        else {
+            cell.descriptionLabel.text = @"No description available for this event";
+        }
+    }
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isExpanded {
+    
+    if (isExpanded) {
+        return 150;
+    }
+    return 70;
+}
+
+
+- (void)didTapConfirmEvent:(EventCell *)cell {
+    NSLog(@"I want to confirm this event");
+}
+
+
+@end
