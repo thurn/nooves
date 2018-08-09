@@ -114,7 +114,9 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     self.locationTextField.text = self.location;
     
     NSDateFormatter *formatter = [NSDateFormatter new];
-    formatter.dateFormat = @"MMM-dd HH:mm";
+    formatter.dateFormat = @"MMM dd hh:mm a";
+    formatter.locale = [NSLocale localeWithLocaleIdentifier:@"en_US"];
+    [formatter setTimeZone:[NSTimeZone localTimeZone]];
     NSString *dateDetails = [formatter stringFromDate:self.date];
     self.timeTextField.text = dateDetails;
     
