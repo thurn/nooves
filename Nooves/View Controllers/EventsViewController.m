@@ -1,6 +1,5 @@
 #import "ComposeViewController.h"
 #import "EventCell.h"
-#import "EventDetailsViewController.h"
 #import "EventsViewController.h"
 
 static NSString * const baseURLString = @"http://api.eventful.com/json/events/search?";
