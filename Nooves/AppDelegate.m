@@ -5,6 +5,7 @@
 #import "ProfileViewController.h"
 #import "LoginViewController.h"
 
+#import <ChameleonFramework/Chameleon.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FirebaseAuth.h>
 #import <Firebase/Firebase.h>
@@ -39,9 +40,9 @@
     // Override point for customization after application launch.
     [FIRApp configure];
     
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1.0]];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor flatSkyBlueColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor flatWhiteColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor flatWhiteColor]}];
     [[UINavigationBar appearance] setTranslucent:NO];
     
     // the leaf controllers
@@ -53,6 +54,9 @@
 
     TabBarController *tabBarController = [[TabBarController alloc] init];
     tabBarController.viewControllers = @[timelineNavCont, profileNavCont];
+    
+    [[UITabBar appearance] setTintColor:[UIColor flatSkyBlueColor]];
+    [[UITabBar appearance] setTranslucent:YES];
     
     UIImage *feedImage = [UIImage imageNamed:@"home"];
     UIImage *profileImage = [UIImage imageNamed:@"profile"];

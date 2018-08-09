@@ -20,6 +20,7 @@
 		15B5F4C7593BEFBBAAFE0646 /* libPods-NoovesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F39A0662BD8CB96F7F92B9 /* libPods-NoovesUITests.a */; };
 		21973DE3113EBB5DEB6F4C66 /* libPods-NoovesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BB44CD4F58502A71E979B8A /* libPods-NoovesTests.a */; };
 		320881052119A0700046F5B3 /* EventDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 320881042119A0700046F5B3 /* EventDetailsViewController.m */; };
+		3208810B211B9B970046F5B3 /* EventsWithDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3208810A211B9B970046F5B3 /* EventsWithDetailsViewController.m */; };
 		327D408421093011002E8513 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327D408321093011002E8513 /* EditProfileViewController.m */; };
 		327D408721094087002E8513 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 327D408621094087002E8513 /* User.m */; };
 		327FA7C220FD2014009C55BA /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 327FA7C120FD2014009C55BA /* ComposeViewController.m */; };
@@ -30,6 +31,9 @@
 		32C735D6210684F0002F8689 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C735D5210684F0002F8689 /* FilterViewController.m */; };
 		32C7361D210842E3002F8689 /* FilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C7361C210842E3002F8689 /* FilterCell.m */; };
 		AEFFC6BF6548F16ED4711448 /* libPods-Nooves.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A904B4EF1BECCBE8A7C80A7 /* libPods-Nooves.a */; };
+		88EA4F91B256FABCEF59A44B /* libPods-Nooves.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3869EF44C092142CDCF38AB /* libPods-Nooves.a */; };
+		A8118283CBE20906A3BDB372 /* libPods-NoovesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A55F4BBA41E7A6F4F43E772D /* libPods-NoovesUITests.a */; };
+		CE19181F211CB7E6006EAF03 /* LocationSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19181E211CB7E6006EAF03 /* LocationSettingsViewController.m */; };
 		CE57768B21064FDA00C7637C /* LocationPickerModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57768A21064FDA00C7637C /* LocationPickerModalViewController.m */; };
 		CE57768F210654E400C7637C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE57768E210654E400C7637C /* CoreLocation.framework */; };
 		CE57769221068ADB00C7637C /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57769121068ADB00C7637C /* LocationCell.m */; };
@@ -86,6 +90,8 @@
 		31C829B9B99B723EAFEEB908 /* Pods-NoovesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesTests/Pods-NoovesTests.release.xcconfig"; sourceTree = "<group>"; };
 		320881032119A0700046F5B3 /* EventDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventDetailsViewController.h; sourceTree = "<group>"; };
 		320881042119A0700046F5B3 /* EventDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventDetailsViewController.m; sourceTree = "<group>"; };
+		32088109211B9B970046F5B3 /* EventsWithDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EventsWithDetailsViewController.h; sourceTree = "<group>"; };
+		3208810A211B9B970046F5B3 /* EventsWithDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EventsWithDetailsViewController.m; sourceTree = "<group>"; };
 		327D408221093011002E8513 /* EditProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
 		327D408321093011002E8513 /* EditProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
 		327D408521094087002E8513 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -111,6 +117,12 @@
 		8A904B4EF1BECCBE8A7C80A7 /* libPods-Nooves.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Nooves.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9F39A0662BD8CB96F7F92B9 /* libPods-NoovesUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NoovesUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C200955B798E53F84849D328 /* Pods-NoovesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoovesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NoovesTests/Pods-NoovesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		38F5B91F5DEB67DC93A08401 /* Pods-Nooves.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nooves.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Nooves/Pods-Nooves.debug.xcconfig"; sourceTree = "<group>"; };
+		8918DA3D7116BD7E859B7BCD /* libPods-NoovesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NoovesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A55F4BBA41E7A6F4F43E772D /* libPods-NoovesUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NoovesUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6A43E079A9B5B80CB927193 /* Pods-Nooves.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Nooves.release.xcconfig"; path = "Pods/Target Support Files/Pods-Nooves/Pods-Nooves.release.xcconfig"; sourceTree = "<group>"; };
+		CE19181D211CB7E6006EAF03 /* LocationSettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationSettingsViewController.h; sourceTree = "<group>"; };
+		CE19181E211CB7E6006EAF03 /* LocationSettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationSettingsViewController.m; sourceTree = "<group>"; };
 		CE57768921064FDA00C7637C /* LocationPickerModalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationPickerModalViewController.h; sourceTree = "<group>"; };
 		CE57768A21064FDA00C7637C /* LocationPickerModalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationPickerModalViewController.m; sourceTree = "<group>"; };
 		CE57768E210654E400C7637C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -217,6 +229,10 @@
 				32B6A8A62113B36400C9C67D /* EventsViewController.m */,
 				320881032119A0700046F5B3 /* EventDetailsViewController.h */,
 				320881042119A0700046F5B3 /* EventDetailsViewController.m */,
+				32088109211B9B970046F5B3 /* EventsWithDetailsViewController.h */,
+				3208810A211B9B970046F5B3 /* EventsWithDetailsViewController.m */,
+				CE19181D211CB7E6006EAF03 /* LocationSettingsViewController.h */,
+				CE19181E211CB7E6006EAF03 /* LocationSettingsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -539,7 +555,9 @@
 				0AE18A122113A1DC00B8CA74 /* Location.m in Sources */,
 				0AADDFE121015B3C00C173CB /* DatePickerModalViewController.m in Sources */,
 				CE57769221068ADB00C7637C /* LocationCell.m in Sources */,
+				CE19181F211CB7E6006EAF03 /* LocationSettingsViewController.m in Sources */,
 				327D408721094087002E8513 /* User.m in Sources */,
+				3208810B211B9B970046F5B3 /* EventsWithDetailsViewController.m in Sources */,
 				0A6C9384211110EE00097F37 /* PostDetailsViewController.m in Sources */,
 				CED91F6F2101306800E0E2F6 /* ProfileViewController.m in Sources */,
 				32C735D6210684F0002F8689 /* FilterViewController.m in Sources */,

@@ -1,23 +1,50 @@
 #import "CategoryPickerModalViewController.h"
 #import "Post.h"
+#import <ChameleonFramework/Chameleon.h>
 
-@interface CategoryPickerModalViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface CategoryPickerModalViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UIScrollViewDelegate>
 @property (nonatomic) NSArray *categories;
 @property (nonatomic) UIPickerView *pickerView;
+@property (nonatomic) UIScrollView *scrollView;
+@property (nonatomic) NSMutableArray *imagesArray;
 @end
 
 @implementation CategoryPickerModalViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor flatWhiteColor];
     self.navigationController.navigationBarHidden = NO;
+    
+    self.imagesArray = [[NSMutableArray alloc] init];
     
     self.pickerView = [[UIPickerView alloc] init];
     self.pickerView.delegate = self;
     self.pickerView.dataSource = self;
     self.pickerView.showsSelectionIndicator = YES;
     self.pickerView.frame = CGRectMake(0, 0, self.view.frame.size.width, 200);
+    
+    self.scrollView = [[UIScrollView alloc] init];
+    self.scrollView.delegate = self;
+    self.scrollView.scrollEnabled = YES;
+    self.scrollView.frame = CGRectMake(0, 51, self.view.frame.size.width, 100);
+    self.scrollView.backgroundColor = [UIColor whiteColor];
+    
+    int xOffset = 0;
+    for(int index=0; index < [self.imagesArray count]; index++)
+    {
+
+        UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset,10,160, 110)];
+        img.image = (UIImage*) [self.imagesArray objectAtIndex:index];
+
+        [self.scrollView addSubview:img];
+
+        xOffset+=100;
+    }
+    
+    [self.view addSubview:self.scrollView];
+    
+    self.scrollView.contentSize = CGSizeMake(100+xOffset,110);
     
     [self.view addSubview:self.pickerView];
     [self createBackButton];

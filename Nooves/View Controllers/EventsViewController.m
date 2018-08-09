@@ -1,5 +1,4 @@
 #import "ComposeViewController.h"
-#import <CoreLocation/CoreLocation.h>
 #import "EventCell.h"
 #import "EventDetailsViewController.h"
 #import "EventsViewController.h"
@@ -7,21 +6,21 @@
 static NSString * const baseURLString = @"http://api.eventful.com/json/events/search?";
 static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 
-@interface EventsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate,CLLocationManagerDelegate>
+@interface EventsViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 @property(strong, nonatomic) NSArray *eventsArray;
 @property(strong, nonatomic) UISearchBar *searchBar;
 @property(strong, nonatomic) NSArray *results;
 @property(strong, nonatomic) NSString *userCity;
 @property(strong, nonatomic) NSString *userState;
-
 @end
 
-@implementation EventsViewController {
+@implementation EventsViewController
+
+{
     UITableView *tableView;
-    CLLocationManager *locationManager;
-    CLLocation *currentLocation;
     NSString *address;
+    NSIndexPath *selectedCellIndexPath;
 }
 
 - (void)viewDidLoad {
@@ -44,6 +43,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     
     [tableView reloadData];
     [tableView registerClass:[EventCell class] forCellReuseIdentifier:@"eventCellIdentifier"];
+    [tableView registerClass:[EventCell class] forCellReuseIdentifier:@"compressedEventCellIdentifier"];
     
     // get user's location from settings
     self.userCity = [NSUserDefaults.standardUserDefaults objectForKey:@"city"];
@@ -125,16 +125,15 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 
 #pragma mark - UITableViewDelegate methods
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    EventCell *cell = [tableView dequeueReusableCellWithIdentifier:@"eventCellIdentifier" forIndexPath:indexPath];
+       EventCell *cell = [tableView dequeueReusableCellWithIdentifier:@"compressedEventCellIdentifier"];
+    cell = [tableView dequeueReusableCellWithIdentifier:@"eventCellIdentifier" forIndexPath:indexPath];
     if(self.results.count > indexPath.row) {
         [cell updateWithEvent:self.results[indexPath.row]];
         return cell;
     }
     else {
-        NSLog(@"No events found matching that keyword");
         return cell;
     }
-   
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -145,10 +144,6 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-   /* EventDetailsViewController *eventDetails = [[EventDetailsViewController alloc]init];
-    NSDictionary *selectedEvent = self.results[indexPath.row];
-    [self.navigationController pushViewController:eventDetails animated:YES];
-    eventDetails.event = selectedEvent;*/
     
     NSDictionary *events = self.results[indexPath.row];
     NSString *title = events[@"title"];
@@ -158,11 +153,10 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     [self.eventsDelegate eventsViewController:self didSelectEventWithTitle:title withDescription:description withVenue:venue];
     [self dismissViewControllerAnimated:NO completion:nil];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
 }
 
 - (void)fetchEventsWithQuery:(NSString *)query {
-    
-    
     if ([self.userCity isKindOfClass:[NSString class]] && [self.userState isKindOfClass:[NSString class]]) {
         NSString *cityAndSpace = [self.userCity stringByAppendingString:@" "];
         NSString *loc = [cityAndSpace stringByAppendingString:self.userState];
@@ -199,6 +193,15 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (selectedCellIndexPath != nil && [selectedCellIndexPath compare:indexPath] == NSOrderedSame) {
+        return tableView.rowHeight *2;
+    }
+    return tableView.rowHeight;
+}
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
 @end
 
