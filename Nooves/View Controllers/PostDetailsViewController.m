@@ -55,6 +55,73 @@
             [userRef setValue:@{@"Age":@(0), @"Bio":@"nil", @"Name":@"Unnamed User",@"PhoneNumber":@(0), @"ProfilePicURL":@"nil",@"EventsGoing":@[@"a"]}];
         }
     }];
+    [self setUI];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - initting
+
+- (instancetype)initFromTimeline:(Post *)post {
+    self = [super init];
+    self.post = post;
+    return self;
+}
+
+
+- (void)didTapProfilePicc {
+    UserViewController *newUser = [[UserViewController alloc] initWithUserID:self.post.userID];
+    [self.navigationController pushViewController:newUser animated:YES];
+}
+
+- (void)didTapGoing{
+    FIRDatabaseReference *ref = [[FIRDatabase database] reference];
+    if(!self.going){
+        NSMutableArray *imGoing = [NSMutableArray arrayWithArray:self.post.usersGoing];
+        [imGoing addObject:[FIRAuth auth].currentUser.uid];
+        self.post.usersGoing = [NSArray arrayWithArray:imGoing];
+        [[[[ref child:@"Posts"] child:self.post.userID] child:self.post.fireBaseID] updateChildValues:@{@"UsersGoing":self.post.usersGoing}];
+        [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            NSDictionary *myDict = snapshot.value;
+            NSArray *amIGoing = myDict[@"EventsGoing"];
+            amIGoing = [amIGoing arrayByAddingObject:self.post.fireBaseID];
+            [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] updateChildValues:@{@"EventsGoing":amIGoing}];
+        }];
+        self.going=YES;
+        self.goingButton.backgroundColor = [UIColor blueColor];
+        [self.goingButton setTitle:@"Not Going" forState:UIControlStateSelected];
+        self.goingButton.selected = YES;
+        [self.goingButton sizeToFit];
+        self.phoneNumberLabel.hidden = NO;
+    }
+    else {
+        NSMutableArray *imGoing = [NSMutableArray arrayWithArray:self.post.usersGoing];
+        [imGoing removeObject:[FIRAuth auth].currentUser.uid];
+        self.post.usersGoing = [NSArray arrayWithArray:imGoing];
+        [[[[ref child:@"Posts"] child:self.post.userID] child:self.post.fireBaseID] updateChildValues:@{@"UsersGoing":self.post.usersGoing}];
+        [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+            NSDictionary *myDict = snapshot.value;
+            NSArray *myEvents = myDict[@"EventsGoing"];
+            NSMutableArray *imOut = [NSMutableArray arrayWithArray:myEvents];
+            [imOut removeObject:self.post.fireBaseID];
+            myEvents = [NSArray arrayWithArray:imOut];
+            [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] updateChildValues:@{@"EventsGoing":myEvents}];
+        }];
+        self.going = NO;
+        [self.goingButton setTitle:@"Going" forState:UIControlStateNormal];
+        self.goingButton.selected = NO;
+        self.goingButton.backgroundColor = [UIColor greenColor];
+        [self.goingButton sizeToFit];
+        self.phoneNumberLabel.hidden = YES;
+    }
+}
+
+#pragma mark - settingUI
+
+- (void)setUI {
     self.going = NO;
     for (NSString *uid in self.post.usersGoing){
         if ([[FIRAuth auth].currentUser.uid isEqualToString:uid]){
@@ -112,68 +179,6 @@
         [self.profilePicImage addGestureRecognizer:tappedPic];
     }
 }
-- (void)didTapProfilePicc {
-    UserViewController *newUser = [[UserViewController alloc] initWithUserID:self.post.userID];
-    [self.navigationController pushViewController:newUser animated:YES];
-}
-
-- (void)didTapGoing{
-    FIRDatabaseReference *ref = [[FIRDatabase database] reference];
-    if(!self.going){
-        NSMutableArray *imGoing = [NSMutableArray arrayWithArray:self.post.usersGoing];
-        [imGoing addObject:[FIRAuth auth].currentUser.uid];
-        self.post.usersGoing = [NSArray arrayWithArray:imGoing];
-        [[[[ref child:@"Posts"] child:self.post.userID] child:self.post.fireBaseID] updateChildValues:@{@"UsersGoing":self.post.usersGoing}];
-        [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-            NSDictionary *myDict = snapshot.value;
-            NSArray *amIGoing = myDict[@"EventsGoing"];
-            NSMutableArray *youAre = [NSMutableArray arrayWithArray:amIGoing];
-            [youAre addObject:self.post.fireBaseID];
-            NSArray *finishedEvent = [NSArray arrayWithArray:youAre];
-            [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] updateChildValues:@{@"EventsGoing":finishedEvent}];
-        }];
-        self.going=YES;
-        self.goingButton.backgroundColor = [UIColor blueColor];
-        [self.goingButton setTitle:@"Not Going" forState:UIControlStateSelected];
-        self.goingButton.selected = YES;
-        [self.goingButton sizeToFit];
-        self.phoneNumberLabel.hidden = NO;
-    }
-    else {
-        NSMutableArray *imGoing = [NSMutableArray arrayWithArray:self.post.usersGoing];
-        [imGoing removeObject:[FIRAuth auth].currentUser.uid];
-        self.post.usersGoing = [NSArray arrayWithArray:imGoing];
-        [[[[ref child:@"Posts"] child:self.post.userID] child:self.post.fireBaseID] updateChildValues:@{@"UsersGoing":self.post.usersGoing}];
-        [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
-            NSDictionary *myDict = snapshot.value;
-            NSArray *myEvents = myDict[@"EventsGoing"];
-            NSMutableArray *imOut = [NSMutableArray arrayWithArray:myEvents];
-            [imOut removeObject:self.post.fireBaseID];
-            NSArray *imDone = [NSArray arrayWithArray:imOut];
-            [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] updateChildValues:@{@"EventsGoing":imDone}];
-        }];
-        self.going = NO;
-        [self.goingButton setTitle:@"Going" forState:UIControlStateNormal];
-        self.goingButton.selected = NO;
-        self.goingButton.backgroundColor = [UIColor greenColor];
-        [self.goingButton sizeToFit];
-        self.phoneNumberLabel.hidden = YES;
-    }
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - initting
-
-- (instancetype)initFromTimeline:(Post *)post {
-    self = [super init];
-    self.post = post;
-    return self;
-}
-
 /*
  #pragma mark - Navigation
  
