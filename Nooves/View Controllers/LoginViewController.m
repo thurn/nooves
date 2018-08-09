@@ -60,7 +60,7 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
                                                      
                                                      loginController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Home" image:feedImage tag:0];
                                                      profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Profile" image:profileImage tag:1];
-                                                     [self.navigationController presentViewController:[LoginViewController new] animated:NO completion:nil];
+                                                     [self.navigationController presentViewController:tabBarController animated:NO completion:nil];
                                                  }];
     } else {
         NSLog(@"%@", error.localizedDescription);
