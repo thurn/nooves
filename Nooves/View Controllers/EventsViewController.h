@@ -15,6 +15,5 @@
 
 @property (weak, nonatomic) id<EventsSearchDelegate> eventsDelegate;
 
-
 - (void)fetchEventsWithQuery:(NSString *)query;
 @end

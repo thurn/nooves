@@ -3,10 +3,6 @@
 
 @interface EventCell ()
 
-@property(strong, nonatomic) UILabel *titleLabel;
-@property(strong, nonatomic) UILabel *descriptionLabel;
-@property(strong, nonatomic) UILabel *venueLabel;
-@property(strong, nonatomic) UILabel *timeLabel;
 
 @end
 
@@ -40,7 +36,7 @@
     [self.titleLabel autoPinEdgeToSuperviewMargin:ALEdgeLeft];
     
     self.descriptionLabel = [[UILabel alloc]init];
-     [self.contentView addSubview:self.descriptionLabel];
+    [self.contentView addSubview:self.descriptionLabel];
     [self.descriptionLabel setNumberOfLines:0];
     [self.descriptionLabel sizeToFit];
     [self.descriptionLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.titleLabel withOffset:5.0f];
@@ -54,17 +50,24 @@
     [self.contentView addSubview:self.timeLabel];
     [self.timeLabel autoPinEdgeToSuperviewMargin:ALEdgeBottom];
     [self.timeLabel autoPinEdgeToSuperviewMargin:ALEdgeRight];
+    
+    /*self.arrow = [[UIButton alloc]init];
+    [self.arrow setImage:[UIImage imageNamed:@"arrow-up"] forState:UIControlStateNormal];
+   // [self.contentView addSubview:self.arrow];
+    [self.arrow addTarget:@"selector" action:@selector(didTapArrowToExpandEvent) forControlEvents:UIControlEventTouchUpInside];
+    [self.arrow autoPinEdgeToSuperviewMargin:ALEdgeBottom];
+    [self.arrow autoPinEdgeToSuperviewMargin:ALEdgeRight];*/
 }
 
 - (void)updateWithEvent:(NSDictionary *)dictionary {
     self.titleLabel.text = dictionary[@"title"];
     NSString *descriptionText = dictionary[@"description"];
-    
+  
     if([descriptionText isKindOfClass:[NSString class]]) {
         self.descriptionLabel.text = descriptionText;
         [self.descriptionLabel setNumberOfLines:0];
     }
-    
+
     else {
         self.descriptionLabel.text = @"No description available for this event";
     }
@@ -79,6 +82,10 @@
     NSString *dateString = [formatter stringFromDate:date];
     NSLog(@"Datedetails:%@", dateString);
     self.timeLabel.text = dateString;
+}
+
+- (void)didTapArrowToExpandEvent {
+    NSLog(@"tapped on the arrow");
 }
 
 @end
