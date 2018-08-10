@@ -73,7 +73,6 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     self.locationTextField.placeholder = @"Location";
     self.locationTextField.borderStyle = UITextBorderStyleNone;
     self.locationTextField.textColor = UIColor.flatGrayColor;
-    self.locationTextField.enabled = NO;
     
     UIView *line3 = [[UIView alloc] initWithFrame:CGRectMake(0, 105, self.view.bounds.size.width, 1)];
     line3.backgroundColor = [UIColor flatBlackColor];

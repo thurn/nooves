@@ -1,5 +1,9 @@
 #import "LocationSettingsViewController.h"
 
+#import <FlatUIKit/UIColor+FlatUI.h>
+#import "UIFont+FlatUI.h"
+
+
 @interface LocationSettingsViewController () <UITextFieldDelegate>
 @property (nonatomic) UISwitch *locationSwitch;
 @property (nonatomic) UITextField *cityTextField;

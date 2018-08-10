@@ -39,28 +39,54 @@
     self.nameLabel = [[UILabel alloc] init];
     self.location = [[NSDictionary alloc] init];
     
-    CGRect frame = [self.categoryImageView frame];
-    frame.size.width = 30;
-    [self.categoryImageView setFrame:frame];
-    self.categoryImageView.frame = CGRectMake(7, 7, 30, 30);
+    [self addSubview:[self fullView]];
+}
+
+- (UIStackView *)view {
+    UIStackView *stackView = [[UIStackView alloc] init];
+    stackView.axis = UILayoutConstraintAxisVertical;
+    stackView.distribution = UIStackViewDistributionEqualSpacing;
+    stackView.alignment = UIStackViewAlignmentLeading;
+    stackView.spacing = 1;
     
-    self.nameLabel.center = CGPointMake(20, 90);
     self.nameLabel.text = @"name";
-    [self.nameLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:12]];
-    [self.contentView addSubview:self.nameLabel];
-    [self.nameLabel autoPinEdgeToSuperviewMargin:ALEdgeTop];
-    [self.nameLabel autoPinEdgeToSuperviewMargin:ALEdgeRight];
+    [self.nameLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:14]];
     [self.nameLabel sizeToFit];
     
-    self.addressLabel.center = CGPointMake(7, 70);
     self.addressLabel.text = @"address";
-    [self.addressLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:12]];
-    [self.contentView addSubview:self.addressLabel];
+    [self.addressLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:14]];
     [self.addressLabel sizeToFit];
     
-    [self addSubview:self.categoryImageView];
-    [self addSubview:self.nameLabel];
-    [self addSubview:self.addressLabel];
+    [stackView addArrangedSubview:self.nameLabel];
+    [stackView addArrangedSubview:self.addressLabel];
+    
+    stackView.translatesAutoresizingMaskIntoConstraints = false;
+    
+    return stackView;
+}
+
+- (UIStackView *)fullView {
+    UIStackView *stackView = [[UIStackView alloc] init];
+    stackView.axis = UILayoutConstraintAxisHorizontal;
+    stackView.distribution = UIStackViewDistributionEqualSpacing;
+    stackView.alignment = UIStackViewAlignmentLeading;
+    stackView.spacing = 5;
+    
+    CGRect frame = [self.categoryImageView frame];
+    frame.size.width = 50;
+    [self.categoryImageView setFrame:frame];
+    self.categoryImageView.frame = CGRectMake(10, 10, 40, 40);
+    self.categoryImageView.clipsToBounds = YES;
+    self.categoryImageView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.categoryImageView.widthAnchor constraintEqualToConstant:40].active = true;
+    [self.categoryImageView.heightAnchor constraintEqualToConstant:40].active = true;
+    
+    [stackView addArrangedSubview:self.categoryImageView];
+    [stackView addArrangedSubview:[self view]];
+    
+    stackView.translatesAutoresizingMaskIntoConstraints = false;
+    
+    return stackView;
 }
 
 - (void)updateWithLocation:(NSDictionary *)location {
@@ -68,6 +94,11 @@
     self.addressLabel.text = [location valueForKeyPath:@"location.address"];
     [self.nameLabel sizeToFit];
     [self.addressLabel sizeToFit];
+    
+    if (![self.nameLabel isEqual:@""] && ![self.addressLabel isEqual:@""]) {
+        self.nameLabel.hidden = NO;
+        self.addressLabel.hidden = NO;
+    }
     
     NSArray *categories = location[@"categories"];
     if (categories && categories.count > 0) {
