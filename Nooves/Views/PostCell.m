@@ -6,11 +6,13 @@
 #import "UIImageView+Cache.h"
 #import <Masonry.h>
 
-@implementation PostCell
-
+@implementation PostCell {
+    BOOL constrained;
+};
 - (void) awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    constrained = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -19,6 +21,7 @@
 }
 
 - (void)configurePost: (Post *) post {
+    
     self.post = post;
     if(self.post){
 
@@ -87,7 +90,9 @@
         self.activityDescriptionField.text = @"";
         self.profilePicField.image = nil;
     }
-    [self updateConstraints];
+    if(constrained) {
+        [self updateConstraints];
+    }
 }
 
 - (void)didTapProfile {
@@ -95,44 +100,46 @@
 }
 
 - (void)updateConstraints {
-    [self.dateField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView.mas_top).with.offset(10);
-        make.left.equalTo(self.contentView.mas_left).with.offset(15);
-    }];
-    [self.profilePicField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.dateField.mas_bottom).with.offset(3);
-        make.left.equalTo(self.contentView.mas_left).with.offset(20);
-        make.width.equalTo(@(50));
-        make.height.equalTo(@(50));
-        make.bottom.lessThanOrEqualTo(self.contentView.mas_bottom).with.offset(-13);
-    }];
-    [self.eventTitleField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView.mas_top).with.offset(10).priorityHigh();
-    }];
-    [self.activityTypeField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView.mas_top).with.offset(10);
-        make.right.equalTo(self.contentView.mas_right).with.offset(-15);
-    }];
-    [self.eventTitleField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.equalTo(@(self.eventTitleField.frame.size.width)).priorityLow().priorityLow(); make.right.lessThanOrEqualTo(self.activityTypeField.mas_left).with.offset(-13).priorityHigh();
-        make.left.greaterThanOrEqualTo(self.dateField.mas_right).with.offset(13).priorityHigh();
-        CGFloat centerPos = self.activityTypeField.frame.origin.x+self.dateField.frame.origin.x+self.dateField.frame.size.width;
-        make.centerX.equalTo(@(centerPos/2)).priorityHigh();
-    }];
-    [self.activityDescriptionField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.profilePicField.mas_right).with.offset(13);
-        make.right.equalTo(self.contentView.mas_right).with.offset(-15);
-        self.activityDescriptionField.numberOfLines = 2;
-        make.top.equalTo(self.dateField.mas_bottom).with.offset(14);
-        make.bottom.lessThanOrEqualTo(self.contentView.mas_bottom).with.offset(-12);
-    }];
-    [self.eventTitleField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.activityDescriptionField.mas_top).with.offset(-14);
-    }];
-    [self.profilePicField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.activityDescriptionField.mas_left).with.offset(-13);
-    }];
-    [super updateConstraints];
+        [self.dateField mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentView.mas_top).with.offset(10);
+            make.left.equalTo(self.contentView.mas_left).with.offset(15);
+        }];
+        [self.profilePicField mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.dateField.mas_bottom).with.offset(3);
+            make.left.equalTo(self.contentView.mas_left).with.offset(20);
+            make.width.equalTo(@(50));
+            make.height.equalTo(@(50));
+            make.bottom.lessThanOrEqualTo(self.contentView.mas_bottom).with.offset(-13);
+        }];
+        [self.eventTitleField mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentView.mas_top).with.offset(10).priorityHigh();
+        }];
+        [self.activityTypeField mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.contentView.mas_top).with.offset(10);
+            make.right.equalTo(self.contentView.mas_right).with.offset(-15);
+        }];
+        [self.eventTitleField mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.lessThanOrEqualTo(self.activityTypeField.mas_left).with.offset(-13).priorityHigh();
+            make.left.greaterThanOrEqualTo(self.dateField.mas_right).with.offset(13).priorityHigh();
+            CGFloat centerPos = self.activityTypeField.frame.origin.x+self.dateField.frame.origin.x+self.dateField.frame.size.width;
+            make.centerX.equalTo(@(centerPos/2)).priorityHigh();
+        }];
+        [self.activityDescriptionField mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.profilePicField.mas_right).with.offset(13);
+            make.right.equalTo(self.contentView.mas_right).with.offset(-15);
+            self.activityDescriptionField.numberOfLines = 2;
+            make.top.equalTo(self.dateField.mas_bottom).with.offset(14);
+            make.bottom.lessThanOrEqualTo(self.contentView.mas_bottom).with.offset(-12);
+        }];
+        [self.eventTitleField mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.activityDescriptionField.mas_top).with.offset(-14);
+        }];
+        [self.profilePicField mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.activityDescriptionField.mas_left).with.offset(-13);
+        }];
+    constrained = NO;
+        [super updateConstraints];
+
 }
 
 @end

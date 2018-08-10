@@ -7,7 +7,7 @@
 #import "LocationSettingsViewController.h"
 #import "PureLayout/PureLayout.h"
 #import <ChameleonFramework/Chameleon.h>
-
+#import "TabBarController.h"
 @interface SettingsViewController () <FBSDKLoginButtonDelegate>
 @property (nonatomic) UIButton *logout;
 @end
@@ -65,6 +65,25 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
                                                      }
                                                      // User successfully signed in. Get user data from the FIRUser object
                                                      if (authResult == nil) { return; }
+                                                     if (authResult == nil) { return; }
+                                                     FIRUser *user = authResult.user;
+                                                     ProfileViewController* profileViewController = [[ProfileViewController alloc] init];
+                                                     TimelineViewController *loginController = [[TimelineViewController alloc] init];
+                                                     
+                                                     TabBarController *tabBarController = [[TabBarController alloc] init];
+                                                     UINavigationController *tabBarNavCont = [[UINavigationController alloc] initWithRootViewController:tabBarController];
+                                                     
+                                                     UINavigationController *timelineNavCont = [[UINavigationController alloc] initWithRootViewController:loginController];
+                                                     UINavigationController *profileNavCont = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+                                                     
+                                                     tabBarController.viewControllers = @[timelineNavCont, profileNavCont];
+                                                     
+                                                     UIImage *feedImage = [UIImage imageNamed:@"home"];
+                                                     UIImage *profileImage = [UIImage imageNamed:@"profile"];
+                                                     
+                                                     loginController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Home" image:feedImage tag:0];
+                                                     profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Profile" image:profileImage tag:1];
+                                                     [self.navigationController presentViewController:tabBarController animated:NO completion:nil];
                                                  }];
     } else {
         NSLog(@"%@", error.localizedDescription);
@@ -72,7 +91,7 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
 }
 
 - (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {
-    [self.navigationController pushViewController:[LoginViewController new] animated:YES];
+    [self.navigationController presentViewController:[LoginViewController new] animated:YES completion:nil];
 }
 
 - (UIButton *)createInviteFriendsButton {
