@@ -166,21 +166,39 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 }
 
 - (void)fetchEventsWithQuery:(NSString *)query {
-        NSString *queryString = [NSString stringWithFormat:@"app_key=%@&page_size=100&location=%@&keywords=%@",appKey,self.userLocation,query];
-        queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    
+    if ([self.userLocation isKindOfClass:[NSString class]]) {
+            NSString *queryString = [NSString stringWithFormat:@"app_key=%@&page_size=100&location=%@&keyword=%@",appKey,self.userLocation,query];
+            queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         
-        NSURL *url = [NSURL URLWithString:[baseURLString stringByAppendingString:queryString]];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            NSURL *url = [NSURL URLWithString:[baseURLString stringByAppendingString:queryString]];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
         
-        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-        NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
-            if (data) {
-                NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-                self.results = [responseDictionary valueForKeyPath:@"events.event"];
-                [self->tableView reloadData];
-            }
+            NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+            NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
+                if (data) {
+                    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                    self.results = [responseDictionary valueForKeyPath:@"events.event"];
+                    [self->tableView reloadData];
+                }
+            }];
+            [task resume];
+    }
+    
+    else {
+        NSLog(@" set your phone location");
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error retrieving data"
+                                                                       message:@"Please enable your location services in your settings to search for local events."
+                                                                preferredStyle:(UIAlertControllerStyleAlert)];
+        UIAlertAction *okAlert = [UIAlertAction actionWithTitle:@"OK"
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction * _Nonnull action) {
+                                                        }];
+        [alert addAction:okAlert];
+        
+        [self presentViewController:alert animated:YES completion:^{
         }];
-        [task resume];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -194,5 +212,13 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     return 1;
 }
 
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Failed to get your location" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *dismiss = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [errorAlert addAction:dismiss];
+        [self presentViewController:errorAlert animated:YES completion:nil];
+    }];
+}
 @end
 
