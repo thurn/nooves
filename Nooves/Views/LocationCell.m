@@ -1,6 +1,5 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "LocationCell.h"
-#import "PureLayout/PureLayout.h"
 
 @interface LocationCell ()
 @property (nonatomic) UILabel *addressLabel;

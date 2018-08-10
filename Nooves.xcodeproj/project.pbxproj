@@ -34,6 +34,7 @@
 		CE57768B21064FDA00C7637C /* LocationPickerModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57768A21064FDA00C7637C /* LocationPickerModalViewController.m */; };
 		CE57768F210654E400C7637C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE57768E210654E400C7637C /* CoreLocation.framework */; };
 		CE57769221068ADB00C7637C /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57769121068ADB00C7637C /* LocationCell.m */; };
+		CE7405EA211E30AF0030A060 /* TapGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7405E9211E30AE0030A060 /* TapGesture.m */; };
 		CEAC590A211100A500C08A74 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEAC5909211100A500C08A74 /* MapKit.framework */; };
 		CEAC59162113811300C08A74 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAC59152113811300C08A74 /* SettingsViewController.m */; };
 		CED91F6C2101305000E0E2F6 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CED91F6A2101304F00E0E2F6 /* TabBarController.m */; };
@@ -117,6 +118,8 @@
 		CE57768E210654E400C7637C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CE57769021068ADB00C7637C /* LocationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationCell.h; sourceTree = "<group>"; };
 		CE57769121068ADB00C7637C /* LocationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationCell.m; sourceTree = "<group>"; };
+		CE7405E8211E30AE0030A060 /* TapGesture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TapGesture.h; sourceTree = "<group>"; };
+		CE7405E9211E30AE0030A060 /* TapGesture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TapGesture.m; sourceTree = "<group>"; };
 		CEAC5909211100A500C08A74 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CEAC59142113811300C08A74 /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		CEAC59152113811300C08A74 /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
@@ -304,6 +307,8 @@
 				CEDDCBCE20F95555004BD3A0 /* main.m */,
 				0A732C68211A219400F79D16 /* UIImageView+Cache.h */,
 				0A732C69211A219400F79D16 /* UIImageView+Cache.m */,
+				CE7405E8211E30AE0030A060 /* TapGesture.h */,
+				CE7405E9211E30AE0030A060 /* TapGesture.m */,
 			);
 			path = Nooves;
 			sourceTree = "<group>";
@@ -557,6 +562,7 @@
 				CE19181F211CB7E6006EAF03 /* LocationSettingsViewController.m in Sources */,
 				327D408721094087002E8513 /* User.m in Sources */,
 				3208810B211B9B970046F5B3 /* EventsWithDetailsViewController.m in Sources */,
+				CE7405EA211E30AF0030A060 /* TapGesture.m in Sources */,
 				0A6C9384211110EE00097F37 /* PostDetailsViewController.m in Sources */,
 				CED91F6F2101306800E0E2F6 /* ProfileViewController.m in Sources */,
 				32C735D6210684F0002F8689 /* FilterViewController.m in Sources */,

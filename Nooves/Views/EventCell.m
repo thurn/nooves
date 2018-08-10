@@ -1,5 +1,6 @@
 #import "EventCell.h"
 #import "PureLayout/PureLayout.h"
+#import <Masonry.h>
 
 @interface EventCell ()
 
@@ -32,31 +33,38 @@
     self.titleLabel = [[UILabel alloc]init];
     [self.titleLabel setFont:[UIFont fontWithName:@"Arial-Boldmt" size:16]];
     [self.contentView addSubview:self.titleLabel];
-    [self.titleLabel autoPinEdgeToSuperviewMargin:ALEdgeTop];
-    [self.titleLabel autoPinEdgeToSuperviewMargin:ALEdgeLeft];
+    [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.titleLabel setNumberOfLines:0];
+        make.top.equalTo(self.contentView.mas_top).with.offset(1);
+        make.left.equalTo(self.contentView.mas_left).with.offset(10);
+        make.right.equalTo(self.contentView.mas_right).with.offset(3);
+        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-130);
+    }];
     
     self.descriptionLabel = [[UILabel alloc]init];
     [self.contentView addSubview:self.descriptionLabel];
-    [self.descriptionLabel setNumberOfLines:0];
-    [self.descriptionLabel sizeToFit];
-    [self.descriptionLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.titleLabel withOffset:5.0f];
+    [self.descriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        [self.descriptionLabel setNumberOfLines:0];
+        make.top.equalTo(self.contentView.mas_bottom).with.offset(-130);
+        make.left.equalTo(self.contentView.mas_left).with.offset(3);
+        make.right.equalTo(self.contentView.mas_right).with.offset(3);
+        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-30);
+    }];
     
     self.venueLabel = [[UILabel alloc]init];
     [self.contentView addSubview:self.venueLabel];
-    [self.venueLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.descriptionLabel withOffset:10.0f];
-    [self.venueLabel autoPinEdgeToSuperviewMargin:ALEdgeBottom];
+    [self.venueLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView.mas_bottom).with.offset(-30);
+        make.left.lessThanOrEqualTo(self.contentView.mas_left).with.offset(10);
+        make.bottom.lessThanOrEqualTo(self.contentView.mas_bottom).with.offset(-5);
+    }];
     
     self.timeLabel = [[UILabel alloc]init];
     [self.contentView addSubview:self.timeLabel];
     [self.timeLabel autoPinEdgeToSuperviewMargin:ALEdgeBottom];
     [self.timeLabel autoPinEdgeToSuperviewMargin:ALEdgeRight];
     
-    /*self.arrow = [[UIButton alloc]init];
-    [self.arrow setImage:[UIImage imageNamed:@"arrow-up"] forState:UIControlStateNormal];
-   // [self.contentView addSubview:self.arrow];
-    [self.arrow addTarget:@"selector" action:@selector(didTapArrowToExpandEvent) forControlEvents:UIControlEventTouchUpInside];
-    [self.arrow autoPinEdgeToSuperviewMargin:ALEdgeBottom];
-    [self.arrow autoPinEdgeToSuperviewMargin:ALEdgeRight];*/
+    [self.contentView sizeToFit];
 }
 
 - (void)updateWithEvent:(NSDictionary *)dictionary {
@@ -65,27 +73,24 @@
   
     if([descriptionText isKindOfClass:[NSString class]]) {
         self.descriptionLabel.text = descriptionText;
-        [self.descriptionLabel setNumberOfLines:0];
+       [self.descriptionLabel sizeToFit];
     }
-
+    
     else {
         self.descriptionLabel.text = @"No description available for this event";
+        [self.descriptionLabel sizeToFit];
     }
     
     NSString *location = @"Venue: ";
     self.venueLabel.text = [location stringByAppendingString:dictionary[@"venue_name"]];
     
     NSDate *date = dictionary[@"start_time"];
-    NSLog(@"Original date: %@", date);
-    NSDateFormatter *formatter = [NSDateFormatter new];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"en_US"]];
+    //[formatter setTimeZone: [NSTimeZone timeZoneWithName:@"GMT"]];
     formatter.dateFormat = @"MM-dd HH:mm";
     NSString *dateString = [formatter stringFromDate:date];
-    NSLog(@"Datedetails:%@", dateString);
     self.timeLabel.text = dateString;
-}
-
-- (void)didTapArrowToExpandEvent {
-    NSLog(@"tapped on the arrow");
 }
 
 @end
