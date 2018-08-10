@@ -19,7 +19,7 @@ target 'Nooves' do
   pod 'SDWebImage'
   pod 'HVTableView'
   pod 'ChameleonFramework'
-  pod 'iCarousel'
+  pod 'FlatUIKit'
   pod 'Masonry'
 
   target 'NoovesTests' do

@@ -93,9 +93,19 @@ EOM
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle"
+  install_resource "${PODS_ROOT}/FlatUIKit/Resources/flat-ui-icons-regular.ttf"
+  install_resource "${PODS_ROOT}/FlatUIKit/Resources/Lato-Bold.ttf"
+  install_resource "${PODS_ROOT}/FlatUIKit/Resources/Lato-Italic.ttf"
+  install_resource "${PODS_ROOT}/FlatUIKit/Resources/Lato-Light.ttf"
+  install_resource "${PODS_ROOT}/FlatUIKit/Resources/Lato-Regular.ttf"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle"
+  install_resource "${PODS_ROOT}/FlatUIKit/Resources/flat-ui-icons-regular.ttf"
+  install_resource "${PODS_ROOT}/FlatUIKit/Resources/Lato-Bold.ttf"
+  install_resource "${PODS_ROOT}/FlatUIKit/Resources/Lato-Italic.ttf"
+  install_resource "${PODS_ROOT}/FlatUIKit/Resources/Lato-Light.ttf"
+  install_resource "${PODS_ROOT}/FlatUIKit/Resources/Lato-Regular.ttf"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

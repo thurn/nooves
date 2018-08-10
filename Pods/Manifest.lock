@@ -59,13 +59,13 @@ PODS:
   - FirebaseStorage (3.0.0):
     - FirebaseCore (~> 5.0)
     - GTMSessionFetcher/Core (~> 1.1)
+  - FlatUIKit (1.6.2)
   - FSCalendar (2.7.9)
   - GoogleToolboxForMac/Defines (2.1.4)
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
   - GTMSessionFetcher/Core (1.1.15)
   - HVTableView (0.2.1)
-  - iCarousel (1.8.3)
   - leveldb-library (1.20)
   - Masonry (1.1.0)
   - MBProgressHUD (1.1.0)
@@ -87,9 +87,9 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - FlatUIKit
   - FSCalendar
   - HVTableView
-  - iCarousel
   - Masonry
   - MBProgressHUD
   - PureLayout
@@ -109,11 +109,11 @@ SPEC REPOS:
     - FirebaseDatabase
     - FirebaseInstanceID
     - FirebaseStorage
+    - FlatUIKit
     - FSCalendar
     - GoogleToolboxForMac
     - GTMSessionFetcher
     - HVTableView
-    - iCarousel
     - leveldb-library
     - Masonry
     - MBProgressHUD
@@ -134,11 +134,11 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 482bad9c2abd422bb2321194fb8c937e67426a89
   FirebaseInstanceID: f3f0657372592ecdfdfe2cac604a5a75758376a6
   FirebaseStorage: 7ca4bb7b58a25fa647b04f524033fc7cb7eb272b
+  FlatUIKit: 1b41f0d4952ce8d970d8479ce79df54a960242c4
   FSCalendar: a04b09f16f811bc92e82f3cf852a15225233b9d5
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GTMSessionFetcher: 5fa5b80fd20e439ef5f545fb2cb3ca6c6714caa2
   HVTableView: 87bcd048e8c1f3262ff55aca2cdc348c9b04a4ce
-  iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
@@ -146,6 +146,6 @@ SPEC CHECKSUMS:
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
 
-PODFILE CHECKSUM: 89ec319c0896f74c591f497c3a47adbe83e4ac0f
+PODFILE CHECKSUM: ed352c38b2d3a009ceebbbeeb6b647529f232f83
 
 COCOAPODS: 1.5.3
