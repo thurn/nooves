@@ -7,6 +7,8 @@
 @property (nonatomic) UIPickerView *pickerView;
 @property (nonatomic) UIScrollView *scrollView;
 @property (nonatomic) NSMutableArray *imagesArray;
+@property (nonatomic) int tappedIndex;
+@property (nonatomic) UIImageView *imageView;
 @end
 
 @implementation CategoryPickerModalViewController
@@ -30,27 +32,47 @@
     self.scrollView.scrollEnabled = YES;
     self.scrollView.frame = CGRectMake(0, 51, self.view.frame.size.width, 100);
     self.scrollView.backgroundColor = [UIColor flatWhiteColor];
-    self.scrollView.showsHorizontalScrollIndicator = YES;
+    self.scrollView.showsVerticalScrollIndicator = NO;
+    self.scrollView.showsHorizontalScrollIndicator = NO;
     
-    int xOffset = 0;
-    for(int index=0; index < [self.imagesArray count]; index++)
-    {
-
-        UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(xOffset,10,160, 110)];
-        img.image = (UIImage*) [self.imagesArray objectAtIndex:index];
-
-        [self.scrollView addSubview:img];
-
-        xOffset+=100;
+    
+    int offset = 0;
+    // add to scroll view
+    for (int i = 0; i <= 12; i++) {
+        float xpos = 10 + offset;
+        float ypos = 10;
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"dog", i]];
+        
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(xpos, ypos, 40, 40)];
+        [self.imageView setImage:image];
+        [self.imageView setUserInteractionEnabled:YES];
+        
+        UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapImage)];
+        [self.imageView addGestureRecognizer:gest];
+        self.tappedIndex = i;
+        
+        [self.scrollView addSubview:self.imageView];
+        offset += 60;
     }
     
     [self.view addSubview:self.scrollView];
     
-    self.scrollView.contentSize = CGSizeMake(100+xOffset,110);
+    self.scrollView.contentSize = CGSizeMake(100+offset,self.scrollView.frame.size.height);
     
-    [self.view addSubview:self.pickerView];
+    //[self.view addSubview:self.pickerView];
     [self createBackButton];
     [self createConfirmButton];
+}
+
+- (void)didTapImageWithIndex:(int)index {
+    self.activityType = index;
+    NSLog(@"%i", index);
+}
+
+- (void)didTapImage {
+    NSLog(@"yeet");
+    self.activityType = self.tappedIndex;
+    NSLog(@"%i", self.tappedIndex);
 }
 
 // back button

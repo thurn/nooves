@@ -17,13 +17,22 @@
                     <view key="view" contentMode="scaleToFill" id="mhb-og-CcF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="letter-n-lightning-logo-icon-design-template-vector-20401979 (2)" translatesAutoresizingMaskIntoConstraints="NO" id="q32-z3-sFl">
+                                <rect key="frame" x="76" y="241" width="222" height="185"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="fHu-E8-giZ"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xtn-gT-q9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="12" y="-475"/>
+            <point key="canvasLocation" x="12" y="-475.41229385307349"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="letter-n-lightning-logo-icon-design-template-vector-20401979 (2)" width="180" height="180"/>
+    </resources>
 </document>

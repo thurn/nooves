@@ -3,6 +3,7 @@
 #import "LocationPickerModalViewController.h"
 #import "SettingsViewController.h"
 
+#import <FlatUIKit/UIColor+FlatUI.h>
 #import <ChameleonFramework/Chameleon.h>
 #import <CoreLocation/CoreLocation.h>
 

@@ -357,5 +357,10 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     }];
 }
 
-
+// dismisses keyboard through gesture tap
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.eventTitle endEditing:YES];
+    [self.locationTextField endEditing:YES];
+    [self.eventDescription endEditing:YES];
+}
 @end
