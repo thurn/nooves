@@ -1,6 +1,7 @@
 #import "CategoryPickerModalViewController.h"
 #import "Post.h"
 #import <ChameleonFramework/Chameleon.h>
+#import "iCarousel.h"
 
 @interface CategoryPickerModalViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UIScrollViewDelegate>
 @property (nonatomic) NSArray *categories;
@@ -23,12 +24,14 @@
     self.pickerView.dataSource = self;
     self.pickerView.showsSelectionIndicator = YES;
     self.pickerView.frame = CGRectMake(0, 0, self.view.frame.size.width, 200);
+    self.pickerView.backgroundColor = [UIColor flatWhiteColor];
     
     self.scrollView = [[UIScrollView alloc] init];
     self.scrollView.delegate = self;
     self.scrollView.scrollEnabled = YES;
     self.scrollView.frame = CGRectMake(0, 51, self.view.frame.size.width, 100);
-    self.scrollView.backgroundColor = [UIColor whiteColor];
+    self.scrollView.backgroundColor = [UIColor flatWhiteColor];
+    self.scrollView.showsHorizontalScrollIndicator = YES;
     
     int xOffset = 0;
     for(int index=0; index < [self.imagesArray count]; index++)

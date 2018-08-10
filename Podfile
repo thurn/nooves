@@ -19,6 +19,7 @@ target 'Nooves' do
   pod 'SDWebImage'
   pod 'HVTableView'
   pod 'ChameleonFramework'
+  pod 'iCarousel'
 
   target 'NoovesTests' do
     inherit! :search_paths

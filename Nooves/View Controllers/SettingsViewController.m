@@ -169,6 +169,7 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
 - (void)didTapLocationButton {
     LocationSettingsViewController *controller = [[LocationSettingsViewController alloc] init];
     UINavigationController *navCont = [[UINavigationController alloc] initWithRootViewController:controller];
+    //[self.navigationController pushViewController:controller animated:YES];
     [self.navigationController presentViewController:navCont animated:YES completion:nil];
 }
 
