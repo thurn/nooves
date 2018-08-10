@@ -61,9 +61,11 @@
     
     self.timeLabel = [[UILabel alloc]init];
     [self.contentView addSubview:self.timeLabel];
-    [self.timeLabel autoPinEdgeToSuperviewMargin:ALEdgeBottom];
-    [self.timeLabel autoPinEdgeToSuperviewMargin:ALEdgeRight];
-    
+    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView.mas_bottom).with.offset(-30);
+        make.left.equalTo(self.venueLabel.mas_right).with.offset(5);
+        make.bottom.lessThanOrEqualTo(self.contentView.mas_bottom).with.offset(-5);
+   }];
     [self.contentView sizeToFit];
 }
 
@@ -84,13 +86,23 @@
     NSString *location = @"Venue: ";
     self.venueLabel.text = [location stringByAppendingString:dictionary[@"venue_name"]];
     
-    NSDate *date = dictionary[@"start_time"];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    NSString *date = dictionary[@"start_time"];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"en_US"]];
-    //[formatter setTimeZone: [NSTimeZone timeZoneWithName:@"GMT"]];
-    formatter.dateFormat = @"MM-dd HH:mm";
-    NSString *dateString = [formatter stringFromDate:date];
-    self.timeLabel.text = dateString;
+    [formatter setTimeZone: [NSTimeZone timeZoneWithName:@"GMT"]];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *dateString = [formatter dateFromString:date];
+    [formatter setDateFormat:@"MM-dd HH:mm"];
+    NSString *formattedDate = [formatter stringFromDate:dateString];
+    self.timeLabel.text = formattedDate;
+}
+
+- (NSDate *)parseDate: (NSString *)inStrDate format:(NSString *)inFormat {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setLocale:[NSLocale systemLocale]];
+    [formatter setDateFormat:inFormat];
+    NSDate *dateOutput = [formatter dateFromString:inStrDate];
+    return dateOutput;
 }
 
 @end

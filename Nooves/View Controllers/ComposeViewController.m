@@ -305,7 +305,8 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 #pragma mark - EventsViewDelegate
 - (void)eventsViewController:(EventsViewController *)controller didSelectEventWithTitle:(NSString *)title
              withDescription:(NSString *)description
-                   withVenue:(NSString *)venue {
+                   withVenue:(NSString *)venue
+                    withTime:(NSString *)time {
     self.eventTitle.text = title;
     if([description isKindOfClass:[NSString class]]) {
         self.eventDescription.text = description;
@@ -315,6 +316,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
         self.eventDescription.text = @"";
     }
     self.location = venue;
+    self.timeTextField.text = time;
     [self.navigationController popToViewController:self animated:YES];
 }
 
