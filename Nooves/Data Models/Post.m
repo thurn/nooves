@@ -57,6 +57,8 @@
         self.fireBaseID = postID;
         self.usersGoing = @[[FIRAuth auth].currentUser.uid];
         self.activityLocation = location;
+        NSDate *today = [NSDate date];
+        self.timestamp = [today timeIntervalSince1970];
     }
     return self;
 }
@@ -70,7 +72,8 @@
     NSNumber *activityType = @(post.activityType);
     FIRDatabaseReference *ref = [[FIRDatabase database] reference];
     FIRDatabaseReference *reffy = [[[ref child:@"Posts"] child:[FIRAuth auth].currentUser.uid] childByAutoId];
-    [reffy setValue:@{@"Date":dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription, @"Latitude":post.activityLat, @"Longitude":post.activityLng, @"UsersGoing":post.usersGoing, @"Location":post.activityLocation}];
+    [reffy setValue:@{@"Date":dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription, @"Latitude":post.activityLat, @"Longitude":post.activityLng, @"UsersGoing":post.usersGoing, @"Location":post.activityLocation,
+        @"TimeStamp":@(post.timestamp)}];
 }
 
 + (NSArray *)readPostsFromFIRDict:(NSDictionary *)postsDict {
@@ -105,6 +108,7 @@
             NSInteger date = [postsDict[userKey][IDKey][@"Date"] integerValue];
             NSDate *daty = [NSDate dateWithTimeIntervalSince1970:date];
             posty.activityDateAndTime = daty;
+           
             [tempArray addObject:posty];
         }
     }

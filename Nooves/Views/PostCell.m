@@ -23,7 +23,7 @@
 - (void)configurePost: (Post *) post {
     
     self.post = post;
-    if(self.post){
+    if (self.post){
 
         if(!self.dateField){
             self.dateField = [[UILabel alloc]init];

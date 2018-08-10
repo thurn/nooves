@@ -31,7 +31,7 @@ typedef NS_ENUM(NSInteger, ActivityType){
 @property (strong, nonatomic) NSString *firstUserGoing;
 @property (strong, nonatomic) NSArray *usersGoing;
 @property (strong, nonatomic) NSString *activityLocation;
-
+@property (nonatomic) NSInteger timestamp;
 + (NSString *)activityTypeToString:(ActivityType)activityType;
 - (instancetype)initPostWithDetails:(NSDate *)eventDate
                           withTitle:(NSString *)postTitle
