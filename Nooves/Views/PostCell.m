@@ -73,7 +73,7 @@
         self.eventTitleField.text = post.activityTitle;
         [self.activityTypeField sizeToFit];
         NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-        [formatter setDateFormat:@"MM-dd HH:mm"];
+        [formatter setDateFormat:@"MMM dd hh:mm a"];
         NSString *dateString = [formatter stringFromDate:post.activityDateAndTime];
         self.dateField.text = dateString;
         [self.eventTitleField setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];

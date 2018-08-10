@@ -61,6 +61,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     self.timeTextField.placeholder = @"Time";
     self.timeTextField.borderStyle = UITextBorderStyleNone;
     self.timeTextField.textColor = UIColor.flatGrayColor;
+    self.timeTextField.enabled = NO;
     
     UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(0, 70, self.view.bounds.size.width, 1)];
     line2.backgroundColor = [UIColor flatBlackColor];
@@ -72,6 +73,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     self.locationTextField.placeholder = @"Location";
     self.locationTextField.borderStyle = UITextBorderStyleNone;
     self.locationTextField.textColor = UIColor.flatGrayColor;
+    self.locationTextField.enabled = NO;
     
     UIView *line3 = [[UIView alloc] initWithFrame:CGRectMake(0, 105, self.view.bounds.size.width, 1)];
     line3.backgroundColor = [UIColor flatBlackColor];
@@ -83,6 +85,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     self.categoryTextField.placeholder = @"Category";
     self.categoryTextField.borderStyle = UITextBorderStyleNone;
     self.categoryTextField.textColor = UIColor.flatGrayColor;
+    self.categoryTextField.enabled = NO;
     
     UIView *line4 = [[UIView alloc] initWithFrame:CGRectMake(0, 138, self.view.bounds.size.width, 1)];
     line4.backgroundColor = [UIColor flatBlackColor];
@@ -319,9 +322,9 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 #pragma mark - Text View Delegate methods
 // changes text color when user edits text view
 - (void)textViewDidBeginEditing:(UITextView *)eventDescription {
-    if (eventDescription.textColor == UIColor.flatGrayColor) {
+    if (eventDescription.textColor == UIColor.grayColor) {
         eventDescription.text = nil;
-        eventDescription.textColor = UIColor.flatBlackColor;
+        eventDescription.textColor = UIColor.blackColor;
     }
 }
 
@@ -329,7 +332,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 - (void)textViewDidEndEditing:(UITextView *)eventDescription {
     if (eventDescription.text == nil) {
         eventDescription.text = @"Add description";
-        eventDescription.textColor = UIColor.flatGrayColor;
+        eventDescription.textColor = UIColor.grayColor;
     }
 }
 

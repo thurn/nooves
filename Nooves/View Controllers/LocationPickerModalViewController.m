@@ -69,6 +69,8 @@ UISearchBarDelegate>
     self.tableView.scrollEnabled = YES;
     self.tableView.showsVerticalScrollIndicator = YES;
     self.tableView.userInteractionEnabled = YES;
+    self.tableView.separatorColor = [UIColor clearColor];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     
     return self.tableView;
