@@ -1,6 +1,7 @@
 #import "CategoryPickerModalViewController.h"
 #import "Post.h"
 #import <ChameleonFramework/Chameleon.h>
+#import "TapGesture.h"
 
 @interface CategoryPickerModalViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UIScrollViewDelegate>
 @property (nonatomic) NSArray *categories;
@@ -20,12 +21,12 @@
     
     self.imagesArray = [[NSMutableArray alloc] init];
     
-    self.pickerView = [[UIPickerView alloc] init];
-    self.pickerView.delegate = self;
-    self.pickerView.dataSource = self;
-    self.pickerView.showsSelectionIndicator = YES;
-    self.pickerView.frame = CGRectMake(0, 0, self.view.frame.size.width, 200);
-    self.pickerView.backgroundColor = [UIColor flatWhiteColor];
+//    self.pickerView = [[UIPickerView alloc] init];
+//    self.pickerView.delegate = self;
+//    self.pickerView.dataSource = self;
+//    self.pickerView.showsSelectionIndicator = YES;
+//    self.pickerView.frame = CGRectMake(0, 100, self.view.frame.size.width, 200);
+//    self.pickerView.backgroundColor = [UIColor flatWhiteColor];
     
     self.scrollView = [[UIScrollView alloc] init];
     self.scrollView.delegate = self;
@@ -37,22 +38,21 @@
     
     
     int offset = 0;
-    // add to scroll view
     for (int i = 0; i <= 12; i++) {
         float xpos = 10 + offset;
         float ypos = 10;
         UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"dog", i]];
         
-        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(xpos, ypos, 40, 40)];
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(xpos, ypos, 140, 140)];
         [self.imageView setImage:image];
         [self.imageView setUserInteractionEnabled:YES];
         
-        UITapGestureRecognizer *gest = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapImage)];
+        TapGesture *gest = [[TapGesture alloc] initWithTarget:self action:@selector(didTapImage:)];
         [self.imageView addGestureRecognizer:gest];
-        self.tappedIndex = i;
+        gest.tappedIndex = i;
         
         [self.scrollView addSubview:self.imageView];
-        offset += 60;
+        offset += 250;
     }
     
     [self.view addSubview:self.scrollView];
@@ -61,18 +61,17 @@
     
     //[self.view addSubview:self.pickerView];
     [self createBackButton];
-    [self createConfirmButton];
+    //[self createConfirmButton];
 }
 
-- (void)didTapImageWithIndex:(int)index {
-    self.activityType = index;
-    NSLog(@"%i", index);
-}
-
-- (void)didTapImage {
+- (void)didTapImage:(UITapGestureRecognizer *)recognizer {
+    TapGesture *gest = (TapGesture *)recognizer;
     NSLog(@"yeet");
-    self.activityType = self.tappedIndex;
-    NSLog(@"%i", self.tappedIndex);
+    self.activityType = gest.tappedIndex;
+    NSLog(@"%i", gest.tappedIndex);
+    [self.categoryDelegate categoryPickerModalViewController:self
+                                         didPickActivityType:(ActivityType *)self.activityType];
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 // back button
@@ -91,48 +90,48 @@
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
-// confirm button
-- (UIBarButtonItem *)createConfirmButton {
-    UIBarButtonItem *confirmButton = [[UIBarButtonItem alloc]
-                                       initWithTitle:@"Confirm" style:UIBarButtonItemStylePlain target:self action:@selector(didTapConfirmButton)];
-    self.navigationItem.rightBarButtonItem = confirmButton;
-    return confirmButton;
-}
+//// confirm button
+//- (UIBarButtonItem *)createConfirmButton {
+//    UIBarButtonItem *confirmButton = [[UIBarButtonItem alloc]
+//                                       initWithTitle:@"Confirm" style:UIBarButtonItemStylePlain target:self action:@selector(didTapConfirmButton)];
+//    self.navigationItem.rightBarButtonItem = confirmButton;
+//    return confirmButton;
+//}
+//
+//// passes post data and jumps back to composer view controller
+//- (void)didTapConfirmButton {
+//    [self.categoryDelegate categoryPickerModalViewController:self
+//                                         didPickActivityType:(ActivityType *)self.activityType];
+//    [self dismissViewControllerAnimated:NO completion:nil];
+//}
 
-// passes post data and jumps back to composer view controller
-- (void)didTapConfirmButton {
-    [self.categoryDelegate categoryPickerModalViewController:self
-                                         didPickActivityType:(ActivityType *)self.activityType];
-    [self dismissViewControllerAnimated:NO completion:nil];
-}
-
-#pragma mark - UIPickerViewDelegate
-
-// assigns the selected category from picker view to activity type
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
-       inComponent:(NSInteger)component {
-    self.activityType = row;
-}
-
-// returns the array element at each row
-- (NSString *)pickerView:(UIPickerView *)pickerView
-             titleForRow:(NSInteger)row
-            forComponent:(NSInteger)component {
-    
-    return [Post activityTypeToString:row];
-}
-
-#pragma mark - UIPickerViewDataSource
-
-// returns the picker view column size
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 1;
-}
-
-// returns the array count to determine rows in picker view
-- (NSInteger)pickerView:(UIPickerView *)pickerView
-numberOfRowsInComponent:(NSInteger)component {
-    return ActivityTypeOther+1;
-}
+//#pragma mark - UIPickerViewDelegate
+//
+//// assigns the selected category from picker view to activity type
+//- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row
+//       inComponent:(NSInteger)component {
+//    self.activityType = row;
+//}
+//
+//// returns the array element at each row
+//- (NSString *)pickerView:(UIPickerView *)pickerView
+//             titleForRow:(NSInteger)row
+//            forComponent:(NSInteger)component {
+//
+//    return [Post activityTypeToString:row];
+//}
+//
+//#pragma mark - UIPickerViewDataSource
+//
+//// returns the picker view column size
+//- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+//    return 1;
+//}
+//
+//// returns the array count to determine rows in picker view
+//- (NSInteger)pickerView:(UIPickerView *)pickerView
+//numberOfRowsInComponent:(NSInteger)component {
+//    return ActivityTypeOther+1;
+//}
 
 @end
