@@ -133,6 +133,7 @@
                         posty.usersGoing = [postsDict[userKey][IDKey][@"UsersGoing"] copy];
                         NSInteger date = [postsDict[userKey][IDKey][@"Date"] integerValue];
                         NSDate *daty = [NSDate dateWithTimeIntervalSince1970:date];
+                         posty.timestamp = [postsDict[userKey][IDKey][@"TimeStamp"] integerValue];
                         posty.activityDateAndTime = daty;
                         [myArray addObject:posty];
                     }
