@@ -109,7 +109,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     tableView.backgroundColor = [UIColor whiteColor];
     tableView.dataSource = self;
     tableView.delegate = self;
-    tableView.rowHeight = UITableViewAutomaticDimension;
+    tableView.rowHeight = 150;
     tableView.estimatedRowHeight = 80;
     [tableView setNeedsLayout];
     tableView.contentInset = UIEdgeInsetsMake(20.0, 0.0, 0.0, 0.0);
@@ -180,6 +180,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
                     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
                     self.results = [responseDictionary valueForKeyPath:@"events.event"];
                     [self->tableView reloadData];
+                    NSLog(@" results dictionary :%@", self.results);
                 }
             }];
             [task resume];
