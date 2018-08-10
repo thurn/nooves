@@ -158,17 +158,17 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     NSString *title = events[@"title"];
     NSString *description = events[@"description"];
     NSString *venue = events[@"venue_name"];
+    NSString *time = events[@"start_time"];
    
-    [self.eventsDelegate eventsViewController:self didSelectEventWithTitle:title withDescription:description withVenue:venue];
+    [self.eventsDelegate eventsViewController:self didSelectEventWithTitle:title withDescription:description withVenue:venue withTime:time];
     [self dismissViewControllerAnimated:NO completion:nil];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
 }
 
 - (void)fetchEventsWithQuery:(NSString *)query {
     
     if ([self.userLocation isKindOfClass:[NSString class]]) {
-            NSString *queryString = [NSString stringWithFormat:@"app_key=%@&page_size=100&location=%@&keyword=%@",appKey,self.userLocation,query];
+            NSString *queryString = [NSString stringWithFormat:@"app_key=%@&page_size=20&location=%@&keyword=%@",appKey,self.userLocation,query];
             queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         
             NSURL *url = [NSURL URLWithString:[baseURLString stringByAppendingString:queryString]];

@@ -5,7 +5,7 @@
 static NSString * const baseURLString = @"http://api.eventful.com/json/events/search?";
 static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 
-@interface EventsWithDetailsViewController () <HVTableViewDataSource, HVTableViewDelegate, EventCellDelegate, UISearchBarDelegate>
+@interface EventsWithDetailsViewController () <HVTableViewDataSource, HVTableViewDelegate, UISearchBarDelegate>
 
 @property(strong, nonatomic) HVTableView *tableView;
 @property(strong, nonatomic) NSArray *eventsArray;
@@ -184,7 +184,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isExpanded {
     EventCell *cell = [tableView dequeueReusableCellWithIdentifier:@"eventCellIdentifier" forIndexPath:indexPath];
-    cell.delegate = self;
+   // cell.delegate = self;
     [cell initialize];
     
     cell.backgroundColor = [UIColor whiteColor];

@@ -7,7 +7,8 @@
 - (void)eventsViewController:(EventsViewController *)controller
      didSelectEventWithTitle:(NSString *)title
              withDescription:(NSString *)description
-                   withVenue:(NSString *)venue;
+                   withVenue:(NSString *)venue
+                    withTime:(NSString *)time;
 
 @end
 
