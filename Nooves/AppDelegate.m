@@ -30,14 +30,11 @@
     return handled;
 }
 
-- (void)getCurrentLocation {
-    
-}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
         
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
+    [[UILabel appearance] setSubstituteFontName:@"ProximaNovaT-Thin"];
+    
     [FIRApp configure];
     
     [[UINavigationBar appearance] setBarTintColor:[UIColor flatSkyBlueColor]];
