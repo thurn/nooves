@@ -69,8 +69,6 @@ UISearchBarDelegate>
     self.tableView.scrollEnabled = YES;
     self.tableView.showsVerticalScrollIndicator = YES;
     self.tableView.userInteractionEnabled = YES;
-    self.tableView.separatorColor = [UIColor clearColor];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     
     return self.tableView;
@@ -211,7 +209,7 @@ UISearchBarDelegate>
 
 // sets cell height
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 60;
+    return 50;
 }
 
 #pragma mark - UITableViewDelegate
@@ -244,39 +242,6 @@ UISearchBarDelegate>
     
     // changes the selected background view of the cell
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIView *roundedView = [cell.contentView viewWithTag:100];
-    if (roundedView == nil) {
-        // Add some padding to the view in order to see the shadow
-        NSInteger spacingBothHorizontal = 2;
-        CGRect customizedFrame = CGRectMake(spacingBothHorizontal/2, 10, CGRectGetWidth(cell.contentView.frame) - spacingBothHorizontal, CGRectGetHeight(cell.contentView.frame) - 20);
-        roundedView = [[UIView alloc] initWithFrame:customizedFrame];
-        
-        // Layer customizations
-        roundedView.layer.cornerRadius = 10.0f;
-        roundedView.backgroundColor = [UIColor whiteColor];
-        roundedView.layer.shadowOffset = CGSizeMake(-1, -1);
-        roundedView.layer.shadowOpacity = 2.0;
-        roundedView.layer.shadowColor = [UIColor flatGrayColor].CGColor;
-        roundedView.tag = 100;
-        
-        if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-            [cell setSeparatorInset:UIEdgeInsetsZero];
-        }
-        if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
-            [cell setPreservesSuperviewLayoutMargins:NO];
-        }
-        if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-            [cell setLayoutMargins:UIEdgeInsetsZero];
-        }
-        
-        // Add it to view
-        [cell.contentView addSubview:roundedView];
-        [cell.contentView sendSubviewToBack:roundedView];
-        cell.contentView.backgroundColor = [UIColor flatWhiteColor];
-    }
 }
 
 // presents alert controller if location services not enabled
