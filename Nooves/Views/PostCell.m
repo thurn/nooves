@@ -79,8 +79,8 @@
         [formatter setDateFormat:@"MMM dd hh:mm a"];
         NSString *dateString = [formatter stringFromDate:post.activityDateAndTime];
         self.dateField.text = dateString;
-        [self.eventTitleField setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
         [self.eventTitleField sizeToFit];
+        [self.eventTitleField setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
         [self.contentView addSubview:self.eventTitleField];
     }
     else {
@@ -122,7 +122,9 @@
             make.right.lessThanOrEqualTo(self.activityTypeField.mas_left).with.offset(-13).priorityHigh();
             make.left.greaterThanOrEqualTo(self.dateField.mas_right).with.offset(13).priorityHigh();
             CGFloat centerPos = self.activityTypeField.frame.origin.x+self.dateField.frame.origin.x+self.dateField.frame.size.width;
-            make.centerX.equalTo(@(centerPos/2)).priorityHigh();
+            [self.eventTitleField sizeToFit];
+            [self.eventTitleField setCenter:CGPointMake(centerPos/2, 14)];
+
         }];
         [self.activityDescriptionField mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.profilePicField.mas_right).with.offset(13);
