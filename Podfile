@@ -21,6 +21,7 @@ target 'Nooves' do
   pod 'ChameleonFramework'
   pod 'FlatUIKit'
   pod 'Masonry'
+  pod 'LMPullToBounce'
 
   target 'NoovesTests' do
     inherit! :search_paths
