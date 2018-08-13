@@ -14,7 +14,7 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "PureLayout/PureLayout.h"
 
-@interface ComposeViewController () <UITextViewDelegate, LocationPickerDelegate,
+@interface ComposeViewController () <UITextViewDelegate, UITextFieldDelegate,LocationPickerDelegate,
 CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 
 @property (nonatomic) UIPickerView *pickerView;
@@ -49,7 +49,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     self.eventTitle.text = nil;
     self.eventTitle.placeholder = @"Event name";
     self.eventTitle.borderStyle = UITextBorderStyleNone;
-    self.eventTitle.textColor = UIColor.flatGrayColor;
+    self.eventTitle.textColor = UIColor.blackColor;
     
     UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(0, 37, self.view.bounds.size.width, 1)];
     line1.backgroundColor = [UIColor flatBlackColor];
@@ -60,7 +60,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     self.timeTextField.text = nil;
     self.timeTextField.placeholder = @"Time";
     self.timeTextField.borderStyle = UITextBorderStyleNone;
-    self.timeTextField.textColor = UIColor.flatGrayColor;
+    self.timeTextField.textColor = UIColor.blackColor;
     self.timeTextField.enabled = NO;
     
     UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(0, 70, self.view.bounds.size.width, 1)];
@@ -72,7 +72,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     self.locationTextField.text = nil;
     self.locationTextField.placeholder = @"Location";
     self.locationTextField.borderStyle = UITextBorderStyleNone;
-    self.locationTextField.textColor = UIColor.flatGrayColor;
+    self.locationTextField.textColor = UIColor.blackColor;
     
     UIView *line3 = [[UIView alloc] initWithFrame:CGRectMake(0, 105, self.view.bounds.size.width, 1)];
     line3.backgroundColor = [UIColor flatBlackColor];
@@ -83,7 +83,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     self.categoryTextField.text = nil;
     self.categoryTextField.placeholder = @"Category";
     self.categoryTextField.borderStyle = UITextBorderStyleNone;
-    self.categoryTextField.textColor = UIColor.flatGrayColor;
+    self.categoryTextField.textColor = UIColor.blackColor;
     self.categoryTextField.enabled = NO;
     
     UIView *line4 = [[UIView alloc] initWithFrame:CGRectMake(0, 138, self.view.bounds.size.width, 1)];
@@ -91,10 +91,11 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     [self.view addSubview:line4];
     
     // event text view
-    self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 142, 1000, 150)];
+    self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 142, self.view.bounds.size.width, 150)];
+    [self.eventDescription setFont:[UIFont fontWithName:@"ProximaNovaT-Thin" size:16]];
     self.eventDescription.delegate = self;
     self.eventDescription.text = @"Add a description";
-    self.eventDescription.textColor = UIColor.flatGrayColor;
+    self.eventDescription.textColor = UIColor.grayColor;
     self.eventDescription.backgroundColor = UIColor.flatWhiteColor;
 
     [self.view addSubview:self.eventTitle];
@@ -123,7 +124,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     NSString *dateDetails = [formatter stringFromDate:self.date];
     self.timeTextField.text = dateDetails;
     
-    self.eventDescription.textColor = UIColor.flatGrayColor;
+    self.eventDescription.textColor = UIColor.grayColor;
 }
 
 #pragma mark - buttons and respective actions
@@ -275,6 +276,35 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     }
 }
 
+- (void)pushToTabBar {
+    ProfileViewController* profileViewController = [[ProfileViewController alloc] init];
+    TimelineViewController *loginController = [[TimelineViewController alloc] init];
+    
+    TabBarController *tabBarController = [[TabBarController alloc] init];
+    UINavigationController *tabBarNavCont = [[UINavigationController alloc] initWithRootViewController:tabBarController];
+    
+    UINavigationController *timelineNavCont = [[UINavigationController alloc] initWithRootViewController:loginController];
+    UINavigationController *profileNavCont = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+    
+    tabBarController.viewControllers = @[timelineNavCont, profileNavCont];
+    
+    UIImage *feedImage = [UIImage imageNamed:@"home"];
+    UIImage *profileImage = [UIImage imageNamed:@"profile"];
+    
+    loginController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Home" image:feedImage tag:0];
+    profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Profile" image:profileImage tag:1];
+    [self.navigationController presentViewController:tabBarNavCont animated:NO completion:^{
+        nil;
+    }];
+}
+
+// dismisses keyboard through gesture tap
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.eventTitle endEditing:YES];
+    [self.locationTextField endEditing:YES];
+    [self.eventDescription endEditing:YES];
+}
+
 #pragma mark - Location Picker Delegate method
 - (void)locationsPickerModalViewController:(LocationPickerModalViewController *)controller
                didPickLocationWithLatitude:(NSNumber *)latitude
@@ -320,49 +350,35 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     [self.navigationController popToViewController:self animated:YES];
 }
 
-#pragma mark - Text View Delegate methods
+#pragma mark - Text View delegate methods
 // changes text color when user edits text view
-- (void)textViewDidBeginEditing:(UITextView *)eventDescription {
-    if (eventDescription.textColor == UIColor.grayColor) {
-        eventDescription.text = nil;
-        eventDescription.textColor = UIColor.blackColor;
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    if (textView.textColor == UIColor.grayColor) {
+        textView.text = nil;
+        textView.textColor = UIColor.blackColor;
     }
 }
 
 // changes text color when user stops editing text view
-- (void)textViewDidEndEditing:(UITextView *)eventDescription {
-    if (eventDescription.text == nil) {
-        eventDescription.text = @"Add description";
-        eventDescription.textColor = UIColor.grayColor;
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    if (textView.text == nil) {
+        textView.text = @"Add a description";
+        textView.textColor = UIColor.grayColor;
     }
 }
 
-- (void)pushToTabBar {
-    ProfileViewController* profileViewController = [[ProfileViewController alloc] init];
-    TimelineViewController *loginController = [[TimelineViewController alloc] init];
-    
-    TabBarController *tabBarController = [[TabBarController alloc] init];
-    UINavigationController *tabBarNavCont = [[UINavigationController alloc] initWithRootViewController:tabBarController];
-    
-    UINavigationController *timelineNavCont = [[UINavigationController alloc] initWithRootViewController:loginController];
-    UINavigationController *profileNavCont = [[UINavigationController alloc] initWithRootViewController:profileViewController];
-    
-    tabBarController.viewControllers = @[timelineNavCont, profileNavCont];
-    
-    UIImage *feedImage = [UIImage imageNamed:@"home"];
-    UIImage *profileImage = [UIImage imageNamed:@"profile"];
-    
-    loginController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Home" image:feedImage tag:0];
-    profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Profile" image:profileImage tag:1];
-    [self.navigationController presentViewController:tabBarNavCont animated:NO completion:^{
-        nil;
-    }];
+#pragma mark - Text Field delegate methods
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (textField.textColor == UIColor.grayColor) {
+        textField.text = nil;
+        textField.textColor = UIColor.blackColor;
+    }
 }
 
-// dismisses keyboard through gesture tap
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.eventTitle endEditing:YES];
-    [self.locationTextField endEditing:YES];
-    [self.eventDescription endEditing:YES];
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField.text == nil) {
+        textField.textColor = UIColor.grayColor;
+    }
 }
+
 @end
