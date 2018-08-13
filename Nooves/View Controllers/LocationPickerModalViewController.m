@@ -6,6 +6,7 @@
 #import <FlatUIKit/UIColor+FlatUI.h>
 #import <ChameleonFramework/Chameleon.h>
 #import <CoreLocation/CoreLocation.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 
 static NSString * const baseURLString = @"https://api.foursquare.com/v2/venues/search?";
 static NSString * const clientID = @"4FYRZKNIIFJQG25SUYJ55KINHUMVGWMYWFGQUFO5H4AQPQN2";
@@ -78,6 +79,7 @@ UISearchBarDelegate>
 // completes api request and stores searched results in dictionary based on user location
 - (void)fetchLocationsWithQuery:(NSString *)query nearCityWithLatitude:(NSNumber *)latitude
                       longitude:(NSNumber *)longitude {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *queryLat = [NSString stringWithFormat:@"%@,", latitude];
     NSString *queryLng = [NSString stringWithFormat:@"%@", longitude];
     NSMutableString * ll = [[NSMutableString alloc] initWithString:queryLat];
@@ -103,6 +105,7 @@ UISearchBarDelegate>
                                                                                  error:nil];
             NSLog(@"response: %@", responseDictionary);
             self.results = [responseDictionary valueForKeyPath:@"response.venues"];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
             [self.tableView reloadData];
         }
     }];
@@ -111,6 +114,7 @@ UISearchBarDelegate>
 
 // completes api request and stores search results in dictionary based on inputted city and state
 - (void)fetchLocationsWithQuery:(NSString *)query nearCity:(NSString *)city state:(NSString *)state {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSString *input = [NSString stringWithFormat:@"%@, %@", city, state];
     NSString *baseURLString = @"https://api.foursquare.com/v2/venues/search?";
     NSString *queryString = [NSString stringWithFormat:@"client_id=%@&client_secret=%@&v=20141020&near=%@&query=%@", clientID, clientSecret, input, query];
@@ -125,6 +129,7 @@ UISearchBarDelegate>
             NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             NSLog(@"response: %@", responseDictionary);
             self.results = [responseDictionary valueForKeyPath:@"response.venues"];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
             [self.tableView reloadData];
         }
     }];
@@ -169,7 +174,6 @@ UISearchBarDelegate>
     
     if (newText.length > 2) {
         if ((self.userLat == 0 && self.userLng == 0) || [NSUserDefaults.standardUserDefaults boolForKey:@"switch"]) {
-            NSLog(@"Cannot retrieve user location");
             self.city = [NSUserDefaults.standardUserDefaults objectForKey:@"city"];
             self.state = [NSUserDefaults.standardUserDefaults objectForKey:@"state"];
             

@@ -37,6 +37,12 @@
     }
 };
 
++ (NSArray *)sortPostsByTime:(NSArray *)postsArray {
+    NSSortDescriptor *sortPosts = [[NSSortDescriptor alloc] initWithKey:@"myTimestamp" ascending:NO];
+    NSArray *thisArray = [postsArray sortedArrayUsingDescriptors:@[sortPosts]];
+    return thisArray;
+}
+
 - (instancetype)initPostWithDetails:(NSDate *)eventDate
                           withTitle:(NSString *)postTitle
                     withDescription:(NSString *) postDescription
@@ -58,7 +64,7 @@
         self.usersGoing = @[[FIRAuth auth].currentUser.uid];
         self.activityLocation = location;
         NSDate *today = [NSDate date];
-        self.timestamp = [today timeIntervalSince1970];
+        self.myTimestamp = @([today timeIntervalSince1970]);
     }
     return self;
 }
@@ -73,7 +79,7 @@
     FIRDatabaseReference *ref = [[FIRDatabase database] reference];
     FIRDatabaseReference *reffy = [[[ref child:@"Posts"] child:[FIRAuth auth].currentUser.uid] childByAutoId];
     [reffy setValue:@{@"Date":dateAndTimeStamp, @"Title":post.activityTitle, @"Activity Type":activityType, @"Description":post.activityDescription, @"Latitude":post.activityLat, @"Longitude":post.activityLng, @"UsersGoing":post.usersGoing, @"Location":post.activityLocation,
-        @"TimeStamp":@(post.timestamp)}];
+        @"TimeStamp":post.myTimestamp}];
 }
 
 + (NSArray *)readPostsFromFIRDict:(NSDictionary *)postsDict {
@@ -105,6 +111,7 @@
             ActivityType type = [postsDict[userKey][IDKey][@"Activity Type"] integerValue];
             posty.activityType = type;
             posty.usersGoing = [postsDict[userKey][IDKey][@"UsersGoing"] copy];
+            posty.myTimestamp = postsDict[userKey][IDKey][@"TimeStamp"];
             NSInteger date = [postsDict[userKey][IDKey][@"Date"] integerValue];
             NSDate *daty = [NSDate dateWithTimeIntervalSince1970:date];
             posty.activityDateAndTime = daty;
@@ -112,7 +119,9 @@
             [tempArray addObject:posty];
         }
     }
-    return tempArray;
+    NSArray *myArray = [[NSArray alloc] init];
+    myArray = [Post sortPostsByTime:tempArray];
+    return myArray;
 }
 
 @end

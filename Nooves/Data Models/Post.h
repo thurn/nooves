@@ -31,7 +31,8 @@ typedef NS_ENUM(NSInteger, ActivityType){
 @property (strong, nonatomic) NSString *firstUserGoing;
 @property (strong, nonatomic) NSArray *usersGoing;
 @property (strong, nonatomic) NSString *activityLocation;
-@property (nonatomic) NSInteger timestamp;
+@property (strong, nonatomic) NSNumber *myTimestamp;
+
 + (NSString *)activityTypeToString:(ActivityType)activityType;
 - (instancetype)initPostWithDetails:(NSDate *)eventDate
                           withTitle:(NSString *)postTitle
@@ -44,4 +45,5 @@ typedef NS_ENUM(NSInteger, ActivityType){
 + (void)postToFireBase:(Post *)post;
 - (void)initFromFirebase;
 + (NSArray *)readPostsFromFIRDict:(NSDictionary *)postsDict;
++ (NSArray *)sortPostsByTime:(NSArray *)postsArray;
 @end

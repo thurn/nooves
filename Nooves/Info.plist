@@ -51,6 +51,12 @@
 	<string>Nooves needs access to your location to show you relevent search results within your region.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Nooves needs access to your location to show you relevent search results within your region.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Proxima Nova Alt Regular.ttf</string>
+		<string>Proxima Nova Semibold.ttf</string>
+		<string>Proxima Nova Thin.ttf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -67,12 +73,6 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Proxima Nova Alt Regular.ttf</string>
-		<string>Proxima Nova Semibold.ttf</string>
-		<string>Proxima Nova Thin.ttf</string>
 	</array>
 </dict>
 </plist>

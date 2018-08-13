@@ -2,6 +2,7 @@
 
 #import <FlatUIKit/UIColor+FlatUI.h>
 #import "UIFont+FlatUI.h"
+#import <ChameleonFramework/Chameleon.h>
 
 
 @interface LocationSettingsViewController () <UITextFieldDelegate>
@@ -19,36 +20,50 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 15, 5)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 15, 5)];
     label.text = @"Manually set location";
     [label sizeToFit];
     [self.view addSubview:label];
     
-    self.cityTextField = [[UITextField alloc] initWithFrame:CGRectMake(100, 100, 500, 30)];
+    self.cityTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 35, 100, 30)];
     self.cityTextField.text = nil;
     self.cityTextField.placeholder = @"Enter city";
     self.cityTextField.borderStyle = UITextBorderStyleNone;
-    self.cityTextField.textColor = UIColor.grayColor;
+    self.cityTextField.tintColor = [UIColor flatGrayColor];
+    self.cityTextField.backgroundColor = [UIColor clearColor];
+    self.cityTextField.layer.borderColor = [UIColor flatPinkColor].CGColor;
+    self.cityTextField.layer.borderWidth = 2.0f;
+    self.cityTextField.layer.cornerRadius = 3.0f;
     [self.cityTextField setHidden:YES];
     
-    self.stateTextField = [[UITextField alloc] initWithFrame:CGRectMake(100, 200, 500, 30)];
+    self.stateTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 70, 100, 30)];
     self.stateTextField.text = nil;
     self.stateTextField.placeholder = @"Enter state ex: CA";
     self.stateTextField.borderStyle = UITextBorderStyleNone;
-    self.stateTextField.textColor = UIColor.grayColor;
+    self.stateTextField.tintColor = [UIColor flatGrayColor];
+    self.stateTextField.backgroundColor = [UIColor clearColor];
+    self.stateTextField.layer.borderColor = [UIColor flatPinkColor].CGColor;
+    self.stateTextField.layer.borderWidth = 2.0f;
+    self.stateTextField.layer.cornerRadius = 3.0f;
     [self.stateTextField setHidden:YES];
     
     self.confirmButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    self.confirmButton.frame = CGRectMake(7, 110, 100, 100);
+    self.confirmButton.frame = CGRectMake(10, 105, 100, 100);
     [self.confirmButton setTitle:@"Confirm" forState:UIControlStateNormal];
     [self.confirmButton addTarget:self
                            action:@selector(didTapConfirm)
                  forControlEvents:UIControlEventTouchUpInside];
+    self.confirmButton.backgroundColor = [UIColor flatPinkColor];
+    self.confirmButton.tintColor = [UIColor flatWhiteColor];
+    self.confirmButton.layer.shadowColor = [UIColor flatGrayColor].CGColor;
+    self.confirmButton.layer.shadowOffset = CGSizeMake(0.f, 1.f);
+    self.confirmButton.layer.cornerRadius = 6.0f;
     self.confirmButton.hidden = YES;
     [self.confirmButton sizeToFit];
     
-    CGRect myFrame = CGRectMake(170.0f, 0.0f, 250.0f, 25.0f);
+    CGRect myFrame = CGRectMake(315.0f, 3.0f, 250.0f, 25.0f);
     self.locationSwitch = [[UISwitch alloc] initWithFrame:myFrame];
+    self.locationSwitch.onTintColor = [UIColor flatSkyBlueColor];
     [self.locationSwitch setOn:NO];
     self.locationSwitch.on = [NSUserDefaults.standardUserDefaults boolForKey:@"switch"];
     [self.locationSwitch addTarget:self
@@ -99,7 +114,7 @@
 
 - (UIButton *)createConfirmButton {
     UIButton *confirmButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    confirmButton.frame = CGRectMake(7, 110, 100, 100);
+    confirmButton.frame = CGRectMake(7, 150, 100, 100);
     [confirmButton setTitle:@"Confirm" forState:UIControlStateNormal];
     [confirmButton addTarget:self
                       action:@selector(didTapConfirm)
