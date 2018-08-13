@@ -13,6 +13,7 @@
 		0A732C6A211A219400F79D16 /* UIImageView+Cache.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A732C69211A219400F79D16 /* UIImageView+Cache.m */; };
 		0A732C6E211A2AF900F79D16 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A732C6D211A2AF900F79D16 /* GoogleService-Info.plist */; };
 		0A84EF852118D9D00019699D /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A84EF842118D9D00019699D /* UserViewController.m */; };
+		0A8F5DA721222C9100CFD17A /* TapGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8F5DA621222C9100CFD17A /* TapGesture.m */; };
 		0AAC9D9F2111348300A3967E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AAC9D9E2111348300A3967E /* LaunchScreen.storyboard */; };
 		0AADDFE121015B3C00C173CB /* DatePickerModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AADDFE021015B3C00C173CB /* DatePickerModalViewController.m */; };
 		0AE18A122113A1DC00B8CA74 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AE18A112113A1DC00B8CA74 /* Location.m */; };
@@ -34,7 +35,6 @@
 		CE57768B21064FDA00C7637C /* LocationPickerModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57768A21064FDA00C7637C /* LocationPickerModalViewController.m */; };
 		CE57768F210654E400C7637C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE57768E210654E400C7637C /* CoreLocation.framework */; };
 		CE57769221068ADB00C7637C /* LocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE57769121068ADB00C7637C /* LocationCell.m */; };
-		CE7405EA211E30AF0030A060 /* TapGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7405E9211E30AE0030A060 /* TapGesture.m */; };
 		CE7405F1211E47450030A060 /* Proxima Nova Alt Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE7405EE211E46A50030A060 /* Proxima Nova Alt Regular.ttf */; };
 		CE7405F2211E474A0030A060 /* Proxima Nova Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE7405EF211E46A50030A060 /* Proxima Nova Semibold.ttf */; };
 		CE7405F3211E474D0030A060 /* Proxima Nova Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE7405F0211E46A50030A060 /* Proxima Nova Thin.ttf */; };
@@ -81,6 +81,8 @@
 		0A732C6D211A2AF900F79D16 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0A84EF832118D9D00019699D /* UserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		0A84EF842118D9D00019699D /* UserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		0A8F5DA521222C8900CFD17A /* TapGesture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TapGesture.h; sourceTree = "<group>"; };
+		0A8F5DA621222C9100CFD17A /* TapGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapGesture.m; sourceTree = "<group>"; };
 		0AAC9D9E2111348300A3967E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0AADDFDF21015B3C00C173CB /* DatePickerModalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatePickerModalViewController.h; sourceTree = "<group>"; };
 		0AADDFE021015B3C00C173CB /* DatePickerModalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatePickerModalViewController.m; sourceTree = "<group>"; };
@@ -122,8 +124,6 @@
 		CE57768E210654E400C7637C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CE57769021068ADB00C7637C /* LocationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationCell.h; sourceTree = "<group>"; };
 		CE57769121068ADB00C7637C /* LocationCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationCell.m; sourceTree = "<group>"; };
-		CE7405E8211E30AE0030A060 /* TapGesture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TapGesture.h; sourceTree = "<group>"; };
-		CE7405E9211E30AE0030A060 /* TapGesture.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TapGesture.m; sourceTree = "<group>"; };
 		CE7405EE211E46A50030A060 /* Proxima Nova Alt Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Alt Regular.ttf"; sourceTree = "<group>"; };
 		CE7405EF211E46A50030A060 /* Proxima Nova Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Semibold.ttf"; sourceTree = "<group>"; };
 		CE7405F0211E46A50030A060 /* Proxima Nova Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Proxima Nova Thin.ttf"; sourceTree = "<group>"; };
@@ -327,10 +327,10 @@
 				CEDDCBCE20F95555004BD3A0 /* main.m */,
 				0A732C68211A219400F79D16 /* UIImageView+Cache.h */,
 				0A732C69211A219400F79D16 /* UIImageView+Cache.m */,
-				CE7405E8211E30AE0030A060 /* TapGesture.h */,
-				CE7405E9211E30AE0030A060 /* TapGesture.m */,
 				CE7405FA211E4D310030A060 /* UILabel+Helper.h */,
 				CE7405FB211E4D310030A060 /* UILabel+Helper.m */,
+				0A8F5DA521222C8900CFD17A /* TapGesture.h */,
+				0A8F5DA621222C9100CFD17A /* TapGesture.m */,
 			);
 			path = Nooves;
 			sourceTree = "<group>";
@@ -588,8 +588,8 @@
 				327D408721094087002E8513 /* User.m in Sources */,
 				3208810B211B9B970046F5B3 /* EventsWithDetailsViewController.m in Sources */,
 				CE7405FC211E4D310030A060 /* UILabel+Helper.m in Sources */,
-				CE7405EA211E30AF0030A060 /* TapGesture.m in Sources */,
 				0A6C9384211110EE00097F37 /* PostDetailsViewController.m in Sources */,
+				0A8F5DA721222C9100CFD17A /* TapGesture.m in Sources */,
 				CED91F6F2101306800E0E2F6 /* ProfileViewController.m in Sources */,
 				32C735D6210684F0002F8689 /* FilterViewController.m in Sources */,
 				0A6C93802107A6A000097F37 /* SignUpViewController.m in Sources */,
