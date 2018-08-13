@@ -1,7 +1,9 @@
+
 #import "ComposeViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import "EventCell.h"
 #import "EventsViewController.h"
+#import <Masonry.h>
 
 static NSString * const baseURLString = @"http://api.eventful.com/json/events/search?";
 static NSString * const appKey = @"dFXh3rhZVVwbshg9";
@@ -109,8 +111,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     tableView.backgroundColor = [UIColor whiteColor];
     tableView.dataSource = self;
     tableView.delegate = self;
-    tableView.rowHeight = 150;
-    tableView.estimatedRowHeight = 80;
+    tableView.rowHeight = UITableViewAutomaticDimension;
     [tableView setNeedsLayout];
     tableView.contentInset = UIEdgeInsetsMake(20.0, 0.0, 0.0, 0.0);
     
@@ -159,8 +160,17 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     NSString *description = events[@"description"];
     NSString *venue = events[@"venue_name"];
     NSString *time = events[@"start_time"];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"en_US"]];
+    [formatter setTimeZone: [NSTimeZone timeZoneWithName:@"GMT"]];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *dateString = [formatter dateFromString:time];
+    [formatter setDateFormat:@"MM-dd HH:mm"];
+    NSString *formattedDate = [formatter stringFromDate:dateString];
    
-    [self.eventsDelegate eventsViewController:self didSelectEventWithTitle:title withDescription:description withVenue:venue withTime:time];
+    [self.eventsDelegate eventsViewController:self didSelectEventWithTitle:title withDescription:description withVenue:venue withTime:formattedDate];
+    
     [self dismissViewControllerAnimated:NO completion:nil];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -187,17 +197,11 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     }
     
     else {
-        NSLog(@" set your phone location");
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error retrieving data"
-                                                                       message:@"Please enable your location services in your settings to search for local events."
-                                                                preferredStyle:(UIAlertControllerStyleAlert)];
-        UIAlertAction *okAlert = [UIAlertAction actionWithTitle:@"OK"
-                                                          style:UIAlertActionStyleDefault
-                                                        handler:^(UIAlertAction * _Nonnull action) {
-                                                        }];
-        [alert addAction:okAlert];
+        UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Failed to get your location" preferredStyle:UIAlertControllerStyleAlert];
         
-        [self presentViewController:alert animated:YES completion:^{
+        UIAlertAction *dismiss = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [errorAlert addAction:dismiss];
+            [self presentViewController:errorAlert animated:YES completion:nil];
         }];
     }
 }
