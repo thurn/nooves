@@ -1,3 +1,4 @@
+#import <ChameleonFramework/Chameleon.h>
 #import "EditProfileViewController.h"
 #import <Masonry.h>
 #import "ProfileViewController.h"
@@ -6,7 +7,7 @@
 #import "SettingsViewController.h"
 #import "UIImageView+Cache.h"
 
-@interface ProfileViewController () <editProfileDelegate>
+@interface ProfileViewController () <editProfileDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property(strong, nonatomic) UIImageView *profilePicture;
 @property(strong, nonatomic) UILabel *nameLabel;
@@ -16,6 +17,7 @@
 @property(strong, nonatomic) UIButton *editProfile;
 @property(strong, nonatomic) UIButton *settingsButton;
 @property(strong, nonatomic) User *user;
+@property(strong, nonatomic) UITableView *tableView;
 
 @end
 
@@ -48,6 +50,7 @@
     }];
     [self configureProfile];
     self.navigationItem.title = @"Profile";
+    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,36 +59,30 @@
 
 - (void)configureProfile {
     // set the background color
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor flatWhiteColor];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width,self.view.frame.size.height)];
+    self.tableView.backgroundColor = UIColor.flatWhiteColor;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
     
     if (!self.user) {
         self.user = [[User alloc]init];
         self.user.name = [FIRAuth auth].currentUser.displayName;
         self.user.biography = @"Bio";
     }
-    
+
     // set up the profile picture field
     self.profilePicture = [[UIImageView alloc]initWithFrame:CGRectMake(150, 30, 100, 100)];
     self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width/2;
     self.profilePicture.clipsToBounds = YES;
-    self.profilePicture.layer.borderWidth = 1.0f;
-    self.profilePicture.layer.borderColor = UIColor.blackColor.CGColor;
+    self.profilePicture.layer.borderWidth = 2;
+    self.profilePicture.layer.borderColor = UIColor.flatPinkColor.CGColor;
     [self.profilePicture setImage:[UIImage imageNamed:@"profile-blank"]];
     
     //set up the name label field
     self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(150, 140, 30, 30)];
     self.nameLabel.text = @"Name";
     [self.nameLabel sizeToFit];
-    
-    //set up the age field
-    self.ageLabel = [[UILabel alloc]initWithFrame:CGRectMake(120, 250, 30, 30)];
-    self.ageLabel.text = @"Age";
-    [self.ageLabel sizeToFit];
-    
-    // set up the phone number field
-    self.contactNumberLabel = [[UILabel alloc]initWithFrame:CGRectMake(120, 280, 30, 30)];
-    self.contactNumberLabel.text = @"Phone number";
-    [self.contactNumberLabel sizeToFit];
     
     // set up the bio field
     self.bioLabel = [[UILabel alloc]initWithFrame:CGRectMake(40, 170, 200, 50)];
@@ -95,20 +92,38 @@
     // set up the edit profile button
     self.editProfile = [[UIButton alloc]initWithFrame:CGRectMake(150, 200, 70, 30)];
     self.editProfile.layer.cornerRadius = 5;
-    self.editProfile.layer.borderWidth = 1;
-    self.editProfile.layer.borderColor = UIColor.blackColor.CGColor;
+    self.editProfile.layer.borderWidth = 2;
+    self.editProfile.layer.borderColor = UIColor.flatPinkColor.CGColor;
     [self.editProfile setTitle:@"Edit Profile" forState:UIControlStateNormal];
     [self.editProfile setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [self.editProfile sizeToFit];
     [self.editProfile addTarget:self action:@selector(didTapEditProfile) forControlEvents:UIControlEventTouchUpInside];
     
     // set up settings button
-    self.settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(150, 400, 30, 30)];
+    self.settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(300, 200, 30, 30)];
     [self.settingsButton setImage:[UIImage imageNamed:@"settings"] forState:UIControlStateNormal];
     [self.settingsButton sizeToFit];
     [self.settingsButton addTarget:self action:@selector(didTapSettings) forControlEvents:UIControlEventTouchUpInside];
     
+    //convert age to a string
+    if (![self.user.age isEqualToNumber:@(0)]){
+        NSNumber *userAge = self.user.age;
+        NSString *ageInString = [userAge stringValue];
+        self.ageLabel.text = ageInString;
+    }
+    
+    //set up the age field
+    self.ageLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 270, 30, 30)];
+    self.ageLabel.text = @"Age";
+    [self.ageLabel sizeToFit];
+    
+    // set up the phone number field
+    self.contactNumberLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 300, 30, 30)];
+    self.contactNumberLabel.text = @"Phone number";
+    [self.contactNumberLabel sizeToFit];
+    
     // add all subviews to the view
+    [self.view addSubview:self.tableView];
     [self.view addSubview:self.profilePicture];
     [self.view addSubview:self.nameLabel];
     [self.view addSubview:self.ageLabel];
@@ -132,12 +147,7 @@
     self.nameLabel.text = self.user.name;
     self.bioLabel.text = self.user.biography;
     
-    //convert age to a string
-    if (![self.user.age isEqualToNumber:@(0)]){
-        NSNumber *userAge = self.user.age;
-        NSString *ageInString = [userAge stringValue];
-        self.ageLabel.text = ageInString;
-    }
+  
     //convert phone number to a string
     if (![self.user.phoneNumber isEqualToNumber:@(0)]){
         NSNumber *userNumber = self.user.phoneNumber ;
@@ -149,6 +159,26 @@
     [self.bioLabel sizeToFit];
     [self.contactNumberLabel sizeToFit];
     [self.ageLabel sizeToFit];
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 3;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [[UITableViewCell alloc]init];
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        return 250;
+    }
+    return UITableViewAutomaticDimension;
 }
 
 @end

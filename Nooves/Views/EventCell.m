@@ -68,16 +68,7 @@
         make.bottom.lessThanOrEqualTo(self.contentView.mas_bottom).with.offset(-5);
    }];
     [self.contentView sizeToFit];
-    
-   /* UIButton *testButton = [[UIButton alloc]init];
-    [testButton setBackgroundColor:[UIColor blueColor]];
-    [testButton setTitle:@"See more" forState:UIControlStateNormal];
-    [testButton addTarget:self action:@selector(didTapConfirm) forControlEvents:UIControlEventTouchUpInside];
-    [self.contentView addSubview:testButton];
-    [testButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView.mas_bottom).with.offset(-30);
-        make.left.equalTo(self.venueLabel.mas_right).with.offset(2);  make.bottom.lessThanOrEqualTo(self.contentView.mas_bottom).with.offset(-5);
-    }];*/
+
 }
 
 - (void)updateWithEvent:(NSDictionary *)dictionary {

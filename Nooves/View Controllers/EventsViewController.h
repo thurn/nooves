@@ -8,7 +8,9 @@
      didSelectEventWithTitle:(NSString *)title
              withDescription:(NSString *)description
                    withVenue:(NSString *)venue
-                    withTime:(NSString *)time;
+                    withTime:(NSString *)time
+                withLatitude:(NSNumber *)latitude
+               withLongitude:(NSNumber *)longitude;
 
 @end
 
