@@ -122,7 +122,7 @@
     self.userPhoneNumber.textColor = [UIColor grayColor];
     
     // set up the bio field
-    self.bioInfo = [[UITextView alloc]initWithFrame:CGRectMake(10, 230, 500, 100)];
+    self.bioInfo = [[UITextView alloc]initWithFrame:CGRectMake(10, 230, self.view.bounds.size.width, 100)];
     self.bioInfo.delegate = self;
     self.bioInfo.text = @"Enter bio here";
     self.bioInfo.textColor = [UIColor grayColor];

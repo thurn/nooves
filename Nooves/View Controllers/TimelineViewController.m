@@ -51,10 +51,6 @@
     [tableView insertSubview:self.refreshControl atIndex:0];
 }
 
-- (void)configureTablView {
-    
-}
-
 - (void)filteredArray:(NSArray *)array {
     self.filteredData = [NSMutableArray arrayWithArray:array];
     self.filtered = YES;

@@ -49,11 +49,11 @@
     stackView.spacing = 1;
     
     self.nameLabel.text = @"name";
-    [self.nameLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:14]];
+    //[self.nameLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:14]];
     [self.nameLabel sizeToFit];
     
     self.addressLabel.text = @"address";
-    [self.addressLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:14]];
+    //[self.addressLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:14]];
     [self.addressLabel sizeToFit];
     
     [stackView addArrangedSubview:self.nameLabel];
