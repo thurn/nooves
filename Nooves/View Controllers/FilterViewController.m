@@ -1,3 +1,4 @@
+#import <ChameleonFramework/Chameleon.h>
 #import "ComposeViewController.h"
 #import "FilterCell.h"
 #import "FilterViewController.h"
@@ -106,10 +107,12 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 40)];
-    view.backgroundColor = [UIColor whiteColor];
     
     UIButton *confirmButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    confirmButton.frame = CGRectMake(100, 0, 130, 30);
+    confirmButton.frame = CGRectMake(110, 0, 120, 30);
+    confirmButton.layer.cornerRadius = 5;
+    confirmButton.layer.borderWidth = 2;
+    confirmButton.layer.borderColor = UIColor.flatPinkColor.CGColor;
     [confirmButton setTitle:@"Confirm" forState:UIControlStateNormal];
     [confirmButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [confirmButton addTarget:self action:@selector(didTapConfirm) forControlEvents:UIControlEventTouchUpInside];
