@@ -320,7 +320,10 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 - (void)eventsViewController:(EventsViewController *)controller didSelectEventWithTitle:(NSString *)title
              withDescription:(NSString *)description
                    withVenue:(NSString *)venue
-                    withTime:(NSString *)time {
+                    withTime:(NSString *)time
+                withLatitude:(NSNumber *)latitude
+               withLongitude:(NSNumber *)longitude{
+    
     self.eventTitle.text = title;
     if([description isKindOfClass:[NSString class]]) {
         self.eventDescription.text = description;
@@ -336,6 +339,8 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     [formatter setDateFormat:@"MMM dd hh:mm a"];
     NSDate *dateString = [formatter dateFromString:time];
     self.date = dateString;
+    self.lat = latitude;
+    self.lng = longitude;
     [self.navigationController popToViewController:self animated:YES];
 }
 

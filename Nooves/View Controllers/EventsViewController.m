@@ -162,6 +162,13 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     NSString *description = events[@"description"];
     NSString *venue = events[@"venue_name"];
     NSString *time = events[@"start_time"];
+    NSString *eventLatitude = events[@"latitude"];
+    NSString *eventLongitude = events[@"longitude"];
+    
+    NSNumberFormatter *numFormatter = [[NSNumberFormatter alloc]init];
+    numFormatter.numberStyle = NSNumberFormatterDecimalStyle;
+    NSNumber *formattedLatitude = [numFormatter numberFromString:eventLatitude];
+    NSNumber *formattedLongitude = [numFormatter numberFromString:eventLongitude];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"en_US"]];
@@ -171,7 +178,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     [formatter setDateFormat:@"MM-dd HH:mm"];
     NSString *formattedDate = [formatter stringFromDate:dateString];
    
-    [self.eventsDelegate eventsViewController:self didSelectEventWithTitle:title withDescription:description withVenue:venue withTime:formattedDate];
+    [self.eventsDelegate eventsViewController:self didSelectEventWithTitle:title withDescription:description withVenue:venue withTime:formattedDate withLatitude:formattedLatitude withLongitude:formattedLongitude];
     
     [self dismissViewControllerAnimated:NO completion:nil];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -188,7 +195,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 - (void)fetchEventsWithQuery:(NSString *)query {
     if ([self.userLocation isKindOfClass:[NSString class]]) {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            NSString *queryString = [NSString stringWithFormat:@"app_key=%@&page_size=20&location=%@&keyword=%@",appKey,self.userLocation,query];
+            NSString *queryString = [NSString stringWithFormat:@"app_key=%@&page_size=10&location=%@&keyword=%@",appKey,self.userLocation,query];
             queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         
             NSURL *url = [NSURL URLWithString:[baseURLString stringByAppendingString:queryString]];
