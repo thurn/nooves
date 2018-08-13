@@ -352,7 +352,12 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
         self.eventDescription.text = @"";
     }
     self.location = venue;
-    self.timeTextField.text = time;
+    
+    // format date string to date format
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM-dd HH:mm"];
+    NSDate *dateString = [formatter dateFromString:time];
+    self.date = dateString;
     [self.navigationController popToViewController:self animated:YES];
 }
 
