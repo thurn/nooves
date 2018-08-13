@@ -275,33 +275,11 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
         }];
         self.uploading = NO;
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [self pushToTabBar];
+        [self dismissViewControllerAnimated:true completion:nil];
         NSLog(@"User posted successfully");
     } else {
         NSLog(@"Nothing to post");
     }
-}
-
-- (void)pushToTabBar {
-    ProfileViewController* profileViewController = [[ProfileViewController alloc] init];
-    TimelineViewController *loginController = [[TimelineViewController alloc] init];
-    
-    TabBarController *tabBarController = [[TabBarController alloc] init];
-    UINavigationController *tabBarNavCont = [[UINavigationController alloc] initWithRootViewController:tabBarController];
-    
-    UINavigationController *timelineNavCont = [[UINavigationController alloc] initWithRootViewController:loginController];
-    UINavigationController *profileNavCont = [[UINavigationController alloc] initWithRootViewController:profileViewController];
-    
-    tabBarController.viewControllers = @[timelineNavCont, profileNavCont];
-    
-    UIImage *feedImage = [UIImage imageNamed:@"home"];
-    UIImage *profileImage = [UIImage imageNamed:@"profile"];
-    
-    loginController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Home" image:feedImage tag:0];
-    profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Profile" image:profileImage tag:1];
-    [self.navigationController presentViewController:tabBarNavCont animated:NO completion:^{
-        nil;
-    }];
 }
 
 // dismisses keyboard through gesture tap

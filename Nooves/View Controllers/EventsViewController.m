@@ -3,7 +3,9 @@
 #import <CoreLocation/CoreLocation.h>
 #import "EventCell.h"
 #import "EventsViewController.h"
+
 #import <Masonry.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 
 static NSString * const baseURLString = @"http://api.eventful.com/json/events/search?";
 static NSString * const appKey = @"dFXh3rhZVVwbshg9";
@@ -184,8 +186,8 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 }
 
 - (void)fetchEventsWithQuery:(NSString *)query {
-    
     if ([self.userLocation isKindOfClass:[NSString class]]) {
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             NSString *queryString = [NSString stringWithFormat:@"app_key=%@&page_size=20&location=%@&keyword=%@",appKey,self.userLocation,query];
             queryString = [queryString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         
@@ -197,6 +199,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
                 if (data) {
                     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
                     self.results = [responseDictionary valueForKeyPath:@"events.event"];
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
                     [self->tableView reloadData];
                     NSLog(@" results dictionary :%@", self.results);
                 }
