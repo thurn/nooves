@@ -19,6 +19,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor flatWhiteColor];
+
+    [self configureDatePicker];
+    
+    [self createBackButton];
+    [self createConfirmButton];
+}
+
+- (void)configureDatePicker {
     self.selectedDate = [[NSDate alloc] init];
     self.gregorian = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
     
@@ -43,8 +51,6 @@
     
     [self.view addSubview:calendar];
     [self.view addSubview:self.datepicker];
-    [self createBackButton];
-    [self createConfirmButton];
 }
 
 #pragma mark - FSCalendar Delegate

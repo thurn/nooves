@@ -17,6 +17,12 @@
 @interface ComposeViewController () <UITextViewDelegate, UITextFieldDelegate,LocationPickerDelegate,
 CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 
+@property (nonatomic) Post *post;
+@property (nonatomic) NSDate *date;
+@property (nonatomic) ActivityType activityType;
+@property (nonatomic) NSNumber *lat;
+@property (nonatomic) NSNumber *lng;
+@property (nonatomic) NSString *location;
 @property (nonatomic) UIPickerView *pickerView;
 @property (nonatomic) UITextField *eventTitle;
 @property (nonatomic) UITextField *timeTextField;
@@ -24,6 +30,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 @property (nonatomic) UITextField *categoryTextField;
 @property (nonatomic) UITextView *eventDescription;
 @property (nonatomic) BOOL uploading;
+
 @end
 
 @implementation ComposeViewController
@@ -31,19 +38,33 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor flatWhiteColor];
-    self.navigationController.navigationBarHidden = NO;
-    self.navigationItem.title = @"New Event";
     self.uploading = NO;
-
-    CGRect contentRect = CGRectZero;
-    for (UIView *view in self.view.subviews) {
-        contentRect = CGRectUnion(contentRect, view.frame);
-    }
     
     self.lat = [[NSNumber alloc] init];
     self.lng = [[NSNumber alloc] init];
     self.location = [[NSString alloc] init];
+    
+    [self configureView];
+
+    [self becomeFirstResponder];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    self.locationTextField.text = self.location;
+    
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    formatter.dateFormat = @"MMM dd hh:mm a";
+    formatter.locale = [NSLocale localeWithLocaleIdentifier:@"en_US"];
+    [formatter setTimeZone:[NSTimeZone localTimeZone]];
+    NSString *dateDetails = [formatter stringFromDate:self.date];
+    self.timeTextField.text = dateDetails;
+    
+    self.eventDescription.textColor = UIColor.grayColor;
+}
+
+- (void)configureView {
+    self.view.backgroundColor = [UIColor flatWhiteColor];
+    self.navigationItem.title = @"New Event";
     
     self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(36, 5, 335, 30)];
     self.eventTitle.text = nil;
@@ -97,7 +118,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     self.eventDescription.text = @"Add a description";
     self.eventDescription.textColor = UIColor.grayColor;
     self.eventDescription.backgroundColor = UIColor.flatWhiteColor;
-
+    
     [self.view addSubview:self.eventTitle];
     [self.view addSubview:self.timeTextField];
     [self.view addSubview:self.locationTextField];
@@ -110,21 +131,6 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     
     [self createPostButton];
     [self createBackButton];
-
-    [self becomeFirstResponder];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    self.locationTextField.text = self.location;
-    
-    NSDateFormatter *formatter = [NSDateFormatter new];
-    formatter.dateFormat = @"MMM dd hh:mm a";
-    formatter.locale = [NSLocale localeWithLocaleIdentifier:@"en_US"];
-    [formatter setTimeZone:[NSTimeZone localTimeZone]];
-    NSString *dateDetails = [formatter stringFromDate:self.date];
-    self.timeTextField.text = dateDetails;
-    
-    self.eventDescription.textColor = UIColor.grayColor;
 }
 
 #pragma mark - buttons and respective actions
