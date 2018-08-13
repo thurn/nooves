@@ -133,13 +133,15 @@
                         posty.usersGoing = [postsDict[userKey][IDKey][@"UsersGoing"] copy];
                         NSInteger date = [postsDict[userKey][IDKey][@"Date"] integerValue];
                         NSDate *daty = [NSDate dateWithTimeIntervalSince1970:date];
-                         posty.timestamp = [postsDict[userKey][IDKey][@"TimeStamp"] integerValue];
+                         posty.myTimestamp = postsDict[userKey][IDKey][@"TimeStamp"];
                         posty.activityDateAndTime = daty;
                         [myArray addObject:posty];
                     }
                 }
             }
-            self.eventsGoing = myArray;
+            NSArray *thisArray = [[NSArray alloc] init];
+            thisArray = [Post sortPostsByTime:myArray];
+            self.eventsGoing = thisArray;
             [self.tableview reloadData];
         }
     }];
