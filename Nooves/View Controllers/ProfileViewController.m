@@ -1,9 +1,11 @@
 #import "EditProfileViewController.h"
+#import <Masonry.h>
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
 #import "User.h"
 #import "SettingsViewController.h"
 #import "UIImageView+Cache.h"
+
 @interface ProfileViewController () <editProfileDelegate>
 
 @property(strong, nonatomic) UIImageView *profilePicture;
@@ -63,34 +65,38 @@
     }
     
     // set up the profile picture field
-    self.profilePicture = [[UIImageView alloc]initWithFrame:CGRectMake(10, 80, 30, 30)];
-    self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width / 2;
+    self.profilePicture = [[UIImageView alloc]initWithFrame:CGRectMake(150, 30, 100, 100)];
+    self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width/2;
     self.profilePicture.clipsToBounds = YES;
+    self.profilePicture.layer.borderWidth = 1.0f;
+    self.profilePicture.layer.borderColor = UIColor.blackColor.CGColor;
     [self.profilePicture setImage:[UIImage imageNamed:@"profile-blank"]];
-    [self.profilePicture sizeToFit];
     
     //set up the name label field
-    self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(150, 80, 30, 30)];
+    self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(150, 140, 30, 30)];
     self.nameLabel.text = @"Name";
     [self.nameLabel sizeToFit];
     
     //set up the age field
-    self.ageLabel = [[UILabel alloc]initWithFrame:CGRectMake(150, 130, 30, 30)];
+    self.ageLabel = [[UILabel alloc]initWithFrame:CGRectMake(120, 250, 30, 30)];
     self.ageLabel.text = @"Age";
     [self.ageLabel sizeToFit];
     
     // set up the phone number field
-    self.contactNumberLabel = [[UILabel alloc]initWithFrame:CGRectMake(150, 170, 30, 30)];
+    self.contactNumberLabel = [[UILabel alloc]initWithFrame:CGRectMake(120, 280, 30, 30)];
     self.contactNumberLabel.text = @"Phone number";
     [self.contactNumberLabel sizeToFit];
     
     // set up the bio field
-    self.bioLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 220, 200, 50)];
+    self.bioLabel = [[UILabel alloc]initWithFrame:CGRectMake(40, 170, 200, 50)];
     self.bioLabel.text = @"Bio";
     [self.bioLabel sizeToFit];
     
     // set up the edit profile button
-    self.editProfile = [[UIButton alloc]initWithFrame:CGRectMake(150, 350, 30, 30)];
+    self.editProfile = [[UIButton alloc]initWithFrame:CGRectMake(150, 200, 70, 30)];
+    self.editProfile.layer.cornerRadius = 5;
+    self.editProfile.layer.borderWidth = 1;
+    self.editProfile.layer.borderColor = UIColor.blackColor.CGColor;
     [self.editProfile setTitle:@"Edit Profile" forState:UIControlStateNormal];
     [self.editProfile setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [self.editProfile sizeToFit];
