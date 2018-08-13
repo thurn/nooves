@@ -38,18 +38,31 @@
     self.calendar.appearance.selectionColor = [UIColor flatSkyBlueColor];
     self.calendar.appearance.headerTitleColor = [UIColor flatPinkColor];
     self.calendar.appearance.weekdayTextColor = [UIColor flatPinkColor];
+    [[self.calendar appearance] setTitleFont:[UIFont fontWithName:@"ProximaNovaT-Thin" size:12.0]];
+    [[self.calendar appearance] setSubtitleFont:[UIFont fontWithName:@"ProximaNovaT-Thin" size:12.0]];
     
     [self.view addSubview:calendar];
     [self.view addSubview:self.datepicker];
     [self createBackButton];
     [self createConfirmButton];
-    ;
 }
 
+#pragma mark - FSCalendar Delegate
 - (void)calendar:(FSCalendar *)calendar didSelectDate:(NSDate *)date atMonthPosition:(FSCalendarMonthPosition)monthPosition {
     NSDateComponents *components = [self.gregorian components:NSCalendarUnitMonth | NSCalendarUnitDay fromDate:date];
     _month = [components month];
     _day = [components day];
+}
+
+#pragma mark - FSCalendar Data Source
+- (NSDate *)minimumDateForCalendar:(FSCalendar *)calendar {
+    return [NSDate date];
+}
+- (void)calendar:(FSCalendar *)calendar boundingRectWillChange:(CGRect)bounds animated:(BOOL)animated {
+    calendar.frame = (CGRect) {
+        calendar.frame.origin,bounds.size
+    };
+    
 }
 
 - (void)getTime {
@@ -59,11 +72,6 @@
     _minute = [comp minute];
 }
 
-- (void)calendar:(FSCalendar *)calendar boundingRectWillChange:(CGRect)bounds animated:(BOOL)animated
-{
-    calendar.frame = (CGRect){calendar.frame.origin,bounds.size};
-
-}
 
 // back button
 - (UIBarButtonItem *)createBackButton {
