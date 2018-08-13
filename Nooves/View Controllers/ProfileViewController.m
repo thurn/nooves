@@ -7,7 +7,7 @@
 #import "SettingsViewController.h"
 #import "UIImageView+Cache.h"
 
-@interface ProfileViewController () <editProfileDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface ProfileViewController () <editProfileDelegate>
 
 @property(strong, nonatomic) UIImageView *profilePicture;
 @property(strong, nonatomic) UILabel *nameLabel;
@@ -17,7 +17,6 @@
 @property(strong, nonatomic) UIButton *editProfile;
 @property(strong, nonatomic) UIButton *settingsButton;
 @property(strong, nonatomic) User *user;
-@property(strong, nonatomic) UITableView *tableView;
 
 @end
 
@@ -50,7 +49,6 @@
     }];
     [self configureProfile];
     self.navigationItem.title = @"Profile";
-    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,13 +56,9 @@
 }
 
 - (void)configureProfile {
-    // set the background color
-    self.view.backgroundColor = [UIColor flatWhiteColor];
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width,self.view.frame.size.height)];
-    self.tableView.backgroundColor = UIColor.flatWhiteColor;
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
     
+    self.view.backgroundColor = [UIColor flatWhiteColor];
+
     if (!self.user) {
         self.user = [[User alloc]init];
         self.user.name = [FIRAuth auth].currentUser.displayName;
@@ -123,7 +117,6 @@
     [self.contactNumberLabel sizeToFit];
     
     // add all subviews to the view
-    [self.view addSubview:self.tableView];
     [self.view addSubview:self.profilePicture];
     [self.view addSubview:self.nameLabel];
     [self.view addSubview:self.ageLabel];
