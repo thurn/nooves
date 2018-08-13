@@ -173,6 +173,14 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     
     [self dismissViewControllerAnimated:NO completion:nil];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (selectedCellIndexPath == indexPath) {
+        selectedCellIndexPath = nil;
+    }
+    
+    else {
+        selectedCellIndexPath = indexPath;
+    }
 }
 
 - (void)fetchEventsWithQuery:(NSString *)query {
