@@ -355,7 +355,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     
     // format date string to date format
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MM-dd HH:mm"];
+    [formatter setDateFormat:@"MMM dd hh:mm a"];
     NSDate *dateString = [formatter dateFromString:time];
     self.date = dateString;
     [self.navigationController popToViewController:self animated:YES];
