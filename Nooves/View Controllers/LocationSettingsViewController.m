@@ -9,6 +9,8 @@
 @property (nonatomic) UITextField *cityTextField;
 @property (nonatomic) UITextField *stateTextField;
 @property (nonatomic) UIButton *confirmButton;
+@property (nonatomic) NSString *city;
+@property (nonatomic) NSString *state;
 @end
 
 @implementation LocationSettingsViewController

@@ -8,7 +8,6 @@
 @property (nonatomic) NSArray *categories;
 @property (nonatomic) UIPickerView *pickerView;
 @property (nonatomic) UIScrollView *scrollView;
-@property (nonatomic) NSMutableArray *imagesArray;
 @property (nonatomic) int tappedIndex;
 @property (nonatomic) UIImageView *imageView;
 @end
@@ -19,8 +18,12 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor flatWhiteColor];
     
-    self.imagesArray = [[NSMutableArray alloc] init];
+    [self configureScrollView];
     
+    [self createBackButton];
+}
+
+- (void)configureScrollView {
     self.scrollView = [[UIScrollView alloc] init];
     self.scrollView.delegate = self;
     self.scrollView.scrollEnabled = YES;
@@ -30,11 +33,10 @@
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.showsHorizontalScrollIndicator = NO;
     
-    
     int offset = 0;
     for (int i = 0; i <= 12; i++) {
         float xpos = self.view.frame.size.width/10 + offset;
-
+        
         UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:[Post activityTypeToString:i], i]];
         
         self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(xpos, 0, 300, 300)];
@@ -54,8 +56,6 @@
     [self.view addSubview:self.scrollView];
     
     self.scrollView.contentSize = CGSizeMake(100+offset,self.scrollView.frame.size.height);
-    
-    [self createBackButton];
 }
 
 - (void)didTapImage:(UITapGestureRecognizer *)recognizer {
