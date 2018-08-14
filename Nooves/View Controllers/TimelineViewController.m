@@ -62,12 +62,20 @@
 - (void)filterLocation {
     Location *location = [[Location alloc] init];
     self.filteredData = [[NSMutableArray alloc]init];
+    double distance;
     for (Post *post in self.firArray) {
-        double distance =
-        [location calculateDistanceWithUserLat:Location.currentLocation.userLat
-                                       userLng:Location.currentLocation.userLng
-                                      eventLat:post.activityLat
-                                      eventLng:post.activityLng];
+        if ([NSUserDefaults.standardUserDefaults boolForKey:@"switch"]) {
+            [location calculateDistanceWithUserLat:[NSNumber numberWithDouble:33.448376]
+                                           userLng:[NSNumber numberWithDouble:-112.074036]
+                                          eventLat:post.activityLat
+                                          eventLng:post.activityLng];
+        } else {
+            distance =
+            [location calculateDistanceWithUserLat:Location.currentLocation.userLat
+                                           userLng:Location.currentLocation.userLng
+                                          eventLat:post.activityLat
+                                          eventLng:post.activityLng];
+        }
         if (distance <= 80467.2) {
             [self.filteredData addObject:post];
         }

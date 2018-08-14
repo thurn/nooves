@@ -39,7 +39,7 @@
     self.stateTextField.tintColor = [UIColor flatGrayColor];
     [self.stateTextField setHidden:YES];
     
-    self.confirmButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 105, 100, 100)];
+    self.confirmButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 105, 100, 30)];
     self.confirmButton.layer.cornerRadius = 5;
     self.confirmButton.layer.borderWidth = 2;
     self.confirmButton.layer.borderColor = UIColor.flatPinkColor.CGColor;
@@ -111,6 +111,7 @@
     self.state = self.stateTextField.text;
     [NSUserDefaults.standardUserDefaults setObject:self.city forKey:@"city"];
     [NSUserDefaults.standardUserDefaults setObject:self.state forKey:@"state"];
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 // sets up back button properties
