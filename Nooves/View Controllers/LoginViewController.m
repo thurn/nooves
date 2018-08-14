@@ -112,7 +112,6 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
     } else {
         NSLog(@"%@", error.localizedDescription);
     }
-    
 }
 
 - (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {

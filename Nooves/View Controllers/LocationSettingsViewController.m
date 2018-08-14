@@ -46,14 +46,17 @@
     self.stateTextField.layer.cornerRadius = 3.0f;
     [self.stateTextField setHidden:YES];
     
-    self.confirmButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    self.confirmButton.frame = CGRectMake(10, 105, 100, 100);
+    self.confirmButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 105, 100, 100)];
+    self.confirmButton.layer.cornerRadius = 5;
+    self.confirmButton.layer.borderWidth = 2;
+    self.confirmButton.layer.borderColor = UIColor.flatPinkColor.CGColor;
     [self.confirmButton setTitle:@"Confirm" forState:UIControlStateNormal];
     [self.confirmButton addTarget:self
                            action:@selector(didTapConfirm)
                  forControlEvents:UIControlEventTouchUpInside];
-    self.confirmButton.tintColor = [UIColor flatWhiteColor];
-    self.confirmButton.layer.shadowColor = [UIColor flatGrayColor].CGColor;
+    [self.confirmButton setTitleColor:[UIColor flatBlackColor] forState:UIControlStateNormal];
+    self.confirmButton.tintColor = [UIColor flatBlackColor];
+    self.confirmButton.layer.shadowColor = [UIColor flatBlackColor].CGColor;
     self.confirmButton.layer.shadowOffset = CGSizeMake(0.f, 1.f);
     self.confirmButton.layer.cornerRadius = 6.0f;
     self.confirmButton.hidden = YES;
@@ -108,17 +111,6 @@
         [self.cityTextField setHidden:YES];
         self.confirmButton.hidden = YES;
     }
-}
-
-- (UIButton *)createConfirmButton {
-    UIButton *confirmButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    confirmButton.frame = CGRectMake(7, 150, 100, 100);
-    [confirmButton setTitle:@"Confirm" forState:UIControlStateNormal];
-    [confirmButton addTarget:self
-                      action:@selector(didTapConfirm)
-            forControlEvents:UIControlEventTouchUpInside];
-    [confirmButton sizeToFit];
-    return confirmButton;
 }
 
 - (void)didTapConfirm {
