@@ -101,7 +101,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     [view addSubview:self.timeTextField];
     [view addSubview:[self createDateButton]];
     
-    UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(5, 40, self.view.bounds.size.width, 1)];
+    UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(10, 40, self.view.bounds.size.width, 1)];
     line2.backgroundColor = [UIColor flatWhiteColor];
     [view addSubview:line2];
     
@@ -114,7 +114,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     [view addSubview:self.locationTextField];
     [view addSubview:[self createLocationButton]];
     
-    UIView *line3 = [[UIView alloc] initWithFrame:CGRectMake(5, 80, self.view.bounds.size.width, 1)];
+    UIView *line3 = [[UIView alloc] initWithFrame:CGRectMake(10, 80, self.view.bounds.size.width, 1)];
     line3.backgroundColor = [UIColor flatWhiteColor];
     [view addSubview:line3];
     

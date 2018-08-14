@@ -49,8 +49,8 @@
     self.usernameField.placeholder = @"Email or username";
     self.usernameField.borderStyle = UITextBorderStyleNone;
     self.usernameField.tintColor = [UIColor flatGrayColor];
-    self.usernameField.backgroundColor = [UIColor flatWhiteColor];
-    self.usernameField.layer.borderColor = [UIColor flatBlackColor].CGColor;
+    self.usernameField.backgroundColor = [UIColor whiteColor];
+    self.usernameField.layer.borderColor = [UIColor flatWhiteColor].CGColor;
     self.usernameField.layer.borderWidth = 2.0f;
     self.usernameField.layer.cornerRadius = 3.0f;
     [self.view addSubview:self.usernameField];
@@ -60,8 +60,8 @@
     self.passwordField.placeholder = @"Password";
     self.passwordField.borderStyle = UITextBorderStyleNone;
     self.passwordField.tintColor = [UIColor flatGrayColor];
-    self.passwordField.backgroundColor = [UIColor flatWhiteColor];
-    self.passwordField.layer.borderColor = [UIColor flatBlackColor].CGColor;
+    self.passwordField.backgroundColor = [UIColor whiteColor];
+    self.passwordField.layer.borderColor = [UIColor flatWhiteColor].CGColor;
     self.passwordField.layer.borderWidth = 2.0f;
     self.passwordField.layer.cornerRadius = 3.0f;
     [self.view addSubview:self.passwordField];
@@ -136,7 +136,10 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [button setTintColor:[UIColor blackColor]];
     [button setTitle:@"Login" forState:UIControlStateNormal];
-    [button setBackgroundColor:[UIColor flatWhiteColor]];
+    [button setBackgroundColor:[UIColor lightGrayColor]];
+    button.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    button.layer.borderWidth = 2.0f;
+    button.layer.cornerRadius = 3.0f;
     return button;
 }
 

@@ -71,9 +71,8 @@
     stackView.alignment = UIStackViewAlignmentLeading;
     stackView.spacing = 5;
     
-    CGRect frame = [self.categoryImageView frame];
-    frame.size.width = 50;
-    [self.categoryImageView setFrame:frame];
+    stackView.frame = CGRectMake(5, 5, self.view.bounds.size.width, self.view.bounds.size.height);
+    
     self.categoryImageView.frame = CGRectMake(10, 10, 40, 40);
     self.categoryImageView.clipsToBounds = YES;
     self.categoryImageView.contentMode = UIViewContentModeScaleAspectFill;
