@@ -99,13 +99,18 @@
     
     UIView *profileView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 150)];
     [profileView setBackgroundColor:UIColor.whiteColor];
-   profileView.layer.cornerRadius = 5;
-    profileView.layer.borderWidth = 1;
+   // profileView.layer.cornerRadius = 5;
+    profileView.layer.borderWidth = 0.5;
     profileView.layer.borderColor = UIColor.flatBlackColor.CGColor;
     [self.view addSubview:profileView];
     
     //set up the profile pic field
-    self.profilePic = [[UIImageView alloc]initWithFrame:CGRectMake(100, 30, 100, 100)];
+    self.profilePic = [[UIImageView alloc]initWithFrame:CGRectMake((self.view.bounds.size.width/2)-62.5, 10, 125, 125)];
+   self.profilePic.layer.cornerRadius = self.profilePic.frame.size.width/2;
+    self.profilePic.clipsToBounds = YES;
+    self.profilePic.contentMode = UIViewContentModeScaleAspectFill;
+    self.profilePic.layer.borderWidth = 2;
+    self.profilePic.layer.borderColor = UIColor.flatPinkColor.CGColor;
     [self.profilePic setImage:[UIImage imageNamed:@"profile-blank"]];
     UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] init];
     [tapped addTarget:self action:@selector(selectProfilePic)];
@@ -115,8 +120,8 @@
     
     UIView *infoView = [[UIView alloc] initWithFrame:CGRectMake(0, 180, self.view.bounds.size.width, 200)];
     [infoView setBackgroundColor:UIColor.whiteColor];
-    infoView.layer.cornerRadius = 5;
-    infoView.layer.borderWidth = 1;
+   // infoView.layer.cornerRadius = 5;
+    infoView.layer.borderWidth = 0.5;
     infoView.layer.borderColor = UIColor.flatBlackColor.CGColor;
     [self.view addSubview:infoView];
     
@@ -127,7 +132,7 @@
     self.userName.textColor = [UIColor grayColor];
     [infoView addSubview:self.userName];
     
-    UIView *firstLine = [[UIView alloc]initWithFrame:CGRectMake(0, 35, infoView.bounds.size.width, 1)];
+    UIView *firstLine = [[UIView alloc]initWithFrame:CGRectMake(0, 35, infoView.bounds.size.width, 0.3)];
     [firstLine setBackgroundColor:UIColor.flatBlackColorDark];
     [infoView addSubview:firstLine];
     
@@ -136,7 +141,7 @@
     self.age.placeholder = @"Enter age";
     self.age.textColor = [UIColor grayColor];
     
-    UIView *secondLine = [[UIView alloc]initWithFrame:CGRectMake(0, 65, infoView.bounds.size.width, 1)];
+    UIView *secondLine = [[UIView alloc]initWithFrame:CGRectMake(0, 60, infoView.bounds.size.width, 0.3)];
     [secondLine setBackgroundColor:UIColor.flatBlackColorDark];
     [infoView addSubview:secondLine];
     
@@ -145,7 +150,7 @@
     self.userPhoneNumber.placeholder = @"Enter phone number";
     self.userPhoneNumber.textColor = [UIColor grayColor];
     
-    UIView *thirdLine = [[UIView alloc]initWithFrame:CGRectMake(0, 95, infoView.bounds.size.width, 1)];
+    UIView *thirdLine = [[UIView alloc]initWithFrame:CGRectMake(0, 90, infoView.bounds.size.width, 0.3)];
     [thirdLine setBackgroundColor:UIColor.flatBlackColorDark];
     [infoView addSubview:thirdLine];
     
