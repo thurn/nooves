@@ -69,6 +69,7 @@
     self.profilePicture = [[UIImageView alloc]initWithFrame:CGRectMake(150, 30, 100, 100)];
     self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width/2;
     self.profilePicture.clipsToBounds = YES;
+    self.profilePicture.contentMode = UIViewContentModeScaleAspectFill;
     self.profilePicture.layer.borderWidth = 2;
     self.profilePicture.layer.borderColor = UIColor.flatPinkColor.CGColor;
     [self.profilePicture setImage:[UIImage imageNamed:@"profile-blank"]];

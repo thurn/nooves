@@ -33,9 +33,10 @@
         [self.dateField autoPinEdgeToSuperviewMargin:ALEdgeLeft];
         [self.dateField autoPinEdgeToSuperviewMargin:ALEdgeTop];
         if(!self.profilePicField){
-            self.profilePicField = [[UIImageView alloc] initWithFrame:CGRectMake(self.dateField.frame.origin.x, self.dateField.frame.size.height+22, 70, 70)];
+            self.profilePicField = [[UIImageView alloc] initWithFrame:CGRectMake(self.dateField.frame.origin.x, self.dateField.frame.size.height+22, 50, 50)];
             self.profilePicField.layer.cornerRadius = self.profilePicField.frame.size.width / 2;
             self.profilePicField.clipsToBounds = YES;
+            self.profilePicField.contentMode = UIViewContentModeScaleAspectFill;
         }
         self.profilePicField.image = [UIImage imageNamed:@"profile-blank"];
         [self.contentView addSubview:self.profilePicField];
