@@ -66,7 +66,7 @@
     }
 
     // set up the profile picture field
-    self.profilePicture = [[UIImageView alloc]initWithFrame:CGRectMake(150, 30, 100, 100)];
+    self.profilePicture = [[UIImageView alloc]initWithFrame:CGRectMake(100, 30, 200, 200)];
     self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width/2;
     self.profilePicture.clipsToBounds = YES;
     self.profilePicture.contentMode = UIViewContentModeScaleAspectFill;
@@ -75,12 +75,12 @@
     [self.profilePicture setImage:[UIImage imageNamed:@"profile-blank"]];
     
     //set up the name label field
-    self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(150, 140, 30, 30)];
+    self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(120, 240, 30, 30)];
     self.nameLabel.text = @"Name";
     [self.nameLabel sizeToFit];
     
     // set up the bio field
-    self.bioLabel = [[UILabel alloc]initWithFrame:CGRectMake(40, 170, 200, 50)];
+    self.bioLabel = [[UILabel alloc]initWithFrame:CGRectMake(40, 340, 200, 50)];
     self.bioLabel.text = @"Bio";
     [self.bioLabel sizeToFit];
     
@@ -90,28 +90,13 @@
     editProfile.target = self;
     editProfile.action = @selector(didTapEditProfile);
     
-    // set up the edit profile button
-    /*self.editProfile = [[UIButton alloc]initWithFrame:CGRectMake(150, 200, 70, 30)];
-    self.editProfile.layer.cornerRadius = 5;
-    self.editProfile.layer.borderWidth = 2;
-    self.editProfile.layer.borderColor = UIColor.flatPinkColor.CGColor;
-    [self.editProfile setTitle:@"Edit Profile" forState:UIControlStateNormal];
-    [self.editProfile setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [self.editProfile sizeToFit];
-    [self.editProfile addTarget:self action:@selector(didTapEditProfile) forControlEvents:UIControlEventTouchUpInside];*/
-    
     // set up settings button
     UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc]init];
     [settingsButton setImage:[UIImage imageNamed:@"settings"]];
     self.navigationItem.leftBarButtonItem = settingsButton;
     settingsButton.target = self;
     settingsButton.action = @selector(didTapSettings);
-    
-    self.settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(260, 205, 30, 30)];
-    [self.settingsButton setImage:[UIImage imageNamed:@"settings"] forState:UIControlStateNormal];
-    [self.settingsButton sizeToFit];
-    [self.settingsButton addTarget:self action:@selector(didTapSettings) forControlEvents:UIControlEventTouchUpInside];
-    
+
     //convert age to a string
     if (![self.user.age isEqualToNumber:@(0)]){
         NSNumber *userAge = self.user.age;
@@ -120,12 +105,12 @@
     }
     
     //set up the age field
-    self.ageLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 270, 30, 30)];
+    self.ageLabel = [[UILabel alloc]initWithFrame:CGRectMake(40, 280, 30, 30)];
     self.ageLabel.text = @"Age";
     [self.ageLabel sizeToFit];
     
     // set up the phone number field
-    self.contactNumberLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, 300, 30, 30)];
+    self.contactNumberLabel = [[UILabel alloc]initWithFrame:CGRectMake(40, 310, 30, 30)];
     self.contactNumberLabel.text = @"Phone number";
     [self.contactNumberLabel sizeToFit];
     
@@ -135,8 +120,6 @@
     [self.view addSubview:self.ageLabel];
     [self.view addSubview:self.contactNumberLabel];
     [self.view addSubview:self.bioLabel];
-    //[self.view addSubview:self.editProfile];
-   // [self.view addSubview:self.settingsButton];
 }
 
 - (void)didTapEditProfile {
@@ -151,18 +134,18 @@
 
 - (void)didUpdateProfile {
     self.nameLabel.text = self.user.name;
-    self.bioLabel.text = self.user.biography;
+    self.bioLabel.text = [@"Bio: " stringByAppendingString:self.user.biography];
     NSNumber *ageNumber = self.user.age;
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
     NSString *ageString = [formatter stringFromNumber:ageNumber];
-    self.ageLabel.text = ageString;
+    self.ageLabel.text = [@"Age: " stringByAppendingString:ageString];
     
   
     //convert phone number to a string
     if (![self.user.phoneNumber isEqualToNumber:@(0)]){
         NSNumber *userNumber = self.user.phoneNumber ;
         NSString *phoneNumberInString = [userNumber stringValue];
-        self.contactNumberLabel.text = phoneNumberInString;
+        self.contactNumberLabel.text = [@"Contact number: " stringByAppendingString:phoneNumberInString];
     }
     
     [self.nameLabel sizeToFit];

@@ -73,6 +73,7 @@
 
 - (void)updateWithEvent:(NSDictionary *)dictionary {
     self.titleLabel.text = dictionary[@"title"];
+    [self.titleLabel setFont:[UIFont fontWithName:@"ProximaNova-Semibold" size:16]];
     NSString *descriptionText = dictionary[@"description"];
   
     if([descriptionText isKindOfClass:[NSString class]]) {
