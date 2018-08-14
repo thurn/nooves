@@ -152,6 +152,10 @@
 - (void)didUpdateProfile {
     self.nameLabel.text = self.user.name;
     self.bioLabel.text = self.user.biography;
+    NSNumber *ageNumber = self.user.age;
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
+    NSString *ageString = [formatter stringFromNumber:ageNumber];
+    self.ageLabel.text = ageString;
     
   
     //convert phone number to a string
