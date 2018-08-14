@@ -21,7 +21,8 @@
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 15, 5)];
     label.text = @"Manually set location";
-    [label setFont:[UIFont fontWithName:@"ProximaNova-Semibold" size:16]];
+    [label setTextColor:[UIColor blackColor]];
+    [label setFont:[UIFont fontWithName:@"ProximaNova-Semibold" size:18]];
     [label sizeToFit];
     [self.view addSubview:label];
     
