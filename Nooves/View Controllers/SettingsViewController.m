@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.hidesBackButton = YES;
     self.view.backgroundColor = [UIColor flatWhiteColor];
     
     FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
@@ -65,33 +66,22 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
                                                      }
                                                      // User successfully signed in. Get user data from the FIRUser object
                                                      if (authResult == nil) { return; }
-                                                     if (authResult == nil) { return; }
-                                                     FIRUser *user = authResult.user;
-                                                     ProfileViewController* profileViewController = [[ProfileViewController alloc] init];
-                                                     TimelineViewController *loginController = [[TimelineViewController alloc] init];
                                                      
-                                                     TabBarController *tabBarController = [[TabBarController alloc] init];
-                                                     UINavigationController *tabBarNavCont = [[UINavigationController alloc] initWithRootViewController:tabBarController];
-                                                     
-                                                     UINavigationController *timelineNavCont = [[UINavigationController alloc] initWithRootViewController:loginController];
-                                                     UINavigationController *profileNavCont = [[UINavigationController alloc] initWithRootViewController:profileViewController];
-                                                     
-                                                     tabBarController.viewControllers = @[timelineNavCont, profileNavCont];
-                                                     
-                                                     UIImage *feedImage = [UIImage imageNamed:@"home"];
-                                                     UIImage *profileImage = [UIImage imageNamed:@"profile"];
-                                                     
-                                                     loginController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Home" image:feedImage tag:0];
-                                                     profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Profile" image:profileImage tag:1];
-                                                     [self.navigationController presentViewController:tabBarController animated:NO completion:nil];
                                                  }];
     } else {
         NSLog(@"%@", error.localizedDescription);
     }
+    
 }
-
 - (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {
-    [self.navigationController presentViewController:[LoginViewController new] animated:YES completion:nil];
+    NSError *signOutError;
+    BOOL status = [[FIRAuth auth] signOut:&signOutError];
+    if (!status) {
+        NSLog(@"Error signing out: %@", signOutError);
+        return;
+    }
+    LoginViewController *login = [[LoginViewController alloc] init];
+    [self.navigationController presentViewController:login animated:NO completion:nil];
 }
 
 - (UIButton *)createInviteFriendsButton {

@@ -15,6 +15,7 @@
 
 - (void)viewDidLoad {
     self.user = [FIRAuth auth].currentUser;
+    self.navigationItem.hidesBackButton = YES;
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor whiteColor];
@@ -47,8 +48,7 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
                                                      ProfileViewController* profileViewController = [[ProfileViewController alloc] init];
                                                      TimelineViewController *loginController = [[TimelineViewController alloc] init];
                                                      
-                                                     TabBarController *tabBarController = [[TabBarController alloc] init];
-                                                    UINavigationController *tabBarNavCont = [[UINavigationController alloc] initWithRootViewController:tabBarController];
+                                                     UITabBarController *tabBarController = [[UITabBarController alloc] init];
                                                      
                                                      UINavigationController *timelineNavCont = [[UINavigationController alloc] initWithRootViewController:loginController];
                                                      UINavigationController *profileNavCont = [[UINavigationController alloc] initWithRootViewController:profileViewController];
@@ -60,7 +60,8 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
                                                      
                                                      loginController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Home" image:feedImage tag:0];
                                                      profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Profile" image:profileImage tag:1];
-                                                     [self.navigationController presentViewController:tabBarNavCont animated:NO completion:nil];
+                                                     [self presentViewController:tabBarController animated:NO completion:^{
+                                                     }];
                                                  }];
     } else {
         NSLog(@"%@", error.localizedDescription);
@@ -69,6 +70,12 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
 }
 
 - (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {
+    NSError *signOutError;
+    BOOL status = [[FIRAuth auth] signOut:&signOutError];
+    if (!status) {
+        NSLog(@"Error signing out: %@", signOutError);
+        return;
+    }
     [self.navigationController pushViewController:[LoginViewController new] animated:YES];
 }
 
