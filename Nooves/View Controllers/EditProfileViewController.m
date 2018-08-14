@@ -1,10 +1,12 @@
+#import <ChameleonFramework/Chameleon.h>
 #import "EditProfileViewController.h"
 #import "ProfileViewController.h"
 #import <FIRStorage.h>
+#import <Masonry.h>
 #import "User.h"
 #import "UIImageView+Cache.h"
 
-@interface EditProfileViewController () <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface EditProfileViewController () <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDropItem, UITableViewDataSource>
 
 @property(strong, nonatomic) UIImageView *profilePic;
 @property(strong, nonatomic) UITextField *userName;
@@ -40,7 +42,7 @@
     }];
     // Do any additional setup after loading the view.
     self.picEdited = NO;
-    self.view.backgroundColor = [UIColor whiteColor];\
+    self.view.backgroundColor = [UIColor flatWhiteColor];
     [self configureView];
     self.navigationController.navigationBarHidden = NO;
     self.navigationItem.title = @"Edit Profile";
@@ -93,6 +95,14 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)configureView {
+    
+    //set up a tableview
+    UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+    tableView.backgroundColor = UIColor.flatWhiteColor;
+    tableView.dataSource = self;
+    tableView.delegate = self;
+    tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
+    [self.view addSubview:tableView];
     
     //set up the profile pic field
     self.profilePic = [[UIImageView alloc]initWithFrame:CGRectMake(10, 80, 100, 100)];
@@ -174,4 +184,17 @@
     [User saveUserProfile:self.user];
 }
 
+#pragma mark - UITableViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 5;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [[UITableViewCell alloc]init];
+    return cell;
+}
 @end

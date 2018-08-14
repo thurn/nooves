@@ -27,10 +27,11 @@
     if (self.filtered) {
         [tableView reloadData];
     }
+    self.navigationItem.hidesBackButton = YES;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.navigationItem.hidesBackButton = YES;
     self.filtered = NO;
 
     tableView = [self configureTableView];

@@ -61,10 +61,9 @@
     loginController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Home" image:feedImage tag:0];
     profileViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Profile" image:profileImage tag:1];
     LoginViewController *login = [[LoginViewController alloc] init];
-    UINavigationController *loginNav = [[UINavigationController alloc] initWithRootViewController:login];
     
     if (![FIRAuth auth].currentUser) {
-        self.window.rootViewController = loginNav;
+        self.window.rootViewController = login;
     }
     else {
         self.window.rootViewController = tabBarController;
