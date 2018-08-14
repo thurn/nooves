@@ -4,7 +4,6 @@
 #import "UIFont+FlatUI.h"
 #import <ChameleonFramework/Chameleon.h>
 
-
 @interface LocationSettingsViewController () <UITextFieldDelegate>
 @property (nonatomic) UISwitch *locationSwitch;
 @property (nonatomic) UITextField *cityTextField;
@@ -53,7 +52,6 @@
     [self.confirmButton addTarget:self
                            action:@selector(didTapConfirm)
                  forControlEvents:UIControlEventTouchUpInside];
-    self.confirmButton.backgroundColor = [UIColor flatPinkColor];
     self.confirmButton.tintColor = [UIColor flatWhiteColor];
     self.confirmButton.layer.shadowColor = [UIColor flatGrayColor].CGColor;
     self.confirmButton.layer.shadowOffset = CGSizeMake(0.f, 1.f);
