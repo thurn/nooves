@@ -95,7 +95,7 @@
     [self.editProfile addTarget:self action:@selector(didTapEditProfile) forControlEvents:UIControlEventTouchUpInside];
     
     // set up settings button
-    self.settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(300, 200, 30, 30)];
+    self.settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(260, 205, 30, 30)];
     [self.settingsButton setImage:[UIImage imageNamed:@"settings"] forState:UIControlStateNormal];
     [self.settingsButton sizeToFit];
     [self.settingsButton addTarget:self action:@selector(didTapSettings) forControlEvents:UIControlEventTouchUpInside];
@@ -153,26 +153,6 @@
     [self.bioLabel sizeToFit];
     [self.contactNumberLabel sizeToFit];
     [self.ageLabel sizeToFit];
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc]init];
-    return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        return 250;
-    }
-    return UITableViewAutomaticDimension;
 }
 
 @end
