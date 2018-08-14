@@ -24,26 +24,26 @@
     [label sizeToFit];
     [self.view addSubview:label];
     
-    self.cityTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 35, 100, 30)];
+    self.cityTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 35, self.view.bounds.size.width, 30)];
     self.cityTextField.text = nil;
-    self.cityTextField.placeholder = @"Enter city";
+    self.cityTextField.placeholder = @"City";
     self.cityTextField.borderStyle = UITextBorderStyleNone;
     self.cityTextField.tintColor = [UIColor flatGrayColor];
     self.cityTextField.backgroundColor = [UIColor clearColor];
-    self.cityTextField.layer.borderColor = [UIColor flatPinkColor].CGColor;
-    self.cityTextField.layer.borderWidth = 2.0f;
-    self.cityTextField.layer.cornerRadius = 3.0f;
+//    self.cityTextField.layer.borderColor = [UIColor flatPinkColor].CGColor;
+//    self.cityTextField.layer.borderWidth = 2.0f;
+//    self.cityTextField.layer.cornerRadius = 3.0f;
     [self.cityTextField setHidden:YES];
     
-    self.stateTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 70, 100, 30)];
+    self.stateTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 70, self.view.bounds.size.width, 30)];
     self.stateTextField.text = nil;
-    self.stateTextField.placeholder = @"Enter state ex: CA";
+    self.stateTextField.placeholder = @"State ex: CA";
     self.stateTextField.borderStyle = UITextBorderStyleNone;
     self.stateTextField.tintColor = [UIColor flatGrayColor];
     self.stateTextField.backgroundColor = [UIColor clearColor];
-    self.stateTextField.layer.borderColor = [UIColor flatPinkColor].CGColor;
-    self.stateTextField.layer.borderWidth = 2.0f;
-    self.stateTextField.layer.cornerRadius = 3.0f;
+//    self.stateTextField.layer.borderColor = [UIColor flatPinkColor].CGColor;
+//    self.stateTextField.layer.borderWidth = 2.0f;
+//    self.stateTextField.layer.cornerRadius = 3.0f;
     [self.stateTextField setHidden:YES];
     
     self.confirmButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 105, 100, 100)];

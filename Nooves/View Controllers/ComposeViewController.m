@@ -1,8 +1,5 @@
 #import "ComposeViewController.h"
 #import "AppDelegate.h"
-#import "TimelineViewController.h"
-#import "ProfileViewController.h"
-#import "TabBarController.h"
 
 #import "CategoryPickerModalViewController.h"
 #import "DatePickerModalViewController.h"
@@ -12,9 +9,8 @@
 #import <ChameleonFramework/Chameleon.h>
 #import <FirebaseAuth.h>
 #import <MBProgressHUD/MBProgressHUD.h>
-#import "PureLayout/PureLayout.h"
 
-@interface ComposeViewController () <UITextViewDelegate, UITextFieldDelegate,LocationPickerDelegate,
+@interface ComposeViewController () <UITextViewDelegate, UITextFieldDelegate, LocationPickerDelegate,
 CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 
 @property (nonatomic) Post *post;
@@ -44,7 +40,15 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     self.lng = [[NSNumber alloc] init];
     self.location = [[NSString alloc] init];
     
-    [self configureView];
+    self.view.backgroundColor = [UIColor flatWhiteColor];
+    self.navigationItem.title = @"New Event";
+    
+    [self.view addSubview:[self configureTitleView]];
+    [self.view addSubview:[self configureDetailsView]];
+    [self.view addSubview:[self configureDescriptionView]];
+    
+    [self createPostButton];
+    [self createBackButton];
 
     [self becomeFirstResponder];
 }
@@ -62,82 +66,92 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
     self.eventDescription.textColor = UIColor.grayColor;
 }
 
-- (void)configureView {
-    self.view.backgroundColor = [UIColor flatWhiteColor];
-    self.navigationItem.title = @"New Event";
-    
-    self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(36, 5, 335, 30)];
+- (UIView *)configureTitleView {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 70)];
+    view.backgroundColor = [UIColor whiteColor];
+    self.eventTitle = [[UITextField alloc] initWithFrame:CGRectMake(36, 0, 335, 70)];
     self.eventTitle.text = nil;
     self.eventTitle.placeholder = @"Event name";
     self.eventTitle.borderStyle = UITextBorderStyleNone;
     self.eventTitle.textColor = UIColor.blackColor;
+    [self.eventTitle setFont:[UIFont fontWithName:@"ProximaNovaT-Thin" size:24]];
+    [view addSubview:self.eventTitle];
+    UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(0, 70, self.view.bounds.size.width, 1)];
+    line1.backgroundColor = [UIColor flatWhiteColor];
+    [view addSubview:line1];
+    [view addSubview:[self createEventsButton]];
+    return view;
+}
+
+- (UIView *)configureDetailsView {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 100, self.view.bounds.size.width, 120)];
+    view.backgroundColor = [UIColor whiteColor];
     
-    UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(0, 37, self.view.bounds.size.width, 1)];
-    line1.backgroundColor = [UIColor flatBlackColor];
-    [self.view addSubview:line1];
+    UIView *line1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 1)];
+    line1.backgroundColor = [UIColor flatWhiteColor];
+    [view addSubview:line1];
     
     // time text view
-    self.timeTextField = [[UITextField alloc] initWithFrame:CGRectMake(36, 40, 335, 30)];
+    self.timeTextField = [[UITextField alloc] initWithFrame:CGRectMake(36, 0, self.view.bounds.size.width, 40)];
     self.timeTextField.text = nil;
     self.timeTextField.placeholder = @"Time";
     self.timeTextField.borderStyle = UITextBorderStyleNone;
     self.timeTextField.textColor = UIColor.blackColor;
     self.timeTextField.enabled = NO;
+    [view addSubview:self.timeTextField];
+    [view addSubview:[self createDateButton]];
     
-    UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(0, 70, self.view.bounds.size.width, 1)];
-    line2.backgroundColor = [UIColor flatBlackColor];
-    [self.view addSubview:line2];
+    UIView *line2 = [[UIView alloc] initWithFrame:CGRectMake(5, 40, self.view.bounds.size.width, 1)];
+    line2.backgroundColor = [UIColor flatWhiteColor];
+    [view addSubview:line2];
     
     // location text view
-    self.locationTextField = [[UITextField alloc] initWithFrame:CGRectMake(36, 75, 335, 30)];
+    self.locationTextField = [[UITextField alloc] initWithFrame:CGRectMake(36, 40, self.view.bounds.size.width, 40)];
     self.locationTextField.text = nil;
     self.locationTextField.placeholder = @"Location";
     self.locationTextField.borderStyle = UITextBorderStyleNone;
     self.locationTextField.textColor = UIColor.blackColor;
+    [view addSubview:self.locationTextField];
+    [view addSubview:[self createLocationButton]];
     
-    UIView *line3 = [[UIView alloc] initWithFrame:CGRectMake(0, 105, self.view.bounds.size.width, 1)];
-    line3.backgroundColor = [UIColor flatBlackColor];
-    [self.view addSubview:line3];
+    UIView *line3 = [[UIView alloc] initWithFrame:CGRectMake(5, 80, self.view.bounds.size.width, 1)];
+    line3.backgroundColor = [UIColor flatWhiteColor];
+    [view addSubview:line3];
     
     // category text view
-    self.categoryTextField = [[UITextField alloc] initWithFrame:CGRectMake(36, 107, 335, 30)];
+    self.categoryTextField = [[UITextField alloc] initWithFrame:CGRectMake(36, 80, self.view.bounds.size.width, 40)];
     self.categoryTextField.text = nil;
     self.categoryTextField.placeholder = @"Category";
     self.categoryTextField.borderStyle = UITextBorderStyleNone;
     self.categoryTextField.textColor = UIColor.blackColor;
     self.categoryTextField.enabled = NO;
-    
-    UIView *line4 = [[UIView alloc] initWithFrame:CGRectMake(0, 138, self.view.bounds.size.width, 1)];
-    line4.backgroundColor = [UIColor flatBlackColor];
-    [self.view addSubview:line4];
-    
+    [view addSubview:self.categoryTextField];
+    [view addSubview:[self createCategoryButton]];
+
+    UIView *line4 = [[UIView alloc] initWithFrame:CGRectMake(0, 120, self.view.bounds.size.width, 1)];
+    line4.backgroundColor = [UIColor flatWhiteColor];
+    [view addSubview:line4];
+    return view;
+}
+
+- (UIView *)configureDescriptionView {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 250, self.view.bounds.size.width, 150)];
     // event text view
-    self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 142, self.view.bounds.size.width, 150)];
+    self.eventDescription = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 150)];
     [self.eventDescription setFont:[UIFont fontWithName:@"ProximaNovaT-Thin" size:16]];
     self.eventDescription.delegate = self;
     self.eventDescription.text = @"Add a description";
     self.eventDescription.textColor = UIColor.grayColor;
-    self.eventDescription.backgroundColor = UIColor.flatWhiteColor;
-    
-    [self.view addSubview:self.eventTitle];
-    [self.view addSubview:self.timeTextField];
-    [self.view addSubview:self.locationTextField];
-    [self.view addSubview:self.categoryTextField];
-    [self.view addSubview:self.eventDescription];
-    [self.view addSubview:[self createDateButton]];
-    [self.view addSubview:[self createCategoryButton]];
-    [self.view addSubview:[self createLocationButton]];
-    [self.view addSubview:[self createEventsButton]];
-    
-    [self createPostButton];
-    [self createBackButton];
+    self.eventDescription.backgroundColor = UIColor.whiteColor;
+    [view addSubview:self.eventDescription];
+    return view;
 }
 
 #pragma mark - buttons and respective actions
 // set up button to select local events
--(UIButton *)createEventsButton {
+- (UIButton *)createEventsButton {
     UIButton *eventsButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    eventsButton.frame = CGRectMake(5, 8, 100, 100);
+    eventsButton.frame = CGRectMake(5, 20, 100, 100);
     [eventsButton setTintColor:[UIColor flatSkyBlueColor]];
     [eventsButton setImage:[UIImage imageNamed:@"calendar"] forState:UIControlStateNormal];
     [eventsButton addTarget:self
@@ -158,7 +172,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 // sets up select date button properties
 - (UIButton *)createDateButton {
     UIButton *selectDate = [UIButton buttonWithType:UIButtonTypeSystem];
-    selectDate.frame = CGRectMake(5, 42, 100, 100);
+    selectDate.frame = CGRectMake(5, 8, 100, 100);
     [selectDate setTintColor:[UIColor flatSkyBlueColor]];
     [selectDate setImage:[UIImage imageNamed:@"clock"] forState:UIControlStateNormal];
     [selectDate addTarget:self
@@ -180,7 +194,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 // sets up select location properties
 - (UIButton *)createLocationButton {
     UIButton *selectLocation = [UIButton buttonWithType:UIButtonTypeSystem];
-    selectLocation.frame = CGRectMake(5, 76, 100, 100);
+    selectLocation.frame = CGRectMake(5, 48, 100, 100);
     [selectLocation setTintColor:[UIColor flatSkyBlueColor]];
     [selectLocation setImage:[UIImage imageNamed:@"location"] forState:UIControlStateNormal];
     [selectLocation addTarget:self
@@ -202,7 +216,7 @@ CategoryPickerDelegate, DatePickerDelegate, EventsSearchDelegate>
 // sets up selection category button properties
 - (UIButton *)createCategoryButton {
     UIButton *selectCategory = [UIButton buttonWithType:UIButtonTypeSystem];
-    selectCategory.frame = CGRectMake(7, 110, 100, 100);
+    selectCategory.frame = CGRectMake(7, 88, 100, 100);
     [selectCategory setTintColor:[UIColor flatSkyBlueColor]];
     [selectCategory setImage:[UIImage imageNamed:@"tag"] forState:UIControlStateNormal];
     [selectCategory addTarget:self

@@ -31,7 +31,7 @@
     
     //initialize event cell properties
     self.titleLabel = [[UILabel alloc]init];
-    [self.titleLabel setFont:[UIFont fontWithName:@"Arial-Boldmt" size:16]];
+    [self.titleLabel setFont:[UIFont fontWithName:@"ProximaNova-Semibold" size:16]];
     [self.contentView addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         [self.titleLabel setNumberOfLines:0];

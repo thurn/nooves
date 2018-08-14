@@ -46,6 +46,7 @@
     [self.view addSubview:[self createAboutButton]];
     [self.view addSubview:[self createLocationButton]];
     [self.view addSubview:loginButton];
+    [self createBackButton];
     
 }
 
@@ -188,6 +189,22 @@ didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
     UINavigationController *navCont = [[UINavigationController alloc] initWithRootViewController:controller];
     //[self.navigationController pushViewController:controller animated:YES];
     [self.navigationController presentViewController:navCont animated:YES completion:nil];
+}
+
+// back button
+- (UIBarButtonItem *)createBackButton {
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc]
+                                   initWithImage:[UIImage imageNamed:@"back-icon"]
+                                   style:UIBarButtonItemStylePlain
+                                   target:self
+                                   action:@selector(didTapBackButton)];
+    self.navigationItem.leftBarButtonItem = backButton;
+    return backButton;
+}
+
+// goes back to parent controller
+- (void)didTapBackButton {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
