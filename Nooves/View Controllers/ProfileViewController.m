@@ -83,17 +83,29 @@
     self.bioLabel.text = @"Bio";
     [self.bioLabel sizeToFit];
     
+    UIBarButtonItem *editProfile = [[UIBarButtonItem alloc] init];
+    [editProfile setTitle:@"Edit Profile"];
+    self.navigationItem.rightBarButtonItem = editProfile;
+    editProfile.target = self;
+    editProfile.action = @selector(didTapEditProfile);
+    
     // set up the edit profile button
-    self.editProfile = [[UIButton alloc]initWithFrame:CGRectMake(150, 200, 70, 30)];
+    /*self.editProfile = [[UIButton alloc]initWithFrame:CGRectMake(150, 200, 70, 30)];
     self.editProfile.layer.cornerRadius = 5;
     self.editProfile.layer.borderWidth = 2;
     self.editProfile.layer.borderColor = UIColor.flatPinkColor.CGColor;
     [self.editProfile setTitle:@"Edit Profile" forState:UIControlStateNormal];
     [self.editProfile setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [self.editProfile sizeToFit];
-    [self.editProfile addTarget:self action:@selector(didTapEditProfile) forControlEvents:UIControlEventTouchUpInside];
+    [self.editProfile addTarget:self action:@selector(didTapEditProfile) forControlEvents:UIControlEventTouchUpInside];*/
     
     // set up settings button
+    UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc]init];
+    [settingsButton setImage:[UIImage imageNamed:@"settings"]];
+    self.navigationItem.leftBarButtonItem = settingsButton;
+    settingsButton.target = self;
+    settingsButton.action = @selector(didTapSettings);
+    
     self.settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(260, 205, 30, 30)];
     [self.settingsButton setImage:[UIImage imageNamed:@"settings"] forState:UIControlStateNormal];
     [self.settingsButton sizeToFit];
@@ -122,8 +134,8 @@
     [self.view addSubview:self.ageLabel];
     [self.view addSubview:self.contactNumberLabel];
     [self.view addSubview:self.bioLabel];
-    [self.view addSubview:self.editProfile];
-    [self.view addSubview:self.settingsButton];
+    //[self.view addSubview:self.editProfile];
+   // [self.view addSubview:self.settingsButton];
 }
 
 - (void)didTapEditProfile {
