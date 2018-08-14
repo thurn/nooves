@@ -30,8 +30,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     UIView *superView = [[UIView alloc]initWithFrame:CGRectMake(0, 0,self.view.frame.size.width, self.view.frame.size.height)];
-    superView.backgroundColor = [UIColor clearColor];
-   // [superView addSubview:self.view];
+    superView.backgroundColor = UIColor.flatWhiteColor;
     [self.view addSubview:superView];
     
     [self configureTableView];
@@ -60,6 +59,8 @@
     CGRect tableViewFrame = CGRectMake( 0, 0, width, height);
     
     self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
+    self.tableView.backgroundColor = UIColor.flatWhiteColor;
+    self.view.backgroundColor = [UIColor blueColor];
     self.tableView.scrollEnabled = YES;
     self.tableView.showsVerticalScrollIndicator = YES;
     self.tableView.userInteractionEnabled = YES;
@@ -85,6 +86,7 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     FilterCell *cell =[tableView dequeueReusableCellWithIdentifier:@"filterCellIdentifier" forIndexPath:indexPath];
+    cell.textLabel.textColor = UIColor.flatPinkColor;
     cell.textLabel.text = self.categories[indexPath.row];
     return cell;
 }
@@ -114,7 +116,7 @@
     confirmButton.layer.borderWidth = 2;
     confirmButton.layer.borderColor = UIColor.flatPinkColor.CGColor;
     [confirmButton setTitle:@"Confirm" forState:UIControlStateNormal];
-    [confirmButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [confirmButton setTitleColor:UIColor.flatSkyBlueColor forState:UIControlStateNormal];
     [confirmButton addTarget:self action:@selector(didTapConfirm) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:confirmButton];
     

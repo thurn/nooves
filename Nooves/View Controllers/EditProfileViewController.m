@@ -6,7 +6,7 @@
 #import "User.h"
 #import "UIImageView+Cache.h"
 
-@interface EditProfileViewController () <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDropItem, UITableViewDataSource>
+@interface EditProfileViewController () <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDropItem>
 
 @property(strong, nonatomic) UIImageView *profilePic;
 @property(strong, nonatomic) UITextField *userName;
@@ -16,6 +16,7 @@
 @property(strong, nonatomic) UIBarButtonItem *saveProfile;
 @property(strong, nonatomic) User *user;
 @property(nonatomic) BOOL picEdited;
+
 @end
 
 @implementation EditProfileViewController
@@ -96,43 +97,60 @@
 }
 - (void)configureView {
     
-    //set up a tableview
-    UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
-    tableView.backgroundColor = UIColor.flatWhiteColor;
-    tableView.dataSource = self;
-    tableView.delegate = self;
-    tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
-    [self.view addSubview:tableView];
+    UIView *profileView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 150)];
+    [profileView setBackgroundColor:UIColor.whiteColor];
+   profileView.layer.cornerRadius = 5;
+    profileView.layer.borderWidth = 1;
+    profileView.layer.borderColor = UIColor.flatBlackColor.CGColor;
+    [self.view addSubview:profileView];
     
     //set up the profile pic field
-    self.profilePic = [[UIImageView alloc]initWithFrame:CGRectMake(10, 80, 100, 100)];
+    self.profilePic = [[UIImageView alloc]initWithFrame:CGRectMake(100, 30, 100, 100)];
     [self.profilePic setImage:[UIImage imageNamed:@"profile-blank"]];
     UITapGestureRecognizer *tapped = [[UITapGestureRecognizer alloc] init];
     [tapped addTarget:self action:@selector(selectProfilePic)];
     [self.profilePic addGestureRecognizer:tapped];
     self.profilePic.userInteractionEnabled = YES;
-    [self.profilePic sizeToFit];
+    [profileView addSubview:self.profilePic];
+    
+    UIView *infoView = [[UIView alloc] initWithFrame:CGRectMake(0, 180, self.view.bounds.size.width, 200)];
+    [infoView setBackgroundColor:UIColor.whiteColor];
+    infoView.layer.cornerRadius = 5;
+    infoView.layer.borderWidth = 1;
+    infoView.layer.borderColor = UIColor.flatBlackColor.CGColor;
+    [self.view addSubview:infoView];
     
     // set up the name field
-    self.userName = [[UITextField alloc]initWithFrame:CGRectMake(10, 150, 100, 100)];
+    self.userName = [[UITextField alloc]initWithFrame:CGRectMake(10, 10, infoView.bounds.size.width, 20)];
+    NSString *nameString = @"Name      ";
     self.userName.placeholder = @"Enter full name";
-    [self.userName sizeToFit];
     self.userName.textColor = [UIColor grayColor];
+    [infoView addSubview:self.userName];
+    
+    UIView *firstLine = [[UIView alloc]initWithFrame:CGRectMake(0, 35, infoView.bounds.size.width, 1)];
+    [firstLine setBackgroundColor:UIColor.flatBlackColorDark];
+    [infoView addSubview:firstLine];
     
     //set up the age field
-    self.age = [[UITextField alloc]initWithFrame:CGRectMake(180, 80,  100, 100)];
+    self.age = [[UITextField alloc]initWithFrame:CGRectMake(10, 40,infoView.bounds.size.width, 20)];
     self.age.placeholder = @"Enter age";
-    [self.age sizeToFit];
     self.age.textColor = [UIColor grayColor];
     
+    UIView *secondLine = [[UIView alloc]initWithFrame:CGRectMake(0, 65, infoView.bounds.size.width, 1)];
+    [secondLine setBackgroundColor:UIColor.flatBlackColorDark];
+    [infoView addSubview:secondLine];
+    
     // set up the phone number field
-    self.userPhoneNumber = [[UITextField alloc]initWithFrame:CGRectMake(180, 150, 100, 100)];
+    self.userPhoneNumber = [[UITextField alloc]initWithFrame:CGRectMake(10, 70, infoView.bounds.size.width, 20)];
     self.userPhoneNumber.placeholder = @"Enter phone number";
-    [self.userPhoneNumber sizeToFit];
     self.userPhoneNumber.textColor = [UIColor grayColor];
     
+    UIView *thirdLine = [[UIView alloc]initWithFrame:CGRectMake(0, 95, infoView.bounds.size.width, 1)];
+    [thirdLine setBackgroundColor:UIColor.flatBlackColorDark];
+    [infoView addSubview:thirdLine];
+    
     // set up the bio field
-    self.bioInfo = [[UITextView alloc]initWithFrame:CGRectMake(10, 230, self.view.bounds.size.width, 100)];
+    self.bioInfo = [[UITextView alloc]initWithFrame:CGRectMake(10, 100, self.view.bounds.size.width, 50)];
     self.bioInfo.delegate = self;
     self.bioInfo.text = @"Enter bio here";
     self.bioInfo.textColor = [UIColor grayColor];
@@ -145,11 +163,10 @@
     self.saveProfile.action = @selector(didTapSaveProfile);
     
     // add all the subviews to the view
-    [self.view addSubview:self.profilePic];
-    [self.view addSubview:self.userName];
-    [self.view addSubview:self.age];
-    [self.view addSubview:self.userPhoneNumber];
-    [self.view addSubview:self.bioInfo];
+   // [infoView addSubview:self.userName];
+    [infoView addSubview:self.age];
+    [infoView addSubview:self.userPhoneNumber];
+    [infoView addSubview:self.bioInfo];
 }
 
 // change the text color if the user is editing their bio
@@ -158,6 +175,7 @@
         textView.text = nil;
         textView.textColor = UIColor.blackColor;
     }
+    [textView becomeFirstResponder];
 }
 
 // change the color back to gray if the user is done editing
@@ -166,6 +184,7 @@
         textView.text = @"Enter bio here";
         textView.textColor = UIColor.grayColor;
     }
+    [textView resignFirstResponder];
 }
 
 - (void)didTapSaveProfile {
@@ -184,17 +203,5 @@
     [User saveUserProfile:self.user];
 }
 
-#pragma mark - UITableViewDataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc]init];
-    return cell;
-}
 @end
