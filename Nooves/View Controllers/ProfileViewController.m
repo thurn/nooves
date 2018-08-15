@@ -66,7 +66,7 @@
     }
 
     // set up the profile picture field
-    self.profilePicture = [[UIImageView alloc]initWithFrame:CGRectMake(100, 30, 200, 200)];
+    self.profilePicture = [[UIImageView alloc]initWithFrame:CGRectMake(90, 30, 200, 200)];
     self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width/2;
     self.profilePicture.clipsToBounds = YES;
     self.profilePicture.contentMode = UIViewContentModeScaleAspectFill;
@@ -75,7 +75,7 @@
     [self.profilePicture setImage:[UIImage imageNamed:@"profile-blank"]];
     
     //set up the name label field
-    self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(120, 240, 30, 30)];
+    self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(150, 240, 30, 30)];
     self.nameLabel.text = @"Name";
     [self.nameLabel sizeToFit];
     
