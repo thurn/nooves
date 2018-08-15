@@ -8,6 +8,7 @@
 
 #import "Location.h"
 
+#import <ChameleonFramework/Chameleon.h>
 #import "PureLayout/PureLayout.h"
 
 #import <FIRDatabase.h>
@@ -156,6 +157,7 @@
     CGRect tableViewFrame = CGRectMake(0, 0, width, height-tab.tabBar.frame.size.height-20);
     
     tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
+    [tableView setBackgroundColor:UIColor.flatSkyBlueColor];
     tableView.scrollEnabled = YES;
     tableView.showsVerticalScrollIndicator = YES;
     tableView.userInteractionEnabled = YES;
@@ -172,6 +174,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PostCell *cell =[tableView dequeueReusableCellWithIdentifier:@"postCellIdentifier" forIndexPath:indexPath];
+    
+    cell.backgroundColor = UIColor.whiteColor;
+    cell.layer.borderColor = UIColor.blackColor.CGColor;
+    cell.layer.borderWidth = 0.5;
+    cell.layer.cornerRadius = 15;
+    cell.clipsToBounds = YES;
+    
     cell.postDelegate = self;
     Post *newPost = self.filteredData[indexPath.row];
     [cell configurePost:newPost];

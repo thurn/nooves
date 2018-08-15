@@ -86,7 +86,7 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     FilterCell *cell =[tableView dequeueReusableCellWithIdentifier:@"filterCellIdentifier" forIndexPath:indexPath];
-    cell.textLabel.textColor = UIColor.flatPinkColor;
+    cell.textLabel.textColor = UIColor.blackColor;
     cell.textLabel.text = self.categories[indexPath.row];
     return cell;
 }

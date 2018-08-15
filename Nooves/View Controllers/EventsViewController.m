@@ -1,4 +1,4 @@
-
+#import <ChameleonFramework/Chameleon.h>
 #import "ComposeViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import "EventCell.h"
@@ -17,13 +17,13 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 @property(strong, nonatomic) NSArray *results;
 @property(strong, nonatomic) NSString *userLocation;
 @property(strong, nonatomic) CLLocationManager *locationManager;
+@property(strong, nonatomic) UITableView *tableView;
 
 @end
 
 @implementation EventsViewController
 
 {
-    UITableView *tableView;
     NSIndexPath *selectedCellIndexPath;
 }
 
@@ -45,8 +45,8 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     [searchBarView addSubview:self.searchBar];
     self.navigationItem.titleView = searchBarView;
     
-    [tableView reloadData];
-    [tableView registerClass:[EventCell class] forCellReuseIdentifier:@"eventCellIdentifier"];
+    [self.tableView reloadData];
+    [self.tableView registerClass:[EventCell class] forCellReuseIdentifier:@"eventCellIdentifier"];
     
     // Get user's current location
     self.locationManager = [[CLLocationManager alloc]init];
@@ -73,7 +73,6 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
         self.userLocation= [cityAndSpace stringByAppendingString:userState];
         NSLog(@"User location :%@", self.userLocation);
         [self.locationManager stopUpdatingLocation];
-        
     }];
 }
 // cancel button appears when user edits search bar
@@ -100,25 +99,26 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 }
 
 - (UITableView *)configureTableView {
+    
     CGFloat width = self.view.frame.size.width;
     CGFloat height = self.view.frame.size.height;
     CGRect tableViewFrame = CGRectMake( 0, 0, width, height);
     
-    tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
-    tableView.scrollEnabled = YES;
-    tableView.showsVerticalScrollIndicator = YES;
-    tableView.userInteractionEnabled = YES;
-    [self.view addSubview:tableView];
+    self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame style:UITableViewStylePlain];
+    self.tableView.scrollEnabled = YES;
+    self.tableView.showsVerticalScrollIndicator = YES;
+    self.tableView.userInteractionEnabled = YES;
+    [self.view addSubview:self.tableView];
     
-    tableView.backgroundColor = [UIColor whiteColor];
-    tableView.dataSource = self;
-    tableView.delegate = self;
-    tableView.rowHeight = UITableViewAutomaticDimension;
-    [tableView setNeedsLayout];
-    tableView.contentInset = UIEdgeInsetsMake(20.0, 0.0, 0.0, 0.0);
+    self.tableView.backgroundColor = UIColor.flatSkyBlueColor;
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    [self.tableView setNeedsLayout];
+    self.tableView.contentInset = UIEdgeInsetsMake(20.0, 0.0, 0.0, 0.0);
     
-    [tableView reloadData];
-    return tableView;
+    [self.tableView reloadData];
+    return self.tableView;
 }
 
 // set up the back button
@@ -139,6 +139,13 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 #pragma mark - UITableViewDelegate methods
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     EventCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"eventCellIdentifier" forIndexPath:indexPath];
+    
+    cell.backgroundColor = UIColor.whiteColor;
+    cell.layer.borderColor = UIColor.blackColor.CGColor;
+    cell.layer.borderWidth = 0.5;
+    cell.layer.cornerRadius = 15;
+    cell.clipsToBounds = YES;
+    
     if(self.results.count > indexPath.row) {
         [cell updateWithEvent:self.results[indexPath.row]];
         return cell;
@@ -192,6 +199,10 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     }
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+}
+
+
 - (void)fetchEventsWithQuery:(NSString *)query {
     if ([self.userLocation isKindOfClass:[NSString class]]) {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -207,7 +218,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
                     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
                     self.results = [responseDictionary valueForKeyPath:@"events.event"];
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
-                    [self->tableView reloadData];
+                    [self.tableView reloadData];
                     NSLog(@" results dictionary :%@", self.results);
                 }
             }];
@@ -223,6 +234,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
         }];
     }
 }
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (selectedCellIndexPath != nil && [selectedCellIndexPath compare:indexPath] == NSOrderedSame) {
