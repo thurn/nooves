@@ -1,17 +1,10 @@
-//
-//  PostDetailsViewController.m
-//  Nooves
-//
-//  Created by Nkenna Aniedobe on 7/31/18.
-//  Copyright © 2018 Nikki Tran. All rights reserved.
-//
-
 #import "PostDetailsViewController.h"
 #import <FIRDatabase.h>
 #import "ProfileViewController.h"
 #import "PureLayout/PureLayout.h"
 #import "UIImageView+Cache.h"
 #import "UserViewController.h"
+#import <ChameleonFramework/Chameleon.h>
 @interface PostDetailsViewController ()
 @property (strong, nonatomic) Post *post;
 @property (strong, nonatomic) User *user;
@@ -38,11 +31,10 @@
             self.user = [[User alloc] initFromDatabase:usersDictionary];
             self.phoneNumberLabel = [[UILabel alloc] init];
             NSString *phoneNumber = [self.user.phoneNumber stringValue];
-            self.phoneNumberLabel.text = [@"You can contact the host at " stringByAppendingString:phoneNumber];
-            self.phoneNumberLabel.frame = CGRectMake(self.view.center.x, self.view.frame.size.height/2+200, 10, 10);
+            self.phoneNumberLabel.text = [@"Contact the host at " stringByAppendingString:phoneNumber];
+            self.phoneNumberLabel.frame = CGRectMake(100, self.view.frame.size.height/2+190, 10, 10);
             [self.phoneNumberLabel sizeToFit];
             [self.view addSubview:self.phoneNumberLabel];
-            [self.phoneNumberLabel setCenter:CGPointMake(self.view.center.x, self.view.frame.size.height - 100)];
             if (!self.going){
                 self.phoneNumberLabel.hidden = YES;
             }
@@ -56,11 +48,6 @@
         }
     }];
     [self setUI];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - initting
@@ -91,11 +78,14 @@
             [[[ref child:@"Users"] child:[FIRAuth auth].currentUser.uid] updateChildValues:@{@"EventsGoing":amIGoing}];
         }];
         self.going=YES;
-        self.goingButton.backgroundColor = [UIColor blueColor];
-        [self.goingButton setTitle:@"Not Going" forState:UIControlStateSelected];
+        [self.goingButton setTitle:@"Not Going" forState:UIControlStateNormal];
         self.goingButton.selected = YES;
         [self.goingButton sizeToFit];
         self.phoneNumberLabel.hidden = NO;
+        [self.goingButton setTitleColor:[UIColor flatBlackColor] forState:UIControlStateNormal];
+        self.goingButton.layer.cornerRadius = 5;
+        self.goingButton.layer.borderWidth = 2;
+        self.goingButton.layer.borderColor = UIColor.flatSkyBlueColor.CGColor;
     }
     else {
         NSMutableArray *imGoing = [NSMutableArray arrayWithArray:self.post.usersGoing];
@@ -113,9 +103,12 @@
         self.going = NO;
         [self.goingButton setTitle:@"Going" forState:UIControlStateNormal];
         self.goingButton.selected = NO;
-        self.goingButton.backgroundColor = [UIColor greenColor];
         [self.goingButton sizeToFit];
         self.phoneNumberLabel.hidden = YES;
+        [self.goingButton setTitleColor:[UIColor flatBlackColor] forState:UIControlStateNormal];
+        self.goingButton.layer.cornerRadius = 5;
+        self.goingButton.layer.borderWidth = 2;
+        self.goingButton.layer.borderColor = UIColor.flatPinkColor.CGColor;
     }
 }
 
@@ -129,18 +122,24 @@
             break;
         }
     }
-    self.goingButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.center.x, self.view.frame.size.height/2+150, 20, 20)];
+    self.goingButton = [[UIButton alloc] initWithFrame:CGRectMake(10, self.view.frame.size.height/2+150, 20, 20)];
     if (!self.going) {
         [self.goingButton setTitle:@"Going" forState:UIControlStateNormal];
+        [self.goingButton setTitleColor:[UIColor flatBlackColor] forState:UIControlStateNormal];
+        self.goingButton.layer.cornerRadius = 5;
+        self.goingButton.layer.borderWidth = 2;
+        self.goingButton.layer.borderColor = UIColor.flatPinkColor.CGColor;
         self.goingButton.selected = NO;
-        self.goingButton.backgroundColor = [UIColor greenColor];
-    }
-    else {
+        [self.goingButton sizeToFit];
+    } else {
         self.goingButton.selected = YES;
-        self.goingButton.backgroundColor = [UIColor blueColor];
-        [self.goingButton setTitle:@"Not Going" forState:UIControlStateSelected];
+        [self.goingButton setTitle:@"Not Going" forState:UIControlStateNormal];
+        [self.goingButton setTitleColor:[UIColor flatBlackColor] forState:UIControlStateNormal];
+        self.goingButton.layer.cornerRadius = 5;
+        self.goingButton.layer.borderWidth = 2;
+        self.goingButton.layer.borderColor = UIColor.flatSkyBlueColor.CGColor;
+        [self.goingButton sizeToFit];
     }
-    [self.goingButton setCenter:CGPointMake(self.view.center.x, self.view.frame.size.height/2+150)];
     [self.goingButton sizeToFit];
     [self.goingButton addTarget:self action:@selector(didTapGoing) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:self.goingButton];
@@ -151,7 +150,7 @@
     self.profilePicImage.clipsToBounds = YES;
     self.profilePicImage.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:self.profilePicImage];
-    if(self.post){
+    if (self.post) {
         self.activityTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width/2-25, self.view.frame.size.height/2+10, 10, 10)];
         self.activityTitleLabel.text = self.post.activityTitle;
         [self.activityTitleLabel sizeToFit];
@@ -182,14 +181,5 @@
         [self.profilePicImage addGestureRecognizer:tappedPic];
     }
 }
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end
