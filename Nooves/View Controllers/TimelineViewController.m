@@ -62,9 +62,10 @@
 - (void)filterLocation {
     Location *location = [[Location alloc] init];
     self.filteredData = [[NSMutableArray alloc]init];
-    double distance;
+    double distance = 0;
     for (Post *post in self.firArray) {
         if ([NSUserDefaults.standardUserDefaults boolForKey:@"switch"]) {
+            distance =
             [location calculateDistanceWithUserLat:[NSNumber numberWithDouble:33.448376]
                                            userLng:[NSNumber numberWithDouble:-112.074036]
                                           eventLat:post.activityLat

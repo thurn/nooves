@@ -146,7 +146,7 @@
     [self.view addSubview:self.goingButton];
     self.profilePicImage = [[UIImageView alloc] init];
     self.profilePicImage.image = [UIImage imageNamed:@"profile-blank"];
-    self.profilePicImage.frame = CGRectMake(self.view.bounds.size.width/12, 15, 320, 320);
+    self.profilePicImage.frame = CGRectMake(self.view.bounds.size.width/12, 0, 320, 320);
     self.profilePicImage.layer.cornerRadius = self.profilePicImage.frame.size.width/2;
     self.profilePicImage.clipsToBounds = YES;
     self.profilePicImage.contentMode = UIViewContentModeScaleAspectFill;
@@ -156,7 +156,7 @@
         self.activityTitleLabel.text = self.post.activityTitle;
         [self.activityTitleLabel sizeToFit];
         [self.activityTitleLabel.font fontWithSize:80];
-        //self.activityTitleLabel.center = self.view.center;
+        self.activityTitleLabel.center = self.view.center;
         [self.view addSubview:self.activityTitleLabel];
         self.activityTypeLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, self.view.frame.size.height/2+30, 10, 10)];
         self.activityTypeLabel.text = [@"Activity Type: " stringByAppendingString:[Post activityTypeToString:self.post.activityType]];

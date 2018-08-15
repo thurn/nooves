@@ -73,7 +73,10 @@
         if (![snapshot.value isEqual:[NSNull null]]) {
             self.user = [[User alloc] initFromDatabase:usersDictionary];
             if (![self.user.profilePicURL isEqualToString:@"nil"]){
-                self.profilePicture = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height*9/20)];
+                self.profilePicture = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.bounds.size.width/12, 0, 320, 320)];
+                self.profilePicture.layer.cornerRadius = self.profilePicture.frame.size.width/2;
+                self.profilePicture.clipsToBounds = YES;
+                self.profilePicture.contentMode = UIViewContentModeScaleAspectFill;
                 [self.view addSubview:self.profilePicture];
                 [self.profilePicture loadURLandCache:self.user.profilePicURL];
                 [self setUI];
