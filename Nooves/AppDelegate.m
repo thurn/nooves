@@ -39,7 +39,7 @@
     
     [[UINavigationBar appearance] setBarTintColor:[UIColor flatSkyBlueColor]];
     [[UINavigationBar appearance] setTintColor:[UIColor flatWhiteColor]];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor flatWhiteColor]}];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor flatWhiteColor], NSFontAttributeName:[UIFont fontWithName:@"ProximaNova-Semibold" size:22]}];
     [[UINavigationBar appearance] setTranslucent:NO];
     
     // the leaf controllers
