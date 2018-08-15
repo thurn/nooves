@@ -24,8 +24,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    if (self.filtered) {
+     if ([NSUserDefaults.standardUserDefaults boolForKey:@"switch"]) {
         [tableView reloadData];
+        [self filterLocation];
     }
     self.navigationItem.hidesBackButton = YES;
 }
