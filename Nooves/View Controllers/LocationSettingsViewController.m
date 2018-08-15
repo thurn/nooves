@@ -23,6 +23,7 @@
     label.text = @"Manually set location";
     [label setTextColor:[UIColor blackColor]];
     [label setFont:[UIFont fontWithName:@"ProximaNova-Semibold" size:18]];
+    label.font = [UIFont fontWithName:@"ProximaNova-Semibold" size:18];
     [label sizeToFit];
     [self.view addSubview:label];
     
@@ -31,6 +32,7 @@
     self.cityTextField.placeholder = @"City";
     self.cityTextField.borderStyle = UITextBorderStyleNone;
     self.cityTextField.tintColor = [UIColor flatGrayColor];
+    self.cityTextField.tag = 1;
     [self.cityTextField setHidden:YES];
     
     self.stateTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 70, self.view.bounds.size.width, 30)];
@@ -38,6 +40,7 @@
     self.stateTextField.placeholder = @"State ex: CA";
     self.stateTextField.borderStyle = UITextBorderStyleNone;
     self.stateTextField.tintColor = [UIColor flatGrayColor];
+    self.stateTextField.tag = 2;
     [self.stateTextField setHidden:YES];
     
     self.confirmButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 105, 100, 30)];
@@ -78,15 +81,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    if (self.cityTextField.text == nil) {
-        self.cityTextField.text = @"Enter city";
-    } else {
+    if ([self.locationSwitch isOn]) {
         self.cityTextField.text = [NSUserDefaults.standardUserDefaults objectForKey:@"city"];
-    }
-    
-    if (self.stateTextField.text == nil) {
-        self.stateTextField.text = @"Enter state ex: CA";
-    } else {
         self.stateTextField.text = [NSUserDefaults.standardUserDefaults objectForKey:@"state"];
     }
 }
@@ -138,6 +134,14 @@
     if (textField.textColor == UIColor.grayColor) {
         textField.text = nil;
         textField.textColor = UIColor.blackColor;
+    }
+    if (textField.tag == 1) {
+        self.cityTextField.text = textField.text;
+        self.city = self.cityTextField.text;
+    }
+    if (textField.tag == 2) {
+        self.stateTextField.text = textField.text;
+        self.state = self.stateTextField.text;
     }
 }
 
