@@ -92,7 +92,7 @@
     
     // set up settings button
     UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc]init];
-    [settingsButton setImage:[UIImage imageNamed:@"settings"]];
+    [settingsButton setImage:[UIImage imageNamed:@"menu"]];
     self.navigationItem.leftBarButtonItem = settingsButton;
     settingsButton.target = self;
     settingsButton.action = @selector(didTapSettings);
@@ -134,6 +134,7 @@
 
 - (void)didUpdateProfile {
     self.nameLabel.text = self.user.name;
+    [self.nameLabel setFont:[UIFont fontWithName:@"ProximaNova-Regular" size:40]];
     self.bioLabel.text = [@"Bio: " stringByAppendingString:self.user.biography];
     NSNumber *ageNumber = self.user.age;
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
