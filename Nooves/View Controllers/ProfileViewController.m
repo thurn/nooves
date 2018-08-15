@@ -75,7 +75,7 @@
     [self.profilePicture setImage:[UIImage imageNamed:@"profile-blank"]];
     
     //set up the name label field
-    self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(150, 240, 30, 30)];
+    self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(140, 240, 30, 30)];
     self.nameLabel.text = @"Name";
     [self.nameLabel sizeToFit];
     
@@ -134,7 +134,7 @@
 
 - (void)didUpdateProfile {
     self.nameLabel.text = self.user.name;
-    [self.nameLabel setFont:[UIFont fontWithName:@"ProximaNova-Regular" size:40]];
+    [self.nameLabel setFont:[UIFont fontWithName:@"ProximaNova-Semibold" size:20]];
     self.bioLabel.text = [@"Bio: " stringByAppendingString:self.user.biography];
     NSNumber *ageNumber = self.user.age;
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc]init];
