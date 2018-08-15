@@ -75,6 +75,7 @@
         self.activityDescriptionField.text = post.activityDescription;
         self.activityTypeField.text = [Post activityTypeToString:post.activityType];
         self.eventTitleField.text = post.activityTitle;
+        [self.eventTitleField setFont:[UIFont fontWithName:@"ProximaNova-Semibold" size:16]];
         [self.activityTypeField sizeToFit];
         NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
         [formatter setDateFormat:@"MMM dd hh:mm a"];

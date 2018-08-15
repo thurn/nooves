@@ -24,7 +24,6 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 @implementation EventsViewController
 
 {
-    //UITableView *tableView;
     NSIndexPath *selectedCellIndexPath;
 }
 
@@ -144,7 +143,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
     cell.backgroundColor = UIColor.whiteColor;
     cell.layer.borderColor = UIColor.blackColor.CGColor;
     cell.layer.borderWidth = 0.5;
-    cell.layer.cornerRadius = 8;
+    cell.layer.cornerRadius = 15;
     cell.clipsToBounds = YES;
     
     if(self.results.count > indexPath.row) {
@@ -157,7 +156,10 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    if (self.eventsArray) {
+        return  self.eventsArray.count;
+    }
+    return 30;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -232,15 +234,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
         }];
     }
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 5;
-}
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *view = [[UIView alloc]init];
-    [view setBackgroundColor:[UIColor clearColor]];
-    return view;
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (selectedCellIndexPath != nil && [selectedCellIndexPath compare:indexPath] == NSOrderedSame) {
@@ -250,10 +244,7 @@ static NSString * const appKey = @"dFXh3rhZVVwbshg9";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (self.eventsArray) {
-        return  self.eventsArray.count;
-    }
-    return 30;
+    return 1;
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
