@@ -85,15 +85,15 @@
     [self.bioLabel sizeToFit];
     
     UIBarButtonItem *editProfile = [[UIBarButtonItem alloc] init];
-    [editProfile setTitle:@"Edit Profile"];
-    self.navigationItem.rightBarButtonItem = editProfile;
+    [editProfile setImage:[UIImage imageNamed:@"profile-settings"]];
+    self.navigationItem.leftBarButtonItem = editProfile;
     editProfile.target = self;
     editProfile.action = @selector(didTapEditProfile);
     
     // set up settings button
     UIBarButtonItem *settingsButton = [[UIBarButtonItem alloc]init];
-    [settingsButton setImage:[UIImage imageNamed:@"menu"]];
-    self.navigationItem.leftBarButtonItem = settingsButton;
+    [settingsButton setImage:[UIImage imageNamed:@"settings"]];
+    self.navigationItem.rightBarButtonItem = settingsButton;
     settingsButton.target = self;
     settingsButton.action = @selector(didTapSettings);
 
